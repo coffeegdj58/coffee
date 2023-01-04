@@ -2,6 +2,7 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import vo.Customer;
 
@@ -27,24 +28,112 @@ public class CustomerDao {
 		return result;
 	}
 	
-	//customer id check 쿼
+	//customer id check 쿼리
 	public int checkCustomeId(String customerId, Connection conn) throws Exception{
 		int result= 0;
 		
+		
+		//customer table에서 찾는 쿼리
 		String sql = "SELECT customer FROM customer WHERE customer_id= ?";
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		stmt.setString(1, customerId);
 		
-		result= stmt.executeUpdate();
+		ResultSet rs= stmt.executeQuery();
+		if(rs.next()) {
+			result= 1;
+		}
 		
+		
+		//outid 에서찾는쿼리
 		String sql1 = "SELECT id FROM outid WHERE id= ?";
 		PreparedStatement stmt1 = conn.prepareStatement(sql1);
 		stmt1.setString(1, customerId);
 		
-		result = stmt1.executeUpdate();
+		ResultSet rs1= stmt.executeQuery();
 		
+		if(rs1.next()) {
+			result=1;
+		}
 		
+		rs.close();
+		rs1.close();
+		stmt.close();
+		stmt1.close();
 		
 		return result;
 	}
+	
+	//customer update 쿼리
+	public int updateCustomer(Customer customer, String customerPw, Connection conn) throws Exception{
+		int result= 0;
+		String sql = "UPDATE customer SET "
+				+ "customer_pw = password(?), customer_name= ?, customer_phone = ?, customer_gender= ?, customer_birth= ?"
+				+ " WHERE customer_id= ? AND customer_pw = password(?) ";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setString(1, customer.getCustomerPw());
+		stmt.setString(2, customer.getCustomerName());
+		stmt.setString(3, customer.getCustomerPhone());
+		stmt.setString(4, customer.getCustomerGender());
+		stmt.setString(5, customer.getCustomerBirth());
+		stmt.setString(6, customer.getCustomerId());
+		stmt.setString(7, customerPw);
+		
+		result= stmt.executeUpdate();
+		
+		stmt.close();
+		
+		return result;
+	}
+	
+	//pw update시에 pwhistory에 넣는 쿼리
+	public int insertPwHistory(String customerId, String customerPw, Connection conn) throws Exception{
+		int result = 0;
+		
+		String sql = "INSERT INTO pw_history(customer_id, pw) VALUES (?, password(?))";
+		PreparedStatement stmt =conn.prepareStatement(sql);
+		stmt.setString(1, customerId);
+		stmt.setString(2, customerPw);
+		
+		result= stmt.executeUpdate();
+		
+		stmt.close();
+		return result;
+	}
+	
+	//pw update시 pwhistory에서 중복된 것을 찾는 쿼리
+	public int pwCheck(String customerId, String customerPw, Connection conn)  throws Exception{
+		int result = 0;
+		
+		String sql = "SELECT * FROM pw_history WHERE customer_id=? AND pw=password(?)";
+		PreparedStatement stmt= conn.prepareStatement(sql);
+		stmt.setString(1, customerId);
+		stmt.setString(2, customerPw);
+		
+		ResultSet rs= stmt.executeQuery();
+		if(rs.next()) {
+			result=1;
+		}
+		rs.close();
+		stmt.close();
+		
+		return result;
+	}
+	
+	//회원 삭제 쿼리
+	public int deleteCustomer(String customerId, String customerPw, Connection conn) throws Exception{
+		int result= 0;
+		
+		String sql = "DELETE FROM customer WHERE customer_id=? AND customer_pw= password(?)";
+		PreparedStatement stmt =conn.prepareStatement(sql);
+		stmt.setString(1, customerId);
+		stmt.setString(2, customerPw);
+		
+		result= stmt.executeUpdate();
+		
+		stmt.close();
+		return result;
+		
+	}
+	
+	
 }
