@@ -1,6 +1,5 @@
 package vo;
 
-import java.util.ArrayList;
 
 public class Customer {
 	private int customerCode;
@@ -11,7 +10,7 @@ public class Customer {
 	private int point;
 	private String customerGender;
 	private String customerBirth;
-	private ArrayList<String> customerAddress;
+	private String customerAddress;
 	
 	public int getCustomerCode() {
 		return customerCode;
@@ -61,10 +60,10 @@ public class Customer {
 	public void setCustomerBirth(String customerBirth) {
 		this.customerBirth = customerBirth;
 	}
-	public ArrayList<String> getCustomerAddress() {
+	public String getCustomerAddress() {
 		return customerAddress;
 	}
-	public void setCustomerAddress(ArrayList<String> customerAddress) {
+	public void setCustomerAddress(String customerAddress) {
 		this.customerAddress = customerAddress;
 	}
 

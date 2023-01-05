@@ -5,8 +5,25 @@ public class Question {
 	private int orderCode;
 	private String category;
 	private String questionMemo;
+	private String customerId;
 	private String createdate;
+	private String flag;
 	
+	
+	
+	
+	public String getFlag() {
+		return flag;
+	}
+	public void setFlag(String flag) {
+		this.flag = flag;
+	}
+	public String getCustomerId() {
+		return customerId;
+	}
+	public void setCustomerId(String customerId) {
+		this.customerId = customerId;
+	}
 	public int getQuestionCode() {
 		return questionCode;
 	}

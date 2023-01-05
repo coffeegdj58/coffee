@@ -1,6 +1,6 @@
 package vo;
 
-public class point {
+public class Point {
 	private int point;
 	private String customerId;
 	private String createdate;
@@ -29,7 +29,6 @@ public class point {
 	public void setPointKind(String pointKind) {
 		this.pointKind = pointKind;
 	}
-	
 	
 	
 }
