@@ -14,7 +14,7 @@
 			</tr>
 			<tr>
 				<td>내용</td>
-				<td><textarea cols="30" rows="10" type="text" name="noticeContent"></textarea></td>
+				<td><textarea cols="30" rows="10" name="noticeContent"></textarea></td>
 			</tr>
 			<tr>
 				<td>작성자</td>

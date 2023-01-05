@@ -23,11 +23,11 @@ public class addEmpController extends HttpServlet {
 	}
 	//회원가입 액션
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		//폼에서 받아오기
 		String empId=request.getParameter("empId");
 		String empPw=request.getParameter("empPw");
 		String empName=request.getParameter("empName");
-		
+		//service 불러오기
 		this.empService=new EmpService();
 		empService.idCkEmp(empId);
 		if(empService.idCkEmp(empId)==true) {//중복된 아이디
@@ -37,21 +37,24 @@ public class addEmpController extends HttpServlet {
 			PrintWriter writer = response.getWriter();
 			writer.println("<script>alert('중복 아이디입니다.'); location.href='"+request.getContextPath()+"/emp/addEmp"+"';</script>"); 
 			writer.close();
+		}else {
+			Emp emp= new Emp();
+			emp.setEmpId(empId);
+			emp.setEmpName(empName);
+			emp.setEmpPw(empPw);
+			//service 불러오기
+			int row=empService.signUpEmp(emp);
+			if(row==1) {//회원가입 성공
+				response.sendRedirect(request.getContextPath()+"/emp/loginEmp"); 
+				return;
+			}else {//회원가입 실패
+				//서블릿에서 알림창 띄우기
+				response.setContentType("text/html; charset=UTF-8");
+				PrintWriter writer = response.getWriter();
+				writer.println("<script>alert('회원가입 실패.'); location.href='"+request.getContextPath()+"/emp/addEmp"+"';</script>"); 
+				writer.close();
+			}
 		}
-		Emp emp= new Emp();
-		emp.setEmpId(empId);
-		emp.setEmpName(empName);
-		emp.setEmpPw(empPw);
-		
-		int row=empService.signUpEmp(emp);
-		if(row==1) {//회원가입 성공
-			response.sendRedirect(request.getContextPath()+"/emp/loginEmp"); 
-			return;
-		}else {//회원가입 실패
-			response.sendRedirect(request.getContextPath()+"/emp/addEmp"); 
-			return;
-		}
-		
 	}
 
 }

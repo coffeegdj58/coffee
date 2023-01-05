@@ -6,9 +6,8 @@ public class Emp {
 	private String empPw;
 	private String empName;
 	private String active;
-	private String authCode;
+	private int authCode;
 	private String createdate;
-	
 	public int getEmpCode() {
 		return empCode;
 	}
@@ -39,10 +38,10 @@ public class Emp {
 	public void setActive(String active) {
 		this.active = active;
 	}
-	public String getAuthCode() {
+	public int getAuthCode() {
 		return authCode;
 	}
-	public void setAuthCode(String authCode) {
+	public void setAuthCode(int authCode) {
 		this.authCode = authCode;
 	}
 	public String getCreatedate() {
@@ -51,7 +50,7 @@ public class Emp {
 	public void setCreatedate(String createdate) {
 		this.createdate = createdate;
 	}
-	
+
 	
 	
 	

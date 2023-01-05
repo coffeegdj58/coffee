@@ -4,23 +4,77 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import dao.*;
-import util.*;
-import vo.*;
+import dao.NoticeDao;
+import util.Dbutil;
+import vo.Notice;
 
 public class NoticeService {
 	private NoticeDao noticeDao;
+		
+	//modifyNotice Form
+	public Notice selectModifyNotice(int noticeCode) {
+		Connection conn=null;
+		Dbutil dbUtil= new Dbutil();
+		noticeDao= new NoticeDao();
+		Notice n=new Notice();
+		try {
+			conn=dbUtil.getConnection();
+			n=noticeDao.selectModifyNotice(conn, noticeCode);
+			conn.commit();
+		}catch(Exception e) {
+			try {
+				conn.rollback();
+			}catch(SQLException se) {
+				se.printStackTrace();
+			}
+			e.printStackTrace();
+		}finally {
+			try {
+				conn.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return n;
+	}
 	
-	//removeNotice
-	public int deleteNotice(int noticeCode) {
+	
+	//modifyNotice ACtion
+	public int modifyNotice(Notice notice) {
 		Connection conn=null;
 		Dbutil dbUtil= new Dbutil();
 		noticeDao= new NoticeDao();
 		int row=0;
 		try {
 			conn=dbUtil.getConnection();
-			conn.setAutoCommit(false);
-			row=noticeDao.deleteNotice(conn, noticeCode);
+			row=noticeDao.modifyNotice(conn, notice);
+			conn.commit();
+		}catch(Exception e) {
+			try {
+				conn.rollback();
+			}catch(SQLException se) {
+				se.printStackTrace();
+			}
+			e.printStackTrace();
+		}finally {
+			try {
+				conn.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return row;
+	}
+	
+	//removeNotice
+	public int removeNotice(int noticeCode) {
+		Connection conn=null;
+		Dbutil dbUtil= new Dbutil();
+		noticeDao= new NoticeDao();
+		int row=0;
+		try {
+			conn=dbUtil.getConnection();
+			row=noticeDao.removeNotice(conn, noticeCode);
 			conn.commit();
 		}catch(Exception e) {
 			try {
@@ -47,7 +101,6 @@ public class NoticeService {
 		int row=0;
 		try {
 			conn=dbUtil.getConnection();
-			conn.setAutoCommit(false);
 			row=noticeDao.addNotice(conn, notice);
 			conn.commit();
 		}catch(Exception e) {
@@ -68,14 +121,13 @@ public class NoticeService {
 	}
 	
 	//noticeOne
-	public Notice getBoardOne(int noticeCode) {
+	public Notice noticeOne(int noticeCode) {
 		Connection conn=null;
 		Dbutil dbUtil= new Dbutil();
 		Notice n = null;
 		this.noticeDao=new NoticeDao();
 		try {
 			conn=dbUtil.getConnection();
-			conn.setAutoCommit(false);
 			n=noticeDao.noticeOne(conn, noticeCode);
 			conn.commit();
 		}catch(Exception e) {
@@ -95,7 +147,7 @@ public class NoticeService {
 		return n;
 	}
 	
-	//
+	//total count
 	public int selectNoticeCount() {
 		Connection conn=null;
 		Dbutil dbUtil= new Dbutil();
@@ -104,7 +156,6 @@ public class NoticeService {
 
 		try {
 			conn=dbUtil.getConnection();
-			conn.setAutoCommit(false);
 			count=noticeDao.selectNoticeCount(conn);
 			conn.commit();
 		} catch (Exception e) {
@@ -124,7 +175,6 @@ public class NoticeService {
 		return count;
 	}
 	
-	
 	//noticeList+페이징
 	public ArrayList<Notice> getBoardListByPage(int beginRow, int rowPerPage){
 	ArrayList<Notice> list=null;
@@ -134,7 +184,6 @@ public class NoticeService {
 	
 	try {
 		conn=dbUtil.getConnection();
-		conn.setAutoCommit(false);
 		list=noticeDao.selectNoticeListByPage(conn, beginRow, rowPerPage);
 	} catch (Exception e) {
 		try {

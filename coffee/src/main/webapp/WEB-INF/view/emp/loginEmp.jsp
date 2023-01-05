@@ -4,10 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>로그인</title>
+<title>관리자 로그인</title>
 </head>
 <body>
-	<!--관리자가 아니라면 접근 못하게  -->
 	<form action="${pageContext.request.contextPath}/emp/loginEmp" method="post">
 		<table>
 			<tr>

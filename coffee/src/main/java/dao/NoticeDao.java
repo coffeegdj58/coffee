@@ -9,11 +9,10 @@ import vo.Notice;
 
 public class NoticeDao {
 	
-	
 	//수정 Form에서 메모 내용이랑 번호 가져오기
-	public Notice selectNotice(Connection conn, int noticeCode)throws Exception {
+	public Notice selectModifyNotice(Connection conn, int noticeCode)throws Exception {
 		Notice notice=null;
-		String sql="SELECT notice_title noticeTitle, notice_content noticeContent FROM notice WHERE notice_code=? ;";
+		String sql="SELECT notice_code noticeCode,notice_title noticeTitle, notice_content noticeContent, emp_id empId FROM notice WHERE notice_code=? ;";
 		PreparedStatement stmt=conn.prepareStatement(sql);
 		stmt.setInt(1, noticeCode);
 		ResultSet rs=stmt.executeQuery();
@@ -21,27 +20,29 @@ public class NoticeDao {
 			notice=new Notice();
 			notice.setNoticeTitle(rs.getString("noticeTitle"));
 			notice.setNoticeContent(rs.getString("noticeContent"));
+			notice.setEmpId(rs.getString("empId"));
+			notice.setNoticeCode(rs.getInt("noticeCode"));
 		}
 		return notice;
 	}
 	
-	//수정 Action
-	public int updateNotice(Connection conn, Notice notice) throws Exception {
+	//modifyNotice Action
+	public int modifyNotice(Connection conn, Notice notice) throws Exception {
 		int row=0;
 		String sql = "UPDATE notice SET notice_title =?, notice_content =?  WHERE notice_code=? ;";
 		PreparedStatement stmt=conn.prepareStatement(sql);
 		stmt.setString(1, notice.getNoticeTitle());
 		stmt.setString(2, notice.getNoticeContent());
+		stmt.setInt(3, notice.getNoticeCode());
 		row=stmt.executeUpdate();
 		if(row==1) {
 			System.out.println("수정성공");
-			return 1;
 		}
 		return row;
 	}
 	
 	//removeNotice
-	public int deleteNotice(Connection conn, int noticeCode) throws Exception {
+	public int removeNotice(Connection conn, int noticeCode) throws Exception {
 		int row=0;
 		String sql = "DELETE FROM notice WHERE notice_code=?";
 		PreparedStatement stmt=conn.prepareStatement(sql);
@@ -49,7 +50,6 @@ public class NoticeDao {
 		row=stmt.executeUpdate();
 		if(row==1) {
 			System.out.println("삭제성공");
-			return 1;
 		}
 		return row;
 	}
@@ -65,7 +65,6 @@ public class NoticeDao {
 		row=stmt.executeUpdate();
 		if (row == 1) {
 			System.out.println("추가 성공");
-			return 1;
 		}
 		return row;
 	}
@@ -117,5 +116,6 @@ public class NoticeDao {
 		}
 		return list;
 	}
+	
 	
 }

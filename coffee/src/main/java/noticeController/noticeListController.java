@@ -17,15 +17,15 @@ import vo.Notice;
 public class noticeListController extends HttpServlet {
 	private NoticeService noticeService;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		//회원 비회원 모두가 볼 수 있게 
 		int currentPage=1; //1페이지부터 시작
 		int rowPerPage=10; //10개씩 보여줄거
 		int beginRow=(currentPage-1)*rowPerPage; //0번부터 보여줄거
-		
+		//service 불러오기
 		this.noticeService=new NoticeService();
 		ArrayList<Notice> list=noticeService.getBoardListByPage(beginRow, rowPerPage);
-		int selectNoticeCount=noticeService.selectNoticeCount();//전체 행의 개수 가져올거
 		
+		int selectNoticeCount=noticeService.selectNoticeCount();//전체 행의 개수 가져올거
 		int lastPage=selectNoticeCount/rowPerPage; //마지막 페이지: 전체 행의 개수 / 10(10개씩 보여줄거니까)
 		
 		//jsp에서 <% %> 안쓰고 가져오게 하려고

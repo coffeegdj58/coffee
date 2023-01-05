@@ -3,11 +3,28 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import vo.*;
 
 public class EmpDao {
 	
+	//최고관리자가 active 및 ahtoCode 변경
+	
+	
+	//최고 관리자가 하위 관리가 삭제
+	public int removeEmp(Connection conn, int empCode) throws Exception{
+		int row=0;
+		String sql="DELETE FROM emp WHERE emp_code=?";
+		PreparedStatement stmt=conn.prepareStatement(sql);
+		stmt.setInt(1, empCode);
+		row=stmt.executeUpdate();
+		if(row==1) {
+			System.out.println("삭제성공: dao");
+		}
+		return row;
+	}
 	
 	//관리자 회원가입
 	//outid에 저장 쿼리
@@ -18,7 +35,7 @@ public class EmpDao {
 		stmt.setString(1, emp.getEmpId());
 		row=stmt.executeUpdate();
 		if(row==1) {
-			System.out.println("관리자 회원가입 성공");
+			System.out.println("관리자 회원가입 성공: outIdEmpDao");
 		}
 		stmt.close();
 		return row;
@@ -33,7 +50,7 @@ public class EmpDao {
 		stmt.setString(3, emp.getEmpName());
 		row=stmt.executeUpdate();
 		if(row==1) {
-			System.out.println("관리자 회원가입 성공");
+			System.out.println("관리자 회원가입 성공: empDao");
 		}
 		stmt.close();
 		return row;
@@ -68,11 +85,32 @@ public class EmpDao {
 			resultEmp.setEmpId(rs.getString("empId"));
 			resultEmp.setEmpName(rs.getString("empName"));
 			resultEmp.setActive(rs.getString("active"));
-			resultEmp.setAuthCode(rs.getString("authCode"));
+			resultEmp.setAuthCode(rs.getInt("authCode"));
 			resultEmp.setCreatedate(rs.getString("createdate"));
 		}
 		rs.close();
 		stmt.close();
 		return resultEmp;
 	}
+	
+	//관리자 멤버 리스트
+	public ArrayList<Emp> selectEmpList(Connection conn) throws Exception{
+		ArrayList<Emp> list= new ArrayList<Emp>();
+		String sql="SELECT emp_code empCode,emp_id empId,emp_name empName,active,auth_code authCode,createdate FROM emp ORDER BY createdate";
+		PreparedStatement stmt= conn.prepareStatement(sql);
+		ResultSet rs=stmt.executeQuery();
+		while(rs.next()) {
+			Emp e=new Emp();
+			e.setEmpCode(rs.getInt("empCode"));
+			e.setEmpId(rs.getString("empId"));
+			e.setEmpName(rs.getString("empName"));
+			e.setActive(rs.getString("active"));
+			e.setAuthCode(rs.getInt("authCode"));
+			e.setCreatedate(rs.getString("createdate"));
+			list.add(e);
+		}
+		return list;
+	}
+	
+	
 }

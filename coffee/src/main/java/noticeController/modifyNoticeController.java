@@ -1,41 +1,60 @@
 package noticeController;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet implementation class modifyNoticeController
- */
-@WebServlet("/modifyNoticeController")
-public class modifyNoticeController extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public modifyNoticeController() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+import service.NoticeService;
+import vo.Notice;
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+
+@WebServlet("/notice/modifyNotice")
+public class modifyNoticeController extends HttpServlet {
+	private NoticeService noticeService;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		//로그인 한 사람만 접근 가능+ 관리자
+		
+		//noticeCode받아오기
+		int noticeCode=Integer.parseInt(request.getParameter("noticeCode"));
+		//service 불러오기
+		this.noticeService=new NoticeService();
+		Notice n= noticeService.selectModifyNotice(noticeCode);
+		
+		//jsp에서 <% %> 안쓰고 가져오게 하려고
+		request.setAttribute("n", n);
+		
+		request.getRequestDispatcher("/WEB-INF/view/emp/modifyNotice.jsp").forward(request, response);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		request.setCharacterEncoding("utf-8");
+		//폼에서 받아오기
+		String noticeTitle=request.getParameter("noticeTitle");
+		String noticeContent=request.getParameter("noticeContent");
+		String empId=request.getParameter("empId");
+		
+		Notice notice= new Notice();
+		notice.setNoticeTitle(noticeTitle);
+		notice.setNoticeContent(noticeContent);
+		notice.setEmpId(empId);
+		//service 불러오기
+		this.noticeService=new NoticeService();
+		int row=noticeService.modifyNotice(notice);
+		if(row==1) {//수정 성공
+			response.sendRedirect(request.getContextPath()+"/notice/noticeList");
+		}else {//실패
+			System.out.println("공지사항 수정 실패");
+			//서블릿에서 알림창 띄우기
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter writer = response.getWriter();
+			writer.println("<script>alert('공지사항 수정 실패!'); location.href='"+request.getContextPath()+"/notice/modifyNotice"+"';</script>"); 
+			writer.close();
+		}
 	}
 
 }

@@ -23,7 +23,7 @@ public class addNoticeController extends HttpServlet {
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		//폼에서 받아오기
 		request.setCharacterEncoding("utf-8");
 		String noticeTitle=request.getParameter("noticeTitle");
 		String noticeContent=request.getParameter("noticeContent");
@@ -33,10 +33,9 @@ public class addNoticeController extends HttpServlet {
 		notice.setNoticeTitle(noticeTitle);
 		notice.setNoticeContent(noticeContent);
 		notice.setEmpId(empId);
-		
+		//service 불러오기
 		this.noticeService=new NoticeService();
 		int row=noticeService.addNotice(notice);
-		
 		if(row==1) { //성공: 공지사항 추가 성공하면 noticeList로 보낼거
 			response.sendRedirect(request.getContextPath()+"/notice/noticeList"); 
 		}else { //실패: 실패하면 다시 addlist로 보낼거

@@ -5,6 +5,7 @@ public class Dbutil {
 	public Connection getConnection() throws Exception{
 		Class.forName("org.mariadb.jdbc.Driver");
 		Connection conn = DriverManager.getConnection("jdbc:mariadb://localhost/shop","root", "java1234");
+		conn.setAutoCommit(false);
 		return conn;
 		}
 	public void close(ResultSet rs, PreparedStatement stmt, Connection conn) throws Exception{
