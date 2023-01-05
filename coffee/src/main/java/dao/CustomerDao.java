@@ -1,5 +1,6 @@
 package dao;
 
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -134,6 +135,37 @@ public class CustomerDao {
 		return result;
 		
 	}
+	
+	//insertoutid timing == insertcustomer
+	public int signUpEmpByOutid(Connection conn, String customerId) throws Exception{
+	      int row=0;
+	      String sql="INSERT INTO outid(id) VALUES (?);";
+	      PreparedStatement stmt=conn.prepareStatement(sql);
+	      stmt.setString(1, customerId);
+	      row=stmt.executeUpdate();
+	      if(row==1) {
+	         System.out.println("관리자 회원가입 성공");
+	         
+	      }
+	      stmt.close();
+	      return row;
+	   }
+	
+	//insertpoint 고객 테이블에 넣는 쿼리
+	public int insertPointInCustomer(String customerId, Connection conn, int sum) throws Exception{ 
+		int result =0;
+		
+		String sql= "UPDATE customer SET point= ? WHERE customer_id=?";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		
+		stmt.setInt(1, (int)Math.floor(sum/100*3));
+		stmt.setString(2, customerId);
+		result = stmt.executeUpdate();
+		
+		return result;
+	}
+
+	//updatepoint
 	
 	
 }

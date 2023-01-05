@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import vo.Cart;
 
+
 public class OrderDao {
 	
 	//cart에 goods 추가하는 쿼리
@@ -28,7 +29,7 @@ public class OrderDao {
 	public ArrayList<Cart> selectCartListById(String customerId, Connection conn) throws Exception {
 		ArrayList<Cart> list = new ArrayList<Cart>();
 		
-		String sql= "SELECT g.goods_name goodsName, g.goods_price goodsPrice, g.category_code categoryCode, c.cart_quantity cartQuantity FROM "
+		String sql= "SELECT g.goods_name goodsName, g.goods_price goodsPrice, g.category_code categoryCode, c.cart_quantity cartQuantity, g.goods_code, goodsCode FROM "
 				+ "cart c INNER JOIN goods g ON c.goods_code = g.goods_code WHERE c.customer_id= ?";
 		PreparedStatement stmt= conn.prepareStatement(sql);
 		stmt.setString(1, customerId);
@@ -41,7 +42,7 @@ public class OrderDao {
 			c.setGoodsName(rs.getString("goodsName"));
 			c.setGoodsPrice(rs.getInt("goodsPrice"));
 			c.setCategoryCode(rs.getInt("categoryCode"));
-			
+			c.setGoodsCode(rs.getInt("goodsCode"));
 			list.add(c);
 		}
 		
@@ -51,18 +52,93 @@ public class OrderDao {
 	}
 	
 	//orders insert 하는 쿼리
-	public int insertOrdersByCart(ArrayList<Cart> list, int cartQuantity, Connection conn )throws Exception{
+	public int insertOrdersByCart(ArrayList<Cart> list, Connection conn )throws Exception{
 		int result= 0;
+		int quantity = 0;
 		
 		for(Cart c : list) {
+			quantity++;
 			String sql = "INSERT INTO orders(goods_code, customer_id, order_quantity, order_price)values(?, ?, ?, ?)";
 			PreparedStatement stmt= conn.prepareStatement(sql);
 			stmt.setInt(1, c.getGoodsCode());
 			stmt.setString(2, c.getCustomerId());
+			stmt.setInt(3, quantity);
+			stmt.setInt(4, c.getGoodsPrice());
+			
+			result= stmt.executeUpdate();
+			stmt.close();
 			
 		}
 		
 		
 		return result;
 	}
+	
+	//결제 후 유저의 카트 데이터를 지우는 쿼리
+	public int deleteCartById(String customerId, Connection conn) throws Exception {
+		int result =0;
+		
+		String sql = "DELETE FROM cart WHERE customer_id= ?";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setString(1, customerId);
+		
+		result = stmt.executeUpdate();
+		
+		stmt.close();
+		return result;
+	}
+	
+	//장바구니 총 가격을 알려주는 쿼리
+	public int selectSumGoodsPrice(String customerId, Connection conn )throws Exception{
+		int sum = 0;
+		
+		String sql = "SELECT SUM(goods_price) s FROM cart WHERE customer_id= ?";
+		PreparedStatement stmt =conn.prepareStatement(sql);
+		stmt.setString(1, customerId);
+		
+		ResultSet rs = stmt.executeQuery();
+		if(rs.next()) {
+			sum = rs.getInt("s");
+		}
+		
+		
+		return sum;
+	}
+	
+	//orders의 state를 바꾸는 쿼리
+	public int updateOrderState (Connection conn, String orderState, int orderCode) throws Exception{
+		int result = 0;
+		
+		String sql = "UPDATE orders SET order_state = ? WHERE order_code= ?";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setString(1, orderState);
+		stmt.setInt(2, orderCode);
+		
+		result = stmt.executeUpdate();
+		
+		return result;
+	}
+	
+	//cart - orders에 넘어갈때 hit을 높이는 쿼리
+	public int updateGoodsHit(ArrayList<Cart> list, Connection conn ) throws Exception {
+		int hit= 0;
+		int result= 0;
+		
+		for(Cart c : list) {
+			hit++;
+			String sql="UPDATE goods SET hit= ? WHERE goods_code= ?";
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, hit);
+			stmt.setInt(2, c.getGoodsCode());
+			result= stmt.executeUpdate();
+			
+			stmt.close();
+			
+		}
+		
+		
+		return result;
+	}
+	
+
 }
