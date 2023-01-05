@@ -19,8 +19,10 @@ public class EmpService {
 		try {
 			conn=dbutil.getConnection();
 			conn.setAutoCommit(false);
-			empDao.signUpEmpByOutid(conn, emp);
-			empDao.signUpEmp(conn, emp);
+			row=empDao.signUpEmp(conn, emp);
+			if(row==1) {
+				int rowOi=empDao.signUpEmpByOutid(conn, emp);
+			}
 			conn.commit();
 		} catch (Exception e) {
 			try {
@@ -94,7 +96,5 @@ public class EmpService {
 		}
 		return resultEmp;
 	}
-	
-	
 	
 }

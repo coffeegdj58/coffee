@@ -19,7 +19,6 @@ public class EmpDao {
 		row=stmt.executeUpdate();
 		if(row==1) {
 			System.out.println("관리자 회원가입 성공");
-			return 1;
 		}
 		stmt.close();
 		return row;
@@ -35,7 +34,6 @@ public class EmpDao {
 		row=stmt.executeUpdate();
 		if(row==1) {
 			System.out.println("관리자 회원가입 성공");
-			return 1;
 		}
 		stmt.close();
 		return row;
