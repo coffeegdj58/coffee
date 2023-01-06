@@ -14,7 +14,7 @@ import vo.Notice;
 
 
 @WebServlet("/notice/modifyNotice")
-public class modifyNoticeController extends HttpServlet {
+public class ModifyNoticeController extends HttpServlet {
 	private NoticeService noticeService;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//로그인 한 사람만 접근 가능+ 관리자

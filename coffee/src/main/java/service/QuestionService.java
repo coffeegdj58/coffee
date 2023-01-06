@@ -51,7 +51,7 @@ public class QuestionService {
 			db= new Dbutil();
 			conn = db.getConnection();
 			this.questiondao = new QuestionDao();
-			int beginRow = (currentPage-1)*rowPerPage+1;
+			int beginRow = (currentPage-1)*rowPerPage;
 			
 			list = questiondao.selectQuestionBylistPaging(category, searchWord, beginRow, rowPerPage, conn);
 			

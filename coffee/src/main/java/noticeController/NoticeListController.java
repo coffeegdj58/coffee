@@ -14,7 +14,7 @@ import vo.Notice;
 
 
 @WebServlet("/notice/noticeList")
-public class noticeListController extends HttpServlet {
+public class NoticeListController extends HttpServlet {
 	private NoticeService noticeService;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//회원 비회원 모두가 볼 수 있게 
@@ -27,12 +27,14 @@ public class noticeListController extends HttpServlet {
 		
 		int selectNoticeCount=noticeService.selectNoticeCount();//전체 행의 개수 가져올거
 		int lastPage=selectNoticeCount/rowPerPage; //마지막 페이지: 전체 행의 개수 / 10(10개씩 보여줄거니까)
+		if(selectNoticeCount%rowPerPage!=0) {
+			lastPage=lastPage+1;
+		}
 		
 		//jsp에서 <% %> 안쓰고 가져오게 하려고
 		request.setAttribute("list", list);
 		request.setAttribute("currentPage", currentPage);
 		request.setAttribute("rowPerPage", rowPerPage);
-		request.setAttribute("beginRow", beginRow);
 		request.setAttribute("lastPage", lastPage);
 		
 		request.getRequestDispatcher("/WEB-INF/view/emp/notice.jsp").forward(request, response);

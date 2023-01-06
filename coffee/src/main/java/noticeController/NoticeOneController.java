@@ -14,8 +14,8 @@ import vo.*;
 /**
  * Servlet implementation class noticeOneController
  */
-@WebServlet("/noticeOneController")
-public class noticeOneController extends HttpServlet {
+@WebServlet("/notice/noticeOne")
+public class NoticeOneController extends HttpServlet {
 	private NoticeService noticeService;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//로그인 한 사람만 접근 가능+ 관리자

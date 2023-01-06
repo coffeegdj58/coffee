@@ -9,7 +9,7 @@ import vo.Notice;
 
 public class NoticeDao {
 	
-	//수정 Form에서 메모 내용이랑 번호 가져오기
+	//수정 Form에서 메모 내용이랑 번호 가져오기 적고보니 쓸 필요가 없었음 one꺼 가져다 쓰면 됐었네,,,
 	public Notice selectModifyNotice(Connection conn, int noticeCode)throws Exception {
 		Notice notice=null;
 		String sql="SELECT notice_code noticeCode,notice_title noticeTitle, notice_content noticeContent, emp_id empId FROM notice WHERE notice_code=? ;";

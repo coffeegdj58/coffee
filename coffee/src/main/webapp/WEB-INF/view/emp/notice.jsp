@@ -17,16 +17,38 @@
 			<th>제목</th>
 			<th>내용</th>
 			<th>날짜</th>
+			<!-- 관리자만 수정 삭제가 보이게 할 것 -->
+			<c:if test="">
+				<th>수정 / 삭제</th>
+			</c:if>
 		</tr>
 		<c:forEach var="n" items="${list}">
 			<tr>
 				<td>${n.noticeCode}</td>
 				<td>${n.noticeTitle}</td>
-				<td>${n.noticeContent}</td>
+				<td>
+					<a href="${pageContext.request.contextPath}/notice/noticeOne?noticeCode=${n.noticeCode}">
+					${n.noticeContent} </a>
+				</td>
 				<td>${n.createdate}</td>
 			</tr>
+			<!-- 관리자만 수정 삭제가 보이게 할 것 -->
+			<c:if test="">
+					<td>
+						<a href="${pageContext.request.contextPath}/question/modifyQuestion?noticeCode=${n.noticeCode}">수정</a> /
+						<a href="${pageContext.request.contextPath}/question/removeQuestion?noticeCode=${n.noticeCode}">삭제</a> 
+					</td>
+				</c:if>
 		</c:forEach>
 	</table>
-
+	
+	<a href="${pageContext.request.contextPath}/emp/questionList?currentPage=1">처음</a>
+	<c:if test="${currentPage > 1}">
+		<a href="${pageContext.request.contextPath}/emp/questionList?currentPage=${currentPage-1}&rowPerPage=${rowPerPage}">이전</a>
+	</c:if>
+	<c:if test="${currentPage < lastPage}">
+		<a href="${pageContext.request.contextPath}/emp/questionList?currentPage=${currentPage+1}&rowPerPage=${rowPerPage}">이후</a>
+	</c:if>
+	<a href="${pageContext.request.contextPath}/emp/questionList?currentPage=${lastPage}">마지막</a>
 </body>
 </html>

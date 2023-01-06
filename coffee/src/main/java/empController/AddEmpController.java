@@ -14,7 +14,7 @@ import vo.Emp;
 
 
 @WebServlet("/emp/addEmp")
-public class addEmpController extends HttpServlet {
+public class AddEmpController extends HttpServlet {
 	private EmpService empService;
 	//회원가입 폼
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

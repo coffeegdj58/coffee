@@ -14,7 +14,7 @@ import vo.*;
 
 
 @WebServlet("/emp/empPage")
-public class empPageController extends HttpServlet {
+public class EmpPageController extends HttpServlet {
 	private EmpService empService;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//service 불러오기

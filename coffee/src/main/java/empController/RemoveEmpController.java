@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import service.EmpService;
 
 @WebServlet("/emp/removeEmp")
-public class removeEmpController extends HttpServlet {
+public class RemoveEmpController extends HttpServlet {
 	private EmpService empService;
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
