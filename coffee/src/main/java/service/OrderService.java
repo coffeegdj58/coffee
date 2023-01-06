@@ -3,6 +3,7 @@ package service;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import dao.OrderDao;
 import util.Dbutil;
@@ -224,6 +225,36 @@ public class OrderService {
 		return result;
 		
 	
+	}
+	
+	public ArrayList<HashMap<String, Object>> selectOrderListByid(String customerId){
+		ArrayList<HashMap<String, Object>> list = new ArrayList<HashMap<String,Object>>();
+		Connection conn = null;
+
+		try {
+			db= new Dbutil();
+			conn = db.getConnection();
+			orderdao = new OrderDao();
+			
+			list = orderdao.selectOrderListById(customerId, conn);
+			
+			conn.commit(); // DBUtil.class에서 conn.setAutoCommit(false);
+		} catch (Exception e) {
+			try {
+				conn.rollback(); // DBUtil.class에서 conn.setAutoCommit(false);
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
+		
 	}
 }
 

@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import vo.Cart;
 
@@ -30,7 +31,7 @@ public class OrderDao {
 		ArrayList<Cart> list = new ArrayList<Cart>();
 		
 		String sql= "SELECT g.goods_name goodsName, g.goods_price goodsPrice, g.category_code categoryCode, c.cart_quantity cartQuantity, g.goods_code, goodsCode FROM "
-				+ "cart c INNER JOIN goods g ON c.goods_code = g.goods_code WHERE c.customer_id= ?";
+				+ "cart c INNER JOIN goods g ON c.goods_code = g.goods_code WHERE c.customer_id= ? AND c.selected= 1";
 		PreparedStatement stmt= conn.prepareStatement(sql);
 		stmt.setString(1, customerId);
 		
@@ -78,7 +79,7 @@ public class OrderDao {
 	public int deleteCartById(String customerId, Connection conn) throws Exception {
 		int result =0;
 		
-		String sql = "DELETE FROM cart WHERE customer_id= ?";
+		String sql = "DELETE FROM cart WHERE customer_id= ? AND selected= 1";
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		stmt.setString(1, customerId);
 		
@@ -139,6 +140,34 @@ public class OrderDao {
 		
 		return result;
 	}
-	
+	public ArrayList<HashMap<String, Object>> selectOrderListById(String customerId, Connection conn) throws Exception{
+		ArrayList<HashMap<String, Object>> list =new ArrayList<HashMap<String, Object>>();
+		
+		String sql = "SELECT c.category_name categoryName, c.category_kind categoryKind, o.order_code orderCode, o.order_state orderState, g.goods_name goodsName, g.goods_price goodsPrice "
+				+ "FROM orders o INNER JOIN goods g ON g.goods_code= o.goods_code INNER JOIN category c ON g.category_code= c.category_code"
+				+ " WHERE o.customer_id = ? ORDER BY o.createdate";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setString(1, customerId);
+		
+		ResultSet rs = stmt.executeQuery();
+		
+		
+		while(rs.next()) {
+			HashMap<String, Object> o = new HashMap<String, Object>();
+			o.put("categoryName", rs.getString("categoryName"));
+			o.put("categoryKind", rs.getString("categoryKind"));
+			o.put("orderCode", rs.getInt("orderCode"));
+			o.put("orderState", rs.getString("orderState"));
+			o.put("goodsName", rs.getString("goodsName"));
+			o.put("goodsPrice", rs.getInt("goodsPrice"));
+			
+			list.add(o);
+		}
+		
+		stmt.close();
+		rs.close();
+		
+		return list;
+	}
 
 }

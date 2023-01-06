@@ -15,7 +15,7 @@ public class CustomerDao {
 	public int insertCustomer(Customer cust, Connection conn) throws Exception{
 		int result= 0;
 		
-		String sql = "INSERT INTO(customer_id, customer_pw, customer_name, customer_phone, customer_gender, customer_birth)VALUES(?,password(?),?,?,?,?)";
+		String sql = "INSERT INTO customer(customer_id, customer_pw, customer_name, customer_phone, customer_gender, customer_birth)VALUES(?,password(?),?,?,?,?)";
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		stmt.setString(1, cust.getCustomerId());
 		stmt.setString(2, cust.getCustomerPw());
@@ -227,12 +227,13 @@ public class CustomerDao {
 	}
 	
 	//address add
-	public int addAddress(String customer_id, String address, Connection conn)throws Exception {
+	public int addAddress(String customerId, String address, int flag, Connection conn)throws Exception {
 		int result = 0;
-		String sql= "INSERT INTO customer_address (customer_id, address) VALUES (?, ?)";
+		String sql= "INSERT INTO customer_address (customer_id, address, flag) VALUES (?, ?, ?)";
 		PreparedStatement stmt = conn.prepareStatement(sql);
-		stmt.setString(1, customer_id);
+		stmt.setString(1, customerId);
 		stmt.setString(2, address);
+		stmt.setInt(3, flag);
 		
 		result= stmt.executeUpdate();
 		
@@ -269,12 +270,13 @@ public class CustomerDao {
 	}
 	
 	//update address
-	public int updateAddress(String address, int flag, Connection conn) throws Exception {
+	public int updateAddress(String customerId, String address, int flag, Connection conn) throws Exception {
 		int result = 0;
-		String sql = "UPDATE customer_address SET address= ? flag= ?";
+		String sql = "UPDATE customer_address SET address= ? flag= ? WHERE customer_id=?";
 		PreparedStatement stmt= conn.prepareStatement(sql);
 		stmt.setString(1, address);
 		stmt.setInt(2, flag);
+		stmt.setString(3, customerId);
 		
 		result= stmt.executeUpdate();
 		stmt.close();
