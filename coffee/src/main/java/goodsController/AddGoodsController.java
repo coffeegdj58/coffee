@@ -43,7 +43,7 @@ public class AddGoodsController extends HttpServlet {
 		// 직원이 아닐 경우 직원 로그인 페이지로 전환
 		HttpSession session = request.getSession();
 		if(session.getAttribute("loginEmp") == null) {
-			response.sendRedirect(request.getContextPath() + "/LoginEmpController");
+			response.sendRedirect(request.getContextPath() + "/emp/loginEmp");
 			return;
 		}
 		this.goodsService= new GoodsService();
@@ -85,6 +85,6 @@ public class AddGoodsController extends HttpServlet {
 			goods.setGoodsInfo(goodsInfo);
 			goodsService.addGoods(goods, dir, empId);
 		}
-		response.sendRedirect(request.getContextPath() + "/addGoods");
+		response.sendRedirect(request.getContextPath() + "/CoffeeListController");
 	}
 }

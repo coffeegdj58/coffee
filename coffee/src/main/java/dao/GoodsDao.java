@@ -14,7 +14,7 @@ public class GoodsDao {
 	public ArrayList<Goods> selectGoodsList(Connection conn, int categoryCode) throws Exception {
 		ArrayList<Goods> list = new ArrayList<>();
 		
-		String sql = "SELECT g.goods_name goodsName, g.goods_price goodsPrice, g.soldout soldout, g.goods_code goodsCode, c.category_kind categoryKind, c.category_name, categoryName FROM goods g INNER JOIN category c ON g.category_code = c.category_code WHERE c.category_code= ? ORDER BY g.hit DESC";
+		String sql = "SELECT g.goods_name goodsName, g.goods_price goodsPrice, g.soldout soldout, g.goods_code goodsCode, c.category_kind categoryKind, c.category_name categoryName FROM goods g INNER JOIN category c ON g.category_code = c.category_code WHERE c.category_code= ? ORDER BY g.hit DESC";
 		
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		stmt.setInt(1, categoryCode);
