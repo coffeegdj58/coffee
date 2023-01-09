@@ -19,6 +19,8 @@
 			<th>질문 코드</th>
 			<th>주문자 아이디</th>
 			<th>주문번호</th>
+			<th>답변 유/무 </th>
+			
 		</tr>
 		<c:forEach var="q" items="${list}">
 			<tr>
@@ -29,6 +31,8 @@
 				</td>
 				<td>${q.customer_id}</td>
 				<td>${q.order_code}</td>
+				<!-- 답변 달기 전이면 빨간색으로 글씨 표시.. -->
+				<td>${q.flag}</td>
 			</tr>
 		</c:forEach>
 	</table>

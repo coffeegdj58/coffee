@@ -19,6 +19,9 @@ public class NoticeListController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//회원 비회원 모두가 볼 수 있게 
 		int currentPage=1; //1페이지부터 시작
+		if(request.getParameter("currentPage") != null) {
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		}
 		int rowPerPage=10; //10개씩 보여줄거
 		int beginRow=(currentPage-1)*rowPerPage; //0번부터 보여줄거
 		//service 불러오기

@@ -18,7 +18,7 @@
 			</tr>
 			<tr>
 				<td>작성자</td>
-				<td><input type="text" name="empId" value="" readonly="readonly"></td>
+				<td><input type="text" name="empId" value="admind" readonly="readonly"></td>
 			</tr>
 		</table>
 		<button type="submit">추가</button>

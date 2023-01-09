@@ -15,7 +15,7 @@
 			<th>주문자 아이디</th>
 			<th>주문번호</th>
 			<!-- 답변이 안달렸으면 보이게 달리면 안보이게 -->
-			<c:if test="${q.flag==N}">
+			<c:if test="${q.flag eq 'N'}">
 				<th>수정 / 삭제</th>
 			</c:if>
 		</tr>
@@ -29,7 +29,7 @@
 				<td>${q.customer_id}</td>
 				<td>${q.order_code}</td>
 				<!-- 답변이 안달렸으면 보이게 달리면 안보이게 -->
-				<c:if test="${q.flag==N }">
+				<c:if test="${q.flag eq 'N'}">
 					<td>
 						<a href="${pageContext.request.contextPath}/question/modifyQuestion?questionCode=${question_code}">수정</a> /
 						<a href="${pageContext.request.contextPath}/question/removeQuestion?questionCode=${question_code}">삭제</a> 

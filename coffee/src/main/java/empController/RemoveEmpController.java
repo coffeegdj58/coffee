@@ -15,7 +15,7 @@ import service.EmpService;
 public class RemoveEmpController extends HttpServlet {
 	private EmpService empService;
 	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//empCode 받아오기
 		int empCode= Integer.parseInt(request.getParameter("empCode"));
 		this.empService=new EmpService();

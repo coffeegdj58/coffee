@@ -19,7 +19,7 @@ public class RemoveNoticeController extends HttpServlet {
 	private NoticeService noticeService;
 	
 	//공지사항 삭제 액션
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//로그인 한 사람만 접근 가능+ 관리자
 		//noticeCode받아오기
 		int noticeCode=Integer.parseInt(request.getParameter("noticeCode"));

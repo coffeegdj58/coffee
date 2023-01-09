@@ -23,6 +23,8 @@ public class NoticeDao {
 			notice.setEmpId(rs.getString("empId"));
 			notice.setNoticeCode(rs.getInt("noticeCode"));
 		}
+		rs.close();
+		stmt.close();
 		return notice;
 	}
 	
@@ -38,6 +40,7 @@ public class NoticeDao {
 		if(row==1) {
 			System.out.println("수정성공");
 		}
+		stmt.close();
 		return row;
 	}
 	
@@ -51,13 +54,14 @@ public class NoticeDao {
 		if(row==1) {
 			System.out.println("삭제성공");
 		}
+		stmt.close();
 		return row;
 	}
 	
 	//addNotice
 	public int addNotice(Connection conn,Notice notice) throws Exception {
 		int row=0;
-		String sql = "INSERT notice(notice_title noticeTitle,notice_content noticeContent,emp_id empId,createdate) VALUES (?,?,?,NOW());";
+		String sql = "INSERT INTO notice (notice_title, notice_content, emp_id, createdate) VALUES (?,?,?,NOW());";
 		PreparedStatement stmt=conn.prepareStatement(sql);
 		stmt.setString(1, notice.getNoticeTitle());
 		stmt.setString(2, notice.getNoticeContent());
@@ -66,11 +70,12 @@ public class NoticeDao {
 		if (row == 1) {
 			System.out.println("추가 성공");
 		}
+		stmt.close();
 		return row;
 	}
 	//noticeOne
 	public Notice noticeOne(Connection conn, int noticeCode) throws Exception {
-		String sql = "SELECT notice_code noticeCode, notice_title noticeTitle, notice_content noticeContent, emp_id empId, createdate FROM board WHERE notice_code=?";
+		String sql = "SELECT notice_code noticeCode, notice_title noticeTitle, notice_content noticeContent, emp_id empId, createdate FROM notice WHERE notice_code=?";
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		stmt.setInt(1, noticeCode);
 		ResultSet rs = stmt.executeQuery();
@@ -82,6 +87,8 @@ public class NoticeDao {
 			n.setCreatedate(rs.getString("createdate"));
 			n.setNoticeCode(rs.getInt("noticeCode"));
 		}
+		rs.close();
+		stmt.close();
 		return n;
 	}
 
@@ -94,6 +101,8 @@ public class NoticeDao {
 		if (countRs.next()) {
 			count = countRs.getInt(count);
 		}
+		countRs.close();
+		countStmt.close();
 		return count;
 	}
 	
@@ -114,6 +123,8 @@ public class NoticeDao {
 			n.setCreatedate(rs.getString("createdate"));
 			list.add(n);
 		}
+		rs.close();
+		stmt.close();
 		return list;
 	}
 	

@@ -21,6 +21,9 @@ public class QuestionListByEmpController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//관리자만 볼 수 있음
 		int currentPage=1; //1페이지부터 시작
+		if(request.getParameter("currentPage") != null) {
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		}
 		int rowPerPage=10; //10개씩 보여줄거
 		//폼에서 받아올 것
 		String category="category";

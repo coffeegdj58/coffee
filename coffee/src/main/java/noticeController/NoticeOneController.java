@@ -11,9 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import service.*;
 import vo.*;
 
-/**
- * Servlet implementation class noticeOneController
- */
 @WebServlet("/notice/noticeOne")
 public class NoticeOneController extends HttpServlet {
 	private NoticeService noticeService;
@@ -26,7 +23,6 @@ public class NoticeOneController extends HttpServlet {
 		Notice n=noticeService.noticeOne(noticeCode);
 		//jsp에서 <% %> 안쓰고 가져오게 하려고
 		request.setAttribute("n", n);
-		
 		request.getRequestDispatcher("/WEB-INF/view/emp/noticeOne.jsp").forward(request, response);
 	}
 
