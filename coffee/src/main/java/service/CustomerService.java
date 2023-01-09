@@ -8,6 +8,7 @@ import dao.CustomerDao;
 import util.Dbutil;
 import vo.Address;
 import vo.Customer;
+import vo.Point;
 
 public class CustomerService {
 	private CustomerDao customerDao;
@@ -69,7 +70,7 @@ public class CustomerService {
 		
 		return result;
 	}
-	public int updateCustomer(Customer customer, String customerPw) {
+	public int updateCustomer(String customerId, String afterPassword, String beforePassword) {
 		int result =0;
 		Connection conn =null;
 		try {
@@ -77,7 +78,7 @@ public class CustomerService {
 			conn =db.getConnection();
 			customerDao =new CustomerDao();
 			
-			result = customerDao.updateCustomer(customer, customerPw, conn);
+			result = customerDao.updateCustomer(customerId, afterPassword, beforePassword, conn);
 			
 			conn.commit(); // DBUtil.class에서 conn.setAutoCommit(false);
 		} catch (Exception e) {
@@ -410,7 +411,7 @@ public class CustomerService {
 		return list;
 	}
 	
-	public int updateAddress(String address, int flag, String customerId) {
+	public int updateAddress(String address, int flag, int addressCode) {
 		
 		int result =0;
 		Connection conn =null;
@@ -419,7 +420,7 @@ public class CustomerService {
 			conn =db.getConnection();
 			customerDao =new CustomerDao();
 			
-			result = customerDao.updateAddress(customerId, address, flag, conn);
+			result = customerDao.updateAddress(addressCode, address, flag, conn);
 			
 			conn.commit(); // DBUtil.class에서 conn.setAutoCommit(false);
 		} catch (Exception e) {
@@ -437,6 +438,35 @@ public class CustomerService {
 			}
 		}
 		return result;
+	}
+	//기본배송지 아이디 초기화쿼리
+	public int resetAddressFlag(String customerId) {
+		int result =0;
+		Connection conn =null;
+		try {
+			db = new Dbutil();
+			conn =db.getConnection();
+			customerDao =new CustomerDao();
+			
+			result = customerDao.resetFlagById(customerId, conn);
+			
+			conn.commit(); // DBUtil.class에서 conn.setAutoCommit(false);
+		} catch (Exception e) {
+			try {
+				conn.rollback(); // DBUtil.class에서 conn.setAutoCommit(false);
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
+		
 	}
 	
 	public int deleteAddress(int addressCode) {
@@ -465,5 +495,63 @@ public class CustomerService {
 			}
 		}
 		return result;
+	}
+	
+	public ArrayList<Point> pointListById(String customerId){
+		ArrayList<Point> list = new ArrayList<Point>();
+		Connection conn =null;
+		try {
+			db = new Dbutil();
+			conn =db.getConnection();
+			customerDao =new CustomerDao();
+			
+			list = customerDao.pointListById(conn, customerId);
+			
+			conn.commit(); // DBUtil.class에서 conn.setAutoCommit(false);
+		} catch (Exception e) {
+			try {
+				conn.rollback(); // DBUtil.class에서 conn.setAutoCommit(false);
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		
+		return list;
+		
+	}
+	public Address addressOne(int addressCode) {
+		Address address= new Address();
+		Connection conn =null;
+		try {
+			db = new Dbutil();
+			conn =db.getConnection();
+			customerDao =new CustomerDao();
+			
+			address = customerDao.addressOneByAddresscode(conn, addressCode);
+			
+			conn.commit(); // DBUtil.class에서 conn.setAutoCommit(false);
+		} catch (Exception e) {
+			try {
+				conn.rollback(); // DBUtil.class에서 conn.setAutoCommit(false);
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return address;
 	}
 }

@@ -7,12 +7,31 @@ public class Cart {
 	private String createdate;
 	private String goodsName;
 	private int goodsPrice;
-	private int categoryCode;
+	private String categoryKind;
+	private String categoryName;
+	
+	public String getCategoryKind() {
+		return categoryKind;
+	}
+	public void setCategoryKind(String categoryKind) {
+		this.categoryKind = categoryKind;
+	}
+	public String getCategoryName() {
+		return categoryName;
+	}
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
+	}
+	private int selected;
 	
 	
-	
-	
-	
+
+	public int getSelected() {
+		return selected;
+	}
+	public void setSelected(int selected) {
+		this.selected = selected;
+	}
 	public String getGoodsName() {
 		return goodsName;
 	}
@@ -24,12 +43,6 @@ public class Cart {
 	}
 	public void setGoodsPrice(int goodsPrice) {
 		this.goodsPrice = goodsPrice;
-	}
-	public int getCategoryCode() {
-		return categoryCode;
-	}
-	public void setCategoryCode(int categoryCode) {
-		this.categoryCode = categoryCode;
 	}
 	public int getGoodsCode() {
 		return goodsCode;

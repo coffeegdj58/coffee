@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import vo.Address;
 import vo.Customer;
+import vo.Point;
 
 public class CustomerDao {
 	
@@ -56,19 +57,14 @@ public class CustomerDao {
 	}
 	
 	//customer update 쿼리
-	public int updateCustomer(Customer customer, String customerPw, Connection conn) throws Exception{
+	public int updateCustomer(String customerId, String afterPassword, String beforePassword, Connection conn) throws Exception{
 		int result= 0;
-		String sql = "UPDATE customer SET "
-				+ "customer_pw = password(?), customer_name= ?, customer_phone = ?, customer_gender= ?, customer_birth= ?"
-				+ " WHERE customer_id= ? AND customer_pw = password(?) ";
+		String sql = "UPDATE customer SET customer_pw = password(?) WHERE customer_id= ? AND customer_pw = password(?) ";
 		PreparedStatement stmt = conn.prepareStatement(sql);
-		stmt.setString(1, customer.getCustomerPw());
-		stmt.setString(2, customer.getCustomerName());
-		stmt.setString(3, customer.getCustomerPhone());
-		stmt.setString(4, customer.getCustomerGender());
-		stmt.setString(5, customer.getCustomerBirth());
-		stmt.setString(6, customer.getCustomerId());
-		stmt.setString(7, customerPw);
+		stmt.setString(1, afterPassword);
+	
+		stmt.setString(2, customerId);
+		stmt.setString(3, beforePassword);
 		
 		result= stmt.executeUpdate();
 		
@@ -141,6 +137,31 @@ public class CustomerDao {
 	      stmt.close();
 	      return row;
 	   }
+	
+	//poinPage에서 볼 pointlist
+	public ArrayList<Point> pointListById(Connection conn, String customerId) throws Exception{
+		ArrayList<Point> list = new ArrayList<Point>();
+		String sql = "SELECT * FROM point_history WHERE customer_id= ? ORDER BY createdate DESC";
+		PreparedStatement stmt= conn.prepareStatement(sql);
+		stmt.setString(1, customerId);
+		
+		ResultSet rs = stmt.executeQuery();
+		
+		while(rs.next()) {
+			Point p = new Point();
+			p.setCreatedate(rs.getString("createdate"));
+			p.setPoint(rs.getInt("point"));
+			p.setPointKind(rs.getString("point_kind"));
+			
+			list.add(p);
+			
+		}
+		rs.close();
+		stmt.close();
+		
+		
+		return list;
+	}
 	
 	//포인트 적립시 실행 쿼리
 	public int insertPointInCustomer(String customerId, Connection conn, int sum) throws Exception{ 
@@ -270,13 +291,13 @@ public class CustomerDao {
 	}
 	
 	//update address
-	public int updateAddress(String customerId, String address, int flag, Connection conn) throws Exception {
+	public int updateAddress(int addressCode, String address, int flag, Connection conn) throws Exception {
 		int result = 0;
-		String sql = "UPDATE customer_address SET address= ? flag= ? WHERE customer_id=?";
+		String sql = "UPDATE customer_address SET address= ? flag= ? WHERE address_code=?";
 		PreparedStatement stmt= conn.prepareStatement(sql);
 		stmt.setString(1, address);
 		stmt.setInt(2, flag);
-		stmt.setString(3, customerId);
+		stmt.setInt(3, addressCode);
 		
 		result= stmt.executeUpdate();
 		stmt.close();
@@ -298,6 +319,43 @@ public class CustomerDao {
 		
 		return result;
 	}
-
+	
+	//reset기본배송지
+	public int resetFlagById(String customerId, Connection conn )throws Exception{
+		int result= 0;
+		
+		String sql = "UPDATE customer_address SET flag=0 WHERE customer_id=?";
+		PreparedStatement stmt= conn.prepareStatement(sql);
+		stmt.setString(1, customerId);
+		
+		result=stmt.executeUpdate();
+		
+		stmt.close();
+		
+		
+		return result;
+	}
+	
+	//addressone
+	
+	public Address addressOneByAddresscode(Connection conn, int addressCode) throws Exception{
+		
+		Address address =new Address();
+		
+		String sql = "SELECT * FROM customer_address WHERE address_code= ?";
+		PreparedStatement stmt= conn.prepareStatement(sql);
+		stmt.setInt(1, addressCode);
+		
+		ResultSet rs = stmt.executeQuery();
+		
+		if(rs.next()) {
+			address.setAddress(rs.getString("address"));
+			address.setFlag(rs.getInt("flag"));
+		}
+		
+		stmt.close();
+		rs.close();
+		return address;
+	}
 	
 }

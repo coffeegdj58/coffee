@@ -18,7 +18,7 @@ public class OrderDao {
 		PreparedStatement stmt= conn.prepareStatement(sql);
 		stmt.setInt(1, cart.getGoodsCode());
 		stmt.setString(2, cart.getCustomerId());
-		stmt.setInt(3, cart.getCartQuantity()+1);
+		stmt.setInt(3, cart.getCartQuantity());
 		
 		result= stmt.executeUpdate();
 		stmt.close();
@@ -30,8 +30,10 @@ public class OrderDao {
 	public ArrayList<Cart> selectCartListById(String customerId, Connection conn) throws Exception {
 		ArrayList<Cart> list = new ArrayList<Cart>();
 		
-		String sql= "SELECT g.goods_name goodsName, g.goods_price goodsPrice, g.category_code categoryCode, c.cart_quantity cartQuantity, g.goods_code, goodsCode FROM "
-				+ "cart c INNER JOIN goods g ON c.goods_code = g.goods_code WHERE c.customer_id= ? AND c.selected= 1";
+		String sql= "SELECT "
+				+ "c.goods_code goodsCode, c.cart_quantity cartQuantity, c.selected selected, g.goods_name goodsName, g.goods_price goodsPrice, c2.category_kind categoryKind, c2.category_name categoryName "
+				+ "FROM cart c INNER JOIN goods g ON c.goods_code = g.goods_code inner join category c2 ON c2.category_code = g.category_code "
+				+ "WHERE c.customer_id= ?";
 		PreparedStatement stmt= conn.prepareStatement(sql);
 		stmt.setString(1, customerId);
 		
@@ -42,8 +44,10 @@ public class OrderDao {
 			c.setCartQuantity(rs.getInt("cartQuantity"));
 			c.setGoodsName(rs.getString("goodsName"));
 			c.setGoodsPrice(rs.getInt("goodsPrice"));
-			c.setCategoryCode(rs.getInt("categoryCode"));
+			c.setCategoryKind(rs.getString("categoryKind"));
+			c.setCategoryName(rs.getString("categoryName"));
 			c.setGoodsCode(rs.getInt("goodsCode"));
+			c.setSelected(rs.getInt("selected"));
 			list.add(c);
 		}
 		
@@ -55,15 +59,15 @@ public class OrderDao {
 	//orders insert 하는 쿼리
 	public int insertOrdersByCart(ArrayList<Cart> list, Connection conn )throws Exception{
 		int result= 0;
-		int quantity = 0;
+	
 		
 		for(Cart c : list) {
-			quantity++;
+			
 			String sql = "INSERT INTO orders(goods_code, customer_id, order_quantity, order_price)values(?, ?, ?, ?)";
 			PreparedStatement stmt= conn.prepareStatement(sql);
 			stmt.setInt(1, c.getGoodsCode());
 			stmt.setString(2, c.getCustomerId());
-			stmt.setInt(3, quantity);
+			stmt.setInt(3, c.getCartQuantity());
 			stmt.setInt(4, c.getGoodsPrice());
 			
 			result= stmt.executeUpdate();
@@ -93,13 +97,13 @@ public class OrderDao {
 	public int selectSumGoodsPrice(String customerId, Connection conn )throws Exception{
 		int sum = 0;
 		
-		String sql = "SELECT SUM(goods_price) s FROM cart WHERE customer_id= ?";
+		String sql = "SELECT sum(g.goods_price*c.cart_quantity) sum FROM cart c INNER JOIN goods g ON c.goods_code = g.goods_code WHERE c.customer_id = ? AND c.selected = 1";
 		PreparedStatement stmt =conn.prepareStatement(sql);
 		stmt.setString(1, customerId);
 		
 		ResultSet rs = stmt.executeQuery();
 		if(rs.next()) {
-			sum = rs.getInt("s");
+			sum = rs.getInt("sum");
 		}
 		
 		
@@ -168,6 +172,26 @@ public class OrderDao {
 		rs.close();
 		
 		return list;
+	}
+	
+	//바로구매를 위한쿼리 selected level를 2로 올려서 구분한다
+	public int insertCartlevel2(Connection conn, String customerId, int goodsCode, int quantity)throws Exception{
+	
+		int result=0;
+		
+		String sql= "INSERT INTO cart(customer_id, goods_code, cart_quantity, selected)values(?, ?, ?, 2)";
+		PreparedStatement stmt =conn.prepareStatement(sql);
+		stmt.setString(1, customerId);
+		stmt.setInt(2, goodsCode);
+		stmt.setInt(3, quantity);
+		
+		result =stmt.executeUpdate();
+		
+		stmt.close();
+		
+		
+		
+		return result;
 	}
 
 }
