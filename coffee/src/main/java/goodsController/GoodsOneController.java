@@ -1,7 +1,6 @@
 package goodsController;
 
 import java.io.IOException;
-import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,12 +9,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import service.GoodsService;
+import vo.Goods;
 
 
 @WebServlet("/GoodsOneController")
 public class GoodsOneController extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
+	
     private GoodsService goodsService;
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	// 피라미터 수집
@@ -27,10 +26,10 @@ public class GoodsOneController extends HttpServlet {
     	
     	// 서비스 호출
     	goodsService = new GoodsService();
-    	HashMap<String, Object> m = goodsService.getGoodsOne(goodsCode);
+    	Goods g = goodsService.getGoodsOne(goodsCode);
     	
     	// 객체 바인딩 후 페이지 이동
-    	request.setAttribute("m", m);
+    	request.setAttribute("g", g);
     	request.getRequestDispatcher("/WEB-INF/view/goods/goodsOne.jsp").forward(request, response);
     }
 

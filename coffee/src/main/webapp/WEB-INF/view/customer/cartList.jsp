@@ -31,7 +31,7 @@
 				 		<td><input type="checkBox" name="${c.goodsCode}" value= 1 checked></td>
 				 	</c:if>
 			 	</form>
-			 	<td><img src="${pageContext.request.contextPath}/image/${c.categoryKind}/${c.categoryName}/${c.goodsName}.jpg" width= "150px" height="150px"></td>
+			 	<td><img src="${pageContext.request.contextPath}/image/${c.goodsName}.jpg" width= "150px" height="150px"></td>
 			 	<td>${c.goodsName}</td>
 			 	<td>${c.goodsPrice}</td>
 			 	<td>${c.cartQuantity}</td>

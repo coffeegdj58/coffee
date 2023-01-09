@@ -42,7 +42,7 @@ public class ModifyGoodsController extends HttpServlet {
     	
     	// 서비스 호출
     	goodsService = new GoodsService();
-    	HashMap<String, Object> m = goodsService.getGoodsOne(goodsCode);
+    	
     	m.put("dir", request.getServletContext().getRealPath("/upload"));
     	
     	// 객체 바인딩 후 페이지 이동

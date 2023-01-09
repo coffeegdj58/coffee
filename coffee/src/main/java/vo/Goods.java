@@ -8,7 +8,44 @@ public class Goods {
 	private String empId;
 	private int hit;
 	private String createdate;
+	private String categoryKind;
+	private String categoryName;
+	private String goodsContent;
+	private String goodsInfo;
 	private int categoryCode;
+	
+	
+	
+	public int getCategoryCode() {
+		return categoryCode;
+	}
+	public void setCategoryCode(int categoryCode) {
+		this.categoryCode = categoryCode;
+	}
+	public String getGoodsContent() {
+		return goodsContent;
+	}
+	public void setGoodsContent(String goodsContent) {
+		this.goodsContent = goodsContent;
+	}
+	public String getGoodsInfo() {
+		return goodsInfo;
+	}
+	public void setGoodsInfo(String goodsInfo) {
+		this.goodsInfo = goodsInfo;
+	}
+	public String getCategoryKind() {
+		return categoryKind;
+	}
+	public void setCategoryKind(String categoryKind) {
+		this.categoryKind = categoryKind;
+	}
+	public String getCategoryName() {
+		return categoryName;
+	}
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
+	}
 	public int getGoodsCode() {
 		return goodsCode;
 	}
@@ -51,12 +88,7 @@ public class Goods {
 	public void setCreatedate(String createdate) {
 		this.createdate = createdate;
 	}
-	public int getCategoryCode() {
-		return categoryCode;
-	}
-	public void setCategoryCode(int categoryCode) {
-		this.categoryCode = categoryCode;
-	}
+	
 	
 	
 }

@@ -4,30 +4,30 @@ import java.io.File;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
+import dao.CategoryDao;
 import dao.GoodsDao;
-import dao.GoodsImgDao;
 import util.Dbutil;
+import vo.Category;
 import vo.Goods;
-import vo.GoodsImg;
 
 public class GoodsService {
 	private GoodsDao goodsDao;
-	private GoodsImgDao goodsImgDao;
+	private CategoryDao categoryDao;
+	private Dbutil db;
 	
 	// 상품 리스트
-	public ArrayList<HashMap<String, Object>> getGoodsList() {
-		ArrayList<HashMap<String, Object>> list = null;
+	public ArrayList<Goods> getGoodsList(int categoryCode) {
+		ArrayList<Goods> list = null;
 		Connection conn = null;
-		Dbutil dbutil = null;
+		
 		
 		try {
-			conn = dbutil.getConnection();
+			db= new Dbutil();
+			conn = db.getConnection();
 			
 			goodsDao = new GoodsDao();
-			list = goodsDao.selectGoodsList(conn);
-			
+			list = goodsDao.selectGoodsList(conn, categoryCode);			
 			conn.commit();
 		} catch (Exception e) {
 			try {
@@ -48,16 +48,17 @@ public class GoodsService {
 	}
 	
 	// 상품 상세 정보
-	public HashMap<String, Object> getGoodsOne(int goodsCode) {
-		HashMap<String, Object> m = null;
+	public Goods getGoodsOne(int goodsCode) {
+		Goods g = null;
 		Connection conn = null;
-		Dbutil dbutil = null;
+		
 		
 		try {
-			conn = dbutil.getConnection();
+			db= new Dbutil();
+			conn = db.getConnection();
 			
 			goodsDao = new GoodsDao();
-			m = goodsDao.selectGoodsOne(conn, goodsCode);
+			g = goodsDao.selectGoodsOne(conn, goodsCode);
 			
 			conn.commit();
 		} catch (Exception e) {
@@ -74,36 +75,29 @@ public class GoodsService {
 				e.printStackTrace();
 			}
 		}
-		return m;
+		return g;
 	}
 	
 	// 상품 수정
-	public int modifyGoods(Goods goods, GoodsImg goodsImg, String dir) {
+	public int modifyGoods(Goods goods, String dir) {
 		int result = 0;
 		Connection conn = null;
-		Dbutil dbutil = null;
+		
 		
 		try {
-			conn = dbutil.getConnection();
+			db= new Dbutil();
+			conn = db.getConnection();
 			
 			goodsDao = new GoodsDao();
 			result = goodsDao.updateGoods(conn, goods);
-			
-			// 상품 수정 실패시
-			if(result != 1) {
-				System.out.println("GoodsService : updateGoods fail");
-				throw new Exception();				
-			}
-			
-			goodsImgDao = new GoodsImgDao();
-			result = goodsImgDao.updateGoodsImg(conn, goodsImg);
+	
 			
 			conn.commit();
 		} catch (Exception e) {
 			try {
 				conn.rollback();
 				
-				File file = new File(dir + "\\" + goodsImg.getFilename());
+				File file = new File(dir + "\\" + goods.getGoodsName());
 				if(file.exists()) {
 					file.delete();
 				}
@@ -125,18 +119,12 @@ public class GoodsService {
 	public int removeGoods(int goodsCode) {
 		int result = 0;
 		Connection conn = null;
-		Dbutil dbutil = null;
+		
 		
 		try {
-			conn = dbutil.getConnection();
-			
-			goodsImgDao = new GoodsImgDao();
-			result = goodsImgDao.deleteGoodsimg(conn, goodsCode);
-			
-			// 상품 삭제 실패시
-			if(result != 1) {
-				throw new Exception();
-			}
+			db= new Dbutil();
+			conn = db.getConnection();
+		
 			
 			goodsDao = new GoodsDao();
 			result = goodsDao.deleteGoods(conn, goodsCode);
@@ -160,33 +148,25 @@ public class GoodsService {
 	}
 	
 	// 상품 추가
-	public int addGoods(Goods goods, GoodsImg goodsImg, String dir) {
+	public int addGoods(Goods goods, String dir, String empId) {
 		int result = 0;
 		Connection conn = null;
-		Dbutil dbutil = null;
+		
 		
 		try {
-			conn = dbutil.getConnection();
+			db= new Dbutil();
+			conn = db.getConnection();
 			
 			goodsDao = new GoodsDao();
-			HashMap<String, Integer> m = goodsDao.insertGoods(conn, goods);
+			result = goodsDao.insertGoods(conn, goods, empId);
 			
-			// 상품 등록 실패시
-			if(m.get("result") != 1) {
-				throw new Exception();
-			}
-			
-			goodsImgDao = new GoodsImgDao();
-			goodsImg.setGoodsCode(m.get("autoKey"));
-			
-			result = goodsImgDao.insertGoodsImg(conn, goodsImg);
 			
 			conn.commit();
 		} catch (Exception e) {
 			try {
 				conn.rollback();
 				
-				File file = new File(dir + "\\" + goodsImg.getFilename());
+				File file = new File(dir + "\\" + goods.getGoodsName());
 				if(file.exists()) {
 					file.delete();
 				}
@@ -202,5 +182,37 @@ public class GoodsService {
 			}
 		}
 		return result;
+	}
+	public ArrayList<Category> selectCategory(){
+		ArrayList<Category> list = new ArrayList<Category>();
+		
+		Connection conn = null;
+		
+		
+		try {
+			db= new Dbutil();
+			conn = db.getConnection();
+		
+			
+			this.categoryDao= new CategoryDao();
+			list = categoryDao.selectCategoryList(conn);
+			
+			conn.commit();
+		} catch (Exception e) {
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		} finally {
+			try {
+				if(conn != null) {conn.close();}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}	
+		
+		return list;
 	}
 }

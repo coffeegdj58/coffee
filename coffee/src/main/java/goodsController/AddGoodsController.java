@@ -2,6 +2,7 @@ package goodsController;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,14 +15,15 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import service.GoodsService;
+import vo.Category;
 import vo.Emp;
 import vo.Goods;
-import vo.GoodsImg;
+
 
 
 @WebServlet("/AddGoodsController")
 public class AddGoodsController extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+	private GoodsService goodsService;
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 직원이 아닐 경우 직원 로그인 페이지로 전환
@@ -30,6 +32,9 @@ public class AddGoodsController extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/LoginEmpController");
 			return;
 		}
+		this.goodsService= new GoodsService();
+		ArrayList<Category> list = goodsService.selectCategory();
+		request.setAttribute("categorylist", list);
 		
 		request.getRequestDispatcher("/WEB-INF/view/goods/addGoods.jsp").forward(request, response);
 	}
@@ -41,10 +46,13 @@ public class AddGoodsController extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/LoginEmpController");
 			return;
 		}
+		this.goodsService= new GoodsService();
 		
+		Emp loginEmp = (Emp)session.getAttribute("loginEmp");
+		String empId = loginEmp.getEmpId();
 		// 피라미터 수집
 		request.setCharacterEncoding("utf-8");
-		String dir = request.getServletContext().getRealPath("/upload");
+		String dir = request.getServletContext().getRealPath("/image");
 		int maxFileSize = 1024 * 1024 * 100; // 100Mbyte
 		DefaultFileRenamePolicy fp = new DefaultFileRenamePolicy();
 		MultipartRequest mreq = new MultipartRequest(request, dir, maxFileSize, "utf-8", fp);
@@ -52,11 +60,17 @@ public class AddGoodsController extends HttpServlet {
 		String goodsName = mreq.getParameter("goodsName");
 		int goodsPrice = Integer.parseInt(mreq.getParameter("goodsPrice"));
 		String soldout = mreq.getParameter("soldout");
-		Emp loginEmp = (Emp)session.getAttribute("loginEmp");
-		String empId = loginEmp.getEmpId();
-		int hit = Integer.parseInt(mreq.getParameter("hit"));
-		String filename = mreq.getFilesystemName("filename"); // 저장된 이미지 파일 이름
-		String originName = mreq.getOriginalFileName("filename"); // 이미지 원본 이름
+		int categoryCode= Integer.parseInt(mreq.getParameter("categoryCode"));
+		String goodsContent = mreq.getParameter("goodsContent");
+		String goodsInfo = mreq.getParameter("goodsInfo");
+		
+	
+		
+		String filename = mreq.getFilesystemName("filename");
+		// 저장된 이미지 파일 이름
+		File f= new File(dir+"\\"+filename);
+		f.renameTo(new File(dir+"\\"+goodsName));
+
 		String contentType = mreq.getContentType("filename"); // 이미지 파일 검사
 		
 		if(contentType.equals("image/jpeg") || contentType.equals("image/png")) {
@@ -66,27 +80,10 @@ public class AddGoodsController extends HttpServlet {
 			goods.setGoodsPrice(goodsPrice);
 			goods.setSoldout(soldout);
 			goods.setEmpId(empId);
-			goods.setHit(hit);
-			
-			// goodsImg vo
-			GoodsImg goodsImg = new GoodsImg();
-			goodsImg.setFilename(filename);
-			goodsImg.setOriginName(originName);
-			goodsImg.setContentType(contentType);
-			
-			// service 호출
-			GoodsService goodsService = new GoodsService();
-			int result = goodsService.addGoods(goods, goodsImg, dir);
-			
-			if(result != 1) {
-				System.out.println("상품 추가 실패");
-			}
-		} else {
-			System.out.print("*.jpg, *.png 파일만 업로드 가능");
-			File f = new File(dir + "\\" + mreq.getFilesystemName("filename"));
-			if(f.exists()) {
-				f.delete();
-			}
+			goods.setCategoryCode(categoryCode);
+			goods.setGoodsContent(goodsContent);
+			goods.setGoodsInfo(goodsInfo);
+			goodsService.addGoods(goods, dir, empId);
 		}
 		response.sendRedirect(request.getContextPath() + "/addGoods");
 	}
