@@ -17,6 +17,8 @@ import vo.*;
 public class EmpPageController extends HttpServlet {
 	private EmpService empService;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//세션에서 관리자만 들어올 수 있겠끔 수정 예정
+		
 		//service 불러오기
 		this.empService= new EmpService();
 		ArrayList<Emp> list= empService.selectEmpList();

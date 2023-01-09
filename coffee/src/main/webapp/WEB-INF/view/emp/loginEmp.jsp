@@ -21,6 +21,5 @@
 		<button type="submit">로그인</button>
 	</form>
 	<a href="${pageContext.request.contextPath}/emp/addEmp">회원가입</a>
-	
 </body>
 </html>

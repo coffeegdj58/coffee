@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,14 +22,13 @@
 			</tr>
 			<tr>
 				<td>작성자</td>
-				<td><input type="text" name="customerId"></td>
+				<td><input type="text" name="customerId" value="" readonly="readonly"></td>
 			</tr>
 			<tr>
 				<td>별점</td>
 				<td><input type="text" name="rating"></td>
 			</tr>
 		</table>
-		<button type="submit">리뷰작성</button>
-	</form> 
+		<button type="submit">수정하기</button>
 </body>
 </html>

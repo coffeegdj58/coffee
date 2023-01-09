@@ -43,7 +43,7 @@ public class LoginEmpController extends HttpServlet {
 			writer.println("<script>alert('로그인 실패.'); location.href='"+request.getContextPath()+"/emp/loginEmp"+"';</script>"); 
 			writer.close();
 		}else {
-			session.setAttribute("loginMember", resultEmp);
+			session.setAttribute("loginEmp", resultEmp);
 			response.sendRedirect(request.getContextPath()+"/home");
 			return;
 		}

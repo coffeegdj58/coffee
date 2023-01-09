@@ -26,12 +26,12 @@
 		</tr>
 		<c:forEach var="o" items="${orderList}">
 		<tr>
-			<td><img src="${pageContext.request.contextPath}/image/${o.goodsName}.jpg" width= "150px" height="150px"></td>
+			<td><img src="${pageContext.request.contextPath}/image/${o.categoryKind}/${o.categoryName}/${o.goodsName}.jpg" width= "150px" height="150px"></td>
 			<td>${o.orderCode}</td>
 			<td>${o.orderState}</td>
 			<td>${o.goodsName}</td>
 			<td>${o.goodsPrice}</td>
-			<td><a href="${pageContext.request.contextPath}/AddReviewController?orderCode=${o.orderCode}">리뷰작성하기</a></td>
+			<td><a href="${pageContext.request.contextPath}/review/addReview?orderCode=${o.orderCode}">리뷰작성하기</a></td>
 			<c:if test="${o.orderState.equals('결제')}">
 				<td><a href="${pageContext.request.contextPath}/ModifyOrderController?orderCode=${o.orderCode}">취소하기</a></td>
 			</c:if>

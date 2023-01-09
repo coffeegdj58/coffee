@@ -38,7 +38,7 @@ public class NoticeDao {
 		stmt.setInt(3, notice.getNoticeCode());
 		row=stmt.executeUpdate();
 		if(row==1) {
-			System.out.println("수정성공");
+			System.out.println("수정성공: dao");
 		}
 		stmt.close();
 		return row;
@@ -52,7 +52,7 @@ public class NoticeDao {
 		stmt.setInt(1, noticeCode);
 		row=stmt.executeUpdate();
 		if(row==1) {
-			System.out.println("삭제성공");
+			System.out.println("삭제성공: dao");
 		}
 		stmt.close();
 		return row;
@@ -68,7 +68,7 @@ public class NoticeDao {
 		stmt.setString(3, notice.getEmpId());
 		row=stmt.executeUpdate();
 		if (row == 1) {
-			System.out.println("추가 성공");
+			System.out.println("추가 성공: dao");
 		}
 		stmt.close();
 		return row;

@@ -17,7 +17,7 @@ public class CommentDao {
 		stmt.setInt(1, commentCode);
 		row=stmt.executeUpdate();
 		if(row==1) {
-			System.out.println("삭제성공");
+			System.out.println("삭제 성공: dao");
 		}
 		stmt.close();
 		return row;
@@ -31,7 +31,7 @@ public class CommentDao {
 		stmt.setString(2, comment.getCommentMemo());
 		row=stmt.executeUpdate();
 		if (row == 1) {
-			System.out.println("추가 성공");
+			System.out.println("추가 성공: dao");
 		}
 		stmt.close();
 		return row;

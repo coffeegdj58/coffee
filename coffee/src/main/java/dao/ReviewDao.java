@@ -30,7 +30,7 @@ public class ReviewDao {
 	public ArrayList<Review> selectReviewByGoodsPaging(int goodsCode, int beginRow, int rowPerPage, Connection conn) throws Exception {
 		ArrayList<Review> list = new ArrayList<Review>();
 		
-		String sql = "SELECT * FROM WHERE goods_code= ? ORDER BY createdate DESC LIMIT ?, ?";
+		String sql = "SELECT * FROM review WHERE goods_code= ? ORDER BY createdate DESC LIMIT ?, ?";
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		stmt.setInt(1, goodsCode);
 		stmt.setInt(2, beginRow);
@@ -56,7 +56,7 @@ public class ReviewDao {
 	public ArrayList<Review> selectReviewById(String customerId, Connection conn) throws Exception {
 		ArrayList<Review> list = new ArrayList<Review>();
 		
-		String sql = "SELECT * FROM WHERE customer_id= ? ORDER BY createdate DESC";
+		String sql = "SELECT * FROM review WHERE customer_id= ? ORDER BY createdate DESC";
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		stmt.setString(1, customerId);
 		

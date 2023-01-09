@@ -4,14 +4,46 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.HashMap;
 
-import vo.*;
+import vo.Emp;
 
 public class EmpDao {
 	
-	//최고관리자가 active 및 ahtoCode 변경
+	//최고관리자가 하위 관리자 정보 수정 때 모든 정보 불러오기
+	public Emp selectModifyEmp(Connection conn, int empCode)throws Exception {
+		Emp emp=null;
+		String sql="SELECT emp_code empCode,emp_id empId, emp_name empName, active active,auth_code authCode,createdate createdate FROM emp WHERE emp_code=?;";
+		PreparedStatement stmt=conn.prepareStatement(sql);
+		stmt.setInt(1, empCode);
+		ResultSet rs=stmt.executeQuery();
+		if(rs.next()) {
+			emp= new Emp();
+			emp.setEmpId(rs.getString("empId"));
+			emp.setEmpName(rs.getString("empName"));
+			emp.setActive(rs.getString("active"));
+			emp.setAuthCode(rs.getInt("authCode"));
+			emp.setCreatedate(rs.getString("createdate"));
+			emp.setEmpCode(rs.getInt("empCode"));
+		}
+		rs.close();
+		stmt.close();
+		return emp;
+	}
 	
+	//최고관리자가 active 및 ahtoCode 변경
+	public int modifyEmp(Connection conn, Emp emp) throws Exception {
+		int row=0;
+		String sql="UPDATE emp SET active=?, auth_code=? WHERE emp_code=?; ";
+		PreparedStatement stmt=conn.prepareStatement(sql);
+		stmt.setString(1, emp.getActive());
+		stmt.setInt(2, emp.getAuthCode());
+		stmt.setInt(3, emp.getEmpCode());
+		if(row==1) {
+			System.out.println("수정성공: dao");
+		}
+		stmt.close();
+		return row;
+	}
 	
 	//최고 관리자가 하위 관리가 삭제
 	public int removeEmp(Connection conn, int empCode) throws Exception{

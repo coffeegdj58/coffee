@@ -12,20 +12,14 @@ import javax.servlet.http.HttpServletResponse;
 import service.ReviewService;
 import vo.Review;
 
-@WebServlet("/review/addReview")
-public class AddReviewController extends HttpServlet {
+@WebServlet("/review/modifdyReview")
+public class ModifyReviewController extends HttpServlet {
 	private ReviewService reviewService;
-	//리뷰 추가 폼
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//로그인 한 사람만 접근 가능
 		
-		int orderCode=Integer.parseInt(request.getParameter("orderCode"));
-		request.setAttribute("orderCode", orderCode);
-		
-		request.getRequestDispatcher("/WEB-INF/view/customer/addReview.jsp").forward(request, response);
-
 	}
-	//리뷰 추가 액션
+
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//폼에서 받아오기
 		int orderCode=Integer.parseInt(request.getParameter("orderCode"));
@@ -43,16 +37,16 @@ public class AddReviewController extends HttpServlet {
 		
 		//service 불러오기
 		this.reviewService= new ReviewService();
-		int result=reviewService.insertReviewByCustomer(review);
+		int result=reviewService.updateReview(review);
 		if(result==1) {
-			System.out.println("리뷰 작성 성공");
+			System.out.println("리뷰 수정 성공");
 			response.sendRedirect(request.getContextPath()+"/customer/?");
 		}else {//실패
-			System.out.println("리뷰 작성 실패");
+			System.out.println("리뷰 수정 실패");
 			//서블릿에서 알림창 띄우기
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter writer = response.getWriter();
-			writer.println("<script>alert('리뷰 작성 실패!'); location.href='"+request.getContextPath()+"/review/addReview"+"';</script>"); 
+			writer.println("<script>alert('리뷰 수정 실패!'); location.href='"+request.getContextPath()+"/review/modifdyReview"+"';</script>"); 
 			writer.close();
 		}
 	}
