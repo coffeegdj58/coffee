@@ -15,7 +15,7 @@ public class NoticeService {
 	public Notice selectModifyNotice(int noticeCode) {
 		Connection conn=null;
 		Dbutil dbUtil= new Dbutil();
-		noticeDao= new NoticeDao();
+		this.noticeDao= new NoticeDao();
 		Notice n=new Notice();
 		try {
 			conn=dbUtil.getConnection();
@@ -43,7 +43,7 @@ public class NoticeService {
 	public int modifyNotice(Notice notice) {
 		Connection conn=null;
 		Dbutil dbUtil= new Dbutil();
-		noticeDao= new NoticeDao();
+		this.noticeDao= new NoticeDao();
 		int row=0;
 		try {
 			conn=dbUtil.getConnection();
@@ -70,7 +70,7 @@ public class NoticeService {
 	public int removeNotice(int noticeCode) {
 		Connection conn=null;
 		Dbutil dbUtil= new Dbutil();
-		noticeDao= new NoticeDao();
+		this.noticeDao= new NoticeDao();
 		int row=0;
 		try {
 			conn=dbUtil.getConnection();
@@ -97,7 +97,7 @@ public class NoticeService {
 	public int addNotice(Notice notice) {
 		Connection conn=null;
 		Dbutil dbUtil= new Dbutil();
-		noticeDao= new NoticeDao();
+		this.noticeDao= new NoticeDao();
 		int row=0;
 		try {
 			conn=dbUtil.getConnection();
@@ -151,7 +151,7 @@ public class NoticeService {
 	public int selectNoticeCount() {
 		Connection conn=null;
 		Dbutil dbUtil= new Dbutil();
-		noticeDao= new NoticeDao();
+		this.noticeDao= new NoticeDao();
 		int count=1; //sql의 경우 1번째 인덱스부터 시작
 
 		try {
@@ -180,7 +180,7 @@ public class NoticeService {
 	ArrayList<Notice> list=null;
 	Connection conn=null;
 	Dbutil dbUtil= new Dbutil();
-	noticeDao= new NoticeDao();
+	this.noticeDao= new NoticeDao();
 	
 	try {
 		conn=dbUtil.getConnection();
@@ -201,6 +201,5 @@ public class NoticeService {
 	}
 	return list;
 	}
-	
 	
 }

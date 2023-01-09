@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>문의 수정하기</title>
 </head>
 <body>
 	<form action="${pageContext.request.contextPath}/question/modifyQuestion" method="post">
@@ -27,15 +27,14 @@
 			</tr>
 			<tr>
 				<td>내용</td>
-				<td><textarea cols="30" rows="10" name="questionMemo"></textarea></td>
+				<td><textarea cols="30" rows="10" name="questionMemo"><${q.question_memo}</textarea></td>
 			</tr>
 			<tr>
 				<td>작성자</td>
-				<td><input type="text" name="customerId" value="" readonly="readonly"></td>
+				<td><input type="text" name="customerId" value="${q.customer_id}" readonly="readonly"></td>
 			</tr>
 		</table>
 		<button type="submit">추가</button>
 	</form>
-
 </body>
 </html>

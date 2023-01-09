@@ -23,6 +23,7 @@ public class EmpDao {
 		if(row==1) {
 			System.out.println("삭제성공: dao");
 		}
+		stmt.close();
 		return row;
 	}
 	

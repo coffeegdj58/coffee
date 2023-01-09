@@ -42,10 +42,10 @@ public class ModifyQuestionController extends HttpServlet {
 		//service 불러오기
 		this.questionService= new QuestionService();
 		int result=questionService.updateQuestion(q);
-		if(result==1) { //성공: 공지사항 추가 성공하면 questionList로 보낼거
+		if(result==1) { //성공: 문의사항 수정 성공하면 questionList로 보낼거
 			response.sendRedirect(request.getContextPath()+"/customer/questionList"); 
 		}else { //실패: 실패하면 다시 modifyQuestion로 보낼거
-			System.out.println("공지사항 추가 실패");
+			System.out.println("문의사항 수정 실패");
 			response.sendRedirect(request.getContextPath()+"/question/modifyQuestion"); 
 		}
 	}

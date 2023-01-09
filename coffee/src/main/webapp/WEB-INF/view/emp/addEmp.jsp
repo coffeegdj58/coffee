@@ -7,7 +7,7 @@
 <title>관리자 회원가입</title>
 </head>
 <body>
-<form action="${pageContext.request.contextPath}/emp/addEmp" method="post">
+	<form action="${pageContext.request.contextPath}/emp/addEmp" method="post">
 		<table>
 			<tr>
 				<td>관리자 아이디</td>
