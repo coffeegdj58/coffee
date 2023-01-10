@@ -6,6 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
 </head>
 <body>
 	<div>	
@@ -24,23 +26,19 @@
 		</tr>
 		<c:forEach var= "c" items="${cartList}">
 			<tr>
-				<form action="${pageContext.request.contextPath}/CartList" method="post">
-					<c:if test="${c.selected==0}">
-				 		<td><input type="checkBox" name="${c.goodsCode}" value= 1></td>
-				 	</c:if>
-				 	<c:if test="${c.selected==1}">
-				 		<td><input type="checkBox" name="${c.goodsCode}" value= 1 checked></td>
-				 	</c:if>
+				<form action="${pageContext.request.contextPath}/CartList" method="post" id="checkForm${c.goodsCode}">
+				<input type="hidden" name="goodsCode" value="${c.goodsCode}">
+				 		<td><input type="checkBox" name="${c.goodsCode}" id="selected${c.goodsCode}" value= 1 <c:if test="${c.selected==1}">checked</c:if>></td>
 			 	</form>
 			 	<td><img src="${pageContext.request.contextPath}/image/${c.goodsName}.jpg" width= "150px" height="150px"></td>
 			 	<td>${c.goodsName}</td>
 			 	<td>${c.cartPrice}</td>
 			 	<td>
-			 	<form action="${pageContext.request.contextPath}/UpdateQuantity" method="post">
+			 	<form action="${pageContext.request.contextPath}/UpdateQuantity" method="post" id="updateQunatity${c.goodsCode}">
 			 		<input type="hidden" name="goodsCode" value="${c.goodsCode}">
 			 		
 			 		<c:if test="${c.cartQuantity==1}">
-				 		<select name="cartQuantity">
+				 		<select name="cartQuantity" id="quantity${c.goodsCode}">
 							<option value="1" selected="selected">1</option>
 							<option value="2">2</option>
 							<option value="3">3</option>
@@ -49,7 +47,7 @@
 						</select>	
 					</c:if>	
 					<c:if test="${c.cartQuantity==2}">
-				 		<select name="cartQuantity">
+				 		<select name="cartQuantity" id="quantity${c.goodsCode}">
 							<option value="1">1</option>
 							<option value="2" selected="selected">2</option>
 							<option value="3">3</option>
@@ -57,17 +55,18 @@
 							<option value="5">5</option>
 						</select>	
 					</c:if>	
-					<c:if test="${c.cartQuantity==3}">
-				 		<select name="cartQuantity">
+					<c:if test="${c.cartQuantity==3}" >
+				 		<select name="cartQuantity" id="quantity${c.goodsCode}">
 							<option value="1">1</option>
 							<option value="2">2</option>
 							<option value="3" selected="selected">3</option>
 							<option value="4">4</option>
+							
 							<option value="5">5</option>
 						</select>	
 					</c:if>	
 					<c:if test="${c.cartQuantity==4}">
-				 		<select name="cartQuantity">
+				 		<select name="cartQuantity" id="quantity${c.goodsCode}">
 							<option value="1" >1</option>
 							<option value="2">2</option>
 							<option value="3">3</option>
@@ -76,7 +75,7 @@
 						</select>	
 					</c:if>	
 					<c:if test="${c.cartQuantity==5}">
-				 		<select name="cartQuantity">
+				 		<select name="cartQuantity" id="quantity${c.goodsCode}">
 							<option value="1" >1</option>
 							<option value="2">2</option>
 							<option value="3">3</option>
@@ -87,16 +86,26 @@
 			 	</form>
 			 	</td>
 			 	<td>
-			 		<a href="${pageContext.request.contextPath}/DeletCartOne?goodsCode=${c.goodsCode}">삭제</a>
+			 		<a href="${pageContext.request.contextPath}/DeleteCartOne?goodsCode=${c.goodsCode}">삭제</a>
 			 	</td>
 			</tr>
 		</c:forEach>
 	</table>
+	 	<a href="${pageContext.request.contextPath}/Payment">결제하기</a>
 	
 	<div>총 가격  ${sum}</div>
-	
+	<c:forEach var="c" items='${cartList}'>
 	<script>
-		
+		$(document).ready(function(){	
+				$('#selected${c.goodsCode}').change(function(){
+					$('#checkForm${c.goodsCode}').submit();
+				})
+				
+				$("#quantity${c.goodsCode}").change(function(){
+					$('#updateQunatity${c.goodsCode}').submit();
+				})
+		})
 	</script>
+	</c:forEach>
 </body>
 </html>

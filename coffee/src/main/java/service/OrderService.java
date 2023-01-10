@@ -72,7 +72,7 @@ public class OrderService {
 	
 	}
 	
-	public int insertOrdersByCart(ArrayList<Cart> list) {
+	public int insertOrdersByCart(ArrayList<Cart> list, int addressCode, String customerId) {
 		int result = 0;
 		Connection conn = null;
 
@@ -81,7 +81,7 @@ public class OrderService {
 			conn = db.getConnection();
 			orderdao = new OrderDao();
 			
-			result = orderdao.insertOrdersByCart(list, conn);
+			result = orderdao.insertOrdersByCart(list, conn, addressCode, customerId);
 			
 			conn.commit(); // DBUtil.class에서 conn.setAutoCommit(false);
 		} catch (Exception e) {
@@ -446,6 +446,35 @@ public class OrderService {
 			orderdao = new OrderDao();
 			
 			result = orderdao.updateCartQuantity(conn, customerId, quantity, goodsCode);
+			
+			conn.commit(); // DBUtil.class에서 conn.setAutoCommit(false);
+		} catch (Exception e) {
+			try {
+				conn.rollback(); // DBUtil.class에서 conn.setAutoCommit(false);
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
+	
+	public int DeleteCartOne(String customerId, int goodsCode) {
+		int result = 0;
+		Connection conn = null;
+
+		try {
+			db= new Dbutil();
+			conn = db.getConnection();
+			orderdao = new OrderDao();
+			
+			result = orderdao.deleteCartOne(conn, customerId, goodsCode);
 			
 			conn.commit(); // DBUtil.class에서 conn.setAutoCommit(false);
 		} catch (Exception e) {

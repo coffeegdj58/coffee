@@ -59,18 +59,19 @@ public class OrderDao {
 	}
 	
 	//orders insert 하는 쿼리
-	public int insertOrdersByCart(ArrayList<Cart> list, Connection conn )throws Exception{
+	public int insertOrdersByCart(ArrayList<Cart> list, Connection conn, int addressCode, String customerId)throws Exception{
 		int result= 0;
 	
 		
 		for(Cart c : list) {
 			
-			String sql = "INSERT INTO orders(goods_code, customer_id, order_quantity, order_price)values(?, ?, ?, ?)";
+			String sql = "INSERT INTO orders(goods_code, customer_id, order_quantity, order_price, address_code)values(?, ?, ?, ?, ?)";
 			PreparedStatement stmt= conn.prepareStatement(sql);
 			stmt.setInt(1, c.getGoodsCode());
-			stmt.setString(2, c.getCustomerId());
+			stmt.setString(2, customerId);
 			stmt.setInt(3, c.getCartQuantity());
 			stmt.setInt(4, c.getCartPrice());
+			stmt.setInt(5, addressCode);
 			
 			result= stmt.executeUpdate();
 			stmt.close();
@@ -317,5 +318,21 @@ public class OrderDao {
 		stmt.close();
 		
 		return result;	
+	}
+	
+	//하나의 카트를 지정해서 삭제하는 쿼리
+	public int deleteCartOne(Connection conn, String customerId, int goodsCode) throws Exception{
+		int result=0;
+		String sql = "DELETE FROM cart WHERE customer_id= ? AND goods_code= ?";
+		PreparedStatement stmt =conn.prepareStatement(sql);
+		stmt.setString(1, customerId);
+		stmt.setInt(2, goodsCode);
+		
+		result =stmt.executeUpdate();
+		
+		stmt.close();
+		
+		
+		return result;
 	}
 }	

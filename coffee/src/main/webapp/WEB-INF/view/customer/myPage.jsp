@@ -26,7 +26,7 @@
 		</tr>
 		<c:forEach var="o" items="${orderList}">
 		<tr>
-			<td><img src="${pageContext.request.contextPath}/image/${o.categoryKind}/${o.categoryName}/${o.goodsName}.jpg" width= "150px" height="150px"></td>
+			<td><img src="${pageContext.request.contextPath}/image/${o.goodsName}.jpg" width= "150px" height="150px"></td>
 			<td>${o.orderCode}</td>
 			<td>${o.orderState}</td>
 			<td>${o.goodsName}</td>
@@ -49,7 +49,7 @@
 	<a href="${pageContext.request.contextPath}/ModifyCustomer">회원정보수정</a><!-- check -->
 	<a href="${pageContext.request.contextPath}/PointPage">포인트</a><!--check -->
 	<a href="${pageContext.request.contextPath}/AddressCustomer">주소관리</a>  
-	<a href="${pageContext.request.contextPath}/QuestionList">고객센터</a>
+	<a href="${pageContext.request.contextPath}/QuestionListByCustomer">고객센터</a>
 	
 </body>
 </html>

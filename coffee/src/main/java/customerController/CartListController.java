@@ -47,8 +47,20 @@ public class CartListController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		HttpSession session = request.getSession();
+		Customer loginMember = (Customer)session.getAttribute("loginMember");
+		int selected= 0;
+		int goodsCode= Integer.parseInt(request.getParameter("goodsCode"));
+		if(request.getParameter(goodsCode+"")!=null) {
+			selected = 1;
+		}
+		this.orderservice = new OrderService();
+		System.out.println(selected);
+		System.out.println(goodsCode);
+		int result =orderservice.updateSelectOne(loginMember.getCustomerId(), selected, goodsCode);
+		
+		
+		response.sendRedirect(request.getContextPath()+"/CartList?reult="+result);
 	}
 
 }
