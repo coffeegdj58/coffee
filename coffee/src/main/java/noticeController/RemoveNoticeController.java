@@ -14,7 +14,7 @@ import service.NoticeService;
 /**
  * Servlet implementation class removeNoticeController
  */
-@WebServlet("/notice/removeNotice")
+@WebServlet("/RemoveNotice")
 public class RemoveNoticeController extends HttpServlet {
 	private NoticeService noticeService;
 	
@@ -27,13 +27,13 @@ public class RemoveNoticeController extends HttpServlet {
 		this.noticeService=new NoticeService();
 		int row=noticeService.removeNotice(noticeCode);
 		if(row==1) {//삭제 성공
-			response.sendRedirect(request.getContextPath()+"/notice/noticeList");
+			response.sendRedirect(request.getContextPath()+"/NoticeList");
 		}else {//실패
 			System.out.println("공지사항 삭제 실패");
 			//서블릿에서 알림창 띄우기
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter writer = response.getWriter();
-			writer.println("<script>alert('공지사항 삭제 실패!'); location.href='"+request.getContextPath()+"/notice/noticeList"+"';</script>"); 
+			writer.println("<script>alert('공지사항 삭제 실패!'); location.href='"+request.getContextPath()+"/NoticeList"+"';</script>"); 
 			writer.close();
 		}
 	}

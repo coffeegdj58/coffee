@@ -24,7 +24,7 @@
 	</div>
 	<!-- 답변이 달리기 전이고 관리자만 보이게 해야함 -->
 	<c:if test="${q.flag eq 'N'}&&${loginMember.authCode > 1}">
-		<a href="${pageContext.request.contextPath}/comment/addComment?questionCode=${q.question_code}">답변 추가</a>
+		<a href="${pageContext.request.contextPath}/AddComment?questionCode=${q.question_code}">답변 추가</a>
 	</c:if>
 	<!-- 관리자가 답변을 달면 보이게 -->
 	<c:if test="${q.flag eq 'Y'}">
@@ -36,7 +36,7 @@
 		</div>
 	</c:if>
 	<c:if test="${loginMember.authCode > 1}">
-		<a href="${pageContext.request.contextPath}/comment/removeComment?commentCode=${c.commentCode}">삭제</a>
+		<a href="${pageContext.request.contextPath}/RemoveComment?commentCode=${c.commentCode}">삭제</a>
 	</c:if>
 </body>
 </html>

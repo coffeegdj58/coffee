@@ -13,7 +13,7 @@ import service.*;
 import vo.*;
 
 
-@WebServlet("/emp/empPage")
+@WebServlet("/EmpPage")
 public class EmpPageController extends HttpServlet {
 	private EmpService empService;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

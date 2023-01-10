@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import service.*;
 import vo.*;
 
-@WebServlet("/notice/noticeOne")
+@WebServlet("/NoticeOne")
 public class NoticeOneController extends HttpServlet {
 	private NoticeService noticeService;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

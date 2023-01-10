@@ -11,7 +11,7 @@ import service.QuestionService;
 import vo.Question;
 
 
-@WebServlet("/question/modifyQuestion")
+@WebServlet("/ModifyQuestion")
 public class ModifyQuestionController extends HttpServlet {
 	private QuestionService questionService;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -43,10 +43,10 @@ public class ModifyQuestionController extends HttpServlet {
 		this.questionService= new QuestionService();
 		int result=questionService.updateQuestion(q);
 		if(result==1) { //성공: 문의사항 수정 성공하면 questionList로 보낼거
-			response.sendRedirect(request.getContextPath()+"/customer/questionList"); 
+			response.sendRedirect(request.getContextPath()+"/QuestionListByCustomer"); 
 		}else { //실패: 실패하면 다시 modifyQuestion로 보낼거
 			System.out.println("문의사항 수정 실패");
-			response.sendRedirect(request.getContextPath()+"/question/modifyQuestion"); 
+			response.sendRedirect(request.getContextPath()+"/ModifyQuestion"); 
 		}
 	}
 

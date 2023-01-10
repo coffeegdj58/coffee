@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import service.QuestionService;
 import vo.Question;
 
-@WebServlet("/question/addQuestion")
+@WebServlet("/AddQuestion")
 public class AddQuestionController extends HttpServlet {
 	private QuestionService questionService;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -36,10 +36,10 @@ public class AddQuestionController extends HttpServlet {
 		this.questionService= new QuestionService();
 		int result=questionService.insertQuestion(q);
 		if(result==1) { //성공: 공지사항 추가 성공하면 questionList로 보낼거
-			response.sendRedirect(request.getContextPath()+"/customer/questionList"); 
+			response.sendRedirect(request.getContextPath()+"/QuestionListByCustomer"); 
 		}else { //실패: 실패하면 다시 addQuestion로 보낼거
 			System.out.println("공지사항 추가 실패");
-			response.sendRedirect(request.getContextPath()+"/question/addQuestion"); 
+			response.sendRedirect(request.getContextPath()+"/AddQuestion"); 
 		}
 	}
 

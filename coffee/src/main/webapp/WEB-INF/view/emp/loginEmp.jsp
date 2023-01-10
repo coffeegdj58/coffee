@@ -7,7 +7,7 @@
 <title>관리자 로그인</title>
 </head>
 <body>
-	<form action="${pageContext.request.contextPath}/emp/loginEmp" method="post">
+	<form action="${pageContext.request.contextPath}/LoginEmp" method="post">
 		<table>
 			<tr>
 				<td>관리자 아이디</td>
@@ -20,6 +20,6 @@
 		</table>
 		<button type="submit">로그인</button>
 	</form>
-	<a href="${pageContext.request.contextPath}/emp/addEmp">회원가입</a>
+	<a href="${pageContext.request.contextPath}/AddEmp">회원가입</a>
 </body>
 </html>

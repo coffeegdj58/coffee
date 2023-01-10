@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import service.QuestionService;
 
-@WebServlet("/question/removeQuestion")
+@WebServlet("/RemoveQuestion")
 public class RemoveQuestionController extends HttpServlet {
 	private QuestionService questionService;
 
@@ -24,13 +24,13 @@ public class RemoveQuestionController extends HttpServlet {
 		this.questionService= new QuestionService();
 		int result=questionService.deleteQuestion(questionCode);
 		if(result==1) {//삭제 성공
-			response.sendRedirect(request.getContextPath()+"/customer/questionList");
+			response.sendRedirect(request.getContextPath()+"/QuestionListByCustomer");
 		}else {//실패
 			System.out.println("문의사항 삭제 실패");
 			//서블릿에서 알림창 띄우기
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter writer = response.getWriter();
-			writer.println("<script>alert('문의사항 삭제 실패!'); location.href='"+request.getContextPath()+"/customer/questionList"+"';</script>"); 
+			writer.println("<script>alert('문의사항 삭제 실패!'); location.href='"+request.getContextPath()+"/QuestionListByCustomer"+"';</script>"); 
 			writer.close();
 		}
 	}

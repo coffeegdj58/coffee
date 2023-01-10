@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import service.QuestionService;
 import vo.Question;
 
-@WebServlet("/customer/questionList")
+@WebServlet("/QuestionListByCustomer")
 public class QuestionListByCustomerController extends HttpServlet {
 	private QuestionService questionService;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

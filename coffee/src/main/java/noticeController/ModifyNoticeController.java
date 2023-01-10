@@ -13,7 +13,7 @@ import service.NoticeService;
 import vo.Notice;
 
 
-@WebServlet("/notice/modifyNotice")
+@WebServlet("/ModifyNotice")
 public class ModifyNoticeController extends HttpServlet {
 	private NoticeService noticeService;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -46,13 +46,13 @@ public class ModifyNoticeController extends HttpServlet {
 		this.noticeService=new NoticeService();
 		int row=noticeService.modifyNotice(notice);
 		if(row==1) {//수정 성공
-			response.sendRedirect(request.getContextPath()+"/notice/noticeList");
+			response.sendRedirect(request.getContextPath()+"/NoticeList");
 		}else {//실패
 			System.out.println("공지사항 수정 실패");
 			//서블릿에서 알림창 띄우기
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter writer = response.getWriter();
-			writer.println("<script>alert('공지사항 수정 실패!'); location.href='"+request.getContextPath()+"/notice/modifyNotice"+"';</script>"); 
+			writer.println("<script>alert('공지사항 수정 실패!'); location.href='"+request.getContextPath()+"/ModifyNotice"+"';</script>"); 
 			writer.close();
 		}
 	}

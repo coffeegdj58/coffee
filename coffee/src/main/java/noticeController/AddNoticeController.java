@@ -15,7 +15,7 @@ import vo.Notice;
 /**
  * Servlet implementation class addNoticeController
  */
-@WebServlet("/notice/addNotice")
+@WebServlet("/AddNotice")
 public class AddNoticeController extends HttpServlet {
 	private NoticeService noticeService;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -39,13 +39,13 @@ public class AddNoticeController extends HttpServlet {
 		this.noticeService=new NoticeService();
 		int row=noticeService.addNotice(notice);
 		if(row==1) { //성공: 공지사항 추가 성공하면 noticeList로 보낼거
-			response.sendRedirect(request.getContextPath()+"/notice/noticeList"); 
+			response.sendRedirect(request.getContextPath()+"/AddNotice"); 
 		}else { //실패: 실패하면 다시 addlist로 보낼거
 			System.out.println("공지사항 추가 실패");
 			//서블릿에서 알림창 띄우기
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter writer = response.getWriter();
-			writer.println("<script>alert('공지사항 추가 실패!'); location.href='"+request.getContextPath()+"/notice/addNotice"+"';</script>"); 
+			writer.println("<script>alert('공지사항 추가 실패!'); location.href='"+request.getContextPath()+"/AddNotice"+"';</script>"); 
 			writer.close();
 		}
 	}

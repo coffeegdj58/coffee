@@ -22,7 +22,7 @@
 		주문자 아이디: ${q.customer_id}
 	</div>
 
-	<form action="${pageContext.request.contextPath}/comment/addComment" method="post">
+	<form action="${pageContext.request.contextPath}/AddComment" method="post">
 		<div>
 			답변 내용:
 			<textarea rows="10" cols="30" name="commentMemo"></textarea>

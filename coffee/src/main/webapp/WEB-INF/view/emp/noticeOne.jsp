@@ -25,8 +25,8 @@
 	<!-- 관리자만 수정 삭제가 보이게 할 것 -->
 	
 		<td>
-			<a href="${pageContext.request.contextPath}/notice/modifyNotice?noticeCode=${n.noticeCode}">수정</a> /
-			<a href="${pageContext.request.contextPath}/notice/removeNotice?noticeCode=${n.noticeCode}">삭제</a> 
+			<a href="${pageContext.request.contextPath}/ModifyNotice?noticeCode=${n.noticeCode}">수정</a> /
+			<a href="${pageContext.request.contextPath}/RemoveNotice?noticeCode=${n.noticeCode}">삭제</a> 
 		</td>
 </body>
 </html>

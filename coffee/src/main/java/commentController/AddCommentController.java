@@ -13,7 +13,7 @@ import service.QuestionService;
 import vo.Comment;
 import vo.Question;
 
-@WebServlet("/comment/addComment")
+@WebServlet("/AddComment")
 public class AddCommentController extends HttpServlet {
 	private QuestionService questionService;
 	private CommentService commentService;
@@ -38,10 +38,10 @@ public class AddCommentController extends HttpServlet {
 		this.commentService=new CommentService();
 		int row=commentService.addComment(comment);
 		if(row==1) { //성공: 답변 추가 성공하면 questionList로 보낼거
-			response.sendRedirect(request.getContextPath()+"/emp/questionList"); 
+			response.sendRedirect(request.getContextPath()+"/QuestionListByEmp"); 
 		}else { //답변: 실패하면 다시 addComment로 보낼거
 			System.out.println("답변 추가 실패");
-			response.sendRedirect(request.getContextPath()+"/comment/addComment"); 
+			response.sendRedirect(request.getContextPath()+"/AddComment"); 
 		}
 	}
 

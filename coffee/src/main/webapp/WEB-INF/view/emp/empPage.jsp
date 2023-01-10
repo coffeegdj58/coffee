@@ -28,8 +28,8 @@
 				<td>${e.authCode}</td>
 				<td>${e.createdate}</td>
 				<!-- 최고 관리자만 사용 가능하게 끔 -->
-				<td><a href="${pageContext.request.contextPath}/emp/modifyEmp?empCode=${e.empCode}">수정 </a></td>
-				<td><a href="${pageContext.request.contextPath}/emp/removeEmp?empCode=${e.empCode}">삭제 </a></td>
+				<td><a href="${pageContext.request.contextPath}/ModifyEmp?empCode=${e.empCode}">수정 </a></td>
+				<td><a href="${pageContext.request.contextPath}/RemoveEmp?empCode=${e.empCode}">삭제 </a></td>
 			</tr>
 		</c:forEach>
 	</table>

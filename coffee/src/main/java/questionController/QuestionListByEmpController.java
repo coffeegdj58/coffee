@@ -15,7 +15,7 @@ import vo.*;
 /**
  * Servlet implementation class QuestionListByEmpController
  */
-@WebServlet("/emp/questionList")
+@WebServlet("/QuestionListByEmp")
 public class QuestionListByEmpController extends HttpServlet {
 	private QuestionService questionService;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

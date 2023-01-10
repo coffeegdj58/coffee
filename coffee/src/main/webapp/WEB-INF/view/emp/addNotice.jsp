@@ -6,7 +6,7 @@
 <title>공지 추가하기</title>
 </head>
 <body>
-	<form action="${pageContext.request.contextPath}/notice/addNotice" method="post">
+	<form action="${pageContext.request.contextPath}/AddNotice" method="post">
 		<table>
 			<tr>
 				<td>제목</td>

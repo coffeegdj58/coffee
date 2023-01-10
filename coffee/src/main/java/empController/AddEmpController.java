@@ -13,7 +13,7 @@ import service.EmpService;
 import vo.Emp;
 
 
-@WebServlet("/emp/addEmp")
+@WebServlet("/AddEmp")
 public class AddEmpController extends HttpServlet {
 	private EmpService empService;
 	//회원가입 폼
@@ -35,7 +35,7 @@ public class AddEmpController extends HttpServlet {
 			//서블릿에서 알림창 띄우기
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter writer = response.getWriter();
-			writer.println("<script>alert('중복 아이디입니다.'); location.href='"+request.getContextPath()+"/emp/addEmp"+"';</script>"); 
+			writer.println("<script>alert('중복 아이디입니다.'); location.href='"+request.getContextPath()+"/AddEmp"+"';</script>"); 
 			writer.close();
 		}else {
 			Emp emp= new Emp();
@@ -45,13 +45,13 @@ public class AddEmpController extends HttpServlet {
 			//service 불러오기
 			int row=empService.signUpEmp(emp);
 			if(row==1) {//회원가입 성공
-				response.sendRedirect(request.getContextPath()+"/emp/loginEmp"); 
+				response.sendRedirect(request.getContextPath()+"/LoginEmp"); 
 				return;
 			}else {//회원가입 실패
 				//서블릿에서 알림창 띄우기
 				response.setContentType("text/html; charset=UTF-8");
 				PrintWriter writer = response.getWriter();
-				writer.println("<script>alert('회원가입 실패.'); location.href='"+request.getContextPath()+"/emp/addEmp"+"';</script>"); 
+				writer.println("<script>alert('회원가입 실패.'); location.href='"+request.getContextPath()+"/AddEmp"+"';</script>"); 
 				writer.close();
 			}
 		}

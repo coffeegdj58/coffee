@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import service.EmpService;
 
-@WebServlet("/emp/removeEmp")
+@WebServlet("/RemoveEmp")
 public class RemoveEmpController extends HttpServlet {
 	private EmpService empService;
 	
@@ -21,13 +21,13 @@ public class RemoveEmpController extends HttpServlet {
 		this.empService=new EmpService();
 		int row=empService.removeEmp(empCode);
 		if(row==1) {//회원 삭제 성공
-			response.sendRedirect(request.getContextPath()+"/emp/empPage"); 
+			response.sendRedirect(request.getContextPath()+"/EmpPage"); 
 			return;
 		}else {//회원 삭제 실패
 			//서블릿에서 알림창 띄우기
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter writer = response.getWriter();
-			writer.println("<script>alert('회원 삭제 실패!'); location.href='"+request.getContextPath()+"/emp/empPage"+"';</script>"); 
+			writer.println("<script>alert('회원 삭제 실패!'); location.href='"+request.getContextPath()+"/EmpPage"+"';</script>"); 
 			writer.close();
 		}
 	}

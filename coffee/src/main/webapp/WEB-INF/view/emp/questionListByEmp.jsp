@@ -8,7 +8,7 @@
 </head>
 <body>
 	<!--  검색창 -->
-	<form action="${pageContext.request.contextPath}/emp/questionList" method="post">
+	<form action="${pageContext.request.contextPath}/QuestionListByEmp" method="post">
 		<label for="searchWord">검색 : </label>
 		<input type="text" name="searchWord" id="searchWord">
 		<button type="submit">검색</button>
@@ -26,7 +26,7 @@
 			<tr>
 				<td>${q.category}</td>
 				<td>
-					<a href="${pageContext.request.contextPath}/question/questionOne?questionCode=${question_code}">
+					<a href="${pageContext.request.contextPath}/QuestionOne?questionCode=${question_code}">
 					${q.question_code}</a>
 				</td>
 				<td>${q.customer_id}</td>
@@ -37,13 +37,13 @@
 		</c:forEach>
 	</table>
 	
-	<a href="${pageContext.request.contextPath}/emp/questionList?currentPage=1">처음</a>
+	<a href="${pageContext.request.contextPath}/QuestionListByEmp?currentPage=1">처음</a>
 	<c:if test="${currentPage > 1}">
-		<a href="${pageContext.request.contextPath}/emp/questionList?currentPage=${currentPage-1}&rowPerPage=${rowPerPage}">이전</a>
+		<a href="${pageContext.request.contextPath}/QuestionListByEmp?currentPage=${currentPage-1}&rowPerPage=${rowPerPage}">이전</a>
 	</c:if>
 	<c:if test="${currentPage < lastPage}">
-		<a href="${pageContext.request.contextPath}/emp/questionList?currentPage=${currentPage+1}&rowPerPage=${rowPerPage}">이후</a>
+		<a href="${pageContext.request.contextPath}/QuestionListByEmp?currentPage=${currentPage+1}&rowPerPage=${rowPerPage}">이후</a>
 	</c:if>
-	<a href="${pageContext.request.contextPath}/emp/questionList?currentPage=${lastPage}">마지막</a>
+	<a href="${pageContext.request.contextPath}/QuestionListByEmp?currentPage=${lastPage}">마지막</a>
 </body>
 </html>

@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="${pageContext.request.contextPath}/emp/modifyEmp" method="post">
+<form action="${pageContext.request.contextPath}/ModifyEmp" method="post">
 		<input type="hidden" name="empCode" value="${e.empCode}"> 
 		<table>
 			<tr>

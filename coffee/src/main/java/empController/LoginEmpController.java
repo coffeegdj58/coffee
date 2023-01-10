@@ -14,7 +14,7 @@ import javax.websocket.Session;
 import service.EmpService;
 import vo.Emp;
 
-@WebServlet("/emp/loginEmp")
+@WebServlet("/LoginEmp")
 public class LoginEmpController extends HttpServlet {
 	private EmpService empService;
 	//관리자 로그임 폼
@@ -40,7 +40,7 @@ public class LoginEmpController extends HttpServlet {
 			//서블릿에서 알림창 띄우기
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter writer = response.getWriter();
-			writer.println("<script>alert('로그인 실패.'); location.href='"+request.getContextPath()+"/emp/loginEmp"+"';</script>"); 
+			writer.println("<script>alert('로그인 실패.'); location.href='"+request.getContextPath()+"/LoginEmp"+"';</script>"); 
 			writer.close();
 		}else {
 			session.setAttribute("loginEmp", resultEmp);

@@ -12,7 +12,7 @@ import service.QuestionService;
 import vo.Comment;
 import vo.Question;
 
-@WebServlet("/question/questionOne")
+@WebServlet("/QuestionOne")
 public class QuestionOneController extends HttpServlet {
 	private QuestionService questionService;
 	private CommentService commentService;

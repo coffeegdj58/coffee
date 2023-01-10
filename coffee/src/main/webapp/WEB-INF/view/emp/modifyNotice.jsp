@@ -7,7 +7,7 @@
 <title>공지 수정하기</title>
 </head>
 <body>
-<form action="${pageContext.request.contextPath}/notice/modifyNotice" method="post">
+<form action="${pageContext.request.contextPath}/ModifyNotice" method="post">
 		<input type="hidden" name="noticeCode" value="${n.noticeCode}"> 
 		<table>
 			<tr>
