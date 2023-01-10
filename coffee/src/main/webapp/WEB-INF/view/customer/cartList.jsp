@@ -20,6 +20,7 @@
 			<td>상품이름</td>
 			<td>상품금액</td>
 			<td>수량</td>	
+			<td>삭제</td>
 		</tr>
 		<c:forEach var= "c" items="${cartList}">
 			<tr>
@@ -33,12 +34,69 @@
 			 	</form>
 			 	<td><img src="${pageContext.request.contextPath}/image/${c.goodsName}.jpg" width= "150px" height="150px"></td>
 			 	<td>${c.goodsName}</td>
-			 	<td>${c.goodsPrice}</td>
-			 	<td>${c.cartQuantity}</td>
+			 	<td>${c.cartPrice}</td>
+			 	<td>
+			 	<form action="${pageContext.request.contextPath}/UpdateQuantity" method="post">
+			 		<input type="hidden" name="goodsCode" value="${c.goodsCode}">
+			 		
+			 		<c:if test="${c.cartQuantity==1}">
+				 		<select name="cartQuantity">
+							<option value="1" selected="selected">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+						</select>	
+					</c:if>	
+					<c:if test="${c.cartQuantity==2}">
+				 		<select name="cartQuantity">
+							<option value="1">1</option>
+							<option value="2" selected="selected">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+						</select>	
+					</c:if>	
+					<c:if test="${c.cartQuantity==3}">
+				 		<select name="cartQuantity">
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3" selected="selected">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+						</select>	
+					</c:if>	
+					<c:if test="${c.cartQuantity==4}">
+				 		<select name="cartQuantity">
+							<option value="1" >1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4" selected="selected">4</option>
+							<option value="5">5</option>
+						</select>	
+					</c:if>	
+					<c:if test="${c.cartQuantity==5}">
+				 		<select name="cartQuantity">
+							<option value="1" >1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5" selected="selected">5</option>
+						</select>	
+					</c:if>	
+			 	</form>
+			 	</td>
+			 	<td>
+			 		<a href="${pageContext.request.contextPath}/DeletCartOne?goodsCode=${c.goodsCode}">삭제</a>
+			 	</td>
 			</tr>
 		</c:forEach>
 	</table>
 	
 	<div>총 가격  ${sum}</div>
+	
+	<script>
+		
+	</script>
 </body>
 </html>

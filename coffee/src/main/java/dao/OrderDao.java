@@ -31,7 +31,7 @@ public class OrderDao {
 		ArrayList<Cart> list = new ArrayList<Cart>();
 		
 		String sql= "SELECT "
-				+ "c.goods_code goodsCode, c.cart_quantity cartQuantity, c.selected selected, g.goods_name goodsName, g.goods_price goodsPrice, c2.category_kind categoryKind, c2.category_name categoryName "
+				+ "c.goods_code goodsCode, c.cart_quantity cartQuantity, c.selected selected, g.goods_name goodsName, (g.goods_price * c.cart_quantity) cartPrice, g.goods_price goodsPrice, c2.category_kind categoryKind, c2.category_name categoryName "
 				+ "FROM cart c INNER JOIN goods g ON c.goods_code = g.goods_code inner join category c2 ON c2.category_code = g.category_code "
 				+ "WHERE c.customer_id= ?";
 		PreparedStatement stmt= conn.prepareStatement(sql);
@@ -48,9 +48,11 @@ public class OrderDao {
 			c.setCategoryName(rs.getString("categoryName"));
 			c.setGoodsCode(rs.getInt("goodsCode"));
 			c.setSelected(rs.getInt("selected"));
+			c.setCartPrice(rs.getInt("cartPrice"));
 			list.add(c);
 		}
-		
+		rs.close();
+		stmt.close();
 		
 		return list;
 		
@@ -68,7 +70,7 @@ public class OrderDao {
 			stmt.setInt(1, c.getGoodsCode());
 			stmt.setString(2, c.getCustomerId());
 			stmt.setInt(3, c.getCartQuantity());
-			stmt.setInt(4, c.getGoodsPrice());
+			stmt.setInt(4, c.getCartPrice());
 			
 			result= stmt.executeUpdate();
 			stmt.close();
@@ -105,7 +107,8 @@ public class OrderDao {
 		if(rs.next()) {
 			sum = rs.getInt("sum");
 		}
-		
+		rs.close();
+		stmt.close();
 		
 		return sum;
 	}
@@ -120,6 +123,7 @@ public class OrderDao {
 		stmt.setInt(2, orderCode);
 		
 		result = stmt.executeUpdate();
+		stmt.close();
 		
 		return result;
 	}
@@ -193,5 +197,125 @@ public class OrderDao {
 		
 		return result;
 	}
-
-}
+	//select level2
+	
+	public Cart selectCartlevel2(Connection conn, String customerId) throws Exception{
+		Cart c = new Cart();
+		
+		String sql= "SELECT (c.cart_quantity* g.goods_price) cartPrice, g.goods_name goodsName, g.goods_code goodsCode, c.cart_quantity cartQuantity FROM cart c INNER JOIN goods g ON c.goods_code = g.goods_code WHERE c.customer_id= ? AND selected= 2";
+		PreparedStatement stmt =conn.prepareStatement(sql);
+		stmt.setString(1, customerId);
+		
+		ResultSet rs = stmt.executeQuery();
+		
+		if(rs.next()) {
+			c.setCartPrice(rs.getInt("cartPrice"));
+			c.setGoodsName(rs.getString("goodsName"));
+			c.setGoodsCode(rs.getInt("goodsCode"));
+			c.setCartQuantity(rs.getInt("cartQuantity"));
+		}
+		stmt.close();
+		rs.close();
+		return c;
+	}
+	
+	//delete level2
+	public int deleteCartlevel2(String customerId, Connection conn) throws Exception {
+		int result =0;
+		
+		String sql = "DELETE FROM cart WHERE customer_id= ? AND selected= 2";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setString(1, customerId);
+		
+		result = stmt.executeUpdate();
+		
+		stmt.close();
+		return result;
+	}
+	
+	//실구매할 cartlist level1
+	
+	public ArrayList<Cart> selectCartListlevel1(String customerId, Connection conn) throws Exception {
+		ArrayList<Cart> list = new ArrayList<Cart>();
+		
+		String sql= "SELECT "
+				+ "c.goods_code goodsCode, c.cart_quantity cartQuantity, c.selected selected, g.goods_name goodsName, (g.goods_price * c.cart_quantity) cartPrice, g.goods_price goodsPrice, c2.category_kind categoryKind, c2.category_name categoryName "
+				+ "FROM cart c INNER JOIN goods g ON c.goods_code = g.goods_code inner join category c2 ON c2.category_code = g.category_code "
+				+ "WHERE c.customer_id= ? AND selected= 1";
+		PreparedStatement stmt= conn.prepareStatement(sql);
+		stmt.setString(1, customerId);
+		
+		ResultSet rs = stmt.executeQuery();
+		
+		while(rs.next()) {
+			Cart c = new Cart();
+			c.setCartQuantity(rs.getInt("cartQuantity"));
+			c.setGoodsName(rs.getString("goodsName"));
+			c.setGoodsPrice(rs.getInt("goodsPrice"));
+			c.setCategoryKind(rs.getString("categoryKind"));
+			c.setCategoryName(rs.getString("categoryName"));
+			c.setGoodsCode(rs.getInt("goodsCode"));
+			c.setSelected(rs.getInt("selected"));
+			c.setCartPrice(rs.getInt("cartPrice"));
+			list.add(c);
+		}
+		
+		rs.close();
+		stmt.close();
+		return list;
+		
+	}
+	
+	//장바구니 전체 선택시 실행 쿼리
+	
+	public int updateSelectAll(Connection conn, String customerId) throws Exception{
+		int result = 0;
+		String sql ="UPDATE cart SET selected= 1 WHERE customer_id= ?";
+		PreparedStatement stmt =conn.prepareStatement(sql);
+		
+		stmt.setString(1, customerId);
+		
+		result= stmt.executeUpdate();
+		
+		stmt.close();
+		
+		
+		return result;
+	}
+	
+	//장바구니에서 하나 선택시 실행쿼리
+	
+	public int updateSelectOne(Connection conn, String customerId, int selected, int goodsCode) throws Exception {
+		int result= 0;
+		
+		String sql ="UPDATE cart SET selected= ? WHERE customer_id= ? AND goods_code = ?";
+		PreparedStatement stmt =conn.prepareStatement(sql);
+		stmt.setInt(1, selected);
+		stmt.setString(2, customerId);
+		stmt.setInt(3, goodsCode);
+		
+		result = stmt.executeUpdate();
+		stmt.close();
+		
+		
+		return result;
+	}
+	
+	//장바구니에서 수량 변경시 실행쿼리
+	public int updateCartQuantity(Connection conn, String customerId, int quantity, int goodsCode) throws Exception{
+		
+		int result = 0;
+		
+		String sql = "UPDATE cart SET cart_quantity = ? WHERE customer_id=? AND goods_code= ? ";
+		PreparedStatement stmt =conn.prepareStatement(sql);
+		
+		stmt.setInt(1, quantity);
+		stmt.setString(2, customerId);
+		stmt.setInt(3, goodsCode);
+		
+		result = stmt.executeUpdate();
+		stmt.close();
+		
+		return result;	
+	}
+}	

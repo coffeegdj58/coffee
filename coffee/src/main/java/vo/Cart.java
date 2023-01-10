@@ -7,9 +7,18 @@ public class Cart {
 	private String createdate;
 	private String goodsName;
 	private int goodsPrice;
+	private int cartPrice;
 	private String categoryKind;
 	private String categoryName;
 	
+	
+	
+	public int getCartPrice() {
+		return cartPrice;
+	}
+	public void setCartPrice(int cartPrice) {
+		this.cartPrice = cartPrice;
+	}
 	public String getCategoryKind() {
 		return categoryKind;
 	}

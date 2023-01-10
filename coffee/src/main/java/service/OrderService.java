@@ -256,5 +256,213 @@ public class OrderService {
 		return list;
 		
 	}
+	
+	public int insertCartlevel2(String customerId, int goodsCode, int quantity) {
+		int result = 0;
+		Connection conn = null;
+
+		try {
+			db= new Dbutil();
+			conn = db.getConnection();
+			orderdao = new OrderDao();
+			
+			result = orderdao.insertCartlevel2(conn, customerId, goodsCode, quantity);
+			
+			conn.commit(); // DBUtil.class에서 conn.setAutoCommit(false);
+		} catch (Exception e) {
+			try {
+				conn.rollback(); // DBUtil.class에서 conn.setAutoCommit(false);
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
+	
+	public Cart selectCartlevel2(String customerId) {
+		Cart c = null;
+		Connection conn = null;
+
+		try {
+			db= new Dbutil();
+			conn = db.getConnection();
+			orderdao = new OrderDao();
+			
+			c= orderdao.selectCartlevel2(conn, customerId);
+			
+			conn.commit(); // DBUtil.class에서 conn.setAutoCommit(false);
+		} catch (Exception e) {
+			try {
+				conn.rollback(); // DBUtil.class에서 conn.setAutoCommit(false);
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return c;
+		
+	}
+	
+	public int deletecartlevel2(String customerId) {
+		int result = 0;
+		Connection conn = null;
+
+		try {
+			db= new Dbutil();
+			conn = db.getConnection();
+			orderdao = new OrderDao();
+			
+			result = orderdao.deleteCartlevel2(customerId, conn);
+			
+			conn.commit(); // DBUtil.class에서 conn.setAutoCommit(false);
+		} catch (Exception e) {
+			try {
+				conn.rollback(); // DBUtil.class에서 conn.setAutoCommit(false);
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
+		
+	}
+	
+	public ArrayList<Cart> selectCartListlevel1(String customerId){
+		ArrayList<Cart> list = new ArrayList<Cart>();
+		Connection conn = null;
+
+		try {
+			db= new Dbutil();
+			conn = db.getConnection();
+			orderdao = new OrderDao();
+			
+			list = orderdao.selectCartListlevel1(customerId, conn);
+			
+			conn.commit(); // DBUtil.class에서 conn.setAutoCommit(false);
+		} catch (Exception e) {
+			try {
+				conn.rollback(); // DBUtil.class에서 conn.setAutoCommit(false);
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
+		
+		
+	}
+	
+	public int updateSelectAll(String customerId) {
+		int result = 0;
+		Connection conn = null;
+
+		try {
+			db= new Dbutil();
+			conn = db.getConnection();
+			orderdao = new OrderDao();
+			
+			result = orderdao.updateSelectAll(conn, customerId);
+			
+			conn.commit(); // DBUtil.class에서 conn.setAutoCommit(false);
+		} catch (Exception e) {
+			try {
+				conn.rollback(); // DBUtil.class에서 conn.setAutoCommit(false);
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
+		
+	}
+	
+	public int updateSelectOne(String customerId, int selected, int goodsCode) {
+		int result = 0;
+		Connection conn = null;
+
+		try {
+			db= new Dbutil();
+			conn = db.getConnection();
+			orderdao = new OrderDao();
+			
+			result = orderdao.updateSelectOne(conn, customerId, selected, goodsCode);
+			
+			conn.commit(); // DBUtil.class에서 conn.setAutoCommit(false);
+		} catch (Exception e) {
+			try {
+				conn.rollback(); // DBUtil.class에서 conn.setAutoCommit(false);
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
+	
+	public int updateCartQuantity(String customerId, int quantity, int goodsCode) {
+		int result = 0;
+		Connection conn = null;
+
+		try {
+			db= new Dbutil();
+			conn = db.getConnection();
+			orderdao = new OrderDao();
+			
+			result = orderdao.updateCartQuantity(conn, customerId, quantity, goodsCode);
+			
+			conn.commit(); // DBUtil.class에서 conn.setAutoCommit(false);
+		} catch (Exception e) {
+			try {
+				conn.rollback(); // DBUtil.class에서 conn.setAutoCommit(false);
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
 }
 
