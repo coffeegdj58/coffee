@@ -51,7 +51,7 @@ public class AddEmpController extends HttpServlet {
 				//서블릿에서 알림창 띄우기
 				response.setContentType("text/html; charset=UTF-8");
 				PrintWriter writer = response.getWriter();
-				writer.println("<script>alert('회원가입 실패.'); location.href='"+request.getContextPath()+"/AddEmp"+"';</script>"); 
+				writer.println("<script>alert('회원가입 실패!'); location.href='"+request.getContextPath()+"/AddEmp"+"';</script>"); 
 				writer.close();
 			}
 		}

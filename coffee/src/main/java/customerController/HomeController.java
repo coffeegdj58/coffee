@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import vo.Customer;
+import vo.Emp;
 
 /**
  * Servlet implementation class HomeController
@@ -21,6 +22,7 @@ public class HomeController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		Customer loginMember = (Customer)session.getAttribute("loginMember");
+		Emp loginEmp=(Emp)session.getAttribute("loginEmp");
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/view/home.jsp");
 		rd.forward(request, response);
 	}

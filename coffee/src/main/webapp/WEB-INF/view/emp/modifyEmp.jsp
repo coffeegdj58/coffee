@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>사원 수정하기</title>
 </head>
 <body>
 <form action="${pageContext.request.contextPath}/ModifyEmp" method="post">
@@ -12,7 +12,7 @@
 		<table>
 			<tr>
 				<td>사원 아이디</td>
-				<td><input type="text" name="empId" value="${e.empId }"></td>
+				<td><input type="text" name="empId" value="${e.empId}"></td>
 			</tr>
 			<tr>
 				<td>사원 이름</td>
@@ -20,11 +20,11 @@
 			</tr>
 			<tr>
 				<td>계정 사용 유/무</td>
-				<c:if test="${active.eq 'Y' }">
+				<c:if test="${e.active=='Y'}">
 					<td><input type="radio" name="active" value="Y" checked="checked">Y</td>
 					<td><input type="radio" name="active" value="N">N</td>
 				</c:if>
-				<c:if test="${active.eq 'N' }">
+				<c:if test="${e.active=='N'}">
 					<td><input type="radio" name="active" value="Y">Y</td>
 					<td><input type="radio" name="active" value="N" checked="checked">N</td>
 				</c:if>
@@ -33,14 +33,14 @@
 				<td>관리자 등급</td>
 				<td>
 					<select name="authCode">
-						<option value="바리스타">바리스타</option>
-						<option value="매니저">매니저</option>
-						<option value="슈퍼바이저">슈퍼바이저</option>
+						<option value="1">바리스타</option>
+						<option value="2">매니저</option>
+						<option value="3">슈퍼바이저</option>
 					</select>
 				</td>
 			<tr>
 				<td>입사일</td>
-				<td><input type="text" name="createdate" value="${e.createdate }"></td>
+				<td><input type="text" name="createdate" value="${e.createdate}"></td>
 			</tr>
 		</table>
 		<button type="submit">수정</button>

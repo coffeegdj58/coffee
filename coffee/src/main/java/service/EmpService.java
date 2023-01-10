@@ -47,10 +47,13 @@ public class EmpService {
 		try {
 			conn=dbutil.getConnection();
 			row=empDao.modifyEmp(conn, emp);
+			//System.out.println(emp+"<==서비스");
 			conn.commit();
+			//System.out.println("커밋 됨");
 		} catch (Exception e) {
 			try {
 				conn.rollback();
+				//System.out.println("롤백 됨");
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}

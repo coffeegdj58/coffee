@@ -20,6 +20,6 @@
 		</table>
 		<button type="submit">로그인</button>
 	</form>
-	<a href="${pageContext.request.contextPath}/AddEmp">회원가입</a>
+	<a href="${pageContext.request.contextPath}/AddEmp">관리자 회원가입</a>
 </body>
 </html>

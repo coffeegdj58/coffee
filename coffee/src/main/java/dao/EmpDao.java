@@ -38,8 +38,11 @@ public class EmpDao {
 		stmt.setString(1, emp.getActive());
 		stmt.setInt(2, emp.getAuthCode());
 		stmt.setInt(3, emp.getEmpCode());
+		//System.out.println(stmt);
+		row=stmt.executeUpdate();
 		if(row==1) {
-			System.out.println("수정성공: dao");
+			//System.out.println(row+"row: dao");
+			//System.out.println("수정성공: dao");
 		}
 		stmt.close();
 		return row;

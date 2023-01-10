@@ -24,7 +24,7 @@ public class LoginEmpController extends HttpServlet {
 	}
 	//관리자 로그인 액션
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session=request.getSession();
+		HttpSession session=request.getSession(true);
 		request.setCharacterEncoding("utf-8");
 		//로그인 폼에서 받아오기 
 		String empId=request.getParameter("empId");
@@ -34,18 +34,18 @@ public class LoginEmpController extends HttpServlet {
 		emp.setEmpId(empId);
 		emp.setEmpPw(empPw);
 		//service 불러오기
-		this.empService=new EmpService();
+		empService=new EmpService();
 		Emp resultEmp=empService.loginEmp(emp);
 		if(resultEmp==null) {//로그인 실패 시 
 			//서블릿에서 알림창 띄우기
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter writer = response.getWriter();
-			writer.println("<script>alert('로그인 실패.'); location.href='"+request.getContextPath()+"/LoginEmp"+"';</script>"); 
+			writer.println("<script>alert('로그인 실패!'); location.href='"+request.getContextPath()+"/LoginEmp"+"';</script>"); 
 			writer.close();
-		}else {
+		}else if(resultEmp!=null){
+			System.out.println(resultEmp+"<==resultEmp");
 			session.setAttribute("loginEmp", resultEmp);
 			response.sendRedirect(request.getContextPath()+"/Home");
-			return;
 		}
 		
 	}

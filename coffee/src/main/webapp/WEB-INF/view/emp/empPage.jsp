@@ -7,7 +7,7 @@
 <title>괸리자 페이지</title>
 </head>
 <body>
-	<!--관리자만 접근 가능하게 할 것  -->
+	<!--최고 관리자만 접근 가능하게 할 것  -->
 	<table>
 		<tr>
 			<th>사원 이름</th>
@@ -16,9 +16,10 @@
 			<th>관리자 등급</th>
 			<th>입사일</th>
 			<!-- 최고 관리자만 사용 가능하게 끔 -->
-			<th>수정</th>
-			<th>삭제</th>
-			
+			<c:if test="${authCode==3}">
+				<th>수정</th>
+				<th>삭제</th>
+			</c:if>
 		</tr>
 		<c:forEach var="e" items="${list}">
 			<tr>
@@ -28,8 +29,10 @@
 				<td>${e.authCode}</td>
 				<td>${e.createdate}</td>
 				<!-- 최고 관리자만 사용 가능하게 끔 -->
-				<td><a href="${pageContext.request.contextPath}/ModifyEmp?empCode=${e.empCode}">수정 </a></td>
-				<td><a href="${pageContext.request.contextPath}/RemoveEmp?empCode=${e.empCode}">삭제 </a></td>
+				<c:if test="${authCode==3}">
+					<td><a href="${pageContext.request.contextPath}/ModifyEmp?empCode=${e.empCode}">수정 </a></td>
+					<td><a href="${pageContext.request.contextPath}/RemoveEmp?empCode=${e.empCode}">삭제 </a></td>
+				</c:if>
 			</tr>
 		</c:forEach>
 	</table>
