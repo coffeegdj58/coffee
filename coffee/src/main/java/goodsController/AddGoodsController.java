@@ -29,7 +29,7 @@ public class AddGoodsController extends HttpServlet {
 		// 직원이 아닐 경우 직원 로그인 페이지로 전환
 		HttpSession session = request.getSession();
 		if(session.getAttribute("loginEmp") == null) {
-			response.sendRedirect(request.getContextPath() + "/LoginEmpController");
+			response.sendRedirect(request.getContextPath() + "/emp/loginEmp");
 			return;
 		}
 		this.goodsService= new GoodsService();
@@ -46,6 +46,7 @@ public class AddGoodsController extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/emp/loginEmp");
 			return;
 		}
+		request.setCharacterEncoding("utf-8");
 		this.goodsService= new GoodsService();
 		
 		Emp loginEmp = (Emp)session.getAttribute("loginEmp");
@@ -68,9 +69,10 @@ public class AddGoodsController extends HttpServlet {
 		
 		String filename = mreq.getFilesystemName("filename");
 		// 저장된 이미지 파일 이름
-		File f= new File(dir+"\\"+filename);
-		f.renameTo(new File(dir+"\\"+goodsName));
-
+		File f= new File(dir+"/"+filename);
+		System.out.println(f);
+		f.renameTo(new File(dir+"/"+goodsName+".jpg"));
+		System.out.println(f);
 		String contentType = mreq.getContentType("filename"); // 이미지 파일 검사
 		
 		if(contentType.equals("image/jpeg") || contentType.equals("image/png")) {
