@@ -12,7 +12,7 @@ import service.GoodsService;
 import vo.Goods;
 
 
-@WebServlet("/GoodsOneController")
+@WebServlet("/GoodsOne")
 public class GoodsOneController extends HttpServlet {
 	
     private GoodsService goodsService;

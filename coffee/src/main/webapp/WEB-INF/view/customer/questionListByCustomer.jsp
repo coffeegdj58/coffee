@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<a href="${pageContext.request.contextPath}/question/addQuestion">문의하기</a>
+	<a href="${pageContext.request.contextPath}/AddQuestion">문의하기</a>
 	<table>
 		<tr>
 			<th>카테고리</th>
@@ -31,8 +31,8 @@
 				<!-- 답변이 안달렸으면 보이게 달리면 안보이게 -->
 				<c:if test="${q.flag eq 'N'}">
 					<td>
-						<a href="${pageContext.request.contextPath}/question/modifyQuestion?questionCode=${question_code}">수정</a> /
-						<a href="${pageContext.request.contextPath}/question/removeQuestion?questionCode=${question_code}">삭제</a> 
+						<a href="${pageContext.request.contextPath}/ModifyQuestion?questionCode=${question_code}">수정</a> /
+						<a href="${pageContext.request.contextPath}/RemoveQuestion?questionCode=${question_code}">삭제</a> 
 					</td>
 				</c:if>
 			</tr>

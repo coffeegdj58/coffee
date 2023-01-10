@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import service.ReviewService;
 import vo.Review;
 
-@WebServlet("/review/modifdyReview")
+@WebServlet("/ModifyReview")
 public class ModifyReviewController extends HttpServlet {
 	private ReviewService reviewService;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -40,13 +40,13 @@ public class ModifyReviewController extends HttpServlet {
 		int result=reviewService.updateReview(review);
 		if(result==1) {
 			System.out.println("리뷰 수정 성공");
-			response.sendRedirect(request.getContextPath()+"/customer/?");
+			response.sendRedirect(request.getContextPath()+"/CustomerPage");
 		}else {//실패
 			System.out.println("리뷰 수정 실패");
 			//서블릿에서 알림창 띄우기
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter writer = response.getWriter();
-			writer.println("<script>alert('리뷰 수정 실패!'); location.href='"+request.getContextPath()+"/review/modifdyReview"+"';</script>"); 
+			writer.println("<script>alert('리뷰 수정 실패!'); location.href='"+request.getContextPath()+"/ModifyReview"+"';</script>"); 
 			writer.close();
 		}
 	}

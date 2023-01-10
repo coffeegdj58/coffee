@@ -17,7 +17,7 @@ import vo.Point;
 /**
  * Servlet implementation class PointPageController
  */
-@WebServlet("/PointPageController")
+@WebServlet("/PointPage")
 public class PointPageController extends HttpServlet {
 	private CustomerService customerService;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -25,7 +25,7 @@ public class PointPageController extends HttpServlet {
 		HttpSession session = request.getSession();
 		Customer loginMember = (Customer)session.getAttribute("loginMember");
 		if(loginMember ==null) {
-			response.sendRedirect(request.getContextPath()+"/HomeController");
+			response.sendRedirect(request.getContextPath()+"/Home");
 			return;
 		}
 		

@@ -7,7 +7,7 @@
 		<title>ModifyGoods</title>
 	</head>
 	<body>
-		<form action="${pageContext.request.contextPath}/modifyGoods" method="post" enctype="multipart/form-data">
+		<form action="${pageContext.request.contextPath}/ModifyGoods" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="goodsCode" value="${m.goodsCode}">
 		</form>
 	</body>

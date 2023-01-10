@@ -8,7 +8,7 @@
 </head>
 <body>
 	<h1>회원가입페이지</h1>
-	<form action="${pageContext.request.contextPath}/AddCustomerController" method="post">
+	<form action="${pageContext.request.contextPath}/AddCustomer" method="post">
 		<table>
 			<tr>
 				<td>id</td>

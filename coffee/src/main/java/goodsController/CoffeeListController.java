@@ -13,7 +13,7 @@ import service.GoodsService;
 import vo.Goods;
 
 
-@WebServlet("/CoffeeListController")
+@WebServlet("/CoffeeList")
 public class CoffeeListController extends HttpServlet {
 	private GoodsService goodsService;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

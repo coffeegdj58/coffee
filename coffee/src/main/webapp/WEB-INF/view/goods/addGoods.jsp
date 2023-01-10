@@ -9,7 +9,7 @@
 	<body>
 		<h1>상품 추가</h1>
 		<a href="${pageContext.request.contextPath}/goodsList">goodsList</a>
-		<form action="${pageContext.request.contextPath}/AddGoodsController" method="post" enctype="multipart/form-data">
+		<form action="${pageContext.request.contextPath}/AddGoods" method="post" enctype="multipart/form-data">
 			<div>goodsName : <input type="text" name="goodsName"></div>
 			<div>goodsPrice : <input type="number" name="goodsPrice"></div>
 			<div>soldout : Y<input type="radio" name="soldout" value="Y">N<input type="radio" name="soldout" value="N"></div>

@@ -32,7 +32,7 @@
 			</tr>
 			
 		</table>
-		<div><a href="${pageContext.request.contextPath}/ModifyAddressController?addressCode=${a.addressCode}">수정하기</a></div>
+		<div><a href="${pageContext.request.contextPath}/ModifyAddress?addressCode=${a.addressCode}">수정하기</a></div>
 		
 		<c:if test="${a.flag==1}">
 			<div>기본배송지</div>
@@ -41,7 +41,7 @@
 	</c:forEach>
 	<a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">배송지 추가하기</a>
 	
-	<form action="${pageContext.request.contextPath}/AddressCustomerController" method="post">
+	<form action="${pageContext.request.contextPath}/AddressCustomer" method="post">
 	<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">

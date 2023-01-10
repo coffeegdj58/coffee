@@ -8,7 +8,7 @@
 </head>
 <body>
 	<h1>login</h1>
-	<form method="post" action="${pageContext.request.contextPath}/CustomerLoginController">
+	<form method="post" action="${pageContext.request.contextPath}/CustomerLogin">
 		<table>
 			<tr>
 				<td>id</td>
@@ -21,6 +21,6 @@
 		</table>
 		<button type="submit">login</button>
 	</form>
-	<a href="${pageContext.request.contextPath}/AddCustomerController">회원가입</a>
+	<a href="${pageContext.request.contextPath}/AddCustomer">회원가입</a>
 </body>
 </html>

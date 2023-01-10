@@ -17,7 +17,7 @@ import vo.Customer;
 /**
  * Servlet implementation class CartListController
  */
-@WebServlet("/CartListController")
+@WebServlet("/CartList")
 public class CartListController extends HttpServlet {
 	
 	private OrderService orderservice;
@@ -26,7 +26,7 @@ public class CartListController extends HttpServlet {
 		HttpSession session = request.getSession();
 		Customer loginMember = (Customer)session.getAttribute("loginMember");
 		if(loginMember ==null) {
-			response.sendRedirect(request.getContextPath()+"/HomeController");
+			response.sendRedirect(request.getContextPath()+"/Home");
 			return;
 		}
 		

@@ -20,16 +20,15 @@ import vo.Goods;
 import vo.GoodsImg;
 
                                   
-@WebServlet("/ModifyGoodsController")
+@WebServlet("/ModifyGoods")
 public class ModifyGoodsController extends HttpServlet {
-	private static final long serialVersionUID = 1L;
     private GoodsService goodsService;
     
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	// 직원이 아닐 경우 직원 로그인 페이지로 전환
     	HttpSession session = request.getSession();
     	if(session.getAttribute("loginEmp") == null) {
-    		response.sendRedirect(request.getContextPath() + "/LoginEmpController");
+    		response.sendRedirect(request.getContextPath() + "/LoginEmp");
     		return;
     	}
     	
@@ -43,10 +42,7 @@ public class ModifyGoodsController extends HttpServlet {
     	// 서비스 호출
     	goodsService = new GoodsService();
     	
-    	m.put("dir", request.getServletContext().getRealPath("/upload"));
     	
-    	// 객체 바인딩 후 페이지 이동
-    	request.setAttribute("m", m);
     	request.getRequestDispatcher("/WEB-INF/view/goods/modifyGoods.jsp").forward(request, response);
     }
     
@@ -54,7 +50,7 @@ public class ModifyGoodsController extends HttpServlet {
     	// 직원이 아닐 경우 직원 로그인 페이지로 전환
     	HttpSession session = request.getSession();
     	if(session.getAttribute("loginEmp") == null) {
-    		response.sendRedirect(request.getContextPath() + "/LoginEmpController");
+    		response.sendRedirect(request.getContextPath() + "/LoginEmp");
     		return;
     	}
     	
@@ -95,11 +91,8 @@ public class ModifyGoodsController extends HttpServlet {
     		
     		// service 호출
     		GoodsService goodsService = new GoodsService();
-    		int result = goodsService.modifyGoods(goods, goodsImg, dir);
     		
-    		if(result != 1) {
-    			System.out.println("ModifyGoodsController : updateGoodsImg fail");
-    		}
+    	
     		
     		// 수정 완료시 이전 이미지 파일 삭제
     		File f = new File(dir + "\\" + mreq.getParameter("oldFilename"));

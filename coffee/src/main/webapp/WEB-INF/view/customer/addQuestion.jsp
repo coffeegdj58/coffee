@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="${pageContext.request.contextPath}/question/addQuestion" method="post">
+	<form action="${pageContext.request.contextPath}/AddQuestion" method="post">
 		<table>
 			<tr>
 				<td>주문 번호</td>

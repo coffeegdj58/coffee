@@ -15,7 +15,7 @@ import vo.Goods;
 /**
  * Servlet implementation class BakeryController
  */
-@WebServlet("/BakeryController")
+@WebServlet("/BakeryList")
 public class BakeryController extends HttpServlet {
 	private GoodsService goodsService;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

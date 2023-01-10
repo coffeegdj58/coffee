@@ -23,7 +23,7 @@
 		</tr>
 		<c:forEach var= "c" items="${cartList}">
 			<tr>
-				<form action="${pageContext.request.contextPath}/CartListController" method="post">
+				<form action="${pageContext.request.contextPath}/CartList" method="post">
 					<c:if test="${c.selected==0}">
 				 		<td><input type="checkBox" name="${c.goodsCode}" value= 1></td>
 				 	</c:if>

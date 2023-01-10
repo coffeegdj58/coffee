@@ -28,6 +28,6 @@
 		</tr>
 
 	</table>
-	<div> <a href="${pageContext.request.contextPath}/AddGoodsController">추가하기</a> </div>
+	<div> <a href="${pageContext.request.contextPath}/AddGoods">추가하기</a> </div>
 </body>
 </html>

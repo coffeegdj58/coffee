@@ -15,7 +15,7 @@ import vo.Customer;
 /**
  * Servlet implementation class ModifyCustomerController
  */
-@WebServlet("/ModifyCustomerController")
+@WebServlet("/ModifyCustomer")
 public class ModifyCustomerController extends HttpServlet {
 	private CustomerService customerService;
 	
@@ -24,7 +24,7 @@ public class ModifyCustomerController extends HttpServlet {
 		Customer loginMember = (Customer)session.getAttribute("loginMember");
 		
 		if(loginMember ==null) {
-			response.sendRedirect(request.getContextPath()+"/HomeController");
+			response.sendRedirect(request.getContextPath()+"/Home");
 			return;
 		}
 
@@ -54,7 +54,7 @@ public class ModifyCustomerController extends HttpServlet {
 			System.out.println(result+"변경?");
 		}
 		
-		response.sendRedirect(request.getContextPath()+"/ModifyCustomerController");
+		response.sendRedirect(request.getContextPath()+"/ModifyCustomer");
 		
 	}
 

@@ -21,7 +21,7 @@ import vo.Goods;
 
 
 
-@WebServlet("/AddGoodsController")
+@WebServlet("/AddGoods")
 public class AddGoodsController extends HttpServlet {
 	private GoodsService goodsService;
        
@@ -29,7 +29,7 @@ public class AddGoodsController extends HttpServlet {
 		// 직원이 아닐 경우 직원 로그인 페이지로 전환
 		HttpSession session = request.getSession();
 		if(session.getAttribute("loginEmp") == null) {
-			response.sendRedirect(request.getContextPath() + "/emp/loginEmp");
+			response.sendRedirect(request.getContextPath() + "/LoginEmp");
 			return;
 		}
 		this.goodsService= new GoodsService();
@@ -43,7 +43,7 @@ public class AddGoodsController extends HttpServlet {
 		// 직원이 아닐 경우 직원 로그인 페이지로 전환
 		HttpSession session = request.getSession();
 		if(session.getAttribute("loginEmp") == null) {
-			response.sendRedirect(request.getContextPath() + "/emp/loginEmp");
+			response.sendRedirect(request.getContextPath() + "/LoginEmp");
 			return;
 		}
 		request.setCharacterEncoding("utf-8");
@@ -87,6 +87,6 @@ public class AddGoodsController extends HttpServlet {
 			goods.setGoodsInfo(goodsInfo);
 			goodsService.addGoods(goods, dir, empId);
 		}
-		response.sendRedirect(request.getContextPath() + "/CoffeeListController");
+		response.sendRedirect(request.getContextPath() + "/CoffeeList");
 	}
 }

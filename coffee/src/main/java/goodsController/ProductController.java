@@ -15,7 +15,7 @@ import vo.Goods;
 /**
  * Servlet implementation class ProductController
  */
-@WebServlet("/ProductController")
+@WebServlet("/ProductList")
 public class ProductController extends HttpServlet {
 
 	private GoodsService goodsService;

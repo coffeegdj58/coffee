@@ -15,7 +15,7 @@ import vo.Customer;
 /**
  * Servlet implementation class HomeController
  */
-@WebServlet("/home")
+@WebServlet("/Home")
 public class HomeController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

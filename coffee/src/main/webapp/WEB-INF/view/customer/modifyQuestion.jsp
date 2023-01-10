@@ -7,7 +7,7 @@
 <title>문의 수정하기</title>
 </head>
 <body>
-	<form action="${pageContext.request.contextPath}/question/modifyQuestion" method="post">
+	<form action="${pageContext.request.contextPath}/ModifyQuestion" method="post">
 		<table>
 			<tr>
 				<td>주문 번호</td>

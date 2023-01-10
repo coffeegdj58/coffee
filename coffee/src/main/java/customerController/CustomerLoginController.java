@@ -15,7 +15,7 @@ import vo.Customer;
 /**
  * Servlet implementation class CustomerLoginController
  */
-@WebServlet("/CustomerLoginController")
+@WebServlet("/CustomerLogin")
 public class CustomerLoginController extends HttpServlet {
 	private CustomerService customerservice;
 	
@@ -23,7 +23,7 @@ public class CustomerLoginController extends HttpServlet {
 		HttpSession session = request.getSession();
 		Customer loginMember = (Customer)session.getAttribute("loginMember");
 		if(loginMember != null) {
-			response.sendRedirect(request.getContextPath()+"/HomeController");
+			response.sendRedirect(request.getContextPath()+"/Home");
 			return;
 		}
 		
@@ -45,10 +45,10 @@ public class CustomerLoginController extends HttpServlet {
 		
 		if(c.getCustomerId() != null) {
 			request.getSession().setAttribute("loginMember", c);
-			response.sendRedirect(request.getContextPath()+"/HomeController");
+			response.sendRedirect(request.getContextPath()+"/Home");
 		}else {
 						
-			response.sendRedirect(request.getContextPath()+"/CustomerLoginController");
+			response.sendRedirect(request.getContextPath()+"/CustomerLogin");
 		}
 	}
 

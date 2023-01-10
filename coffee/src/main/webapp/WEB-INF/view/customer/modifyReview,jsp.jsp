@@ -6,7 +6,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="${pageContext.request.contextPath}/review/addReview" method="post">
+	<form action="${pageContext.request.contextPath}/AddReview" method="post">
 		<table>
 			<tr>
 				<td>주문번호</td>

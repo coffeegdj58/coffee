@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import service.ReviewService;
 import vo.Review;
 
-@WebServlet("/review/addReview")
+@WebServlet("AddReview")
 public class AddReviewController extends HttpServlet {
 	private ReviewService reviewService;
 	//리뷰 추가 폼
@@ -46,13 +46,13 @@ public class AddReviewController extends HttpServlet {
 		int result=reviewService.insertReviewByCustomer(review);
 		if(result==1) {
 			System.out.println("리뷰 작성 성공");
-			response.sendRedirect(request.getContextPath()+"/customer/?");
+			response.sendRedirect(request.getContextPath()+"/CustomerPage");
 		}else {//실패
 			System.out.println("리뷰 작성 실패");
 			//서블릿에서 알림창 띄우기
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter writer = response.getWriter();
-			writer.println("<script>alert('리뷰 작성 실패!'); location.href='"+request.getContextPath()+"/review/addReview"+"';</script>"); 
+			writer.println("<script>alert('리뷰 작성 실패!'); location.href='"+request.getContextPath()+"/AddReview"+"';</script>"); 
 			writer.close();
 		}
 	}

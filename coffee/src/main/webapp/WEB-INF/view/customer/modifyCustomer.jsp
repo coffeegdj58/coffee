@@ -27,12 +27,12 @@
 		</tr>
 		<tr>
 			<td>배송지</td>
-			<td>배송지는 <a href="${pageContext.request.contextPath}/AddressCustomerController">배송지관리</a>에서 수정, 등록합니다 </td>
+			<td>배송지는 <a href="${pageContext.request.contextPath}/AddressCustomer">배송지관리</a>에서 수정, 등록합니다 </td>
 		</tr>
 		<tr>
 			<td>비밀번호 변경</td>
 			<td>
-				<form action="${pageContext.request.contextPath}/ModifyCustomerController" method="post">
+				<form action="${pageContext.request.contextPath}/ModifyCustomer" method="post">
 						<table>
 							<tr>
 								<td>현재비밀번호</td>
@@ -55,6 +55,6 @@
 			</td>
 		</tr>
 	</table>
-	<a href="${pageContext.request.contextPath}/DeleteCustomerController">회원탈퇴</a>
+	<a href="${pageContext.request.contextPath}/DeleteCustomer">회원탈퇴</a>
 </body>
 </html>

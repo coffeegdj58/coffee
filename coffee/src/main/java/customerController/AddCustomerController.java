@@ -16,14 +16,14 @@ import vo.Customer;
 /**
  * Servlet implementation class AddCustomerController
  */
-@WebServlet("/AddCustomerController")
+@WebServlet("/AddCustomer")
 public class AddCustomerController extends HttpServlet {
 	private CustomerService customerService;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		Customer loginMember = (Customer)session.getAttribute("loginMember");
 		if(loginMember != null) {
-			response.sendRedirect(request.getContextPath()+"/HomeController");
+			response.sendRedirect(request.getContextPath()+"/Home");
 			return;
 		}
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/view/customer/addCustomer.jsp");
@@ -61,9 +61,9 @@ public class AddCustomerController extends HttpServlet {
 			
 			System.out.println("회원가입성공"+row);
 			
-			response.sendRedirect(request.getContextPath()+"/CustomerLoginController");
+			response.sendRedirect(request.getContextPath()+"/CustomerLogin");
 		}else {
-			response.sendRedirect(request.getContextPath()+"/AddCustomerController");
+			response.sendRedirect(request.getContextPath()+"/AddCustomer");
 		}
 		
 		
