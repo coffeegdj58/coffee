@@ -44,7 +44,7 @@ public class LoginEmpController extends HttpServlet {
 			writer.close();
 		}else {
 			session.setAttribute("loginEmp", resultEmp);
-			response.sendRedirect(request.getContextPath()+"/home");
+			response.sendRedirect(request.getContextPath()+"/Home");
 			return;
 		}
 		
