@@ -20,6 +20,7 @@
 			<ul>
 				<li><a class="nav-link scrollto" href="${pageContext.request.contextPath}/EmpPage">사원관리</a>
 				<li><a class="nav-link scrollto" href="${pageContext.request.contextPath}/CoffeeList">커피</a>
+				<li><a class="nav-link scrollto" href="${pageContext.request.contextPath}/QuestionListByEmp">문의사항</a>
 				<li><a class="nav-link scrollto" href="${pageContext.request.contextPath}/Logout">logOut</a></li>
 				
 			</ul>

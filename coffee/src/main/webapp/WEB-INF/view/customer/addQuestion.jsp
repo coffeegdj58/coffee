@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +11,17 @@
 		<table>
 			<tr>
 				<td>주문 번호</td>
-				<td><input type="text" name="orderCode"></td>
+				<td>
+					<select name="orderCode">
+						<c:forEach var="Q" items="${Qlist}">
+							<option value="${Q.orderCode}"> 
+								${Q.orderState}
+								${Q.goodsName}
+								${Q.goodsPrice}
+							</option>
+						</c:forEach>
+					</select>
+				</td>
 			</tr>
 			<tr>
 				<td>카테고리</td>
@@ -31,7 +41,7 @@
 			</tr>
 			<tr>
 				<td>작성자</td>
-				<td><input type="text" name="customerId" value="" readonly="readonly"></td>
+				<td><input type="text" name="customerId" value="${customerId}" readonly="readonly"></td>
 			</tr>
 		</table>
 		<button type="submit">추가</button>

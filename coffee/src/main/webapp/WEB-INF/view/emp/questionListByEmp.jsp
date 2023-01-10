@@ -26,11 +26,11 @@
 			<tr>
 				<td>${q.category}</td>
 				<td>
-					<a href="${pageContext.request.contextPath}/QuestionOne?questionCode=${question_code}">
-					${q.question_code}</a>
+					<a href="${pageContext.request.contextPath}/QuestionOne?questionCode=${q.questionCode}">
+					${q.questionCode}</a>
 				</td>
-				<td>${q.customer_id}</td>
-				<td>${q.order_code}</td>
+				<td>${q.customerId}</td>
+				<td>${q.orderCode}</td>
 				<!-- 답변 달기 전이면 빨간색으로 글씨 표시.. -->
 				<td>${q.flag}</td>
 			</tr>

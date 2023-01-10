@@ -6,8 +6,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import service.QuestionService;
+import vo.Customer;
 import vo.Question;
 
 
@@ -15,6 +17,13 @@ import vo.Question;
 public class ModifyQuestionController extends HttpServlet {
 	private QuestionService questionService;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//로그인 한 사람만 접근 가능
+		HttpSession session=request.getSession();
+		Customer loginMember=(Customer)session.getAttribute("loginMember");
+		if (session.getAttribute("loginMember") == null) { 
+			response.sendRedirect(request.getContextPath() + "/CustomerLogin");
+			return;
+		}
 		//questionCode받아오기
 		int	questionCode=Integer.parseInt(request.getParameter("questionCode"));
 		

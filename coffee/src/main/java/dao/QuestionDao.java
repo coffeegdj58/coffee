@@ -72,7 +72,7 @@ public class QuestionDao {
 		
 		int count = 0;
 		
-		String sql = "SELECT COUNT(*) FROM help";
+		String sql = "SELECT COUNT(*) FROM question";
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		ResultSet rs= stmt.executeQuery();
 		if(rs.next()) {

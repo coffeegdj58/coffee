@@ -5,18 +5,25 @@
 <head>
 <meta charset="UTF-8">
 <title>문의 수정하기</title>
+<script>
+$('#category').blur(function(){
+	if ($('#category').val() == '') {
+		alert("카테고리를 선택하세요");
+	}
+});
+</script>
 </head>
 <body>
 	<form action="${pageContext.request.contextPath}/ModifyQuestion" method="post">
 		<table>
 			<tr>
 				<td>주문 번호</td>
-				<td><input type="text" name="orderCode" value="${q.order_code}"></td>
+				<td><input type="text" name="orderCode" value="${q.orderCode}"></td>
 			</tr>
 			<tr>
 				<td>카테고리</td>
 				<td>
-					<select name="category">
+					<select name="category" id="category">
 					    <option value="">선택</option>
 					    <option value="배송">배송</option>
 					    <option value="반품">반품</option>
@@ -27,14 +34,15 @@
 			</tr>
 			<tr>
 				<td>내용</td>
-				<td><textarea cols="30" rows="10" name="questionMemo"><${q.question_memo}</textarea></td>
+				<td><textarea cols="30" rows="10" name="questionMemo">${q.questionMemo}</textarea></td>
 			</tr>
 			<tr>
 				<td>작성자</td>
-				<td><input type="text" name="customerId" value="${q.customer_id}" readonly="readonly"></td>
+				<td><input type="text" name="customerId" value="${q.customerId}" readonly="readonly"></td>
 			</tr>
 		</table>
 		<button type="submit">추가</button>
 	</form>
+
 </body>
 </html>

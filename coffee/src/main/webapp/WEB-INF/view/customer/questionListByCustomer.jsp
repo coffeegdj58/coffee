@@ -10,8 +10,8 @@
 	<a href="${pageContext.request.contextPath}/AddQuestion">문의하기</a>
 	<table>
 		<tr>
+			<th>번호</th>
 			<th>카테고리</th>
-			<th>질문 코드</th>
 			<th>주문자 아이디</th>
 			<th>주문번호</th>
 			<!-- 답변이 안달렸으면 보이게 달리면 안보이게 -->
@@ -21,18 +21,18 @@
 		</tr>
 		<c:forEach var="q" items="${list}">
 			<tr>
-				<td>${q.category}</td>
 				<td>
-					<a href="${pageContext.request.contextPath}/question/questionOne?questionCode=${question_code}">
-					${q.question_code}</a>
+					<a href="${pageContext.request.contextPath}/QuestionOne?questionCode=${q.questionCode}">
+					${q.questionCode}</a>
 				</td>
-				<td>${q.customer_id}</td>
-				<td>${q.order_code}</td>
+				<td>${q.category}</td>
+				<td>${q.customerId}</td>
+				<td>${q.orderCode}</td>
 				<!-- 답변이 안달렸으면 보이게 달리면 안보이게 -->
 				<c:if test="${q.flag eq 'N'}">
 					<td>
-						<a href="${pageContext.request.contextPath}/ModifyQuestion?questionCode=${question_code}">수정</a> /
-						<a href="${pageContext.request.contextPath}/RemoveQuestion?questionCode=${question_code}">삭제</a> 
+						<a href="${pageContext.request.contextPath}/ModifyQuestion?questionCode=${q.questionCode}">수정</a> /
+						<a href="${pageContext.request.contextPath}/RemoveQuestion?questionCode=${q.questionCode}">삭제</a> 
 					</td>
 				</c:if>
 			</tr>

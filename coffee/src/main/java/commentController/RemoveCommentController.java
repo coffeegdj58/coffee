@@ -15,7 +15,7 @@ import service.QuestionService;
 @WebServlet("/RemoveComment")
 public class RemoveCommentController extends HttpServlet {
 	private CommentService commentService;
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//로그인 한 사람만 접근 가능+ 관리자
 		//commentCode받아오기
 		int commentCode=Integer.parseInt(request.getParameter("commentCode"));

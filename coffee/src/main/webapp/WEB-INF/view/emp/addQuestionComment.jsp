@@ -7,22 +7,23 @@
 </head>
 <body>
 	<div>
-		문의 번호: ${q.question_code}
+		문의 번호: ${q.questionCode}
 	</div>
 	<div>
 		카테고리: ${q.category}
 	</div>
 	<div>
-		주문 번호: ${q.order_code}
+		주문 번호: ${q.orderCode}
 	</div>
 	<div>
-		문의내용: ${q.question_memo}
+		문의내용: ${q.questionMemo}
 	</div>
 	<div>
-		주문자 아이디: ${q.customer_id}
+		주문자 아이디: ${q.customerId}
 	</div>
 
 	<form action="${pageContext.request.contextPath}/AddComment" method="post">
+		<input type="hidden" value="${q.questionCode}" name="questionCode">
 		<div>
 			답변 내용:
 			<textarea rows="10" cols="30" name="commentMemo"></textarea>

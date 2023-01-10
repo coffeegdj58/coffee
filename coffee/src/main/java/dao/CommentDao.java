@@ -25,7 +25,7 @@ public class CommentDao {
 	//addComment
 	public int addComment(Connection conn,Comment comment) throws Exception {
 		int row=0;
-		String sql = "INSERT question_comment(question_code questionCode,comment_memo commentMemo,createdate) VALUES (?,?,NOW());";
+		String sql = "INSERT INTO question_comment(question_code, comment_memo, createdate) VALUES (?,?,NOW());";
 		PreparedStatement stmt=conn.prepareStatement(sql);
 		stmt.setInt(1, comment.getQuestionCode());
 		stmt.setString(2, comment.getCommentMemo());
