@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import service.ReviewService;
 import vo.Review;
 
-@WebServlet("AddReview")
+@WebServlet("/AddReview")
 public class AddReviewController extends HttpServlet {
 	private ReviewService reviewService;
 	//리뷰 추가 폼
