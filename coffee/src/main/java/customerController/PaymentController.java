@@ -72,7 +72,7 @@ public class PaymentController extends HttpServlet {
 			customerService.usePointInsertInHistory(loginMember.getCustomerId(), usePoint);
 			
 			//포인트 적립
-			customerService.insertPointInCustomer(loginMember.getCustomerId(), orderPrice);
+			customerService.insertPointInCustomer(loginMember, orderPrice);
 			customerService.insertPointInHistory(loginMember.getCustomerId(), orderPrice);
 			
 			//판매량 증가
