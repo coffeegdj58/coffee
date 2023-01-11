@@ -15,7 +15,7 @@
 			</tr>
 			<tr>
 				<td>상품번호</td>
-				<td><input type="text" name="goodsCode"></td>
+				<td><input type="text" name="goodsCode" value="${goodsCode}"></td>
 			</tr>
 			<tr>
 				<td>내용</td>
@@ -27,7 +27,16 @@
 			</tr>
 			<tr>
 				<td>별점</td>
-				<td><input type="number" max="10" min="0" name="rating"></td>
+				<td>
+					<select  name="rating">
+						<option value="5">★★★★★</option>
+						<option value="4">★★★★☆</option>
+						<option value="3">★★★☆☆</option>
+						<option value="2">★★☆☆☆</option>
+						<option value="1">★☆☆☆☆</option>
+						<option value="0">☆☆☆☆☆</option>
+					</select>
+				</td>
 			</tr>
 		</table>
 		<button type="submit">리뷰작성</button>

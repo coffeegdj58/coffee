@@ -5,6 +5,9 @@
 	<nav id="navbar" class="navbar">
 		<c:if test="${loginMember==null || loginEmp==null}">
 			<li><a class="nav-link scrollto active" href="${pageContext.request.contextPath}/Home">Home</a></li>
+			<li><a class="nav-link scrollto" href="${pageContext.request.contextPath}/CoffeeList">커피</a></li>
+			<li><a class="nav-link scrollto" href="${pageContext.request.contextPath}/BakeryList">베이커리</a></li>
+			<li><a class="nav-link scrollto" href="${pageContext.request.contextPath}/ProductList">상품</a></li>
 			<li><a class="nav-link scrollto" href="${pageContext.request.contextPath}/CustomerLogin">로그인하기</a></li>
 			<!-- 나중에 위치 수정예정 -->
 			<li><a class="nav-link scrollto" href="${pageContext.request.contextPath}/LoginEmp">관리자 로그인</a></li>
@@ -18,9 +21,8 @@
 		</c:if>
 		<c:if test="${loginEmp!=null}">
 			<ul>
-				<li><a class="nav-link scrollto" href="${pageContext.request.contextPath}/EmpPage">사원관리</a>
-				<li><a class="nav-link scrollto" href="${pageContext.request.contextPath}/CoffeeList">커피</a>
-				<li><a class="nav-link scrollto" href="${pageContext.request.contextPath}/QuestionListByEmp">문의사항</a>
+				<li><a class="nav-link scrollto" href="${pageContext.request.contextPath}/EmpPage">사원관리</a></li>
+				<li><a class="nav-link scrollto" href="${pageContext.request.contextPath}/QuestionListByEmp">문의사항</a></li>
 				<li><a class="nav-link scrollto" href="${pageContext.request.contextPath}/Logout">logOut</a></li>
 				
 			</ul>

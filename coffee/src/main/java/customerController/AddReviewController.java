@@ -31,7 +31,9 @@ public class AddReviewController extends HttpServlet {
 		}
 		
 		int orderCode=Integer.parseInt(request.getParameter("orderCode"));
+		int goodsCode=Integer.parseInt(request.getParameter("goodsCode"));
 		request.setAttribute("orderCode", orderCode);
+		request.setAttribute("goodsCode", goodsCode);
 		
 		request.getRequestDispatcher("/WEB-INF/view/customer/addReview.jsp").forward(request, response);
 

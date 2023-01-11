@@ -31,7 +31,7 @@
 			<td>${o.orderState}</td>
 			<td>${o.goodsName}</td>
 			<td>${o.goodsPrice}</td>
-			<td><a href="${pageContext.request.contextPath}/AddReview?orderCode=${o.orderCode}">리뷰작성하기</a></td>
+			<td><a href="${pageContext.request.contextPath}/AddReview?orderCode=${o.orderCode}&goodsCode=${o.goodsCode}">리뷰작성하기</a></td>
 			<c:if test="${o.orderState.equals('결제')}">
 				<td><a href="${pageContext.request.contextPath}/ModifyOrder?orderCode=${o.orderCode}">취소하기</a></td>
 			</c:if>
@@ -51,15 +51,16 @@
 			<td>주문번호</td>
 			<td>리뷰내용</td>
 			<td>별점</td>
-			<td>수정/삭제</td>
+			<td>삭제</td>
 		</tr>
 		<c:forEach var="R" items="${Rlist}">
 			<tr>
 				<td>${R.orderCode}</td>
 				<td>${R.reviewMemo}</td>
-				<td>${R.rating}</td>
 				<td>
-					<a href="${pageContext.request.contextPath}/ModifyReview?orderCode=${R.orderCode}">수정</a>
+					${R.rating}
+				</td>
+				<td>
 					<a href="${pageContext.request.contextPath}/RemoveReview?orderCode=${R.orderCode}">삭제</a>
 				</td>
 			</tr>

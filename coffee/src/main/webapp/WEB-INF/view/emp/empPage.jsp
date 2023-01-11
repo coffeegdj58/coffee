@@ -16,7 +16,7 @@
 			<th>관리자 등급</th>
 			<th>입사일</th>
 			<!-- 최고 관리자만 사용 가능하게 끔 -->
-			<c:if test="${authCode==3}">
+			<c:if test="${loginEmp.authCode==3}">
 				<th>수정</th>
 				<th>삭제</th>
 			</c:if>
@@ -29,7 +29,7 @@
 				<td>${e.authCode}</td>
 				<td>${e.createdate}</td>
 				<!-- 최고 관리자만 사용 가능하게 끔 -->
-				<c:if test="${authCode==3}">
+				<c:if test="${loginEmp.authCode==3}">
 					<td><a href="${pageContext.request.contextPath}/ModifyEmp?empCode=${e.empCode}">수정 </a></td>
 					<td><a href="${pageContext.request.contextPath}/RemoveEmp?empCode=${e.empCode}">삭제 </a></td>
 				</c:if>
