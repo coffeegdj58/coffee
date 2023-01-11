@@ -52,7 +52,7 @@
                   <li><a href="${pageContext.request.contextPath}/CoffeeList" class="nav-link">Coffee</a></li>
                   <li><a href="${pageContext.request.contextPath}/BakeryList" class="nav-link">Bakery</a></li>
                   <li><a href="${pageContext.request.contextPath}/ProductList" class="nav-link">Product</a></li>
-                  <li><a href="${pageContext.request.contextPath}/NoticeList" class="nav-link">Notice</a></li>
+                  <li><a href="${pageContext.request.contextPath}/NoticeList">Notice</a></li>
                   <li><a href="${pageContext.request.contextPath}/QuestionListByEmp" class="nav-link">Question</a></li>
                 </ul>
               </nav>

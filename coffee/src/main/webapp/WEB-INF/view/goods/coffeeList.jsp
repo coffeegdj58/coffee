@@ -26,7 +26,7 @@
 		<!-- include의 주소에는 context를 사용하지 않는다 편한 액션 중하나 -->
 	</div>
 	
-		<div> <a href="${pageContext.request.contextPath}/AddGoods">추가하기</a> </div>
+	<div> <a href="${pageContext.request.contextPath}/AddGoods">추가하기</a> </div>
 	<h3>에스프레소</h3>
 	<table>
 		<tr>
