@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import service.GoodsService;
+import vo.Category;
 import vo.Goods;
 
 /**
@@ -27,6 +28,9 @@ public class BakeryController extends HttpServlet {
 
 		ArrayList<Goods> list4= goodsService.getGoodsList(7);
 		ArrayList<Goods> list3= goodsService.getGoodsList(11);
+		ArrayList<Category> list= goodsService.selectCategory();
+		
+		request.setAttribute("categoryList", list);
 		
 		request.setAttribute("bread", list1);
 		request.setAttribute("cake", list2);
