@@ -208,7 +208,7 @@ public class CustomerService {
 	
 	}
 	
-	public int insertPointInCustomer(String customerId, int sum) {
+	public int insertPointInCustomer(Customer cust, int sum) {
 		int result =0;
 		Connection conn =null;
 		try {
@@ -216,7 +216,7 @@ public class CustomerService {
 			conn =db.getConnection();
 			customerDao =new CustomerDao();
 			
-			result = customerDao.insertPointInCustomer(customerId, conn, sum);
+			result = customerDao.insertPointInCustomer(cust, conn, sum);
 			
 			conn.commit(); // DBUtil.class에서 conn.setAutoCommit(false);
 		} catch (Exception e) {

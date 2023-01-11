@@ -164,14 +164,14 @@ public class CustomerDao {
 	}
 	
 	//포인트 적립시 실행 쿼리
-	public int insertPointInCustomer(String customerId, Connection conn, int sum) throws Exception{ 
+	public int insertPointInCustomer(Customer cust, Connection conn, int sum) throws Exception{ 
 		int result =0;
 		
 		String sql= "UPDATE customer SET point= ? WHERE customer_id=?";
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		
-		stmt.setInt(1, (int)Math.floor(sum/100*3));
-		stmt.setString(2, customerId);
+		stmt.setInt(1, cust.getPoint()+(int)Math.floor(sum/100*3));
+		stmt.setString(2, cust.getCustomerId());
 		result = stmt.executeUpdate();
 		stmt.close();
 		

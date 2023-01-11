@@ -152,7 +152,7 @@ public class OrderDao {
 	public ArrayList<HashMap<String, Object>> selectOrderListById(String customerId, Connection conn) throws Exception{
 		ArrayList<HashMap<String, Object>> list =new ArrayList<HashMap<String, Object>>();
 		
-		String sql = "SELECT c.category_name categoryName, c.category_kind categoryKind, o.order_code orderCode, o.order_state orderState, g.goods_name goodsName, g.goods_price goodsPrice "
+		String sql = "SELECT c.category_name categoryName, o.goods_code goodsCode, c.category_kind categoryKind, o.order_code orderCode, o.order_state orderState, g.goods_name goodsName, g.goods_price goodsPrice "
 				+ "FROM orders o INNER JOIN goods g ON g.goods_code= o.goods_code INNER JOIN category c ON g.category_code= c.category_code"
 				+ " WHERE o.customer_id = ? ORDER BY o.createdate";
 		PreparedStatement stmt = conn.prepareStatement(sql);
@@ -169,7 +169,7 @@ public class OrderDao {
 			o.put("orderState", rs.getString("orderState"));
 			o.put("goodsName", rs.getString("goodsName"));
 			o.put("goodsPrice", rs.getInt("goodsPrice"));
-			
+			o.put("goodsCode", rs.getInt("goodsCode"));
 			list.add(o);
 		}
 		
