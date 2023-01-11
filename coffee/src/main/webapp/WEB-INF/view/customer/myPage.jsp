@@ -45,6 +45,27 @@
 		
 		</c:forEach>
 	</table>
+	
+	<table>
+		<tr>
+			<td>주문번호</td>
+			<td>리뷰내용</td>
+			<td>별점</td>
+			<td>수정/삭제</td>
+		</tr>
+		<c:forEach var="R" items="${Rlist}">
+			<tr>
+				<td>${R.orderCode}</td>
+				<td>${R.reviewMemo}</td>
+				<td>${R.rating}</td>
+				<td>
+					<a href="${pageContext.request.contextPath}/ModifyReview?orderCode=${R.orderCode}">수정</a>
+					<a href="${pageContext.request.contextPath}/RemoveReview?orderCode=${R.orderCode}">삭제</a>
+				</td>
+			</tr>
+		</c:forEach>
+	</table>
+	
 	<a href="${pageContext.request.contextPath}/CartList">장바구니</a>
 	<a href="${pageContext.request.contextPath}/ModifyCustomer">회원정보수정</a><!-- check -->
 	<a href="${pageContext.request.contextPath}/PointPage">포인트</a><!--check -->

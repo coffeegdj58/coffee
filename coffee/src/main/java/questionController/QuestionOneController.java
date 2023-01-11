@@ -24,11 +24,9 @@ public class QuestionOneController extends HttpServlet {
 		//답변 추가는 관리자 로그인한 사람만 가능하게 할 것
 		HttpSession session=request.getSession();
 		Customer loginMember= (Customer)session.getAttribute("loginMember");
+		
 		Emp loginEmp=(Emp)session.getAttribute("loginEmp");
-		if (session.getAttribute("loginEmp") == null) { 
-			response.sendRedirect(request.getContextPath() + "/Home");
-			return;
-		}
+		
 		request.setAttribute("loginEmp", loginEmp);
 		
 		//questionCode받아오기

@@ -13,7 +13,9 @@ import javax.servlet.http.HttpSession;
 
 import service.CustomerService;
 import service.OrderService;
+import service.ReviewService;
 import vo.Customer;
+import vo.Review;
 
 /**
  * Servlet implementation class CustomerPageController
@@ -22,7 +24,7 @@ import vo.Customer;
 public class CustomerPageController extends HttpServlet {
 	private OrderService orderService;
 	private CustomerService customerService;
-	
+	private ReviewService reviewService;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		Customer loginMember = (Customer)session.getAttribute("loginMember");
@@ -36,7 +38,12 @@ public class CustomerPageController extends HttpServlet {
 		
 		request.setAttribute("orderList", list);
 		
+		//
+		String customerId=loginMember.getCustomerId();
+		this.reviewService= new ReviewService();
+		ArrayList<Review> Rlist=reviewService.selectReviewById(customerId);
 		
+		request.setAttribute("Rlist", Rlist);
 		
 		request.getRequestDispatcher("/WEB-INF/view/customer/myPage.jsp").forward(request, response);
 	}

@@ -11,7 +11,7 @@ public class CommentService {
 	private CommentDao commentDao;
 	
 	//removeComment
-	public int removeComment(int commentCode) {
+	public int removeComment(int commentCode,int questionCode) {
 		Connection conn=null;
 		Dbutil dbUtil= new Dbutil();
 		this.commentDao= new CommentDao();
@@ -19,6 +19,9 @@ public class CommentService {
 		try {
 			conn=dbUtil.getConnection();
 			row=commentDao.removeComment(conn, commentCode);
+			if(row==1) {//답변을 삭제한다면 문의 사항에 flag 값을 N으로 변경하기 위해
+				commentDao.updateFlagremove(conn, questionCode);
+			}
 			conn.commit();
 		}catch(Exception e) {
 			try {
@@ -46,6 +49,9 @@ public class CommentService {
 		try {
 			conn=dbUtil.getConnection();
 			row=commentDao.addComment(conn, comment);
+			if(row==1) {//답변이 추가 됐다면 문의 사항에 flag 값을 Y으로 변경하기 위해
+				commentDao.updateFlagadd(conn, comment);
+			}
 			conn.commit();
 		}catch(Exception e) {
 			try {

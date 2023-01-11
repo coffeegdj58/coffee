@@ -6,7 +6,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="${pageContext.request.contextPath}/AddReview" method="post">
+	<form action="${pageContext.request.contextPath}/ModifyReview" method="post">
 		<table>
 			<tr>
 				<td>주문번호</td>
@@ -30,5 +30,6 @@
 			</tr>
 		</table>
 		<button type="submit">수정하기</button>
+	</form>
 </body>
 </html>

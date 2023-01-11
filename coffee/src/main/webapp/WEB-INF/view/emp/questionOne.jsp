@@ -22,6 +22,7 @@
 	<div>
 		주문자 아이디: ${q.customerId}
 	</div>
+	
 	<!-- 답변이 달리기 전이고 관리자만 보이게 해야함 -->
 	<c:if test="${q.flag eq 'N' && loginEmp!=null}">
 		<a href="${pageContext.request.contextPath}/AddComment?questionCode=${q.questionCode}">답변 추가</a>
@@ -35,8 +36,8 @@
 		 날짜: ${c.createdate}
 		</div>
 	</c:if>
-	<c:if test="${loginEmp!=null}">
-		<a href="${pageContext.request.contextPath}/RemoveComment?commentCode=${c.commentCode}">답변 삭제</a>
+	<c:if test="${q.flag eq 'Y' && loginEmp!=null}">
+		<a href="${pageContext.request.contextPath}/RemoveComment?commentCode=${c.commentCode}&questionCode=${q.questionCode}">답변 삭제</a>
 	</c:if>
 </body>
 </html>
