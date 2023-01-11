@@ -2,6 +2,7 @@ package goodsController;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.ServletException;
@@ -15,6 +16,7 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import service.GoodsService;
+import vo.Category;
 import vo.Emp;
 import vo.Goods;
 import vo.GoodsImg;
@@ -41,6 +43,12 @@ public class ModifyGoodsController extends HttpServlet {
     	
     	// 서비스 호출
     	goodsService = new GoodsService();
+    	ArrayList<Category> list = goodsService.selectCategory();
+		request.setAttribute("categorylist", list);
+    	
+    	Goods m = goodsService.getGoodsOne(goodsCode);
+    	
+    	request.setAttribute("m", m);
     	
     	
     	request.getRequestDispatcher("/WEB-INF/view/goods/modifyGoods.jsp").forward(request, response);
@@ -53,10 +61,10 @@ public class ModifyGoodsController extends HttpServlet {
     		response.sendRedirect(request.getContextPath() + "/LoginEmp");
     		return;
     	}
-    	
+    	int result=0;
     	// 피라미터 수집
     	request.setCharacterEncoding("utf-8");
-    	String dir = request.getServletContext().getRealPath("/upload");
+    	String dir = request.getServletContext().getRealPath("/image");
     	int maxFileSize = 1024 * 1024 * 100; // 100Mbyte
     	DefaultFileRenamePolicy fp = new DefaultFileRenamePolicy();
     	MultipartRequest mreq = new MultipartRequest(request, dir, maxFileSize, "utf-8", fp);
@@ -67,12 +75,14 @@ public class ModifyGoodsController extends HttpServlet {
     	String soldout = mreq.getParameter("soldout");
     	Emp loginEmp = (Emp)session.getAttribute("loginEmp");
     	String empId = loginEmp.getEmpId();
-    	int hit = Integer.parseInt(mreq.getParameter("hit"));
+    	String goodsContent= mreq.getParameter("goodsContent");
+    	String goodsInfo= mreq.getParameter("goodsInfo");
+    	int categoryCode= Integer.parseInt(mreq.getParameter("categoryCode"));
     	String filename = mreq.getFilesystemName("filename"); // 저장된 이미지 파일 이름
-    	String originName = mreq.getOriginalFileName("filename"); // 이미지 원본 이름
+    	
     	String contentType = mreq.getContentType("filename"); // 이미지 파일 검사
     	
-    	if(contentType.equals("image/jpeg") || contentType.equals("image/png")) {
+    	if(contentType.equals("image/jpeg")) {
     		// goods vo
     		Goods goods = new Goods();
     		goods.setGoodsCode(goodsCode);
@@ -80,25 +90,27 @@ public class ModifyGoodsController extends HttpServlet {
     		goods.setGoodsPrice(goodsPrice);
     		goods.setSoldout(soldout);
     		goods.setEmpId(empId);
-    		goods.setHit(hit);
-    		
-    		// goodsImg vo
-    		GoodsImg goodsImg = new GoodsImg();
-    		goodsImg.setGoodsCode(goodsCode);
-    		goodsImg.setFilename(filename);
-    		goodsImg.setOriginName(originName);
-    		goodsImg.setContentType(contentType);
+    		goods.setGoodsContent(goodsContent);
+    		goods.setGoodsInfo(goodsInfo);
+    		goods.setCategoryCode(categoryCode);
     		
     		// service 호출
     		GoodsService goodsService = new GoodsService();
     		
-    	
+    		File f= new File(dir+"/"+filename);
+    		File oldf= new File(dir+"/"+goodsName+".jpg");
+    		System.out.println(f);
+    		System.out.println(oldf);
     		
-    		// 수정 완료시 이전 이미지 파일 삭제
-    		File f = new File(dir + "\\" + mreq.getParameter("oldFilename"));
-    		if(f.exists()) {
-    			f.delete();
+    		// 수정 완료시 이전 이미지 파일 삭제		
+    		if(oldf.exists()) {
+    			oldf.delete();
+    			System.out.println(oldf);
     		}
+    		
+    		f.renameTo(new File(dir+"/"+goodsName+".jpg"));
+    		
+    		result = goodsService.modifyGoods(goods, dir);
     	} else {
     		System.out.print("*.jpg, *.png 파일만 업로드 가능");
     		File f = new File(dir + "\\" + mreq.getFilesystemName("filename"));
@@ -106,6 +118,6 @@ public class ModifyGoodsController extends HttpServlet {
     			f.delete();
     		}
     	}
-    	response.sendRedirect(request.getContextPath() + "/goodsList");
+    	response.sendRedirect(request.getContextPath() + "/GoodsOne?goodsCode="+goodsCode+"&result="+result);
     }
 }

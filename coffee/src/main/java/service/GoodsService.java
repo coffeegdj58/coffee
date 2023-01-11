@@ -97,7 +97,7 @@ public class GoodsService {
 			try {
 				conn.rollback();
 				
-				File file = new File(dir + "\\" + goods.getGoodsName());
+				File file = new File(dir + "/" + goods.getGoodsName()+".jpg");
 				if(file.exists()) {
 					file.delete();
 				}

@@ -47,8 +47,8 @@
 		
 		
 		<c:if test = "${not empty loginEmp}">
-			<a href="${pageContext.request.contextPath}/modifyGoods?goodsCode=${g.goodsCode}">수정</a>
-			<a href="${pageContext.request.contextPath}/removeGoods">삭제</a>
+			<a href="${pageContext.request.contextPath}/ModifyGoods?goodsCode=${g.goodsCode}">수정</a>
+			<a href="${pageContext.request.contextPath}/RemoveGoods?goodsCode=${g.goodsCode}">삭제</a>
 		</c:if>
 	</body>
 </html>

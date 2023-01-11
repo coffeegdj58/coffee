@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import service.GoodsService;
+import vo.Goods;
 
 
 @WebServlet("/RemoveGoods")
@@ -27,20 +28,21 @@ public class RemoveGoodsController extends HttpServlet {
     	}
     	
     	// 피라미터 수집
-    	if(request.getParameter("goodsCode") == null || ("").equals(request.getParameter("goodsCode")) || request.getParameter("filename") == null || ("").equals(request.getParameter("filename"))) {
+    	if(request.getParameter("goodsCode") == null || ("").equals(request.getParameter("goodsCode"))) {
     		response.sendRedirect(request.getContextPath() + "/CoffeeList");
     		return;
     	}
     	int goodsCode = Integer.parseInt(request.getParameter("goodsCode"));
-    	String dir = request.getServletContext().getRealPath("/upload");
-    	String filename = request.getParameter("filename");
+    	String dir = request.getServletContext().getRealPath("/image");
+    	
     	
     	// 서비스 호출
     	goodsService = new GoodsService();
     	int result = goodsService.removeGoods(goodsCode);
+    	Goods g = goodsService.getGoodsOne(goodsCode);
     	
     	if(result == 1) {
-    		File f = new File(dir + "\\" + filename);
+    		File f = new File(dir + "/" + g.getGoodsName()+".jpg");
     		if(f.exists()) {
     			f.delete();
     		}
