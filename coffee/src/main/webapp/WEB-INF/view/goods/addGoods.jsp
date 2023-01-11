@@ -24,7 +24,7 @@
 				</c:forEach>
 			</select>
 			</div>
-			<div>goodsContent : <input type="text" name="goodsContent"></div>
+			<div>goodsContent : <textarea rows="3" cols="50" name= "goodsContent"></textarea></div>
 			<div>goodsInfo : <input type="text" name="goodsInfo"></div>		
 			<div>file : <input type="file" name="filename" accept="image/jpeg, image/png"></div>
 			<button type="submit">상품 추가</button>

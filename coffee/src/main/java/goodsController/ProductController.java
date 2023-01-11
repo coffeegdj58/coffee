@@ -35,7 +35,7 @@ public class ProductController extends HttpServlet {
 		request.setAttribute("glass", list3);
 		request.setAttribute("tumbler", list4);
 
-		request.getRequestDispatcher("/WEB-INF/view/goods/CoffeeList.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/view/goods/productList.jsp").forward(request, response);
 		
 	}
 

@@ -26,11 +26,17 @@ public class CoffeeListController extends HttpServlet {
 		ArrayList<Goods> list3= goodsService.getGoodsList(3);
 
 		ArrayList<Goods> list4= goodsService.getGoodsList(4);
+		ArrayList<Goods> list5= goodsService.getGoodsList(13);
+		ArrayList<Goods> list6= goodsService.getGoodsList(14);
+		ArrayList<Goods> list7= goodsService.getGoodsList(12);
 		
 		request.setAttribute("blended", list1);
-		request.setAttribute("coldebrew", list2);
+		request.setAttribute("coldbrew", list2);
 		request.setAttribute("espresso", list3);
 		request.setAttribute("frappuccino", list4);
+		request.setAttribute("fizzio", list5);
+		request.setAttribute("tea", list6);
+		request.setAttribute("drink", list7);
 
 		request.getRequestDispatcher("/WEB-INF/view/goods/coffeeList.jsp").forward(request, response);
 		

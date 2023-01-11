@@ -87,6 +87,6 @@ public class AddGoodsController extends HttpServlet {
 			goods.setGoodsInfo(goodsInfo);
 			goodsService.addGoods(goods, dir, empId);
 		}
-		response.sendRedirect(request.getContextPath() + "/CoffeeList");
+		response.sendRedirect(request.getContextPath() + "/ProductList");
 	}
 }

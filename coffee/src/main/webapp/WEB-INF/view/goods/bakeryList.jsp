@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+      <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -61,10 +62,10 @@
 
 	</table>
 	
-	<h3>프라푸치노</h3>
+	<h3>푸딩</h3>
 	<table>
 		<tr>
-			<c:forEach var="b" items="${frappuccino}" varStatus="s">
+			<c:forEach var="b" items="${pudding}" varStatus="s">
 				<c:if test="${s.index != 0 && s.index % 3 == 0}">
 					</tr><tr>
 				</c:if>
@@ -77,6 +78,6 @@
 		</tr>
 
 	</table>
-	<div> <a href="${pageContext.request.contextPath}/AddGoods">추가하기</a> </div>
+	
 </body>
 </html>
