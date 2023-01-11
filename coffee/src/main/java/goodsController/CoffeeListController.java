@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import service.GoodsService;
+import vo.Category;
 import vo.Goods;
 
 
@@ -29,6 +30,10 @@ public class CoffeeListController extends HttpServlet {
 		ArrayList<Goods> list5= goodsService.getGoodsList(13);
 		ArrayList<Goods> list6= goodsService.getGoodsList(14);
 		ArrayList<Goods> list7= goodsService.getGoodsList(12);
+		
+		ArrayList<Category> list= goodsService.selectCategory();
+		
+		request.setAttribute("categoryList", list);
 		
 		request.setAttribute("blended", list1);
 		request.setAttribute("coldbrew", list2);

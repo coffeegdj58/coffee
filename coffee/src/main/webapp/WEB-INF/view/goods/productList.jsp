@@ -22,13 +22,28 @@
 
 </head>
 <body>
-<div>	
+
+		<div>	
 		<jsp:include page="../nav.jsp"></jsp:include> 
 		<!-- include의 주소에는 context를 사용하지 않는다 편한 액션 중하나 -->
 	</div>
-	<div> <a href="${pageContext.request.contextPath}/AddGoods">추가하기</a> </div>
+	<br><br>
+	<div class="container">
+	<h1>베이커리</h1>
+	<br><br>
+	<h3>카테고리</h3>
+	<br>
+			<h5>
+			<c:forEach var="c" items="${categoryList}">
+				<c:if test="${c.categoryKind=='product'}"><label><span><a style="color:black" href="#${c.categoryName}">${c.categoryName}</a></span> &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></c:if>
+			</c:forEach>
+			</h5>
+			<span id="Mug"></span>
+			<br><br>
+	
 	<h3>머그</h3>
-	<table>
+	<br>
+	<table> 
 		<tr>
 			<c:forEach var="b" items="${mug}" varStatus="s">
 				<c:if test="${s.index != 0 && s.index % 3 == 0}">
@@ -36,14 +51,18 @@
 				</c:if>
 				 
 				<td>
-					<div><a href="${pageContext.request.contextPath}/GoodsOne?goodsCode=${b.goodsCode}"><img src="${pageContext.request.contextPath}/image/${b.goodsName}.jpg" width="200" height="200"></div></a><br>
-					<div>${b.goodsName}</div>
+					<div><a href="${pageContext.request.contextPath}/GoodsOne?goodsCode=${b.goodsCode}"><img src="${pageContext.request.contextPath}/image/${b.goodsName}.jpg" width="400" height="400"></div></a><br>
+					<div style="text-align: center;">${b.goodsName}</div>
+					<br>
 				</td>
 			</c:forEach>
 		</tr>
 
-	</table>	
-	<h3>글라스</h3>
+	</table>
+	<span id="Glass"></span>
+	<br><br>
+	
+		<h3>글라스</h3><br>
 	<table>
 		<tr>
 			<c:forEach var="b" items="${glass}" varStatus="s">
@@ -52,15 +71,18 @@
 				</c:if>
 				 
 				<td>
-					<div><a href="${pageContext.request.contextPath}/GoodsOne?goodsCode=${b.goodsCode}"><img src="${pageContext.request.contextPath}/image/${b.goodsName}.jpg" width="200" height="200"></div></a><br>
-					<div>${b.goodsName}</div>
+					<div><a href="${pageContext.request.contextPath}/GoodsOne?goodsCode=${b.goodsCode}"><img src="${pageContext.request.contextPath}/image/${b.goodsName}.jpg" width="400" height="400"></div></a><br>
+					<div style="text-align: center;" >${b.goodsName}</div>
+					<br>
 				</td>
 			</c:forEach>
 		</tr>
 
 	</table>
+	<span id="Tumbler"></span>
+	<br><br>
 	
-		<h3>텀블러</h3>
+	<h3>텀블러</h3><br>
 	<table>
 		<tr>
 			<c:forEach var="b" items="${tumbler}" varStatus="s">
@@ -69,13 +91,21 @@
 				</c:if>
 				 
 				<td>
-					<div><a href="${pageContext.request.contextPath}/GoodsOne?goodsCode=${b.goodsCode}"><img src="${pageContext.request.contextPath}/image/${b.goodsName}.jpg" width="200" height="200"></div></a><br>
-					<div>${b.goodsName}</div>
+					<div><a href="${pageContext.request.contextPath}/GoodsOne?goodsCode=${b.goodsCode}"><img src="${pageContext.request.contextPath}/image/${b.goodsName}.jpg" width="400" height="400"></div></a><br>
+					<div style="text-align: center;">${b.goodsName}</div>
+					<br>
 				</td>
 			</c:forEach>
 		</tr>
 
-	</table>
-
+	</table>	
+	
+	<c:if test="${loginEmp!=null}">
+	<div> <a href="${pageContext.request.contextPath}/AddGoods">추가하기</a> </div>
+	</c:if>
+	<br><br>
+	</div>
+	<div><img src="${pageContext.request.contextPath}/image/footeer.png" ></div>
+	
 </body>
 </html>

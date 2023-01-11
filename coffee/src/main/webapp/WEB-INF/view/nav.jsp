@@ -19,11 +19,12 @@
             <div class="col-12">
             <div class="float-right">
 
-                <a href="${pageContext.request.contextPath}/CustomerLogin" class="">login</a>
+                <a href="${pageContext.request.contextPath}/CustomerLogin" style="color:black">login</a>
                 <span class="mx-md-2 d-inline-block"></span>
-                <a href="${pageContext.request.contextPath}/Logout" class="">logout</a>
+                <a href="${pageContext.request.contextPath}/Logout" style="color:black">logout</a>
                 <span class="mx-md-2 d-inline-block"></span>
-				<a href="${pageContext.request.contextPath}/CustomerPage">myPage</a>
+				<a href="${pageContext.request.contextPath}/CustomerPage" style="color:black">myPage</a>
+				
               </div>
 
             </div>
@@ -54,6 +55,7 @@
                   <li><a href="${pageContext.request.contextPath}/ProductList" class="nav-link">Product</a></li>
                   <li><a href="${pageContext.request.contextPath}/NoticeList">Notice</a></li>
                   <li><a href="${pageContext.request.contextPath}/QuestionListByEmp" class="nav-link">Question</a></li>
+                  <li><a href="${pageContext.request.contextPath}/CartList" class="nav-link">Cart</a></li>
                 </ul>
               </nav>
 
