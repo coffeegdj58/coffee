@@ -19,6 +19,7 @@
     
     <!-- Style -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/nav/css/style.css">
+
 </head>
 <body>
 <div>	

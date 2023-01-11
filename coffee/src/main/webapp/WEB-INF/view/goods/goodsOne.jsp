@@ -49,7 +49,7 @@
 		<c:if test="${result==1}">
 			<div>장바구니에 담았습니다</div>
 		</c:if>
-		<form action="${pageContext.request.contextPath}/PaymentOne" method="post">
+		<form action="${pageContext.request.contextPath}/Payment2" method="get">
 			<input type="hidden" name= "goodsCode" value="${g.goodsCode}">
 			<select name="cartQuantity">
 				<option value="1">1</option>

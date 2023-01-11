@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,7 +26,7 @@
 		<jsp:include page="../nav.jsp"></jsp:include> 
 		<!-- include의 주소에는 context를 사용하지 않는다 편한 액션 중하나 -->
 </div>
-	<form action="${pageContext.request.contextPath}/PaymentOne" method="post">
+	<form action="${pageContext.request.contextPath}/Payment2" method="post">
 		<fieldset>
 			<legend>구매자정보</legend>
 				<table>
@@ -81,7 +81,7 @@
 					</tr>
 					<tr>
 						<td>배송비</td>
-						<td>2500</td>
+						<td>0</td>
 					</tr>
 					<tr>
 						<td>포인트</td>
@@ -91,10 +91,9 @@
 						<td>결제방법</td>
 						<td>신용카드</td>
 					</tr>
-					<input type="hidden" value="${c.cartPrice*c.cartQuantity}" name="orderPrice">
-					<button type="submit">결제하기</button>
 				</table>
 		</fieldset>
+		<input type="hidden" value="${c.cartPrice*c.cartQuantity}" name="orderPrice">
 		<button type="submit">결제하기</button>
 	</form>
 </body>
