@@ -152,7 +152,7 @@ public class OrderDao {
 	public ArrayList<HashMap<String, Object>> selectOrderListById(String customerId, Connection conn) throws Exception{
 		ArrayList<HashMap<String, Object>> list =new ArrayList<HashMap<String, Object>>();
 		
-		String sql = "SELECT c.category_name categoryName, o.goods_code goodsCode, c.category_kind categoryKind, o.order_code orderCode, o.order_state orderState, g.goods_name goodsName, g.goods_price goodsPrice "
+		String sql = "SELECT o.createdate createdate, o.order_price, o.order_quantity, c.category_name categoryName, o.goods_code goodsCode, c.category_kind categoryKind, o.order_code orderCode, o.order_state orderState, g.goods_name goodsName, g.goods_price goodsPrice "
 				+ "FROM orders o INNER JOIN goods g ON g.goods_code= o.goods_code INNER JOIN category c ON g.category_code= c.category_code"
 				+ " WHERE o.customer_id = ? ORDER BY o.createdate";
 		PreparedStatement stmt = conn.prepareStatement(sql);
@@ -170,6 +170,9 @@ public class OrderDao {
 			o.put("goodsName", rs.getString("goodsName"));
 			o.put("goodsPrice", rs.getInt("goodsPrice"));
 			o.put("goodsCode", rs.getInt("goodsCode"));
+			o.put("createdate", rs.getString("createdate"));
+			o.put("orderPrice", rs.getInt("o.order_price"));
+			o.put("orderQuantity", rs.getInt("o.order_quantity"));
 			list.add(o);
 		}
 		
@@ -335,4 +338,12 @@ public class OrderDao {
 		
 		return result;
 	}
+	
+	public int insertPayment2(Connection conn, Cart cart) {
+		int row=0;
+		
+		
+		return row;
+	}
+	
 }	
