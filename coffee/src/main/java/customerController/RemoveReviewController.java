@@ -23,6 +23,11 @@ public class RemoveReviewController extends HttpServlet {
 	int result=reviewService.deleteReview(orderCode);
 	if(result==1) {
 		System.out.println("리뷰 삭제 성공");
+		//서블릿에서 알림창 띄우기
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter writer = response.getWriter();
+		writer.println("<script>alert('리뷰 삭제 성공'); location.href='"+request.getContextPath()+"/RemoveReview?orderCode="+orderCode+"';</script>"); 
+		writer.close();
 		response.sendRedirect(request.getContextPath()+"/CustomerPage");
 	}else {//실패
 		System.out.println("리뷰 삭제 실패");

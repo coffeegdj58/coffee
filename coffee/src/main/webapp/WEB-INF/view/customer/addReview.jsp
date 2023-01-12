@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,7 +36,7 @@
 			</tr>
 			<tr>
 				<td>내용</td>
-				<td><input type="text" name="reviewMemo"></td>
+				<td><textarea cols="30" rows="10" name="reviewMemo"></textarea></td>
 			</tr>
 			<tr>
 				<td>작성자</td>
@@ -58,5 +58,35 @@
 		</table>
 		<button type="submit">리뷰작성</button>
 	</form> 
+	
+	<div>
+	리뷰
+	<br>
+		<c:forEach var="Rlist" items="${Rlist}">
+			${Rlist.orderCode}
+			&nbsp;
+			${Rlist.customerId}
+			&nbsp;
+			${Rlist.rating}
+			<c:if test="${Rlist.rating==1}">
+			★
+			</c:if>
+			<c:if test="${Rlist.rating==2}">
+			★★
+			</c:if>
+			<c:if test="${Rlist.rating==3}">
+			★★★
+			</c:if>
+			<c:if test="${Rlist.rating==4}">
+			★★★★
+			</c:if>
+			<c:if test="${Rlist.rating==5}">
+			★★★★★
+			</c:if>
+			&nbsp;
+			${Rlist.reviewMemo}
+			<a href="${pageContext.request.contextPath}/RemoveReview?orderCode=${Rlist.orderCode}">삭제</a>
+		</c:forEach>
+	</div>
 </body>
 </html>

@@ -29,17 +29,25 @@ public class AddReviewController extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/CustomerLogin");
 			return;
 		}
+		String customerId=loginMember.getCustomerId();
 		
 		int orderCode=Integer.parseInt(request.getParameter("orderCode"));
 		int goodsCode=Integer.parseInt(request.getParameter("goodsCode"));
 		request.setAttribute("orderCode", orderCode);
 		request.setAttribute("goodsCode", goodsCode);
 		
+		//service에서 불러오기
+		this.reviewService=new ReviewService();
+		ArrayList<Review> Rlist=reviewService.selectReviewById(customerId);
+		request.setAttribute("Rlist", Rlist);
+		//System.out.println(Rlist);
+		
 		request.getRequestDispatcher("/WEB-INF/view/customer/addReview.jsp").forward(request, response);
 
 	}
 	//리뷰 추가 액션
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
 		//폼에서 받아오기
 		int orderCode=Integer.parseInt(request.getParameter("orderCode"));
 		int goodsCode=Integer.parseInt(request.getParameter("goodsCode"));
