@@ -78,7 +78,7 @@
 						</form>
 					</c:if>
 					<c:if test="${g.soldout == 'Y'}">
-						<span>현재 상품은 준비중입니다.</span>
+						<h3>현재 상품은 준비중입니다.</h3>
 					</c:if>
 					</div>
 				<c:if test = "${not empty loginEmp}">
@@ -86,37 +86,56 @@
 					<button type="button" class="btn btn-outline-dark" onclick="location.href='${pageContext.request.contextPath}/RemoveGoods?goodsCode=${g.goodsCode}'">삭제</button>
 				</c:if>
 			</div>
-		</div>
-		
-		<div>
+			<br><br><br><br>
 			<div>
-				<table>
-					<tr>
-						<th>아이디</th>
-						<th>별점</th>
-						<th>내용</th>
-					</tr>
-					<c:forEach var="Rlist" items="${Rlist}">
+				<h3>BestSeller</h3>
+					<br>
+				<table width="100%">
 						<tr>
-							<th>${Rlist.customerId}</th>
-							<th>${Rlist.rating}</th>
-							<th>${Rlist.reviewMemo}</th>
+							<c:forEach var="g" items="${goodsList}">
+							<td>
+								<div style="text-align: center;"><a href="${pageContext.request.contextPath}/GoodsOne?goodsCode=${g.goodsCode}"><img src="${pageContext.request.contextPath}/image/${g.goodsName}.jpg" width="200" height="200"></a></div>
+								<div style="text-align: center;">${g.goodsName}</div>
+								<div style="text-align: center;">₩ ${g.goodsPrice}</div>
+							</td>	
+							</c:forEach>
+						</tr>
+				</table>
+			</div>
+			
+			
+			<div>
+				<div>
+					<table>
+						<tr>
+							<th>아이디</th>
 							<th>별점</th>
 							<th>내용</th>
 						</tr>
-					</c:forEach>
-				</table>
-			</div>
-			<div>
-				<a href="${pageContext.request.contextPath}/GoodsOne?currentPage=1&goodsCode=${g.goodsCode}">처음</a>
-				<c:if test="${currentPage > 1}">
-					<a href="${pageContext.request.contextPath}/GoodsOne?currentPage=${currentPage-1}&rowPerPage=${rowPerPage}&goodsCode=${g.goodsCode}">이전</a>
-				</c:if>
-				<c:if test="${currentPage < lastPage}">
-					<a href="${pageContext.request.contextPath}/GoodsOne?currentPage=${currentPage+1}&rowPerPage=${rowPerPage}&goodsCode=${g.goodsCode}">이후</a>
-				</c:if>
+						<c:forEach var="Rlist" items="${Rlist}">
+							<tr>
+								<th>${Rlist.customerId}</th>
+								<th>${Rlist.rating}</th>
+								<th>${Rlist.reviewMemo}</th>
+								<th>별점</th>
+								<th>내용</th>
+							</tr>
+						</c:forEach>
+					</table>
+				</div>
+				<div>
+					<a href="${pageContext.request.contextPath}/GoodsOne?currentPage=1&goodsCode=${g.goodsCode}">처음</a>
+					<c:if test="${currentPage > 1}">
+						<a href="${pageContext.request.contextPath}/GoodsOne?currentPage=${currentPage-1}&rowPerPage=${rowPerPage}&goodsCode=${g.goodsCode}">이전</a>
+					</c:if>
+					<c:if test="${currentPage < lastPage}">
+						<a href="${pageContext.request.contextPath}/GoodsOne?currentPage=${currentPage+1}&rowPerPage=${rowPerPage}&goodsCode=${g.goodsCode}">이후</a>
+					</c:if>
+				</div>
 			</div>
 		</div>
+		
+		
 		
 						<br><br><br><br><br>				<br><br><br><br><br>
 		<div><img src="${pageContext.request.contextPath}/image/footeer.png" ></div>

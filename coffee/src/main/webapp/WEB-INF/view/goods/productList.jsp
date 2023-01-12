@@ -38,14 +38,14 @@
 				<c:if test="${c.categoryKind=='product'}"><label><span><a style="color:black" href="#${c.categoryName}">${c.categoryName}</a></span> &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></c:if>
 			</c:forEach>
 			</h5>
-			<span id="Mug"></span>
-			<br><br>
 	
-	<h3>머그</h3>
-	<br>
-	<table> 
+	<span id="Tumbler"></span>
+	<br><br>
+	
+	<h3>텀블러</h3><br>
+	<table>
 		<tr>
-			<c:forEach var="b" items="${mug}" varStatus="s">
+			<c:forEach var="b" items="${tumbler}" varStatus="s">
 				<c:if test="${s.index != 0 && s.index % 3 == 0}">
 					</tr><tr>
 				</c:if>
@@ -59,6 +59,8 @@
 		</tr>
 
 	</table>
+	
+	
 	<span id="Glass"></span>
 	<br><br>
 	
@@ -79,13 +81,16 @@
 		</tr>
 
 	</table>
-	<span id="Tumbler"></span>
-	<br><br>
+		
+	<span id="Mug"></span>
+		
+			<br><br>
 	
-	<h3>텀블러</h3><br>
-	<table>
+	<h3>머그</h3>
+	<br>
+	<table> 
 		<tr>
-			<c:forEach var="b" items="${tumbler}" varStatus="s">
+			<c:forEach var="b" items="${mug}" varStatus="s">
 				<c:if test="${s.index != 0 && s.index % 3 == 0}">
 					</tr><tr>
 				</c:if>
@@ -98,7 +103,9 @@
 			</c:forEach>
 		</tr>
 
-	</table>	
+	</table>
+	
+	
 	
 	<c:if test="${loginEmp!=null}">
 	<div> <a href="${pageContext.request.contextPath}/AddGoods">추가하기</a> </div>

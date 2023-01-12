@@ -10,9 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import service.GoodsService;
 import service.OrderService;
 import vo.Cart;
 import vo.Customer;
+import vo.Goods;
 
 /**
  * Servlet implementation class CartListController
@@ -21,6 +23,7 @@ import vo.Customer;
 public class CartListController extends HttpServlet {
 	
 	private OrderService orderservice;
+	private GoodsService goodsService;
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
@@ -34,6 +37,11 @@ public class CartListController extends HttpServlet {
 		ArrayList<Cart> list = orderservice.selectCartListbyId(loginMember.getCustomerId());
 		//cartlist
 		request.setAttribute("cartList", list);
+		
+		this.goodsService= new GoodsService();
+		ArrayList<Goods> goodsList = goodsService.selectGoodsbyHit();
+		
+		request.setAttribute("goodsList", goodsList);
 		
 		//총가격
 		int sum = orderservice.selectSumGoodsPrice(loginMember.getCustomerId());

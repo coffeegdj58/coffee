@@ -31,8 +31,11 @@
 	<div class="container">
 	<h1>MyCart</h1>
 	<br><br>
-	
+	<c:if test="${empty cartList}">
+				<h2 style="text-align: center;">장바구니가 비었습니다</h2>
+	</c:if>
 		<c:forEach var= "c" items="${cartList}">
+		
 			<table border="1" width="100%">
 			<tr>
 				<c:if test="${c.soldout=='N'}">
@@ -126,11 +129,34 @@
 			</table>
 			<br>
 		</c:forEach>
-		<div>
-			총 가격  ${sum}
-		<button type="button" class="btn btn-outline-dark btn-lg" onclick="location.href='${pageContext.request.contextPath}/Payment'">결제하기</button>
-	 	
-		</div>
+		<br>
+		<c:if test="${!empty cartList}">
+		<fieldset style="text-align: center;">
+			
+			<h4>
+				총 가격 : ₩ ${sum}
+			</h4>
+		</fieldset>
+		
+			<br><br>
+		<div style="text-align: center;"><button type="button" class="btn btn-outline-dark btn-lg" onclick="location.href='${pageContext.request.contextPath}/Payment'">결제하기</button></div>
+		</c:if>
+		<br><br><br><br>
+			<div>
+				<h3>BestSeller</h3>
+					<br>
+				<table width="100%">
+						<tr>
+							<c:forEach var="g" items="${goodsList}">
+							<td>
+								<div style="text-align: center;"><a href="${pageContext.request.contextPath}/GoodsOne?goodsCode=${g.goodsCode}"><img src="${pageContext.request.contextPath}/image/${g.goodsName}.jpg" width="200" height="200"></a></div>
+								<div style="text-align: center;">${g.goodsName}</div>
+								<div style="text-align: center;">₩ ${g.goodsPrice}</div>
+							</td>	
+							</c:forEach>
+						</tr>
+				</table>
+			</div>
 	
 	</div>
 	<br><br><br>

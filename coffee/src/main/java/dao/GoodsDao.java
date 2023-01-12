@@ -127,6 +127,27 @@ public class GoodsDao {
 		return result;
 	}
 	
+	//hit 순으로
+	public ArrayList<Goods> goodsListbyHits(Connection conn) throws Exception {
+		ArrayList<Goods> list = new ArrayList<Goods>();
+		
+		String sql= "SELECT * FROM goods ORDER BY hit DESC LIMIT 0,4";
+		PreparedStatement stmt =conn.prepareStatement(sql);
+		
+		ResultSet rs = stmt.executeQuery();
+		
+		while(rs.next()) {
+			Goods g = new Goods();
+			g.setGoodsCode(rs.getInt("goods_code"));
+			g.setGoodsName(rs.getString("goods_name"));
+			g.setGoodsPrice(rs.getInt("goods_price"));		
+			list.add(g);
+		}
+		rs.close();
+		stmt.close();
+		
+		return list;
+	}
 
 }
 

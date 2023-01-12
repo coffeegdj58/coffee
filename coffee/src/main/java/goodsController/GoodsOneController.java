@@ -42,6 +42,13 @@ public class GoodsOneController extends HttpServlet {
     	goodsService = new GoodsService();
     	Goods g = goodsService.getGoodsOne(goodsCode);
     	
+    	
+    	//top3제품 recommend
+    	ArrayList<Goods> goodsList = goodsService.selectGoodsbyHit();
+    	
+    	request.setAttribute("goodsList", goodsList);
+    	
+    	
     	//리뷰
     	int currentPage=1;//1페이지부터 시작
     	if(request.getParameter("currentPage") != null) {
