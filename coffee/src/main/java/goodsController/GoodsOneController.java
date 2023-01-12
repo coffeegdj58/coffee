@@ -1,6 +1,7 @@
 package goodsController;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,15 +12,18 @@ import javax.servlet.http.HttpSession;
 
 import service.GoodsService;
 import service.OrderService;
+import service.ReviewService;
 import vo.Cart;
 import vo.Customer;
 import vo.Goods;
+import vo.Review;
 
 
 @WebServlet("/GoodsOne")
 public class GoodsOneController extends HttpServlet {
 	private OrderService orderService;
     private GoodsService goodsService;
+    private ReviewService reviewService;
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	// 피라미터 수집
     	if(request.getParameter("goodsCode") == null || ("").equals(request.getParameter("goodsCode"))) {
@@ -37,6 +41,21 @@ public class GoodsOneController extends HttpServlet {
     	// 서비스 호출
     	goodsService = new GoodsService();
     	Goods g = goodsService.getGoodsOne(goodsCode);
+    	
+    	//리뷰
+    	int currentPage=1;//1페이지부터 시작
+    	if(request.getParameter("currentPage") != null) {
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		}
+    	int rowPerPage=10;//10개씩 보여줄거
+    	int beginRow=(currentPage-1)*rowPerPage; //0번부터 보여줄거
+    	
+    	this.reviewService= new ReviewService();
+    	ArrayList<Review> Rlist=reviewService.selectReviewByGoodsPaging(goodsCode, beginRow, rowPerPage);
+    	//jsp에서 <% %> 안쓰고 가져오게 하려고
+    	request.setAttribute("Rlist", Rlist);
+    	request.setAttribute("currentPage", currentPage);
+		request.setAttribute("rowPerPage", rowPerPage);
     	
     	// 객체 바인딩 후 페이지 이동
     	request.setAttribute("g", g);

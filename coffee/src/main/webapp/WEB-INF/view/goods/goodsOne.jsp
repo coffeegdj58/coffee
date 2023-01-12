@@ -42,45 +42,82 @@
 					<hr>
 					<br><br>
 					<h5>${g.goodsContent}</h5>
+					<br>
+					<hr>
 					<h5>${g.goodsInfo}</h5>
 					
 					<hr>
 					<h5>₩ ${g.goodsPrice}</h5>
-					<br><br>
-					<form action="${pageContext.request.contextPath}/GoodsOne" method="post">
-						<input type="hidden" name= "goodsCode" value="${g.goodsCode}">
-						<select name="cartQuantity" class="form-select">
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-							<option value="4">4</option>
-							<option value="5">5</option>
-						</select>
-						<button class="btn btn-outline-dark" type="submit">장바구니에 담기</button>
-						<br><br>
-					</form>
-					<c:if test="${result==1}">
-						<div>장바구니에 담았습니다</div>
+					<br>
+					<c:if test="${g.soldout == 'N'}">
+						<form action="${pageContext.request.contextPath}/GoodsOne" method="post">
+							<input type="hidden" name= "goodsCode" value="${g.goodsCode}">
+							<select name="cartQuantity" class="form-select">
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+								<option value="5">5</option>
+							</select>
+							<button class="btn btn-outline-dark" type="submit">장바구니에 담기</button>
+							<br><br>
+						</form>
+						<c:if test="${result==1}">
+							<div>장바구니에 담았습니다</div>
+						</c:if>
+						<form action="${pageContext.request.contextPath}/Payment2" method="get">
+							<input type="hidden" name= "goodsCode" value="${g.goodsCode}">
+							<select name="cartQuantity" class="form-select">
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+								<option value="5">5</option>
+							</select>
+							<button class="btn btn-outline-dark" type="submit">바로구매</button>
+						</form>
 					</c:if>
-					<form action="${pageContext.request.contextPath}/Payment2" method="get">
-						<input type="hidden" name= "goodsCode" value="${g.goodsCode}">
-						<select name="cartQuantity" class="form-select">
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-							<option value="4">4</option>
-							<option value="5">5</option>
-						</select>
-						<button class="btn btn-outline-dark" type="submit">바로구매</button>
-					</form>
-				</div>
-
+					<c:if test="${g.soldout == 'Y'}">
+						<span>현재 상품은 준비중입니다.</span>
+					</c:if>
+					</div>
 				<c:if test = "${not empty loginEmp}">
 					<button type="button" class="btn btn-outline-dark" onclick="location.href='${pageContext.request.contextPath}/ModifyGoods?goodsCode=${g.goodsCode}'">수정</button>
 					<button type="button" class="btn btn-outline-dark" onclick="location.href='${pageContext.request.contextPath}/RemoveGoods?goodsCode=${g.goodsCode}'">삭제</button>
 				</c:if>
 			</div>
 		</div>
+		
+		<div>
+			<div>
+				<table>
+					<tr>
+						<th>아이디</th>
+						<th>별점</th>
+						<th>내용</th>
+					</tr>
+					<c:forEach var="Rlist" items="${Rlist}">
+						<tr>
+							<th>${Rlist.customerId}</th>
+							<th>${Rlist.rating}</th>
+							<th>${Rlist.reviewMemo}</th>
+							<th>별점</th>
+							<th>내용</th>
+						</tr>
+					</c:forEach>
+				</table>
+			</div>
+			<div>
+				<a href="${pageContext.request.contextPath}/GoodsOne?currentPage=1&goodsCode=${g.goodsCode}">처음</a>
+				<c:if test="${currentPage > 1}">
+					<a href="${pageContext.request.contextPath}/GoodsOne?currentPage=${currentPage-1}&rowPerPage=${rowPerPage}&goodsCode=${g.goodsCode}">이전</a>
+				</c:if>
+				<c:if test="${currentPage < lastPage}">
+					<a href="${pageContext.request.contextPath}/GoodsOne?currentPage=${currentPage+1}&rowPerPage=${rowPerPage}&goodsCode=${g.goodsCode}">이후</a>
+				</c:if>
+			</div>
+		</div>
+		
 						<br><br><br><br><br>				<br><br><br><br><br>
 		<div><img src="${pageContext.request.contextPath}/image/footeer.png" ></div>
 	</body>
