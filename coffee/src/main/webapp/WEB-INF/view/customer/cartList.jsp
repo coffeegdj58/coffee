@@ -26,87 +26,113 @@
 		<jsp:include page="../nav.jsp"></jsp:include> 
 		<!-- include의 주소에는 context를 사용하지 않는다 편한 액션 중하나 -->
 	</div>
-	<h1>장바구니</h1>
-	<table border="1">
-		<tr>
-			<td>전체선택</td>
-			<td>상품사진</td>
-			<td>상품이름</td>
-			<td>상품금액</td>
-			<td>수량</td>	
-			<td>삭제</td>
-		</tr>
+	
+	<br><br><br>
+	<div class="container">
+	<h1>MyCart</h1>
+	<br><br>
+	
 		<c:forEach var= "c" items="${cartList}">
+			<table border="1" width="100%">
 			<tr>
-				<form action="${pageContext.request.contextPath}/CartList" method="post" id="checkForm${c.goodsCode}">
-				<input type="hidden" name="goodsCode" value="${c.goodsCode}">
-				 		<td><input type="checkBox" name="${c.goodsCode}" id="selected${c.goodsCode}" value= 1 <c:if test="${c.selected==1}">checked</c:if>></td>
-			 	</form>
-			 	<td><img src="${pageContext.request.contextPath}/image/${c.goodsName}.jpg" width= "150px" height="150px"></td>
-			 	<td>${c.goodsName}</td>
-			 	<td>${c.cartPrice}</td>
+				<c:if test="${c.soldout=='N'}">
+					<form action="${pageContext.request.contextPath}/CartList" method="post" id="checkForm${c.goodsCode}">
+					<input type="hidden" name="goodsCode" value="${c.goodsCode}">
+					 		<td width='5%' style="text-align: center;"><input type="checkBox" name="${c.goodsCode}" id="selected${c.goodsCode}" value= 1 <c:if test="${c.selected==1}">checked</c:if>></td>
+				 	</form>
+			 	</c:if>
+			 	<c:if test="${c.soldout=='Y'}"><td width="5%" style="text-align: center;">품절</td></c:if>
+			 	
+			 	<td width="15%"><img src="${pageContext.request.contextPath}/image/${c.goodsName}.jpg" width= "200px" height="200px"></td>
+			 	
 			 	<td>
-			 	<form action="${pageContext.request.contextPath}/UpdateQuantity" method="post" id="updateQunatity${c.goodsCode}">
-			 		<input type="hidden" name="goodsCode" value="${c.goodsCode}">
-			 		
-			 		<c:if test="${c.cartQuantity==1}">
-				 		<select name="cartQuantity" id="quantity${c.goodsCode}">
-							<option value="1" selected="selected">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-							<option value="4">4</option>
-							<option value="5">5</option>
-						</select>	
-					</c:if>	
-					<c:if test="${c.cartQuantity==2}">
-				 		<select name="cartQuantity" id="quantity${c.goodsCode}">
-							<option value="1">1</option>
-							<option value="2" selected="selected">2</option>
-							<option value="3">3</option>
-							<option value="4">4</option>
-							<option value="5">5</option>
-						</select>	
-					</c:if>	
-					<c:if test="${c.cartQuantity==3}" >
-				 		<select name="cartQuantity" id="quantity${c.goodsCode}">
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3" selected="selected">3</option>
-							<option value="4">4</option>
-							
-							<option value="5">5</option>
-						</select>	
-					</c:if>	
-					<c:if test="${c.cartQuantity==4}">
-				 		<select name="cartQuantity" id="quantity${c.goodsCode}">
-							<option value="1" >1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-							<option value="4" selected="selected">4</option>
-							<option value="5">5</option>
-						</select>	
-					</c:if>	
-					<c:if test="${c.cartQuantity==5}">
-				 		<select name="cartQuantity" id="quantity${c.goodsCode}">
-							<option value="1" >1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-							<option value="4">4</option>
-							<option value="5" selected="selected">5</option>
-						</select>	
-					</c:if>	
-			 	</form>
-			 	</td>
-			 	<td>
-			 		<a href="${pageContext.request.contextPath}/DeleteCartOne?goodsCode=${c.goodsCode}">삭제</a>
+			 		<table width="100%" style="text-align: center;">
+			 			<tr>
+			 				<td><h4><a style="color:black" href="${pageContext.request.contextPath}/GoodsOne?goodsCode=${c.goodsCode}">${c.goodsName}</a></h4></td>
+			 			</tr>
+			 			<tr>
+			 				<form action="${pageContext.request.contextPath}/UpdateQuantity" method="post" id="updateQunatity${c.goodsCode}">
+			 				<td>
+			 				₩ ${c.cartPrice} &nbsp;&nbsp;&nbsp;
+			 				<c:if test="${c.soldout=='N'}">	
+						 	
+						 	
+							 	
+							 		<input type="hidden" name="goodsCode" value="${c.goodsCode}">
+							 		
+							 		<c:if test="${c.cartQuantity==1}">
+								 		<select name="cartQuantity" id="quantity${c.goodsCode}">
+											<option value="1" selected="selected">1</option>
+											<option value="2">2</option>
+											<option value="3">3</option>
+											<option value="4">4</option>
+											<option value="5">5</option>
+										</select>	
+									</c:if>	
+									<c:if test="${c.cartQuantity==2}">
+								 		<select name="cartQuantity" id="quantity${c.goodsCode}">
+											<option value="1">1</option>
+											<option value="2" selected="selected">2</option>
+											<option value="3">3</option>
+											<option value="4">4</option>
+											<option value="5">5</option>
+										</select>	
+									</c:if>	
+									<c:if test="${c.cartQuantity==3}" >
+								 		<select name="cartQuantity" id="quantity${c.goodsCode}">
+											<option value="1">1</option>
+											<option value="2">2</option>
+											<option value="3" selected="selected">3</option>
+											<option value="4">4</option>
+											
+											<option value="5">5</option>
+										</select>	
+									</c:if>	
+									<c:if test="${c.cartQuantity==4}">
+								 		<select name="cartQuantity" id="quantity${c.goodsCode}">
+											<option value="1" >1</option>
+											<option value="2">2</option>
+											<option value="3">3</option>
+											<option value="4" selected="selected">4</option>
+											<option value="5">5</option>
+										</select>	
+									</c:if>	
+									<c:if test="${c.cartQuantity==5}">
+								 		<select name="cartQuantity" id="quantity${c.goodsCode}">
+											<option value="1" >1</option>
+											<option value="2">2</option>
+											<option value="3">3</option>
+											<option value="4">4</option>
+											<option value="5" selected="selected">5</option>
+										</select>	
+									</c:if>	
+							 	
+							 	
+							 </c:if>
+							 <c:if test="${c.soldout=='Y'}">
+					 			품절
+					 			</c:if>
+					 		</td></form>
+			 			</tr>
+			 			<tr><td>&nbsp;</td></tr>
+			 			<tr>
+			 			<td>
+					 		<button type="button" class="btn btn-outline-dark" onclick="location.href='${pageContext.request.contextPath}/DeleteCartOne?goodsCode=${c.goodsCode}'">삭제</button>
+					 	</td>
+					 	</tr>
+			 		</table>
 			 	</td>
 			</tr>
+			</table>
+			<br>
 		</c:forEach>
-	</table>
-	 	<a href="${pageContext.request.contextPath}/Payment">결제하기</a>
+		<div>
+			총 가격  ${sum}
+		<button type="button" class="btn btn-outline-dark btn-lg" onclick="location.href='${pageContext.request.contextPath}/Payment'">결제하기</button>
+	 	
+		</div>
 	
-	<div>총 가격  ${sum}</div>
-	
+	</div>
 	<br><br><br>
 	
 	<div><img src="${pageContext.request.contextPath}/image/footeer.png" ></div>

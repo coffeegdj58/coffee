@@ -10,9 +10,16 @@ public class Cart {
 	private int cartPrice;
 	private String categoryKind;
 	private String categoryName;
+	private String soldout;
 	
 	
 	
+	public String getSoldout() {
+		return soldout;
+	}
+	public void setSoldout(String soldout) {
+		this.soldout = soldout;
+	}
 	public int getCartPrice() {
 		return cartPrice;
 	}

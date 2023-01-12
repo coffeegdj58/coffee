@@ -31,7 +31,7 @@ public class OrderDao {
 		ArrayList<Cart> list = new ArrayList<Cart>();
 		
 		String sql= "SELECT "
-				+ "c.goods_code goodsCode, c.cart_quantity cartQuantity, c.selected selected, g.goods_name goodsName, (g.goods_price * c.cart_quantity) cartPrice, g.goods_price goodsPrice, c2.category_kind categoryKind, c2.category_name categoryName "
+				+ "c.goods_code goodsCode, c.cart_quantity cartQuantity, g.soldout soldout,c.selected selected, g.goods_name goodsName, (g.goods_price * c.cart_quantity) cartPrice, g.goods_price goodsPrice, c2.category_kind categoryKind, c2.category_name categoryName "
 				+ "FROM cart c INNER JOIN goods g ON c.goods_code = g.goods_code inner join category c2 ON c2.category_code = g.category_code "
 				+ "WHERE c.customer_id= ?";
 		PreparedStatement stmt= conn.prepareStatement(sql);
@@ -49,6 +49,7 @@ public class OrderDao {
 			c.setGoodsCode(rs.getInt("goodsCode"));
 			c.setSelected(rs.getInt("selected"));
 			c.setCartPrice(rs.getInt("cartPrice"));
+			c.setSoldout(rs.getString("soldout"));
 			list.add(c);
 		}
 		rs.close();
@@ -245,7 +246,7 @@ public class OrderDao {
 		String sql= "SELECT "
 				+ "c.goods_code goodsCode, c.cart_quantity cartQuantity, c.selected selected, g.goods_name goodsName, (g.goods_price * c.cart_quantity) cartPrice, g.goods_price goodsPrice, c2.category_kind categoryKind, c2.category_name categoryName "
 				+ "FROM cart c INNER JOIN goods g ON c.goods_code = g.goods_code inner join category c2 ON c2.category_code = g.category_code "
-				+ "WHERE c.customer_id= ? AND selected= 1";
+				+ "WHERE c.customer_id= ? AND c.selected= 1 AND g.soldout='N'";
 		PreparedStatement stmt= conn.prepareStatement(sql);
 		stmt.setString(1, customerId);
 		

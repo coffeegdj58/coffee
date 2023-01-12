@@ -69,23 +69,42 @@
 		<h4>${predate} 주문</h4>
 		</c:if>
 		
-		<table border="1" width="750px;">
+		<table width="750px;">
 			
-			<tr style="text-align: center;">
+			<tr>
 				<td width="15%"><img src="${pageContext.request.contextPath}/image/${o.goodsName}.jpg" width= "200px" height="200px"></td>
-				<td width="5%">${o.orderState}</td>
-				<td width="25%"><a href="${pageContext.request.contextPath}/GoodsOne?goodsCode=${o.goodsCode}">${o.goodsName}</a></td>
-				<td width="15%">₩ ${o.orderPrice}</td>
-				<td width="5%">${o.orderQuantity}개</td>
-				<td><a href="${pageContext.request.contextPath}/AddReview?orderCode=${o.orderCode}&goodsCode=${o.goodsCode}">리뷰작성</a></td>
-				<c:if test="${o.orderState.equals('결제')}">
-					<td><a href="${pageContext.request.contextPath}/ModifyOrder?orderCode=${o.orderCode}">취소</a></td>
-				</c:if>
-				<c:if test="${o.orederState.equals('결제')==false}">
-					<td><a href="${pageContext.request.contextPath}/ModifyOrder?orderCode=${o.orderCode}">반품,환불</a></td>
-				</c:if>
+				<td>
+					<table width="100%" style="text-align: center;">
+						<tr><td><h4><a href="${pageContext.request.contextPath}/GoodsOne?goodsCode=${o.goodsCode}">${o.goodsName}</a></h4></td> </tr>
+						<tr><td>${o.orderState}</td></tr>
+						
+						<tr><td> ₩ ${o.orderPrice} &nbsp;&nbsp;&nbsp;${o.orderQuantity}개</td></tr>
+					</table>
+				</td>
+				<td width="15%">
+					<table width="100%" height="100%">
+						<tr style="text-align: center;">
+							<td>
+								<button type="button" class="btn btn-outline-dark" onclick="location.href='${pageContext.request.contextPath}/AddReview?orderCode=${o.orderCode}&goodsCode=${o.goodsCode}'">리뷰작성</button>
+							</td>
+						</tr>
+						<tr style="text-align: center;">
+							<c:if test="${o.orderState.equals('결제')}">
+								<td><button type="button" class="btn btn-outline-dark" onclick="location.href='${pageContext.request.contextPath}/ModifyOrder?orderCode=${o.orderCode}'">취소하기</button></td>
+							</c:if>
+							<c:if test="${o.orederState.equals('결제')==false}">
+								<td><button type="button" class="btn btn-outline-dark" onclick="location.href='${pageContext.request.contextPath}/ModifyOrder?orderCode=${o.orderCode}'">반품,환불</button></td>
+							</c:if>
+						</tr>
+						<tr style="text-align: center;">
+							<td><button type="button" class="btn btn-outline-dark" onclick="location.href='${pageContext.request.contextPath}/OrderOne?orderCode=${o.orderCode}'">배송조회</button></td>
+						</tr>
+						
+					</table>
+				</td>
 				
-				<td><a href="${pageContext.request.contextPath}/OrderOne?orderCode=${o.orderCode}">배송조회</a></td>
+				
+				
 			</tr>
 			
 			
