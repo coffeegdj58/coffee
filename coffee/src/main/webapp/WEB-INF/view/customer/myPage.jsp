@@ -27,22 +27,18 @@
 		<jsp:include page="../nav.jsp"></jsp:include> 
 		<!-- include의 주소에는 context를 사용하지 않는다 편한 액션 중하나 -->
 	</div>
-	<h1>${loginMember.point}</h1>
+	
+	
+	<br><br>
+	<div><img src="${pageContext.request.contextPath}/image/myPage.png"></div>
+	
+	<br><br>
+	
+	<div class="container">
 	<table border="1">
-		<tr>
-			<td>사진</td>
-			<td>주문번호</td>
-			<td>주문상태</td>
-			<td>상품이름</td>
-			<td>상품가격</td>
-			<td>리뷰작성</td>
-			<td>취소하기</td>
-			<td>배송조회</td>
-		</tr>
 		<c:forEach var="o" items="${orderList}">
 		<tr>
 			<td><img src="${pageContext.request.contextPath}/image/${o.goodsName}.jpg" width= "150px" height="150px"></td>
-			<td>${o.orderCode}</td>
 			<td>${o.orderState}</td>
 			<td>${o.goodsName}</td>
 			<td>${o.goodsPrice}</td>
@@ -88,5 +84,8 @@
 	<a href="${pageContext.request.contextPath}/AddressCustomer">주소관리</a>  
 	<a href="${pageContext.request.contextPath}/QuestionListByCustomer">고객센터</a>
 	
+	<br><br><br>
+	</div>
+	<div><img src="${pageContext.request.contextPath}/image/footeer.png" ></div>
 </body>
 </html>

@@ -37,6 +37,11 @@ public class PaymentController extends HttpServlet {
 		this.customerService = new CustomerService();
 		
 		ArrayList<Cart> list = orderService.selectCartListlevel1(loginMember.getCustomerId());
+		if(list.isEmpty()) {
+			response.sendRedirect(request.getContextPath()+"/CartList");
+			return;
+		}
+		
 		ArrayList<Address> address = customerService.addressListById(loginMember.getCustomerId());
 		int sum = orderService.selectSumGoodsPrice(loginMember.getCustomerId());
 		
@@ -66,14 +71,22 @@ public class PaymentController extends HttpServlet {
 		ArrayList<Cart> list = orderService.selectCartListlevel1(loginMember.getCustomerId());
 		int result= orderService.insertOrdersByCart(list, addressCode, loginMember.getCustomerId());
 		if(result==1) {
-			//포인트 사용 
-			
-			customerService.usePointUpdateCustomer(loginMember, usePoint);
-			customerService.usePointInsertInHistory(loginMember.getCustomerId(), usePoint);
+			//포인트 사용
 			
 			//포인트 적립
 			customerService.insertPointInCustomer(loginMember, orderPrice);
 			customerService.insertPointInHistory(loginMember.getCustomerId(), orderPrice);
+			
+			
+			if(usePoint!=0) {
+				customerService.usePointUpdateCustomer(loginMember, usePoint);
+				customerService.usePointInsertInHistory(loginMember.getCustomerId(), usePoint);
+				
+				
+			}
+			
+			request.getSession().setAttribute("loginMember", loginMember);
+			//loginMemberupdate
 			
 			//판매량 증가
 			orderService.updategoodsHit(list);

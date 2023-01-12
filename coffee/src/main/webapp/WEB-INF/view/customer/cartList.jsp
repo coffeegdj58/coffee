@@ -106,6 +106,10 @@
 	 	<a href="${pageContext.request.contextPath}/Payment">결제하기</a>
 	
 	<div>총 가격  ${sum}</div>
+	
+	<br><br><br>
+	
+	<div><img src="${pageContext.request.contextPath}/image/footeer.png" ></div>
 	<c:forEach var="c" items='${cartList}'>
 	<script>
 		$(document).ready(function(){	

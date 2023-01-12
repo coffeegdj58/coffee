@@ -181,11 +181,11 @@ public class CustomerDao {
 	public int insertPointInHistory(String customerId, Connection conn, int sum) throws Exception {
 		int result= 0;
 		
-		String sql = "INSERT INTO point_history(customer_id, point, point_kind) VALUES (?, ?, ?)";
+		String sql = "INSERT INTO point_history(customer_id, point, point_kind) VALUES (?, ?, '적립')";
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		stmt.setString(1, customerId);
 		stmt.setInt(2, (int)Math.floor(sum/100*3));
-		stmt.setString(3, "적립");
+		
 		
 		result= stmt.executeUpdate();
 		
@@ -200,22 +200,27 @@ public class CustomerDao {
 	public int usePointUpdateCustomer(Customer cust, Connection conn, int useAmount) throws Exception{
 		int result= 0;
 		
-		String sql = "UPDATE customer SET point= ? WHERE customer_id = ? ";
+		String sql = "UPDATE customer SET point= ? WHERE customer_id=?";
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		stmt.setInt(1, cust.getPoint()-useAmount);
+		System.out.println("dado:" +(cust.getPoint()-useAmount));
 		stmt.setString(2, cust.getCustomerId());
+		result=stmt.executeUpdate();
 		
 		stmt.close();
 		return result;
 	}
+	
 	public int usePointInsertInHistory(String customerId, Connection conn, int useAmount) throws Exception{
 		int result= 0;
 		
-		String sql = "INSERT INTO point_history(customer_id, point, point_kind) VALUES (?, ?, ?)";
+		String sql = "INSERT INTO point_history(customer_id, point, point_kind) VALUES (?, ?, '사용')";
 		PreparedStatement stmt =conn.prepareStatement(sql);
 		stmt.setString(1, customerId);
 		stmt.setInt(2, useAmount);
-		stmt.setString(3, "사용");
+		
+		result= stmt.executeUpdate();
+		
 		stmt.close();
 		
 		

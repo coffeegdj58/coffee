@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>결제페이지</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/nav/fonts/icomoon/style.css">
@@ -86,7 +86,7 @@
 			</tr>
 			<tr>
 				<td>포인트</td>
-				<td><input type="number" name="usePoint">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;보유: ${loginMember.point}</td>
+				<td><input type="number" name="usePoint" id="usePoint">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;보유: ${loginMember.point}</td>
 			</tr>
 			
 			<tr>
@@ -96,6 +96,20 @@
 		</table>
 		<input type="hidden" value="${sum}" name="orderPrice">
 		<button type="submit">결제하기</button>
+		
 </form>	
+
+<script>
+$(document).ready(function(){	
+	$('#usePoint').blur(function(){
+		
+		alert($('#usePoint').val());
+		if($('#usePoint').val()<${loginMember.point}){
+			($'#usePoint').val(${loginMember.point});
+		}
+			
+	})
+}
+</script>
 </body>
 </html>
