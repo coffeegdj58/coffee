@@ -493,5 +493,35 @@ public class OrderService {
 		}
 		return result;
 	}
+	
+	public int insertPayment2Order(Cart cart,int addressCode, int gooodsCode) {
+		int row=0;
+		Connection conn = null;
+		try {
+			db= new Dbutil();
+			conn = db.getConnection();
+			orderdao = new OrderDao();
+			row=orderdao.insertPayment2Order(conn, cart, addressCode);
+			if(row==1) {
+			int	row2=orderdao.updateHitPatment2(conn, gooodsCode);
+			}
+			conn.commit();
+		} catch (Exception e) {
+			try {
+				conn.rollback(); // DBUtil.class에서 conn.setAutoCommit(false);
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		}finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return row;
+	}
+	
 }
 

@@ -338,12 +338,36 @@ public class OrderDao {
 		
 		return result;
 	}
-	
-	public int insertPayment2(Connection conn, Cart cart) {
+	//바로구매 카트 담긴걸 order로 넘기기
+	public int insertPayment2Order(Connection conn, Cart cart, int addressCode) throws Exception {
 		int row=0;
-		
-		
+		String sql= "INSERT INTO orders(goods_code,customer_id, order_quantity, order_price , address_code) VALUES(?,?,?,?,?)";
+		PreparedStatement stmt=conn.prepareStatement(sql);
+		stmt.setInt(1, cart.getGoodsCode());
+		stmt.setString(2, cart.getCustomerId());
+		stmt.setInt(3, cart.getCartQuantity());
+		stmt.setInt(4, cart.getCartPrice());
+		stmt.setInt(5, addressCode);
+		row=stmt.executeUpdate();
+		if(row==1) {
+			System.out.println("구입 성공 : Dao");
+		}
 		return row;
 	}
+	
+	public int updateHitPatment2(Connection conn, int gooodsCode) throws Exception{
+		int row=0;
+		int hit=0;
+		String sql= "UPDATE goods SET hit=? WHERE goods_code=?";
+		PreparedStatement stmt=conn.prepareStatement(sql);
+		stmt.setInt(1, hit+1);
+		stmt.setInt(2, gooodsCode);
+		row=stmt.executeUpdate();
+		if(row==1) {
+			System.out.println("Hit 증가 : Dao");
+		}
+		return row;		
+	}
+
 	
 }	

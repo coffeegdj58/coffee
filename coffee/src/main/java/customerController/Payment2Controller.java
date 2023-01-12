@@ -61,8 +61,11 @@ public class Payment2Controller extends HttpServlet {
 		String customerId=loginMember.getCustomerId();
 		//payment2 폼에서 받아올 것
 		int goodsCode=Integer.parseInt(request.getParameter("goodsCode"));
+		//System.out.println(goodsCode+"goodsCode");
 		int cartQuantity=Integer.parseInt(request.getParameter("cartQuantity"));
+		//System.out.println(cartQuantity+"cartQuantity");
 		int addressCode= Integer.parseInt(request.getParameter("addressCode"));
+		//System.out.println(addressCode+"addressCode");
 		//포인트 사용
 		int usePoint = 0; //포인트 사용이 null이 아니고 공백이 아닐시 사용 했다면 usePoint에 받아온 값을 넣음
 		if(request.getParameter("usePoint")!=null && request.getParameter("usePoint").equals("")!=true) {
@@ -74,11 +77,33 @@ public class Payment2Controller extends HttpServlet {
 		this.orderService = new OrderService();
 		this.customerService= new CustomerService();
 		
-		Cart c=orderService.selectCartlevel2(customerId);
-		int result=orderService.insertCartlevel2(customerId, goodsCode, cartQuantity);
+		Cart cart= new Cart();
+		cart.setGoodsCode(goodsCode);
+		cart.setCustomerId(customerId);
+		cart.setCartQuantity(cartQuantity);
+		cart.setCartPrice(orderPrice);
 		
-		
-		response.sendRedirect(request.getContextPath()+"/"); //orderState로 보낼거
+		int result=orderService.insertPayment2Order(cart, addressCode, goodsCode);
+		if(result==1){
+			//포인트 사용
+			
+			//포인트 적립
+			customerService.insertPointInCustomer(loginMember, orderPrice);
+			customerService.insertPointInHistory(loginMember.getCustomerId(), orderPrice);
+			if(usePoint!=0) {
+				customerService.usePointUpdateCustomer(loginMember, usePoint);
+				customerService.usePointInsertInHistory(loginMember.getCustomerId(), usePoint);
+
+				request.getSession().setAttribute("loginMember", loginMember);
+				//loginMemberupdate
+				
+				//판매량 증가
+				
+				//사용된 카트 삭제
+				orderService.deletecartlevel2(customerId);
+			}
+		}
+		response.sendRedirect(request.getContextPath()+"/CartList"); //orderState로 보낼거 수정하기
 	}	
 
 }

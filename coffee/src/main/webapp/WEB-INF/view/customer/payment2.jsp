@@ -93,6 +93,8 @@
 					</tr>
 				</table>
 		</fieldset>
+		<input type="hidden" value="${c.goodsCode}" name="goodsCode">
+		<input type="hidden" value="${c.cartQuantity}" name="cartQuantity">
 		<input type="hidden" value="${c.cartPrice*c.cartQuantity}" name="orderPrice">
 		<button type="submit">결제하기</button>
 	</form>
