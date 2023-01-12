@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
      <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+     <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,7 +20,22 @@
     
     <!-- Style -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/nav/css/style.css">
-
+	<style type="text/css">
+		a:link {
+			  color : black;
+			}
+			a:visited {
+			  color : black;
+			}
+			a:hover {
+			  color : green;
+			}
+			a:active {
+			  color : green
+			}
+		
+	</style>
+	
    
 </head>
 <body>
@@ -35,55 +51,64 @@
 	<br><br>
 	
 	<div class="container">
-	<table border="1">
-		<c:forEach var="o" items="${orderList}">
-		<tr>
-			<td><img src="${pageContext.request.contextPath}/image/${o.goodsName}.jpg" width= "150px" height="150px"></td>
-			<td>${o.orderState}</td>
-			<td>${o.goodsName}</td>
-			<td>${o.goodsPrice}</td>
-			<td><a href="${pageContext.request.contextPath}/AddReview?orderCode=${o.orderCode}&goodsCode=${o.goodsCode}">리뷰작성하기</a></td>
-			<c:if test="${o.orderState.equals('결제')}">
-				<td><a href="${pageContext.request.contextPath}/ModifyOrder?orderCode=${o.orderCode}">취소하기</a></td>
-			</c:if>
-			<c:if test="${o.orederState.equals('결제')==false}">
-				<td><a href="${pageContext.request.contextPath}/ModifyOrder?orderCode=${o.orderCode}">반품,환불하기</a></td>
-			</c:if>
+	<h1>Order</h1>
+	<br>
+	
+	<div class="row">
+	<div class="col-10">
+	<c:set var="predate" value=""/>
+   
+	
+	<c:forEach var="o" items="${orderList}">
+		<c:set var ="num" value="${o.createdate}"/> 
+		<c:set var="curdate" value="${fn:substring(num,0,10)}"/>
+		
+		<c:if test="${curdate != predate}">
+			<c:set var="predate" target="predate" value="${fn:substring(num,0,10)}"/>
+			<br>
+		<h4>${predate} 주문</h4>
+		</c:if>
+		
+		<table border="1" width="750px;">
 			
-			<td><a href="${pageContext.request.contextPath}/OrderOne?orderCode=${o.orderCode}">배송조회하기</a></td>
-		
-		</tr>
-		
-		</c:forEach>
-	</table>
-	
-	<table>
-		<tr>
-			<td>주문번호</td>
-			<td>리뷰내용</td>
-			<td>별점</td>
-			<td>삭제</td>
-		</tr>
-		<c:forEach var="R" items="${Rlist}">
-			<tr>
-				<td>${R.orderCode}</td>
-				<td>${R.reviewMemo}</td>
-				<td>
-					${R.rating}
-				</td>
-				<td>
-					<a href="${pageContext.request.contextPath}/RemoveReview?orderCode=${R.orderCode}">삭제</a>
-				</td>
+			<tr style="text-align: center;">
+				<td width="15%"><img src="${pageContext.request.contextPath}/image/${o.goodsName}.jpg" width= "200px" height="200px"></td>
+				<td width="5%">${o.orderState}</td>
+				<td width="25%"><a href="${pageContext.request.contextPath}/GoodsOne?goodsCode=${o.goodsCode}">${o.goodsName}</a></td>
+				<td width="15%">₩ ${o.orderPrice}</td>
+				<td width="5%">${o.orderQuantity}개</td>
+				<td><a href="${pageContext.request.contextPath}/AddReview?orderCode=${o.orderCode}&goodsCode=${o.goodsCode}">리뷰작성</a></td>
+				<c:if test="${o.orderState.equals('결제')}">
+					<td><a href="${pageContext.request.contextPath}/ModifyOrder?orderCode=${o.orderCode}">취소</a></td>
+				</c:if>
+				<c:if test="${o.orederState.equals('결제')==false}">
+					<td><a href="${pageContext.request.contextPath}/ModifyOrder?orderCode=${o.orderCode}">반품,환불</a></td>
+				</c:if>
+				
+				<td><a href="${pageContext.request.contextPath}/OrderOne?orderCode=${o.orderCode}">배송조회</a></td>
 			</tr>
+			
+			
+		</table>
+		<c:if test="${curdate != predate}">
+		<br>
+		</c:if>
 		</c:forEach>
-	</table>
-	
-	<a href="${pageContext.request.contextPath}/CartList">장바구니</a>
-	<a href="${pageContext.request.contextPath}/ModifyCustomer">회원정보수정</a><!-- check -->
-	<a href="${pageContext.request.contextPath}/PointPage">포인트</a><!--check -->
-	<a href="${pageContext.request.contextPath}/AddressCustomer">주소관리</a>  
-	<a href="${pageContext.request.contextPath}/QuestionListByCustomer">고객센터</a>
-	
+		</div>
+		
+		<div class="col-2">
+			<hr height="20px" background-color="black">
+			<ul class="list-group list-group-flush">
+			  <li class="list-group-item"><a href="${pageContext.request.contextPath}/CartList">장바구니</a>
+			  <li class="list-group-item"><a href="${pageContext.request.contextPath}/ModifyCustomer">회원정보수정</a></li>
+			  <li class="list-group-item"><a href="${pageContext.request.contextPath}/PointPage">포인트</a></li>
+			  <li class="list-group-item"><a href="${pageContext.request.contextPath}/AddressCustomer">주소관리</a></li>
+			  <li class="list-group-item"><a href="${pageContext.request.contextPath}/QuestionListByCustomer">고객센터</a></li>
+			</ul>
+		
+			
+		</div>	
+	</div>
 	<br><br><br>
 	</div>
 	<div><img src="${pageContext.request.contextPath}/image/footeer.png" ></div>
