@@ -247,4 +247,36 @@ public class GoodsService {
 		return list;
 		
 	}
+
+	public ArrayList<Goods> searchGoodsList(String word){
+		ArrayList<Goods> list= null;
+		
+		Connection conn=null;
+		
+		try {
+			db=new Dbutil();
+			conn= db.getConnection();
+			this.goodsDao= new GoodsDao();
+			list  = goodsDao.selectGoodsBySearch(word, conn);
+			
+			conn.commit();
+		}catch (Exception e) {
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		} finally {
+			try {
+				if(conn != null) {conn.close();}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}	
+		
+		return list;
+		
+		
+	}
 }

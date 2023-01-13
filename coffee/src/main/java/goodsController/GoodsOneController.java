@@ -26,6 +26,8 @@ public class GoodsOneController extends HttpServlet {
     private ReviewService reviewService;
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	// 피라미터 수집
+    	HttpSession session = request.getSession();
+		Customer loginMember = (Customer)session.getAttribute("loginMember");
     	if(request.getParameter("goodsCode") == null || ("").equals(request.getParameter("goodsCode"))) {
     		response.sendRedirect(request.getContextPath() + "/CoffeeList");
     		return;
@@ -37,6 +39,7 @@ public class GoodsOneController extends HttpServlet {
     		result = request.getParameter("result");
     	}
     	request.setAttribute("result", result);
+    	this.orderService = new OrderService();
     	
     	// 서비스 호출
     	goodsService = new GoodsService();

@@ -148,6 +148,29 @@ public class GoodsDao {
 		
 		return list;
 	}
+	
+	public ArrayList<Goods> selectGoodsBySearch(String word, Connection conn) throws Exception {
+		ArrayList<Goods> list = new ArrayList<Goods>();
+		String sql = "SELECT goods_code, goods_name, goods_price FROM goods WHERE goods_name LIKE ? ORDER BY hit DESC";
+		PreparedStatement stmt =conn.prepareStatement(sql);
+		stmt.setString(1, "%"+word+"%");
+		
+		ResultSet rs = stmt.executeQuery();
+		
+		while(rs.next()) {
+			Goods g = new Goods();
+			g.setGoodsName(rs.getString("goods_name"));
+			g.setGoodsPrice(rs.getInt("goods_price"));
+			g.setGoodsCode(rs.getInt("goods_code"));
+			list.add(g);
+			
+		}
+		
+		stmt.close();
+		rs.close();
+		
+		return list;
+	}
 
 }
 

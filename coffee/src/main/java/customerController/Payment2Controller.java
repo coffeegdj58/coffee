@@ -33,6 +33,7 @@ public class Payment2Controller extends HttpServlet {
 		String customerId=loginMember.getCustomerId();
 		//goodsOne에서 바로 구매 누를 시에 받을 값
 		int goodsCode=Integer.parseInt(request.getParameter("goodsCode"));
+		System.out.println(goodsCode);
 		int cartQuantity=Integer.parseInt(request.getParameter("cartQuantity"));
 		//service에서 불러오기
 		this.orderService= new OrderService();
@@ -98,10 +99,9 @@ public class Payment2Controller extends HttpServlet {
 				//loginMemberupdate
 				
 				//판매량 증가
-				
-				//사용된 카트 삭제
-				orderService.deletecartlevel2(customerId);
+
 			}
+		orderService.deletecartlevel2(customerId);
 		}
 		response.sendRedirect(request.getContextPath()+"/CartList"); //orderState로 보낼거 수정하기
 	}	

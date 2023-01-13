@@ -26,7 +26,7 @@
 		<jsp:include page="../nav.jsp"></jsp:include> 
 		<!-- include의 주소에는 context를 사용하지 않는다 편한 액션 중하나 -->
 </div>
-	<form action="${pageContext.request.contextPath}/Payment2" method="post">
+	<form action="${pageContext.request.contextPath}/Payment3" method="post">
 		<fieldset>
 			<legend>구매자정보</legend>
 				<table>

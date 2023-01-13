@@ -50,7 +50,7 @@
 					<h5>₩ ${g.goodsPrice}</h5>
 					<br>
 					<c:if test="${g.soldout == 'N'}">
-						<form action="${pageContext.request.contextPath}/GoodsOne" method="post">
+						<form name="form" method="post">
 							<input type="hidden" name= "goodsCode" value="${g.goodsCode}">
 							<select name="cartQuantity" class="form-select">
 								<option value="1">1</option>
@@ -59,23 +59,19 @@
 								<option value="4">4</option>
 								<option value="5">5</option>
 							</select>
-							<button class="btn btn-outline-dark" type="submit">장바구니에 담기</button>
+							<button class="btn btn-outline-dark" type="submit" onclick="javascript: form.action='${pageContext.request.contextPath}/Payment3'">바로구매</button>
+							<button class="btn btn-outline-dark" type="submit" onclick="javascript: form.action='${pageContext.request.contextPath}/GoodsOne'">장바구니에 담기</button>
 							<br><br>
 						</form>
 						<c:if test="${result==1}">
 							<div>장바구니에 담았습니다</div>
 						</c:if>
-						<form action="${pageContext.request.contextPath}/Payment2" method="get">
-							<input type="hidden" name= "goodsCode" value="${g.goodsCode}">
-							<select name="cartQuantity" class="form-select">
-								<option value="1">1</option>
-								<option value="2">2</option>
-								<option value="3">3</option>
-								<option value="4">4</option>
-								<option value="5">5</option>
-							</select>
-							<button class="btn btn-outline-dark" type="submit">바로구매</button>
-						</form>
+						
+						<c:if test="${result==0}">
+							<div>이미 담겨있는 상품 입니다</div>
+						</c:if>
+						<br>
+						
 					</c:if>
 					<c:if test="${g.soldout == 'Y'}">
 						<h3>현재 상품은 준비중입니다.</h3>
