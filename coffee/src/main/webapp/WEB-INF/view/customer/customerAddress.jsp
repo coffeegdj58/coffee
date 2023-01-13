@@ -48,6 +48,7 @@
 						<td>전화번호</td>
 						<td>수정</td>
 					</tr>
+					<tr><td colspan="4"><hr></td></tr>
 					<c:forEach var="a" items="${list}">
 						<tr>
 							<td>${loginMember.customerName}</td>	
@@ -55,7 +56,7 @@
 							<td>${loginMember.customerPhone}</td>
 							<td colspan="3"><button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="location.href='${pageContext.request.contextPath}/ModifyAddress?addressCode=${a.addressCode}'">수정하기</button></td>
 						</tr>
-						
+						<tr><td colspan="4"><hr></td></tr>
 				</c:forEach>
 				</table>
 			</div>
@@ -89,8 +90,8 @@
 			 	 	
 					 </div>
 					 <div class="modal-footer">
-						   <button type="button" data-bs-dismiss="modal">Close</button>
-						   <button type="submit">추가하기</button>
+						   <button type="button" data-bs-dismiss="modal" class="btn btn-outline-dark">Close</button>
+						   <button type="submit" class="btn btn-outline-dark">추가하기</button>
 					      
 				</div>
 			</div>

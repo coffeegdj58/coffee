@@ -58,6 +58,7 @@
 									<td><h4>${p.point}Pt</h4></td>
 								</c:if>
 							</tr>
+							<tr><td colspan=2><hr></td></tr>
 				</c:forEach>	
 			</table>
 			</div>

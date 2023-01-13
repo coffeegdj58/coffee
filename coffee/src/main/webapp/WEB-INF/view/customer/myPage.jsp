@@ -72,7 +72,7 @@
 		</c:if>
 		
 		<table width="750px;">
-			
+			<tr><td colspan="4"><hr></td></tr>
 			<tr>
 				<td width="15%"><img src="${pageContext.request.contextPath}/image/${o.goodsName}.jpg" width= "200px" height="200px"></td>
 				<td>

@@ -26,6 +26,39 @@
 		<jsp:include page="nav.jsp"></jsp:include> 
 		<!-- include의 주소에는 context를 사용하지 않는다 편한 액션 중하나 -->
 </div>
+	<br>
 
+		<div class=row>
+			
+			<div class="col-4" width="100%">
+				<img src="${pageContext.request.contextPath}/image/bgTh1.jpg" style="width:650px;"  >
+			</div>
+			<div class="col-4" width="100%">
+				<img src="${pageContext.request.contextPath}/image/bgTh2.jpg" style="width:650px;"  >
+			</div>
+			<div class="col-4" width="100%">
+				<img src="${pageContext.request.contextPath}/image/bgTh3.jpg" style="width:650px;" >
+			</div>
+			<div class="col-4" width="100%">
+				<img src="${pageContext.request.contextPath}/image/bg2.png" style="width:650px;"  >
+			</div>
+			<div class="col-4" width="100%">
+				<img src="${pageContext.request.contextPath}/image/bg1.png" style="width:650px;"  >
+			</div>
+			<div class="col-4" width="100%">
+				<img src="${pageContext.request.contextPath}/image/bg.png" style="width:650px;" >
+			</div>
+			
+			<div class="col-4" width="100%">
+				<img src="${pageContext.request.contextPath}/image/bgSe1.jpg" style="width:650px;"  >
+			</div>
+			<div class="col-4" width="100%">
+				<img src="${pageContext.request.contextPath}/image/bgSe2.jpg" style="width:650px;"  >
+			</div>
+			<div class="col-4" width="100%">
+				<img src="${pageContext.request.contextPath}/image/bgSe3.jpg" style="width:650px;" >
+			</div>
+		</div>
+	<div><img src="${pageContext.request.contextPath}/image/footeer.png" ></div>
 </body>
 </html>

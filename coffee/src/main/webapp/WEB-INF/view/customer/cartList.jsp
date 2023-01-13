@@ -36,7 +36,8 @@
 	</c:if>
 		<c:forEach var= "c" items="${cartList}">
 		
-			<table border="1" width="100%">
+			<table width="100%">
+			<tr><td colspan="3"><hr></td></tr>
 			<tr>
 				<c:if test="${c.soldout=='N'}">
 					<form action="${pageContext.request.contextPath}/CartList" method="post" id="checkForm${c.goodsCode}">
@@ -123,9 +124,11 @@
 					 		<button type="button" class="btn btn-outline-dark" onclick="location.href='${pageContext.request.contextPath}/DeleteCartOne?goodsCode=${c.goodsCode}'">삭제</button>
 					 	</td>
 					 	</tr>
+					 	
 			 		</table>
 			 	</td>
 			</tr>
+			<tr><td colspan="3"><hr></td></tr>
 			</table>
 			<br>
 		</c:forEach>
