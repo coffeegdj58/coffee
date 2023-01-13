@@ -3,7 +3,6 @@ package customerController;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,14 +11,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import service.OrderService;
+import service.GoodsService;
 import service.ReviewService;
 import vo.Customer;
+import vo.Goods;
 import vo.Review;
 
 @WebServlet("/AddReview")
 public class AddReviewController extends HttpServlet {
 	private ReviewService reviewService;
+	private GoodsService goodsService;
 	//리뷰 추가 폼
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//로그인 한 사람만 접근 가능
@@ -41,6 +42,12 @@ public class AddReviewController extends HttpServlet {
 		ArrayList<Review> Rlist=reviewService.selectReviewById(customerId);
 		request.setAttribute("Rlist", Rlist);
 		//System.out.println(Rlist);
+		//리뷰 작성할때 상품이름이랑 사진 보여주려고
+		this.goodsService= new GoodsService();
+		Goods goodsOne=goodsService.getGoodsOne(goodsCode);
+		request.setAttribute("goodsOne", goodsOne);
+		//
+		
 		
 		request.getRequestDispatcher("/WEB-INF/view/customer/addReview.jsp").forward(request, response);
 

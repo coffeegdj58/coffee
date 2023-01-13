@@ -6,6 +6,7 @@ public class Review {
 	private int goodsCode;
 	private String customerId;
 	private int rating;
+	private String goodsName;
 	
 	public int getOrderCode() {
 		return orderCode;
@@ -36,6 +37,12 @@ public class Review {
 	}
 	public void setRating(int rating) {
 		this.rating = rating;
+	}
+	public String getGoodsName() {
+		return goodsName;
+	}
+	public void setGoodsName(String goodsName) {
+		this.goodsName = goodsName;
 	}
 	
 	

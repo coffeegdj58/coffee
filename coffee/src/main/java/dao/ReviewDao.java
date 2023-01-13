@@ -56,7 +56,7 @@ public class ReviewDao {
 	public ArrayList<Review> selectReviewById(String customerId, Connection conn) throws Exception {
 		ArrayList<Review> list = new ArrayList<Review>();
 		
-		String sql = "SELECT * FROM review WHERE customer_id= ? ORDER BY createdate DESC";
+		String sql = "SELECT * FROM review r INNER JOIN goods g ON g.goods_code=r.goods_code WHERE r.customer_id= ? ORDER BY r.createdate DESC";
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		stmt.setString(1, customerId);
 		
@@ -65,10 +65,12 @@ public class ReviewDao {
 		
 		while(rs.next()) {
 			Review r = new Review();
-			r.setCustomerId(rs.getString("customer_id"));
-			r.setRating(rs.getInt("rating"));
-			r.setReviewMemo(rs.getString("review_memo"));
-			r.setOrderCode(rs.getInt("order_code"));
+			r.setCustomerId(rs.getString("r.customer_id"));
+			r.setRating(rs.getInt("r.rating"));
+			r.setReviewMemo(rs.getString("r.review_memo"));
+			r.setOrderCode(rs.getInt("r.order_code"));
+			r.setGoodsCode(rs.getInt("r.goods_code"));
+			r.setGoodsName(rs.getString("g.goods_name"));
 			list.add(r);
 		}
 		rs.close();

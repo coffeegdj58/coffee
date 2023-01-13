@@ -70,7 +70,7 @@
 		<a href="${pageContext.request.contextPath}/NoticeList?currentPage=${lastPage}" style="color: black;">마지막</a>
 	</div>
 	
-	
+	<!--footer -->
 	<img alt="" src="${pageContext.request.contextPath}/image/footeer.png"  style="width: 100%; height: auto;">
 </body>
 </html>
