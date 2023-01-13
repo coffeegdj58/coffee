@@ -27,31 +27,45 @@
 		<jsp:include page="../nav.jsp"></jsp:include> 
 		<!-- include의 주소에는 context를 사용하지 않는다 편한 액션 중하나 -->
 	</div>
-	<h1>배송지 목록</h1>
-	<c:forEach var="a" items="${list}">
-		<table>
-			<tr>
-				<td>이름</td>
-				<td>${loginMember.customerName}</td>	
-			</tr>
-			<tr>
-				<td>주소</td>
-				<td>${a.address}</td>
-			</tr>
-			<tr>
-				<td>전화번호</td>
-				<td>${loginMember.customerPhone}</td>
-			</tr>
-			
-		</table>
-		<div><a href="${pageContext.request.contextPath}/ModifyAddress?addressCode=${a.addressCode}">수정하기</a></div>
-		
-		<c:if test="${a.flag==1}">
-			<div>기본배송지</div>
-		</c:if>
+	
+	<br><br>
+	<div><img src="${pageContext.request.contextPath}/image/myPage.png"></div>
+	<br><br>
+	
+	<div class="container">
+		<div class="row">
+			<div class="col-12" style="text-align: center;" >
+				<table width="90%">
+					<tr><td colspan="4" width="50%"><h1>배송지목록</h1></td></tr>
+					<tr><td>&nbsp;</td></tr>
+					<tr><td colspan="4"><img src="${pageContext.request.contextPath}/image/myAddress.png" width="400px" height="400px"></td></tr>
+					<tr><td>&nbsp;</td></tr>
+					<tr><td>&nbsp;</td></tr>
+					<tr><td>&nbsp;</td></tr>
+					<tr>
+						<td>이름</td>
+						<td>주소</td>
+						<td>전화번호</td>
+						<td>수정</td>
+					</tr>
+					<c:forEach var="a" items="${list}">
+						<tr>
+							<td>${loginMember.customerName}</td>	
+							<td>${a.address} <c:if test="${a.flag==1}">(기본배송지)</c:if>
+							<td>${loginMember.customerPhone}</td>
+							<td colspan="3"><button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="location.href='${pageContext.request.contextPath}/ModifyAddress?addressCode=${a.addressCode}'">수정하기</button></td>
+						</tr>
+						
+				</c:forEach>
+				</table>
+			</div>
+		</div>
 		<br><br>
-	</c:forEach>
-	<a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">배송지 추가하기</a>
+		
+			
+		<div style="text-align: center;"><button type="button" class="btn btn-outline-dark btn-lg" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="location.href='#'">배송지추가하기</button></div>
+	</div>		
+	
 	
 	<form action="${pageContext.request.contextPath}/AddressCustomer" method="post">
 	<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -83,6 +97,10 @@
 		</div>
 	</div>
 	</form>
+	
+	
+	<br><br><br><br>
+	<div><img src="${pageContext.request.contextPath}/image/footeer.png" ></div>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script> 
 </body>
 </html>

@@ -26,40 +26,44 @@
 		<jsp:include page="../nav.jsp"></jsp:include> 
 		<!-- include의 주소에는 context를 사용하지 않는다 편한 액션 중하나 -->
 	</div>
-	<br>
+	<div><img src="${pageContext.request.contextPath}/image/myPage.png"></div>
 	<br>
 	
+	<br><br>
+	
 	<div class="container">
-	<h1>Point</h1>
+	
+		<br><br>
 		<div class="row">
-			
-			<br><br>
-			<div style="text-align: center;" class="col-3">
-				<h3>사용 가능 포인트</h3>
-				<h3>${loginMember.point}</h3>
-			</div>
-			<div class="col-9">
-				<table>
-					<tr>
-						<td>포인트</td>
-						<td>적립/사용</td>
-						<td>일자</td>
-					</tr>
-					<c:forEach var="p" items="${list}">
-						<tr>
-							<c:if test="${p.pointKind.equals('사용')}">
-								<td>-${p.point}</td>
-							</c:if>
-							<c:if test="${p.pointKind.equals('적립')}">
-								<td>${p.point}</td>
-							</c:if>
-							<td>${p.pointKind}</td>
-							<td>${p.createdate}</td>
-						</tr>
-					</c:forEach>
-				</table>
+			<div class="col-12" style="text-align: center;" >
+			<table width="90%">
+				<tr>
+					<td colspan="2" width="50%"><h3 style="text-align: center;"> 잔여포인트:&nbsp;&nbsp;&nbsp; ${loginMember.point}Pt</h3></td>	
+				</tr>
+				<tr><td>&nbsp;</td></tr>		
+				<tr><td colspan="2"><img src="${pageContext.request.contextPath}/image/point.jpg" width="400px" heigth="400px"></td></tr>
+				<tr><td>&nbsp;</td></tr>
+				<tr><td>&nbsp;</td></tr>
+				<c:forEach var="p" items="${list}">
+							<tr>
+								<td>${p.createdate}</td>
+							</tr>
+							<tr>
+								
+								<td><h4>포인트 ${p.pointKind}</h4></td>
+								<c:if test="${p.pointKind.equals('사용')}">
+									<td><h4>-${p.point}Pt</h4></td>
+								</c:if>
+								<c:if test="${p.pointKind.equals('적립')}">
+									<td><h4>${p.point}Pt</h4></td>
+								</c:if>
+							</tr>
+				</c:forEach>	
+			</table>
 			</div>
 		</div>
 	</div>
+	<br><br><br><br>
+	<div><img src="${pageContext.request.contextPath}/image/footeer.png" ></div>
 </body>
 </html>

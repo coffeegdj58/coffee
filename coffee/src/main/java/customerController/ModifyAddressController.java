@@ -41,8 +41,24 @@ public class ModifyAddressController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		HttpSession session = request.getSession();
+		Customer loginMember = (Customer)session.getAttribute("loginMember");
+		request.setCharacterEncoding("utf-8");
+		String address= request.getParameter("address");
+		int addressCode = Integer.parseInt(request.getParameter("addressCode"));
+		int flag = 0;
+		if(request.getParameter("flag")!=null) {
+			flag= Integer.parseInt(request.getParameter("flag"));
+		}
+		this.customerService = new CustomerService();
+		if(flag==1) {
+			customerService.resetAddressFlag(loginMember.getCustomerId());
+		}
+		int result= customerService.updateAddress(address, flag, addressCode);		
+				
+				System.out.println(result);
+		
+		response.sendRedirect(request.getContextPath()+"/AddressCustomer");
 	}
 
 }

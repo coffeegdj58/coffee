@@ -18,8 +18,9 @@
           <div class="row">
             <div class="col-12">
             <div class="float-right">
-
-                <a href="${pageContext.request.contextPath}/CustomerLogin" style="color:black">login</a>
+				<c:if test="${empty loginMember||empty loginEmp}">
+                	<a href="${pageContext.request.contextPath}/CustomerLogin" style="color:black">login</a>
+                </c:if>
                 <span class="mx-md-2 d-inline-block"></span>
                 <a href="${pageContext.request.contextPath}/Logout" style="color:black">logout</a>
                 <span class="mx-md-2 d-inline-block"></span>

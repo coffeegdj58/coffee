@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+      <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,5 +29,21 @@
 		<jsp:include page="../nav.jsp"></jsp:include> 
 		<!-- include의 주소에는 context를 사용하지 않는다 편한 액션 중하나 -->
 	</div>
+	<form action="${pageContext.request.contextPath}/ModifyAddress" method="post">
+		<input type="hidden" name="addressCode" value="${address.addressCode}">
+		<table>
+			<tr>
+				<td>주소</td>
+				<td><input type="text" name="address" placeholder="${address.address}"></td>
+			</tr>
+			<tr>
+				<td>기본 배송지로 등록</td>
+				
+				<td><input type="checkbox" name="flag" value="1"<c:if test="${address.flag==1}">checked="checked"</c:if>></td>
+				
+			</tr>	
+		</table>
+		<button type="submit">수정하기</button>
+	</form>
 </body>
 </html>

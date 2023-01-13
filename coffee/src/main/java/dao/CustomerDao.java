@@ -298,7 +298,7 @@ public class CustomerDao {
 	//update address
 	public int updateAddress(int addressCode, String address, int flag, Connection conn) throws Exception {
 		int result = 0;
-		String sql = "UPDATE customer_address SET address= ? flag= ? WHERE address_code=?";
+		String sql = "UPDATE customer_address SET address= ?, flag= ? WHERE address_code= ?";
 		PreparedStatement stmt= conn.prepareStatement(sql);
 		stmt.setString(1, address);
 		stmt.setInt(2, flag);
@@ -354,6 +354,7 @@ public class CustomerDao {
 		ResultSet rs = stmt.executeQuery();
 		
 		if(rs.next()) {
+			address.setAddressCode(rs.getInt("address_code"));
 			address.setAddress(rs.getString("address"));
 			address.setFlag(rs.getInt("flag"));
 		}
