@@ -24,40 +24,53 @@
 			<jsp:include page="../nav.jsp"></jsp:include> 
 			<!-- include의 주소에는 context를 사용하지 않는다 편한 액션 중하나 -->
 	</div>
+	<img alt="" src="${pageContext.request.contextPath}/image/starbucks.jpg"  style="width: 100%; height: auto;">
 	
 	<!-- 공지사항은 회원 비회원 모두가 볼 수있게  -->
-	
-	<!-- 관리자만 공지사항 추가가 보이게 할 것 -->
-	<c:if test="${loginEmp!=null}">
-		<a href="${pageContext.request.contextPath}/AddNotice">공지사항 추가</a>
-	</c:if>
-	<table>
-		<tr>
-			<th>공지번호</th>
-			<th>제목</th>
-			<th>내용</th>
-			<th>날짜</th>
-		</tr>
-		<c:forEach var="n" items="${list}">
+	<div>
+		<h3 style="margin-left: 230px; margin-top: 50px; font-weight: bold;">공지사항</h3>
+	</div> 
+	<div style="margin-left: 230px; margin-top: 30px;">
+		<!-- 관리자만 공지사항 추가가 보이게 할 것 -->
+		<c:if test="${loginEmp!=null}">
+			<a href="${pageContext.request.contextPath}/AddNotice" style="color: black;">공지사항 추가</a>
+		</c:if>
+	</div>
+	<table class="table w-75"  style="margin-left: auto; margin-right: auto;  margin-top: 20px;">
+	 	<thead style="text-align: center;" >
 			<tr>
-				<td>${n.noticeCode}</td>
-				<td>${n.noticeTitle}</td>
-				<td>
-					<a href="${pageContext.request.contextPath}/NoticeOne?noticeCode=${n.noticeCode}">
-					${n.noticeContent} </a>
-				</td>
-				<td>${n.createdate}</td>
+				<th scope="col"  width="80px">번호</th>
+				<th scope="col" width="200px" style="word-break:break-all">제목</th>
+				<th scope="col">내용</th>
+				<th scope="col" width="150px">날짜</th>
 			</tr>
-		</c:forEach>
+		</thead>
+		<tbody style="text-align: center;">
+			<c:forEach var="n" items="${list}">
+				<tr>
+					<td  scope="col" >${n.noticeCode}</td>
+					<td scope="col">${n.noticeTitle}</td>
+					<td scope="col">
+						<a href="${pageContext.request.contextPath}/NoticeOne?noticeCode=${n.noticeCode}" style="color: black;">
+						${n.noticeContent} </a>
+					</td>
+					<td scope="col">${n.createdate}</td>
+				</tr>
+			</c:forEach>
+		</tbody>
 	</table>
+	<div style=" text-align: center;">
+		<a href="${pageContext.request.contextPath}/NoticeList?currentPage=1" style="color: black;">처음</a>
+		<c:if test="${currentPage > 1}">
+			<a href="${pageContext.request.contextPath}/NoticeList?currentPage=${currentPage-1}&rowPerPage=${rowPerPage}" style="color: black;">이전</a>
+		</c:if>
+		<c:if test="${currentPage < lastPage}">
+			<a href="${pageContext.request.contextPath}/NoticeList?currentPage=${currentPage+1}&rowPerPage=${rowPerPage}" style="color: black;">이후</a>
+		</c:if>
+		<a href="${pageContext.request.contextPath}/NoticeList?currentPage=${lastPage}" style="color: black;">마지막</a>
+	</div>
 	
-	<a href="${pageContext.request.contextPath}/NoticeList?currentPage=1">처음</a>
-	<c:if test="${currentPage > 1}">
-		<a href="${pageContext.request.contextPath}/NoticeList?currentPage=${currentPage-1}&rowPerPage=${rowPerPage}">이전</a>
-	</c:if>
-	<c:if test="${currentPage < lastPage}">
-		<a href="${pageContext.request.contextPath}/NoticeList?currentPage=${currentPage+1}&rowPerPage=${rowPerPage}">이후</a>
-	</c:if>
-	<a href="${pageContext.request.contextPath}/NoticeList?currentPage=${lastPage}">마지막</a>
+	
+	<img alt="" src="${pageContext.request.contextPath}/image/footeer.png"  style="width: 100%; height: auto;">
 </body>
 </html>

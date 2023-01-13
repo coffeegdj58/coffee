@@ -24,28 +24,32 @@
 			<jsp:include page="../nav.jsp"></jsp:include> 
 			<!-- include의 주소에는 context를 사용하지 않는다 편한 액션 중하나 -->
 	</div>
+	<div>
+		<h3 style="margin-left: 230px; margin-top: 50px; font-weight: bold;">공지사항</h3>
+	</div> 
 	
-	<div>
-		공지 번호: ${n.noticeCode}
-	</div>
-	<div>
-		제목: ${n.noticeTitle}
-	</div>
-	<div>
-		내용: ${n.noticeContent}
-	</div>
-	<div>
-		작성자: ${n.empId}
-	</div>
-	<div>
-		날짜: ${n.createdate}
-	</div>
+	<div style=" margin-left: 230px; margin-right: 180px; margin-top: 30px; border-style: ridge;"">
+
+		<div>
+			제목: ${n.noticeTitle}
+		</div>
+		<div>
+			내용: <br> ${n.noticeContent}
+		</div>
+		<div>
+			작성자: ${n.empId}
+		</div>
+		<div>
+			날짜: ${n.createdate}
+		</div>
+	</div>	
+	
 	<!-- 관리자만 수정 삭제가 보이게 할 것 -->
-	<c:if test="${loginEmp!=null}">
-		<td>
-			<a href="${pageContext.request.contextPath}/ModifyNotice?noticeCode=${n.noticeCode}">수정</a> /
-			<a href="${pageContext.request.contextPath}/RemoveNotice?noticeCode=${n.noticeCode}">삭제</a> 
-		</td>
-	</c:if>
+	<div style="margin-left: 230px; margin-top: 30px;">
+		<c:if test="${loginEmp!=null}">
+			<a href="${pageContext.request.contextPath}/ModifyNotice?noticeCode=${n.noticeCode}" style="color: black;">수정</a> /
+			<a href="${pageContext.request.contextPath}/RemoveNotice?noticeCode=${n.noticeCode}" style="color: black;">삭제</a> 
+		</c:if>
+	</div>
 </body>
 </html>
