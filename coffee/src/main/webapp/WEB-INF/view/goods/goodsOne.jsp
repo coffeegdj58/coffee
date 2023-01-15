@@ -98,29 +98,47 @@
 						</tr>
 				</table>
 			</div>
-			
-			
+			<hr>
+		<!-- 리뷰보이게 -->
+		<div>
 			<div>
-				<div>
-					<table>
-						<tr>
-							<th>아이디</th>
-							<th>별점</th>
-							<th>내용</th>
-						</tr>
+				<h5 style="margin-left: 230px; margin-top: 50px; font-weight: bold;">Review</h5>
+			</div>
+			<br>
+			<table class="table"
+				style="margin-left: auto; margin-right: auto; margin-top: 20px; width: 100%">
+				<thead style="text-align: center;">
+					<tr>
+						<td>작성자</td>
+						<td>별점</td>
+						<td>내용</td>
+					</tr>
+				</thead>
+				<tbody style="text-align: center;">
 						<c:forEach var="Rlist" items="${Rlist}">
 							<tr>
-								<th>${Rlist.customerId}</th>
-								<th>${Rlist.rating}</th>
-								<th>${Rlist.reviewMemo}</th>
-								<th>별점</th>
-								<th>내용</th>
+								<td>${Rlist.customerId}</td>
+								<td>${Rlist.rating}
+									<c:if test="${Rlist.rating==1}">
+									★
+									</c:if> <c:if test="${Rlist.rating==2}">
+									★★
+									</c:if> <c:if test="${Rlist.rating==3}">
+									★★★
+									</c:if> <c:if test="${Rlist.rating==4}">
+									★★★★
+									</c:if> <c:if test="${Rlist.rating==5}">
+									★★★★★
+									</c:if>
+								</td>
+								<td>${Rlist.reviewMemo}</td>
 							</tr>
 						</c:forEach>
-					</table>
+					</tbody>
+				</table>
 				</div>
-				<div>
-					<a href="${pageContext.request.contextPath}/GoodsOne?currentPage=1&goodsCode=${g.goodsCode}">처음</a>
+				<div style="text-align: center;" >
+					<a href="${pageContext.request.contextPath}/GoodsOne?currentPage=1&goodsCode=${g.goodsCode}" style="color: black;">처음</a>
 					<c:if test="${currentPage > 1}">
 						<a href="${pageContext.request.contextPath}/GoodsOne?currentPage=${currentPage-1}&rowPerPage=${rowPerPage}&goodsCode=${g.goodsCode}">이전</a>
 					</c:if>
@@ -129,11 +147,10 @@
 					</c:if>
 				</div>
 			</div>
-		</div>
 		
 		
 		
 						<br><br><br><br><br>				<br><br><br><br><br>
-		<div><img src="${pageContext.request.contextPath}/image/footeer.png" ></div>
+		<div><img src="${pageContext.request.contextPath}/image/footeer.png" style="width: 100%; height: auto;"></div>
 	</body>
 </html>

@@ -18,6 +18,22 @@
     
     <!-- Style -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/nav/css/style.css">
+<style type="text/css">
+html, body {
+    height: 100%
+}
+
+#wrap {
+    min-height: 100%;
+    position: relative;
+    padding-bottom: 60px;
+}
+
+footer {
+    bottom: 0;
+}
+<!--하단 footer 고정-->
+</style>
 </head>
 <body>
 	<div>	
@@ -48,11 +64,16 @@
 				<td>${e.createdate}</td>
 				<!-- 최고 관리자만 사용 가능하게 끔 -->
 				<c:if test="${loginEmp.authCode==3}">
-					<td><a href="${pageContext.request.contextPath}/ModifyEmp?empCode=${e.empCode}">수정 </a></td>
-					<td><a href="${pageContext.request.contextPath}/RemoveEmp?empCode=${e.empCode}">삭제 </a></td>
+					<td><a href="${pageContext.request.contextPath}/ModifyEmp?empCode=${e.empCode}" style="color: black;">수정 </a></td>
+					<td><a href="${pageContext.request.contextPath}/RemoveEmp?empCode=${e.empCode}" style="color: black;">삭제 </a></td>
 				</c:if>
 			</tr>
 		</c:forEach>
 	</table>
+	
+	<!--footer -->
+	<footer class="footer">
+		<img alt="" src="${pageContext.request.contextPath}/image/footeer.png" style="width: 100%; height: auto; ">
+	</footer>
 </body>
 </html>

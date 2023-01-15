@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>리뷰 작성하기</title>
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -26,6 +26,22 @@
 <!-- Style -->
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/bootstrap/nav/css/style.css">
+<style type="text/css">
+html, body {
+    height: 100%
+}
+
+#wrap {
+    min-height: 100%;
+    position: relative;
+    padding-bottom: 60px;
+}
+
+footer {
+    bottom: 0;
+}
+<!--하단 footer 고정-->
+</style>
 </head>
 <body>
 	<div>
@@ -34,15 +50,13 @@
 	</div>
 	<div>
 		<div>
-			<h3 style="margin-left: 230px; margin-top: 50px; font-weight: bold;">리뷰
-				작성</h3>
+			<h3 style="margin-left: 230px; margin-top: 50px; font-weight: bold;">리뷰 작성</h3>
 		</div>
 		<hr style="height: 50px;">
 		<div style="margin-left: 230px; margin-top: 30px;">
-			<form action="${pageContext.request.contextPath}/AddReview"
-				method="post">
+			<form action="${pageContext.request.contextPath}/AddReview" method="post">
 				<input type="hidden" name="orderCode" value="${orderCode}" readonly="readonly" class="form-control"
-					style="width: 50px; text-align: center;"> 
+					style="width: 30px; text-align: center;"> 
 				<img src="${pageContext.request.contextPath}/image/${goodsOne.goodsName}.jpg" width="300px" height="300px">
 				<br>
 				<div>${goodsOne.goodsName}</div>
@@ -95,7 +109,8 @@
 						<c:forEach var="Rlist" items="${Rlist}">
 							<td>${Rlist.goodsName}</td>
 							<td>${Rlist.customerId}</td>
-							<td>${Rlist.rating}<c:if test="${Rlist.rating==1}">
+							<td>${Rlist.rating}
+							<c:if test="${Rlist.rating==1}">
 							★
 							</c:if> <c:if test="${Rlist.rating==2}">
 							★★
@@ -108,8 +123,8 @@
 							</c:if>
 							</td>
 							<td>${Rlist.reviewMemo}</td>
-							<td><a
-								href="${pageContext.request.contextPath}/RemoveReview?orderCode=${Rlist.orderCode}">삭제</a>
+							<td>
+								<a href="${pageContext.request.contextPath}/RemoveReview?orderCode=${Rlist.orderCode}" style="color: black;">삭제</a>
 							</td>
 						</c:forEach>
 					</tr>
@@ -118,7 +133,8 @@
 		</div>
 	</div>
 	<!--footer -->
-	<img alt="" src="${pageContext.request.contextPath}/image/footeer.png"
-		style="width: 100%; height: auto;      ">
+	<footer class="footer">
+		<img alt="" src="${pageContext.request.contextPath}/image/footeer.png" style="width: 100%; height: auto; ">
+	</footer>
 </body>
 </html>

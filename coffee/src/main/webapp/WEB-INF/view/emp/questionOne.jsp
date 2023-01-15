@@ -18,6 +18,22 @@
     
     <!-- Style -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/nav/css/style.css">
+<style type="text/css">
+html, body {
+    height: 100%
+}
+
+#wrap {
+    min-height: 100%;
+    position: relative;
+    padding-bottom: 60px;
+}
+
+footer {
+    bottom: 0;
+}
+<!--하단 footer 고정-->
+</style>
 </head>
 <body>
 	<div>	
@@ -57,5 +73,10 @@
 	<c:if test="${q.flag eq 'Y' && loginEmp!=null}">
 		<a href="${pageContext.request.contextPath}/RemoveComment?commentCode=${c.commentCode}&questionCode=${q.questionCode}">답변 삭제</a>
 	</c:if>
+	
+	<!--footer -->
+	<footer class="footer">
+		<img alt="" src="${pageContext.request.contextPath}/image/footeer.png" style="width: 100%; height: auto; ">
+	</footer>	
 </body>
 </html>

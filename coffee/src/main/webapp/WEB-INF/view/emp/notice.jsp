@@ -18,13 +18,30 @@
     
     <!-- Style -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/nav/css/style.css">
+<style type="text/css">
+html, main {
+    height: 100%
+}
+
+#wrap {
+    min-height: 100%;
+    position: relative;
+    padding-bottom: 60px;
+}
+
+footer {
+    bottom: 0;
+}
+
+<!--하단 footer 고정-->
+</style>
 </head>
 <body>
 	<div>	
 			<jsp:include page="../nav.jsp"></jsp:include> 
 			<!-- include의 주소에는 context를 사용하지 않는다 편한 액션 중하나 -->
 	</div>
-	<img alt="" src="${pageContext.request.contextPath}/image/starbucks.jpg"  style="width: 100%; height: auto;">
+	<img alt="" src="${pageContext.request.contextPath}/image/"  style="width: 100%; height: auto;">
 	
 	<!-- 공지사항은 회원 비회원 모두가 볼 수있게  -->
 	<div>
@@ -71,6 +88,8 @@
 	</div>
 	
 	<!--footer -->
-	<img alt="" src="${pageContext.request.contextPath}/image/footeer.png"  style="width: 100%; height: auto;">
+	<footer class="footer">
+		<img alt="" src="${pageContext.request.contextPath}/image/footeer.png" style="width: 100%; height: auto; ">
+	</footer>
 </body>
 </html>
