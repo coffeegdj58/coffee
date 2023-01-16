@@ -3,10 +3,8 @@
 <!DOCTYPE html>
 <html>
 	<head>
-	
-  
-		<meta charset="UTF-8">
-			<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
 
@@ -20,7 +18,24 @@
     <!-- Style -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/nav/css/style.css">
 
-		<title>GoodsOne</title>
+	<title>GoodsOne</title>
+	<style type="text/css">
+	html, main {
+	    height: 100%
+	}
+	
+	#wrap {
+	    min-height: 100%;
+	    position: relative;
+	    padding-bottom: 60px;
+	}
+	
+	footer {
+	    bottom: 0;
+	}
+	
+	<!--하단 footer 고정-->
+	</style>	
 	</head>
 	<body>
 		<div>	
@@ -147,10 +162,9 @@
 					</c:if>
 				</div>
 			</div>
-		
-		
-		
-						<br><br><br><br><br>				<br><br><br><br><br>
-		<div><img src="${pageContext.request.contextPath}/image/footeer.png" style="width: 100%; height: auto;"></div>
+		<!--footer -->
+		<footer class="footer">
+			<img alt="" src="${pageContext.request.contextPath}/image/footeer.png" style="width: 100%; height: auto; ">
+		</footer>
 	</body>
 </html>

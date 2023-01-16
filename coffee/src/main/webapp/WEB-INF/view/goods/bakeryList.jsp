@@ -19,8 +19,23 @@
     
     <!-- Style -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/nav/css/style.css">
-
- 
+	<style type="text/css">
+	html, main {
+	    height: 100%
+	}
+	
+	#wrap {
+	    min-height: 100%;
+	    position: relative;
+	    padding-bottom: 60px;
+	}
+	
+	footer {
+	    bottom: 0;
+	}
+	
+	<!--하단 footer 고정-->
+	</style>
 </head>
 <body>
 
@@ -132,7 +147,9 @@
 	</c:if>
 	<br><br>
 	</div>
-	<div><img src="${pageContext.request.contextPath}/image/footeer.png" ></div>
-	
+	<!--footer -->
+	<footer class="footer">
+		<img alt="" src="${pageContext.request.contextPath}/image/footeer.png" style="width: 100%; height: auto; ">
+	</footer>
 </body>
 </html>
