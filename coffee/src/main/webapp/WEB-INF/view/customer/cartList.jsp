@@ -30,6 +30,7 @@
 	<br><br><br>
 	<div class="container">
 	<h1>MyCart</h1>
+	<hr style="height: 3px; background-color:black;">
 	<br><br>
 	<c:if test="${empty cartList}">
 				<h2 style="text-align: center;">장바구니가 비었습니다</h2>

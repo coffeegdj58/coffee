@@ -28,8 +28,10 @@
 	<br><br>
 	<div class="container">
 	<h1>커피</h1>
+	<hr style="height: 3px; background-color:black;">
 	<br><br>
 	<h3>카테고리</h3>
+	<hr style="height: 3px; background-color:black;" width="100%">
 	<br>
 			<h5>
 			<c:forEach var="c" items="${categoryList}">
@@ -40,6 +42,7 @@
 			<br><br>
 	
 	<h3>에스프레소</h3>
+	<hr style="height: 3px; background-color:black;" width="100%">
 	<br>
 	<table> 
 		<tr>
@@ -49,7 +52,7 @@
 				</c:if>
 				 
 				<td>
-					<div><a href="${pageContext.request.contextPath}/GoodsOne?goodsCode=${b.goodsCode}"><img src="${pageContext.request.contextPath}/image/${b.goodsName}.jpg" width="400" height="400"></div></a><br>
+					<div><a href="${pageContext.request.contextPath}/GoodsOne?goodsCode=${b.goodsCode}"><img src="${pageContext.request.contextPath}/image/${b.goodsName}.jpg" width="370" height="370"></div></a><br>
 					<div style="text-align: center;">${b.goodsName}</div>
 					<br>
 				</td>
@@ -60,7 +63,9 @@
 	<span id="Frappuccino"></span>
 	<br><br>
 	
-		<h3>프라푸치노</h3><br>
+		<h3>프라푸치노</h3>
+		<hr style="height: 3px; background-color:black;" width="100%"><br>
+		
 	<table>
 		<tr>
 			<c:forEach var="b" items="${frappuccino}" varStatus="s">
@@ -69,7 +74,7 @@
 				</c:if>
 				 
 				<td>
-					<div><a href="${pageContext.request.contextPath}/GoodsOne?goodsCode=${b.goodsCode}"><img src="${pageContext.request.contextPath}/image/${b.goodsName}.jpg" width="400" height="400"></div></a><br>
+					<div><a href="${pageContext.request.contextPath}/GoodsOne?goodsCode=${b.goodsCode}"><img src="${pageContext.request.contextPath}/image/${b.goodsName}.jpg" width="370" height="370"></div></a><br>
 					<div style="text-align: center;" >${b.goodsName}</div>
 					<br>
 				</td>
@@ -80,7 +85,8 @@
 	<span id="Fizzio"></span>
 	<br><br>
 	
-	<h3>스타벅스 피지오</h3><br>
+	<h3>스타벅스 피지오</h3>
+	<hr style="height: 3px; background-color:black;" width="100%"><br>
 	<table>
 		<tr>
 			<c:forEach var="b" items="${fizzio}" varStatus="s">
@@ -89,7 +95,7 @@
 				</c:if>
 				 
 				<td>
-					<div><a href="${pageContext.request.contextPath}/GoodsOne?goodsCode=${b.goodsCode}"><img src="${pageContext.request.contextPath}/image/${b.goodsName}.jpg" width="400" height="400"></div></a><br>
+					<div><a href="${pageContext.request.contextPath}/GoodsOne?goodsCode=${b.goodsCode}"><img src="${pageContext.request.contextPath}/image/${b.goodsName}.jpg" width="369" height="369"></div></a><br>
 					<div style="text-align: center;">${b.goodsName}</div>
 					<br>
 				</td>
@@ -100,7 +106,8 @@
 	<span id="Blended"></span>
 	<br><br>
 	
-	<h3 >블렌디드</h3><br>
+	<h3 >블렌디드</h3>
+	<hr style="height: 3px; background-color:black;" width="100%"><br>
 	<table>
 		<tr>
 			<c:forEach var="b" items="${blended}" varStatus="s">
@@ -109,7 +116,7 @@
 				</c:if>
 				 
 				<td>
-					<div><a href="${pageContext.request.contextPath}/GoodsOne?goodsCode=${b.goodsCode}"><img src="${pageContext.request.contextPath}/image/${b.goodsName}.jpg" width="400" height="400"></div></a><br>
+					<div><a href="${pageContext.request.contextPath}/GoodsOne?goodsCode=${b.goodsCode}"><img src="${pageContext.request.contextPath}/image/${b.goodsName}.jpg" width="369" height="369"></div></a><br>
 					<div style="text-align: center;">${b.goodsName}</div>
 					<br>
 				</td>
@@ -120,7 +127,8 @@
 	<span id="Coldbrew" ></span>
 	<br><br>
 	
-	<h3 >콜드브루</h3><br>
+	<h3 >콜드브루</h3>
+	<hr style="height: 3px; background-color:black;" width="100%"><br>
 	<table>
 		<tr>
 			<c:forEach var="b" items="${coldbrew}" varStatus="s">
@@ -129,7 +137,7 @@
 				</c:if>
 				 
 				<td>
-					<div><a href="${pageContext.request.contextPath}/GoodsOne?goodsCode=${b.goodsCode}"><img src="${pageContext.request.contextPath}/image/${b.goodsName}.jpg" width="400" height="400"></div></a><br>
+					<div><a href="${pageContext.request.contextPath}/GoodsOne?goodsCode=${b.goodsCode}"><img src="${pageContext.request.contextPath}/image/${b.goodsName}.jpg" width="369" height="369"></div></a><br>
 					<div style="text-align: center;">${b.goodsName}</div>
 					<br>
 				</td>
@@ -140,7 +148,8 @@
 	<span id="Tea"></span>
 	<br><br>
 		
-		<h3>차</h3><br>
+		<h3>차</h3>
+		<hr style="height: 3px; background-color:black;" width="100%"><br>
 	<table>
 		<tr>
 			<c:forEach var="b" items="${tea}" varStatus="s">
@@ -149,7 +158,7 @@
 				</c:if>
 				 
 				<td>
-					<div><a href="${pageContext.request.contextPath}/GoodsOne?goodsCode=${b.goodsCode}"><img src="${pageContext.request.contextPath}/image/${b.goodsName}.jpg" width="400" height="400"></div></a><br>
+					<div><a href="${pageContext.request.contextPath}/GoodsOne?goodsCode=${b.goodsCode}"><img src="${pageContext.request.contextPath}/image/${b.goodsName}.jpg" width="369" height="369"></div></a><br>
 					<div style="text-align: center;">${b.goodsName}</div>
 					<br>
 				</td>
@@ -160,7 +169,8 @@
 	<span id="Drink"></span>
 	<br><br>
 	
-		<h3>기타음료</h3><br>
+		<h3>기타음료</h3>
+		<hr style="height: 3px; background-color:black;" width="100%"><br>
 	<table>
 		<tr>
 			<c:forEach var="b" items="${drink}" varStatus="s">
@@ -169,7 +179,7 @@
 				</c:if>
 				 
 				<td>
-					<div><a href="${pageContext.request.contextPath}/GoodsOne?goodsCode=${b.goodsCode}"><img src="${pageContext.request.contextPath}/image/${b.goodsName}.jpg" width="400" height="400"></div></a><br>
+					<div><a href="${pageContext.request.contextPath}/GoodsOne?goodsCode=${b.goodsCode}"><img src="${pageContext.request.contextPath}/image/${b.goodsName}.jpg" width="369" height="369"></div></a><br>
 					<div style="text-align: center;">${b.goodsName}</div>
 					<br>
 				</td>

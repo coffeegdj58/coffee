@@ -8,6 +8,16 @@ public class Order {
 	private int orderPrice;
 	private String orderState;
 	private String createdate;
+	private int addressCode;
+	
+	
+	
+	public int getAddressCode() {
+		return addressCode;
+	}
+	public void setAddressCode(int addressCode) {
+		this.addressCode = addressCode;
+	}
 	public int getOrderCode() {
 		return orderCode;
 	}

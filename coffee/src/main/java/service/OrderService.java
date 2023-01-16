@@ -8,6 +8,7 @@ import java.util.HashMap;
 import dao.OrderDao;
 import util.Dbutil;
 import vo.Cart;
+import vo.Order;
 
 public class OrderService {
 	private OrderDao orderdao;
@@ -521,6 +522,35 @@ public class OrderService {
 			}
 		}
 		return row;
+	}
+	
+	public Order selectOrderOne(int orderCode) {
+		Order o= new Order();
+		
+		Connection conn = null;
+		try {
+			db= new Dbutil();
+			conn = db.getConnection();
+			orderdao = new OrderDao();
+			o = orderdao.selectOrderOne(conn, orderCode);
+			conn.commit();
+		} catch (Exception e) {
+			try {
+				conn.rollback(); // DBUtil.class에서 conn.setAutoCommit(false);
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		}finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		
+		return o;
 	}
 	
 }

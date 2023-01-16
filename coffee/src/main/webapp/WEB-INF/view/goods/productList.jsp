@@ -29,9 +29,11 @@
 	</div>
 	<br><br>
 	<div class="container">
-	<h1>베이커리</h1>
+	<h1>상품</h1>
+	<hr style="height: 3px; background-color:black;" width="100%">
 	<br><br>
 	<h3>카테고리</h3>
+	<hr style="height: 3px; background-color:black;" width="100%">
 	<br>
 			<h5>
 			<c:forEach var="c" items="${categoryList}">
@@ -42,7 +44,8 @@
 	<span id="Tumbler"></span>
 	<br><br>
 	
-	<h3>텀블러</h3><br>
+	<h3>텀블러</h3>
+	<hr style="height: 3px; background-color:black;" width="100%"><br>
 	<table>
 		<tr>
 			<c:forEach var="b" items="${tumbler}" varStatus="s">
@@ -51,7 +54,7 @@
 				</c:if>
 				 
 				<td>
-					<div><a href="${pageContext.request.contextPath}/GoodsOne?goodsCode=${b.goodsCode}"><img src="${pageContext.request.contextPath}/image/${b.goodsName}.jpg" width="400" height="400"></div></a><br>
+					<div><a href="${pageContext.request.contextPath}/GoodsOne?goodsCode=${b.goodsCode}"><img src="${pageContext.request.contextPath}/image/${b.goodsName}.jpg" width="369" height="369"></div></a><br>
 					<div style="text-align: center;">${b.goodsName}</div>
 					<br>
 				</td>
@@ -64,7 +67,8 @@
 	<span id="Glass"></span>
 	<br><br>
 	
-		<h3>글라스</h3><br>
+		<h3>글라스</h3>
+		<hr style="height: 3px; background-color:black;" width="100%"><br>
 	<table>
 		<tr>
 			<c:forEach var="b" items="${glass}" varStatus="s">
@@ -73,7 +77,7 @@
 				</c:if>
 				 
 				<td>
-					<div><a href="${pageContext.request.contextPath}/GoodsOne?goodsCode=${b.goodsCode}"><img src="${pageContext.request.contextPath}/image/${b.goodsName}.jpg" width="400" height="400"></div></a><br>
+					<div><a href="${pageContext.request.contextPath}/GoodsOne?goodsCode=${b.goodsCode}"><img src="${pageContext.request.contextPath}/image/${b.goodsName}.jpg" width="369" height="369"></div></a><br>
 					<div style="text-align: center;" >${b.goodsName}</div>
 					<br>
 				</td>
@@ -87,6 +91,7 @@
 			<br><br>
 	
 	<h3>머그</h3>
+	<hr style="height: 3px; background-color:black;" width="100%">
 	<br>
 	<table> 
 		<tr>
@@ -96,7 +101,7 @@
 				</c:if>
 				 
 				<td>
-					<div><a href="${pageContext.request.contextPath}/GoodsOne?goodsCode=${b.goodsCode}"><img src="${pageContext.request.contextPath}/image/${b.goodsName}.jpg" width="400" height="400"></div></a><br>
+					<div><a href="${pageContext.request.contextPath}/GoodsOne?goodsCode=${b.goodsCode}"><img src="${pageContext.request.contextPath}/image/${b.goodsName}.jpg" width="369" height="369"></div></a><br>
 					<div style="text-align: center;">${b.goodsName}</div>
 					<br>
 				</td>

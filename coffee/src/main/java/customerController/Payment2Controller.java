@@ -101,9 +101,9 @@ public class Payment2Controller extends HttpServlet {
 				//판매량 증가
 
 			}
-		orderService.deletecartlevel2(customerId);
+	
 		}
-		response.sendRedirect(request.getContextPath()+"/CartList"); //orderState로 보낼거 수정하기
+		response.sendRedirect(request.getContextPath()+"/CompleteOrder2?result="+result+"&addressCode="+addressCode); //orderState로 보낼거 수정하기
 	}	
 
 }

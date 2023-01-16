@@ -54,6 +54,7 @@
 	
 	<div class="container">
 	<h1>Order</h1>
+	<hr style="height: 3px; background-color:black;">
 	<br>
 	
 	<div class="row">
@@ -99,7 +100,7 @@
 							</c:if>
 						</tr>
 						<tr style="text-align: center;">
-							<td><button type="button" class="btn btn-outline-dark" onclick="location.href='${pageContext.request.contextPath}/OrderOne?orderCode=${o.orderCode}'">배송조회</button></td>
+							<td><button type="button" class="btn btn-outline-dark" onclick="location.href='${pageContext.request.contextPath}/ModifyOrder?orderCode=${o.orderCode}'">배송조회</button></td>
 						</tr>
 						
 					</table>

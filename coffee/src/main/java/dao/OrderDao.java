@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import vo.Cart;
+import vo.Order;
 
 
 public class OrderDao {
@@ -155,7 +156,7 @@ public class OrderDao {
 		
 		String sql = "SELECT o.createdate createdate, o.order_price, o.order_quantity, c.category_name categoryName, o.goods_code goodsCode, c.category_kind categoryKind, o.order_code orderCode, o.order_state orderState, g.goods_name goodsName, g.goods_price goodsPrice "
 				+ "FROM orders o INNER JOIN goods g ON g.goods_code= o.goods_code INNER JOIN category c ON g.category_code= c.category_code"
-				+ " WHERE o.customer_id = ? ORDER BY o.createdate";
+				+ " WHERE o.customer_id = ? ORDER BY o.createdate DESC";
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		stmt.setString(1, customerId);
 		
@@ -369,6 +370,28 @@ public class OrderDao {
 		}
 		return row;		
 	}
-
+	
+	public Order selectOrderOne(Connection conn, int orderCode) throws Exception{
+		Order o = new Order();
+		
+		String sql ="SELECT * FROM orders WHERE order_code= ?";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setInt(1, orderCode);
+		ResultSet rs = stmt.executeQuery();
+		
+		if(rs.next()) {
+			o.setOrderPrice(rs.getInt("order_price"));
+			o.setOrderQuantity(rs.getInt("order_quantity"));
+			o.setGoodsCode(rs.getInt("goods_code"));
+			o.setOrderState(rs.getString("order_state"));
+			o.setCreatedate(rs.getString("createdate"));
+			o.setAddressCode(rs.getInt("address_code"));
+		}
+		stmt.close();
+		rs.close();
+		
+		
+		return o;
+	}
 	
 }	

@@ -91,11 +91,8 @@ public class PaymentController extends HttpServlet {
 			//판매량 증가
 			orderService.updategoodsHit(list);
 			
-			//사용된 카트 삭제
-			orderService.deleteCartById(loginMember.getCustomerId());
-			
 		}
-		response.sendRedirect(request.getContextPath()+"/CartList");
+		response.sendRedirect(request.getContextPath()+"/CompleteOrder?result="+result+"&addressCode="+addressCode);
 	}
 
 }
