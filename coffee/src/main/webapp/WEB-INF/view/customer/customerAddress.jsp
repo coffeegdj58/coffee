@@ -21,6 +21,22 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/nav/css/style.css">
 
     
+    <style type="text/css">
+	html, body {
+	    height: 100%
+	}
+	
+	#wrap {
+	    min-height: 100%;
+	    position: relative;
+	    padding-bottom: 60px;
+	}
+	
+	footer {
+	    bottom: 0;
+	}
+	<!--하단 footer 고정-->
+	</style>
 </head>
 <body>
 	<div>	
@@ -100,8 +116,10 @@
 	</form>
 	
 	
-	<br><br><br><br>
-	<div><img src="${pageContext.request.contextPath}/image/footeer.png" ></div>
+<br><br><br><br>
+	<footer class="footer">
+		<img alt="" src="${pageContext.request.contextPath}/image/footeer.png" style="width: 100%; height: auto; ">
+	</footer>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script> 
 </body>
 </html>

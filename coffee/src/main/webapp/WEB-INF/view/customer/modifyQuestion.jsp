@@ -26,6 +26,22 @@ $('#category').blur(function(){
 	}
 });
 </script>
+<style type="text/css">
+	html, body {
+	    height: 100%
+	}
+	
+	#wrap {
+	    min-height: 100%;
+	    position: relative;
+	    padding-bottom: 60px;
+	}
+	
+	footer {
+	    bottom: 0;
+	}
+	<!--하단 footer 고정-->
+	</style>
 </head>
 <body>
 <div>	
@@ -61,6 +77,9 @@ $('#category').blur(function(){
 		</table>
 		<button type="submit">추가</button>
 	</form>
-
+<br><br><br><br>
+	<footer class="footer">
+		<img alt="" src="${pageContext.request.contextPath}/image/footeer.png" style="width: 100%; height: auto; ">
+	</footer>
 </body>
 </html>
