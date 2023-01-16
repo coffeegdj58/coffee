@@ -45,7 +45,9 @@
 		<h3 style="margin-left: 230px; margin-top: 50px; font-weight: bold;">문의하기</h3>
 	</div>
 	<div class="container">
-	<a href="${pageContext.request.contextPath}/AddQuestion">글쓰기</a>
+		<div align="right" >
+			<a href="${pageContext.request.contextPath}/AddQuestion" style="color: black;">글쓰기</a>
+		</div>
 	<table class="table"
 			style="margin-left: auto; margin-right: auto; margin-top: 20px; width: 100%">
 			<thead style="text-align: center;">
@@ -61,7 +63,7 @@
 				<c:forEach var="q" items="${list}">
 					<tr>
 						<td>
-							<a href="${pageContext.request.contextPath}/QuestionOne?questionCode=${q.questionCode}">
+							<a href="${pageContext.request.contextPath}/QuestionOne?questionCode=${q.questionCode}" style="color: black;">
 							${q.questionCode}</a>
 						</td>
 						<td>${q.category}</td>
@@ -70,8 +72,8 @@
 						<!-- 답변이 안달렸으면 보이게 달리면 안보이게 -->
 					<c:if test="${q.flag eq 'N'}">
 						<td>
-							<a href="${pageContext.request.contextPath}/ModifyQuestion?questionCode=${q.questionCode}">수정</a> /
-							<a href="${pageContext.request.contextPath}/RemoveQuestion?questionCode=${q.questionCode}">삭제</a> 
+							<a href="${pageContext.request.contextPath}/ModifyQuestion?questionCode=${q.questionCode}" style="color: black;">수정</a> /
+							<a href="${pageContext.request.contextPath}/RemoveQuestion?questionCode=${q.questionCode}" style="color: black;">삭제</a> 
 						</td>
 					</c:if>
 				</tr>

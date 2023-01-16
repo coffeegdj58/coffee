@@ -68,7 +68,7 @@ footer {
 					<tr>
 						<td>${q.category}</td>
 						<td>
-							<a href="${pageContext.request.contextPath}/QuestionOne?questionCode=${q.questionCode}">
+							<a href="${pageContext.request.contextPath}/QuestionOne?questionCode=${q.questionCode}" style="color: black;">
 							${q.questionCode}</a>
 						</td>
 						<td>${q.customerId}</td>

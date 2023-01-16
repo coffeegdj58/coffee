@@ -41,24 +41,29 @@
 		<jsp:include page="../nav.jsp"></jsp:include> 
 		<!-- include의 주소에는 context를 사용하지 않는다 편한 액션 중하나 -->
 	</div>
+	<div>
+		<h3 style="margin-left: 230px; margin-top: 50px; font-weight: bold;">문의하기</h3>
+	</div>
 	<div class="container">
 	<form action="${pageContext.request.contextPath}/AddQuestion" method="post" class=" form">
 		<div class="mb-3">
 				<label class="form-label">주문 번호</label>
 					<select name="orderCode" class="form-control">
 						<c:forEach var="Q" items="${Qlist}">
+						<c:if test="${Q.orderState!='결제' }">
 							<option value="${Q.orderCode}"> 
 								${Q.orderState}
 								${Q.goodsName}
 								${Q.goodsPrice}
 							</option>
+							</c:if>
 						</c:forEach>
 					</select>
 			</div>
 			<div class="mb-3">
 				<label class="form-label">카테고리</label>
 					<select name="category" class="form-control">
-					    <option value="">선택</option>
+					    <option value="">선택하세요.</option>
 					    <option value="배송">배송</option>
 					    <option value="반품">반품</option>
 					    <option value="교환">교환</option>
@@ -73,11 +78,13 @@
 				<label class="form-label">작성자</label>
 				<input type="text" name="customerId" value="${customerId}" readonly="readonly"  class="form-control-plaintext">
 			</div>
-		<button type="submit" class="btn btn-dark">추가</button>
+			<div  align="center" >
+				<button type="submit" class="btn btn-dark">작성하기</button>
+			</div>
 	</form>
 	</div>	
 	<!--footer -->
-	<footer class="footer">
+	<footer class="footer" style="margin-top: 30px;">
 		<img alt="" src="${pageContext.request.contextPath}/image/footeer.png" style="width: 100%; height: auto; text-align: center;">
 	</footer>
 </body>
