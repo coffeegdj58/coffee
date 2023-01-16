@@ -19,7 +19,37 @@
     
     <!-- Style -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/nav/css/style.css">
+<style type="text/css">
+.a,
+.b,
+.c {
+    display:flex;
+    justify-content: center;'
+}
+.A,
+.B,
+.C{
+max-width: 100%;
+width: 634px;
+width: :auto !important;
+height: auto !important;
+}
 
+html, body {
+    height: 100%
+}
+
+#wrap {
+    min-height: 100%;
+    position: relative;
+    padding-bottom: 60px;
+}
+
+footer {
+    bottom: 0;
+}
+<!--하단 footer 고정-->
+</style>
 </head>
 <body>
 <div>	
@@ -28,37 +58,29 @@
 </div>
 	<br>
 
-		<div class=row>
+		<div  >
 			
-			<div class="col-4" width="100%">
-				<img src="${pageContext.request.contextPath}/image/bgTh1.jpg" style="width:650px;"  >
-			</div>
-			<div class="col-4" width="100%">
-				<img src="${pageContext.request.contextPath}/image/bgTh2.jpg" style="width:650px;"  >
-			</div>
-			<div class="col-4" width="100%">
-				<img src="${pageContext.request.contextPath}/image/bgTh3.jpg" style="width:650px;" >
-			</div>
-			<div class="col-4" width="100%">
-				<img src="${pageContext.request.contextPath}/image/bg2.png" style="width:650px;"  >
-			</div>
-			<div class="col-4" width="100%">
-				<img src="${pageContext.request.contextPath}/image/bg1.png" style="width:650px;"  >
-			</div>
-			<div class="col-4" width="100%">
-				<img src="${pageContext.request.contextPath}/image/bg.png" style="width:650px;" >
+			<div class="a" >
+				<img src="${pageContext.request.contextPath}/image/bgTh1.jpg" class="A"  >
+				<img src="${pageContext.request.contextPath}/image/bgTh2.jpg"  class="A" >
+				<img src="${pageContext.request.contextPath}/image/bgTh3.jpg"class="A"  >
 			</div>
 			
-			<div class="col-4" width="100%">
-				<img src="${pageContext.request.contextPath}/image/bgSe1.jpg" style="width:650px;"  >
+			<div class="b" >
+				<img src="${pageContext.request.contextPath}/image/bg2.png" class="B" >
+				<img src="${pageContext.request.contextPath}/image/bg1.png" class="B">
+				<img src="${pageContext.request.contextPath}/image/bg.png" class="B">
 			</div>
-			<div class="col-4" width="100%">
-				<img src="${pageContext.request.contextPath}/image/bgSe2.jpg" style="width:650px;"  >
-			</div>
-			<div class="col-4" width="100%">
-				<img src="${pageContext.request.contextPath}/image/bgSe3.jpg" style="width:650px;" >
+			
+			<div class="c">
+				<img src="${pageContext.request.contextPath}/image/bgSe1.jpg" class="C" >
+				<img src="${pageContext.request.contextPath}/image/bgSe2.jpg" class="C" >
+				<img src="${pageContext.request.contextPath}/image/bgSe3.jpg" class="C">
 			</div>
 		</div>
-	<div><img src="${pageContext.request.contextPath}/image/footeer.png" ></div>
+	<!--footer -->
+	<footer class="footer">
+		<img id="footer" alt="" src="${pageContext.request.contextPath}/image/footeer.png" style="width: 100%; height: auto; ">
+	</footer>
 </body>
 </html>
