@@ -29,7 +29,7 @@ public class CartListController extends HttpServlet {
 		HttpSession session = request.getSession();
 		Customer loginMember = (Customer)session.getAttribute("loginMember");
 		if(loginMember ==null) {
-			response.sendRedirect(request.getContextPath()+"/Home");
+			response.sendRedirect(request.getContextPath()+"/CustomerLogin");
 			return;
 		}
 		

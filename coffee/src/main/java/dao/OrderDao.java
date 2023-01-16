@@ -137,10 +137,21 @@ public class OrderDao {
 		int result= 0;
 		
 		for(Cart c : list) {
-			hit++;
+			String sql1= "SELECT hit FROM goods WHERE goods_code= ?";
+			PreparedStatement stmt1 = conn.prepareStatement(sql1);
+			stmt1.setInt(1, c.getGoodsCode());
+			ResultSet rs = stmt1.executeQuery();
+
+			if(rs.next()) {
+				hit= rs.getInt("hit");
+			}
+			
+			stmt1.close();
+			rs.close();
+
 			String sql="UPDATE goods SET hit= ? WHERE goods_code= ?";
 			PreparedStatement stmt = conn.prepareStatement(sql);
-			stmt.setInt(1, hit);
+			stmt.setInt(1, hit+(1*c.getCartQuantity()));
 			stmt.setInt(2, c.getGoodsCode());
 			result= stmt.executeUpdate();
 			
@@ -156,7 +167,7 @@ public class OrderDao {
 		
 		String sql = "SELECT o.createdate createdate, o.order_price, o.order_quantity, c.category_name categoryName, o.goods_code goodsCode, c.category_kind categoryKind, o.order_code orderCode, o.order_state orderState, g.goods_name goodsName, g.goods_price goodsPrice "
 				+ "FROM orders o INNER JOIN goods g ON g.goods_code= o.goods_code INNER JOIN category c ON g.category_code= c.category_code"
-				+ " WHERE o.customer_id = ? ORDER BY o.createdate DESC";
+				+ " WHERE o.customer_id = ? AND o.vision = '0' ORDER BY o.createdate DESC";
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		stmt.setString(1, customerId);
 		
@@ -370,7 +381,7 @@ public class OrderDao {
 		}
 		return row;		
 	}
-	
+	//하나의 오더를 select by ordercode
 	public Order selectOrderOne(Connection conn, int orderCode) throws Exception{
 		Order o = new Order();
 		
@@ -392,6 +403,22 @@ public class OrderDao {
 		
 		
 		return o;
+	}
+	
+	//하나의 오더를 삭제하는 것처럼보이지만 안보이게함
+	public int deleteOrderOne(Connection conn, int orderCode) throws Exception{
+		int result= 0;
+		String sql= "UPDATE orders SET vision= 1 WHERE order_code= ?";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setInt(1, orderCode);
+		
+		result= stmt.executeUpdate();
+		
+		stmt.close();
+		
+		
+		return result;
+		
 	}
 	
 }	

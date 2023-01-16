@@ -98,9 +98,10 @@ public class Payment2Controller extends HttpServlet {
 				loginMember.setPoint(loginMember.getPoint()-usePoint);
 				request.getSession().setAttribute("loginMember", loginMember);
 				//loginMemberupdate
-				
+				ArrayList<Cart> list = new ArrayList<Cart>();
+				list.add(cart);
 				//판매량 증가
-
+				orderService.updategoodsHit(list);
 			}
 	
 		}

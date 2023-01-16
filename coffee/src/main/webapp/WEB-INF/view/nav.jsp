@@ -20,14 +20,21 @@
             <div class="float-right">
            	 <form action="${pageContext.request.contextPath}/SearchGoods" method="get" id="search">
 
-					<c:if test="${empty loginMember||empty loginEmp}">
+					<c:if test="${empty loginMember && empty loginEmp}">
 	                	<a href="${pageContext.request.contextPath}/CustomerLogin" style="color:black">login</a>
 	                </c:if>
-	                
-	                <span class="mx-md-2 d-inline-block"></span>
-	                <a href="${pageContext.request.contextPath}/Logout" style="color:black">logout</a>
-	                <span class="mx-md-2 d-inline-block"></span>
-					<a href="${pageContext.request.contextPath}/CustomerPage" style="color:black">myPage</a>
+	                <c:if test="${!empty loginMember}">
+		                <span class="mx-md-2 d-inline-block"></span>
+		                <a href="${pageContext.request.contextPath}/Logout" style="color:black">logout</a>
+		                <span class="mx-md-2 d-inline-block"></span>
+						<a href="${pageContext.request.contextPath}/CustomerPage" style="color:black">myPage</a>
+					</c:if>
+					<c:if test="${!empty loginEmp}">
+						<span class="mx-md-2 d-inline-block"></span>
+		                <a href="${pageContext.request.contextPath}/Logout" style="color:black">logout</a>
+		                <span class="mx-md-2 d-inline-block"></span>
+						<a href="${pageContext.request.contextPath}/EmpPage" style="color:black">EmpPage</a>
+					</c:if>
 					<span>&nbsp;&nbsp;&nbsp;</span>
 					<span>
 						<input type="text" name="word" placeholder="검색어를 입력해주세요" style="height: 40px; font-size: 15px; border: 0; border-radius: 15px; outline: none; padding-left: 10px; background-color: rgb(233, 233, 233);">

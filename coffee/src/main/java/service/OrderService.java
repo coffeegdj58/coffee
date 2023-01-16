@@ -553,5 +553,34 @@ public class OrderService {
 		return o;
 	}
 	
+	public int deleteOrderOne(int orderCode) {
+		int result= 0;
+		Connection conn = null;
+
+		try {
+			db= new Dbutil();
+			conn = db.getConnection();
+			orderdao = new OrderDao();
+			
+			result = orderdao.deleteOrderOne(conn, orderCode);
+			
+			conn.commit(); // DBUtil.class에서 conn.setAutoCommit(false);
+		} catch (Exception e) {
+			try {
+				conn.rollback(); // DBUtil.class에서 conn.setAutoCommit(false);
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
+	
 }
 

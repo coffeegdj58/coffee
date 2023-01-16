@@ -26,6 +26,7 @@ public class CustomerPageController extends HttpServlet {
 	private CustomerService customerService;
 	private ReviewService reviewService;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
 		HttpSession session = request.getSession();
 		Customer loginMember = (Customer)session.getAttribute("loginMember");
 		

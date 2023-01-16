@@ -97,28 +97,32 @@
 						<tr><td> ₩ ${o.orderPrice} &nbsp;&nbsp;&nbsp;${o.orderQuantity}개</td></tr>
 					</table>
 				</td>
-				<td width="15%">
-					<table width="100%" height="100%">
-						<tr style="text-align: center;">
-							<td>
-								<button type="button" class="btn btn-outline-dark" onclick="location.href='${pageContext.request.contextPath}/AddReview?orderCode=${o.orderCode}&goodsCode=${o.goodsCode}'">리뷰작성</button>
-							</td>
-						</tr>
-						<tr style="text-align: center;">
-							<c:if test="${o.orderState.equals('결제')}">
-								<td><button type="button" class="btn btn-outline-dark" onclick="location.href='${pageContext.request.contextPath}/ModifyOrder?orderCode=${o.orderCode}'">취소하기</button></td>
-							</c:if>
-							<c:if test="${o.orederState.equals('결제')==false}">
-								<td><button type="button" class="btn btn-outline-dark" onclick="location.href='${pageContext.request.contextPath}/ModifyOrder?orderCode=${o.orderCode}'">반품,환불</button></td>
-							</c:if>
-						</tr>
-						<tr style="text-align: center;">
-							<td><button type="button" class="btn btn-outline-dark" onclick="location.href='${pageContext.request.contextPath}/ModifyOrder?orderCode=${o.orderCode}'">배송조회</button></td>
-						</tr>
-						
-					</table>
-				</td>
-				
+				<c:if test="${o.orderState ne '취소'}">
+					<td width="15%">
+						<table width="100%" height="100%">
+							<tr style="text-align: center;">
+								<td>
+									<button type="button" class="btn btn-outline-dark" onclick="location.href='${pageContext.request.contextPath}/AddReview?orderCode=${o.orderCode}&goodsCode=${o.goodsCode}'">리뷰작성</button>
+								</td>
+							</tr>
+							<tr style="text-align: center;">
+								<c:if test="${o.orderState eq '결제'}">
+									<td><button type="button" class="btn btn-outline-dark" onclick="location.href='${pageContext.request.contextPath}/UpdateOrder?orderCode=${o.orderCode}'">취소하기</button></td>
+								</c:if>
+								<c:if test="${o.orderState ne '결제'}">
+									<td><button type="button" class="btn btn-outline-dark" onclick="location.href='${pageContext.request.contextPath}/AddQuestion'">반품환불</button></td>
+								</c:if>
+							</tr>
+							<tr style="text-align: center;">
+								<td><button type="button" class="btn btn-outline-dark" onclick="location.href='${pageContext.request.contextPath}/ModifyOrder?orderCode=${o.orderCode}'">배송조회</button></td>
+							</tr>
+							
+						</table>
+					</td>
+				</c:if>
+				<c:if test="${o.orderState eq '취소'}">
+					<td><button type="button" class="btn btn-outline-dark" onclick="location.href='${pageContext.request.contextPath}/DeleteOrder?orderCode=${o.orderCode}'">삭제하기</button></td>
+				</c:if>
 				
 				
 			</tr>

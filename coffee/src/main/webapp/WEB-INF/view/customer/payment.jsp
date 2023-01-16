@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
@@ -119,7 +120,7 @@
 						<tr><td colspan=2><hr></td></tr>
 						<tr>
 							<td>포인트</td>
-							<td><input type="number" name="usePoint">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;보유: ${loginMember.point}pt</td>
+							<td><input type="number" name="usePoint" id="usePoint">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;보유: ${loginMember.point}pt</td>
 						</tr>
 						<tr><td colspan=2><hr></td></tr>
 						<tr>
@@ -138,5 +139,18 @@
 		<img alt="" src="${pageContext.request.contextPath}/image/footeer.png" style="width: 100%; height: auto; ">
 	</footer>
 	
+	<script>
+	$(document).ready(function(){	
+	 	$('#usePoint').change(function(){
+	 		if($('#usePoint').val()>${loginMember.point}){
+	 			$('#usePoint').val(${loginMember.point})
+	 		}
+	 		
+	 		if($('#usePoint').val()<0){
+	 			$('#usePoint').val(0);
+	 		}
+	 	})
+	})
+	</script>
 </body>
 </html>
