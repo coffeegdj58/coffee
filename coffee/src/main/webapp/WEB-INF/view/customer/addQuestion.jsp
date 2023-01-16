@@ -37,16 +37,15 @@
 	</style>
 </head>
 <body>
-<div>	
+	<div>	
 		<jsp:include page="../nav.jsp"></jsp:include> 
 		<!-- include의 주소에는 context를 사용하지 않는다 편한 액션 중하나 -->
 	</div>
-	<form action="${pageContext.request.contextPath}/AddQuestion" method="post">
-		<table>
-			<tr>
-				<td>주문 번호</td>
-				<td>
-					<select name="orderCode">
+	<div class="container">
+	<form action="${pageContext.request.contextPath}/AddQuestion" method="post" class=" form">
+		<div class="mb-3">
+				<label class="form-label">주문 번호</label>
+					<select name="orderCode" class="form-control">
 						<c:forEach var="Q" items="${Qlist}">
 							<option value="${Q.orderCode}"> 
 								${Q.orderState}
@@ -55,35 +54,31 @@
 							</option>
 						</c:forEach>
 					</select>
-				</td>
-			</tr>
-			<tr>
-				<td>카테고리</td>
-				<td>
-					<select name="category">
+			</div>
+			<div class="mb-3">
+				<label class="form-label">카테고리</label>
+					<select name="category" class="form-control">
 					    <option value="">선택</option>
 					    <option value="배송">배송</option>
 					    <option value="반품">반품</option>
 					    <option value="교환">교환</option>
 					    <option value="기타">기타</option>
 					</select>
-				</td>
-			</tr>
-			<tr>
-				<td>내용</td>
-				<td><textarea cols="30" rows="10" name="questionMemo"></textarea></td>
-			</tr>
-			<tr>
-				<td>작성자</td>
-				<td><input type="text" name="customerId" value="${customerId}" readonly="readonly"></td>
-			</tr>
-		</table>
-		<button type="submit">추가</button>
+			</div>
+			<div class="mb-3">
+				<label class="form-label">내용</label>
+				<textarea cols="30" rows="10" name="questionMemo" class="form-control"></textarea>
+			</div>
+			<div class="mb-3">
+				<label class="form-label">작성자</label>
+				<input type="text" name="customerId" value="${customerId}" readonly="readonly"  class="form-control-plaintext">
+			</div>
+		<button type="submit" class="btn btn-dark">추가</button>
 	</form>
-		
+	</div>	
 	<!--footer -->
 	<footer class="footer">
-		<img alt="" src="${pageContext.request.contextPath}/image/footeer.png" style="width: 100%; height: auto; ">
+		<img alt="" src="${pageContext.request.contextPath}/image/footeer.png" style="width: 100%; height: auto; text-align: center;">
 	</footer>
 </body>
 </html>

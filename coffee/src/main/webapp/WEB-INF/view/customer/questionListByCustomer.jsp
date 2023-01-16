@@ -41,37 +41,44 @@
 		<jsp:include page="../nav.jsp"></jsp:include> 
 		<!-- include의 주소에는 context를 사용하지 않는다 편한 액션 중하나 -->
 	</div>
-	<a href="${pageContext.request.contextPath}/AddQuestion">문의하기</a>
-	<table>
-		<tr>
-			<th>번호</th>
-			<th>카테고리</th>
-			<th>주문자 아이디</th>
-			<th>주문번호</th>
-			<!-- 답변이 안달렸으면 보이게 달리면 안보이게 -->
-			<c:if test="${q.flag eq 'N'}">
-				<th>수정 / 삭제</th>
-			</c:if>
-		</tr>
-		<c:forEach var="q" items="${list}">
-			<tr>
-				<td>
-					<a href="${pageContext.request.contextPath}/QuestionOne?questionCode=${q.questionCode}">
-					${q.questionCode}</a>
-				</td>
-				<td>${q.category}</td>
-				<td>${q.customerId}</td>
-				<td>${q.orderCode}</td>
-				<!-- 답변이 안달렸으면 보이게 달리면 안보이게 -->
-				<c:if test="${q.flag eq 'N'}">
-					<td>
-						<a href="${pageContext.request.contextPath}/ModifyQuestion?questionCode=${q.questionCode}">수정</a> /
-						<a href="${pageContext.request.contextPath}/RemoveQuestion?questionCode=${q.questionCode}">삭제</a> 
-					</td>
-				</c:if>
-			</tr>
-		</c:forEach>
+	<div>
+		<h3 style="margin-left: 230px; margin-top: 50px; font-weight: bold;">문의하기</h3>
+	</div>
+	<div class="container">
+	<a href="${pageContext.request.contextPath}/AddQuestion">글쓰기</a>
+	<table class="table"
+			style="margin-left: auto; margin-right: auto; margin-top: 20px; width: 100%">
+			<thead style="text-align: center;">
+				<tr>
+					<th>번호</th>
+					<th>카테고리</th>
+					<th>주문자 아이디</th>
+					<th>주문번호</th>
+					<th>수정 / 삭제</th>
+				</tr>
+			</thead>
+			<tbody style="text-align: center;">
+				<c:forEach var="q" items="${list}">
+					<tr>
+						<td>
+							<a href="${pageContext.request.contextPath}/QuestionOne?questionCode=${q.questionCode}">
+							${q.questionCode}</a>
+						</td>
+						<td>${q.category}</td>
+						<td>${q.customerId}</td>
+						<td>${q.orderCode}</td>
+						<!-- 답변이 안달렸으면 보이게 달리면 안보이게 -->
+					<c:if test="${q.flag eq 'N'}">
+						<td>
+							<a href="${pageContext.request.contextPath}/ModifyQuestion?questionCode=${q.questionCode}">수정</a> /
+							<a href="${pageContext.request.contextPath}/RemoveQuestion?questionCode=${q.questionCode}">삭제</a> 
+						</td>
+					</c:if>
+				</tr>
+			</c:forEach>
+		</tbody>
 	</table>
+	</div>
 	<br><br><br><br>
 	<footer class="footer">
 		<img alt="" src="${pageContext.request.contextPath}/image/footeer.png" style="width: 100%; height: auto; ">

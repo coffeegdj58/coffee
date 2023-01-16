@@ -63,7 +63,7 @@
                   <li><a href="${pageContext.request.contextPath}/BakeryList" class="nav-link">Bakery</a></li>
                   <li><a href="${pageContext.request.contextPath}/ProductList" class="nav-link">Product</a></li>
                   <li><a href="${pageContext.request.contextPath}/NoticeList">Notice</a></li>
-                  <li><a href="${pageContext.request.contextPath}/QuestionListByEmp" class="nav-link">Question</a></li>
+                  <li><a href="${pageContext.request.contextPath}/QuestionListByCustomer" class="nav-link">Question</a></li>
                   <li><a href="${pageContext.request.contextPath}/CartList" class="nav-link">Cart</a></li>
                 </ul>
               </nav>
