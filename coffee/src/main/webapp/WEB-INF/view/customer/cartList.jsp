@@ -182,19 +182,18 @@ footer {
 	</div>
 	<br><br><br>
 	
-	<div><img src="${pageContext.request.contextPath}/image/footeer.png" ></div>
 	<c:forEach var="c" items='${cartList}'>
-	<script>
-		$(document).ready(function(){	
-				$('#selected${c.goodsCode}').change(function(){
-					$('#checkForm${c.goodsCode}').submit();
-				})
-				
-				$("#quantity${c.goodsCode}").change(function(){
-					$('#updateQunatity${c.goodsCode}').submit();
-				})
-		})
-	</script>
+		<script>
+			$(document).ready(function(){	
+					$('#selected${c.goodsCode}').change(function(){
+						$('#checkForm${c.goodsCode}').submit();
+					})
+					
+					$("#quantity${c.goodsCode}").change(function(){
+						$('#updateQunatity${c.goodsCode}').submit();
+					})
+			})
+		</script>
 	</c:forEach>
 	<br><br><br><br>
 	<footer class="footer">

@@ -1,11 +1,12 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="UTF-8">
 		<title>ModifyGoods</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+			<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
 
@@ -35,30 +36,48 @@
 	
 	<!--하단 footer 고정-->
 	</style>
+   
 	</head>
 	<body>
-	<div>	
+		<div>	
 		<jsp:include page="../nav.jsp"></jsp:include> 
 		<!-- include의 주소에는 context를 사용하지 않는다 편한 액션 중하나 -->
-	</div>
-		<form action="${pageContext.request.contextPath}/ModifyGoods" method="post" enctype="multipart/form-data">
-			<input type="hidden" name="goodsCode" value="${m.goodsCode}">
-			<input type="text" name="goodsName" value='${m.goodsName}' readonly='readonly'>
-			<div>goodsPrice : <input type="number" name="goodsPrice"></div>
-			<div>soldout : Y<input type="radio" name="soldout" value="Y">N<input type="radio" name="soldout" value="N"></div>
-			<div>
-			<select name="categoryCode">
-				<c:forEach var="c" items="${categorylist}">
-						<option value="${c.categoryCode}">${c.categoryKind}  ${c.categoryName}</option>
-				</c:forEach>
-			</select>
-			</div>
-			<div>goodsContent : <input type="text" name="goodsContent"></div>
-			<div>goodsInfo : <input type="text" name="goodsInfo"></div>		
-			<div>file : <input type="file" name="filename" accept="image/jpeg, image/png"></div>
-			<button type="submit">수정</button>
-		</form>
+		</div>	
 		
+		<br><br><br>
+		<div class="container">
+			<h1>상품수정</h1>
+			<hr style="height: 3px; background-color:black;">
+			
+			<form action="${pageContext.request.contextPath}/ModifyGoods" method="post" enctype="multipart/form-data">
+				<input type="hidden" name="goodsCode" value="${m.goodsCode}">
+				
+				<div>GoodsName : <input type="text" name="goodsName" value='${m.goodsName}' readonly='readonly'></div>
+				<hr>
+				<div>GoodsPrice : <input type="number" name="goodsPrice"></div>
+				<hr>
+				<div>Soldout : Y<input type="radio" name="soldout" value="Y">&nbsp;N<input type="radio" name="soldout" value="N"></div>
+				<hr>
+				<div>
+				 Category : &nbsp;&nbsp;<select name="categoryCode">
+					<c:forEach var="c" items="${categorylist}">
+							<option value="${c.categoryCode}">${c.categoryKind}  ${c.categoryName}</option>
+					</c:forEach>
+				</select>
+				</div>
+				<hr>
+				<div>GoodsContent : <textarea rows="3" cols="50" name= "goodsContent"></textarea></div>
+				<hr>
+				<div>GoodsInfo : <input type="text" name="goodsInfo"></div>		
+				<hr>
+				<div>File : <input type="file" name="filename" accept="image/jpeg, image/png"></div>
+				<hr>
+				<button class="btn btn-outline-dark btn-lg" type="submit">상품 추가</button>
+			</form>
+		
+		</div>
+		
+		<br><br><br><br>
 		<!--footer -->
 		<footer class="footer">
 			<img alt="" src="${pageContext.request.contextPath}/image/footeer.png" style="width: 100%; height: auto; ">

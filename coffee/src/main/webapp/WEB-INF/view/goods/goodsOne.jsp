@@ -44,8 +44,16 @@
 		</div>
 		<br><br>
 		
+		
 		<div class="container">
+		<c:if test = "${not empty loginEmp}">
+			<div style="float:right">
+					<button type="button" class="btn btn-outline-dark btn-lg" onclick="location.href='${pageContext.request.contextPath}/ModifyGoods?goodsCode=${g.goodsCode}'">수정</button>
+					<button type="button" class="btn btn-outline-dark btn-lg" onclick="location.href='${pageContext.request.contextPath}/RemoveGoods?goodsCode=${g.goodsCode}'">삭제</button>
+			</div>
+		</c:if>
 			<h1>${g.categoryName}</h1>
+			<hr style="height: 3px; background-color:black;">
 			<div class="row">
 		
 				<div class="col-5">
@@ -92,10 +100,7 @@
 						<h3>현재 상품은 준비중입니다.</h3>
 					</c:if>
 					</div>
-				<c:if test = "${not empty loginEmp}">
-					<button type="button" class="btn btn-outline-dark" onclick="location.href='${pageContext.request.contextPath}/ModifyGoods?goodsCode=${g.goodsCode}'">수정</button>
-					<button type="button" class="btn btn-outline-dark" onclick="location.href='${pageContext.request.contextPath}/RemoveGoods?goodsCode=${g.goodsCode}'">삭제</button>
-				</c:if>
+				
 			</div>
 			<br><br><br><br>
 			<div>

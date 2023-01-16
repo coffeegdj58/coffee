@@ -40,25 +40,33 @@ footer {
 			<jsp:include page="../nav.jsp"></jsp:include> 
 			<!-- include의 주소에는 context를 사용하지 않는다 편한 액션 중하나 -->
 	</div>
-	
-	<form action="${pageContext.request.contextPath}/AddNotice" method="post">
-		<table>
-			<tr>
-				<td>제목</td>
-				<td><input type="text" name="noticeTitle"></td>
-			</tr>
-			<tr>
-				<td>내용</td>
-				<td><textarea cols="30" rows="10" name="noticeContent"></textarea></td>
-			</tr>
-			<tr>
-				<td>작성자</td>
-				<td><input type="text" name="empId" value="admind" readonly="readonly"></td>
-			</tr>
-		</table>
-		<button type="submit">추가</button>
-	</form>
-	
+	<br><br><br><br>
+	<div class="container">	
+		<h1>공지사항 작성</h1>
+		<hr style="height: 3px; background-color:black;">
+		<form action="${pageContext.request.contextPath}/AddNotice" method="post">
+			<table width="100%">
+				<tr>
+					<td>제목</td>
+					<td><input type="text" name="noticeTitle"></td>
+				</tr>
+				<tr><td colspan="2"><hr></td></tr>
+				<tr>
+					<td>내용</td>
+					<td><textarea cols="30" rows="10" name="noticeContent"></textarea></td>
+				</tr>
+				<tr><td colspan="2"><hr></td></tr>
+				<tr>
+					<td>작성자</td>
+					<td><input type="text" name="empId" value="admind" readonly="readonly"></td>
+				</tr>
+				<tr><td colspan="2"><hr></td></tr>
+			</table>
+			<br><br>
+			<button class="btn btn-outline-dark btn-lg" type="submit">추가</button>
+		</form>
+	</div>
+	<br><br><br><br><br><br><br><br><br><br><br><br>
 	<!--footer -->
 	<footer class="footer">
 		<img alt="" src="${pageContext.request.contextPath}/image/footeer.png" style="width: 100%; height: auto; ">

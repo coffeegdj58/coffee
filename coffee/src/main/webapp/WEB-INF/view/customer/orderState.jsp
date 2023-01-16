@@ -53,15 +53,15 @@
 		</c:if>
 		
 		<c:if test="${order.orderState=='배송중'}">
-			<img src="${pageContext.request.contextPath}/image/배송중.png">
+			<img src="${pageContext.request.contextPath}/image/배송중.png" width="100%" height="auto">
 		</c:if>
 		
 		<c:if test="${order.orderState=='배송완료'}">
-			<img src="${pageContext.request.contextPath}/image/배송완료.png">
+			<img src="${pageContext.request.contextPath}/image/배송완료.png" width="100%" height="auto">
 		</c:if>
 		
 		<c:if test="${order.orderState=='구매확정'}">
-			<img src="${pageContext.request.contextPath}/image/구매확정.png">
+			<img src="${pageContext.request.contextPath}/image/구매확정.png" width="100%" height="auto">
 		</c:if>
 
 		<hr>

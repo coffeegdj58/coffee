@@ -109,7 +109,7 @@
 					<table width="100%">
 						<tr>
 							<td>총 상품가격</td>
-							<td>₩ ${c.cartPrice*c.cartQuantity}</td>
+							<td>₩ ${c.cartPrice}</td>
 						</tr>
 						<tr><td colspan=2><hr></td></tr>
 						<tr>
@@ -131,7 +131,7 @@
 			</fieldset>
 			<input type="hidden" value="${c.goodsCode}" name="goodsCode">
 			<input type="hidden" value="${c.cartQuantity}" name="cartQuantity">
-			<input type="hidden" value="${c.cartPrice*c.cartQuantity}" name="orderPrice">
+			<input type="hidden" value="${c.cartPrice}" name="orderPrice">
 			<button type="submit" class="btn btn-outline-dark btn-lg">결제하기</button>
 		</form>
 	</div>

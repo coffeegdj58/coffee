@@ -90,7 +90,7 @@
                 <input type="password" class="form-control" id="pw" name="customerPw">
                 
               </div>
-                <a href="${pageContext.request.contextPath}/AddCustomer">회원가입 </a>
+                <a href="${pageContext.request.contextPath}/AddCustomer">회원가입 </a> <span style="float:right"><a href="${pageContext.request.contextPath}/LoginEmp">관리자 로그인 </a></span>
               <input type="submit" value="로그인" class="btn btn-block btn-dark">
             </form>
             </div>

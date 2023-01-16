@@ -58,24 +58,24 @@ footer {
 </div>
 	<br>
 
-		<div  >
+		<div>
 			
 			<div class="a" >
-				<img src="${pageContext.request.contextPath}/image/bgTh1.jpg" class="A"  >
-				<img src="${pageContext.request.contextPath}/image/bgTh2.jpg"  class="A" >
-				<img src="${pageContext.request.contextPath}/image/bgTh3.jpg"class="A"  >
+				<a href="${pageContext.request.contextPath}/GoodsOne?goodsCode=29"><img src="${pageContext.request.contextPath}/image/bgTh1.jpg"  class="A" ></a>
+				<a href="${pageContext.request.contextPath}/GoodsOne?goodsCode=53"><img src="${pageContext.request.contextPath}/image/bgTh2.jpg"  class="A" ></a>
+				<a href="${pageContext.request.contextPath}/GoodsOne?goodsCode=65"><img src="${pageContext.request.contextPath}/image/bgTh3.jpg"class="A"  ></a>
 			</div>
 			
 			<div class="b" >
-				<img src="${pageContext.request.contextPath}/image/bg2.png" class="B" >
-				<img src="${pageContext.request.contextPath}/image/bg1.png" class="B">
-				<img src="${pageContext.request.contextPath}/image/bg.png" class="B">
+				<a href="${pageContext.request.contextPath}/NoticeOne?noticeCode=1"><img src="${pageContext.request.contextPath}/image/bg2.png" class="B" ></a>
+				<a href="${pageContext.request.contextPath}/NoticeOne?noticeCode=1"><img src="${pageContext.request.contextPath}/image/bg1.png" class="B"></a>
+				<a href="${pageContext.request.contextPath}/NoticeOne?noticeCode=1"><img src="${pageContext.request.contextPath}/image/bg.png" class="B"></a>
 			</div>
 			
 			<div class="c">
-				<img src="${pageContext.request.contextPath}/image/bgSe1.jpg" class="C" >
-				<img src="${pageContext.request.contextPath}/image/bgSe2.jpg" class="C" >
-				<img src="${pageContext.request.contextPath}/image/bgSe3.jpg" class="C">
+				<a href="${pageContext.request.contextPath}/NoticeOne?noticeCode=2"><img src="${pageContext.request.contextPath}/image/bgSe1.jpg" class="C" ></a>
+				<a href="${pageContext.request.contextPath}/NoticeOne?noticeCode=2"><img src="${pageContext.request.contextPath}/image/bgSe2.jpg" class="C" ></a>
+				<a href="${pageContext.request.contextPath}/NoticeOne?noticeCode=2"><img src="${pageContext.request.contextPath}/image/bgSe3.jpg" class="C"></a>
 			</div>
 		</div>
 	<!--footer -->

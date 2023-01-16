@@ -49,7 +49,7 @@ public class CompleteOrderController2 extends HttpServlet {
 		orderService= new OrderService();
 		Cart c = orderService.selectCartlevel2(loginMember.getCustomerId());
 		
-		int sum = c.getCartPrice()*c.getCartQuantity();
+		int sum = c.getCartPrice();
 		
 		request.setAttribute("sum", sum);
 		

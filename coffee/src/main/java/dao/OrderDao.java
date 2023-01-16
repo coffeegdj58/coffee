@@ -148,7 +148,10 @@ public class OrderDao {
 			
 			stmt1.close();
 			rs.close();
-
+			System.out.println(hit+"hit");
+			
+			
+			
 			String sql="UPDATE goods SET hit= ? WHERE goods_code= ?";
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setInt(1, hit+(1*c.getCartQuantity()));

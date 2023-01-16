@@ -41,51 +41,54 @@ footer {
 			<jsp:include page="../nav.jsp"></jsp:include> 
 			<!-- include의 주소에는 context를 사용하지 않는다 편한 액션 중하나 -->
 	</div>
-	
-	<!-- 공지사항은 회원 비회원 모두가 볼 수있게  -->
-	<div>
-		<h3 style="margin-left: 230px; margin-top: 50px; font-weight: bold;">공지사항</h3>
-	</div> 
-	<div style="margin-left: 230px; margin-top: 30px;">
-		<!-- 관리자만 공지사항 추가가 보이게 할 것 -->
-		<c:if test="${loginEmp!=null}">
-			<a href="${pageContext.request.contextPath}/AddNotice" style="color: black;">공지사항 추가</a>
-		</c:if>
-	</div>
-	<table class="table w-75"  style="margin-left: auto; margin-right: auto;  margin-top: 20px;">
-	 	<thead style="text-align: center;" >
-			<tr>
-				<th scope="col"  width="80px">번호</th>
-				<th scope="col" width="200px" style="word-break:break-all">제목</th>
-				<th scope="col">내용</th>
-				<th scope="col" width="150px">날짜</th>
-			</tr>
-		</thead>
-		<tbody style="text-align: center;">
-			<c:forEach var="n" items="${list}">
+	<br><br><br><br>
+	<div class="container">
+		<!-- 공지사항은 회원 비회원 모두가 볼 수있게  -->
+		<div>
+			<h1>공지사항</h1>
+		</div> 
+		<hr style="height: 3px; background-color:black;">
+		
+		<table class="table" width="100%">
+		 	<thead style="text-align: center;" >
 				<tr>
-					<td  scope="col" >${n.noticeCode}</td>
-					<td scope="col">${n.noticeTitle}</td>
-					<td scope="col">
-						<a href="${pageContext.request.contextPath}/NoticeOne?noticeCode=${n.noticeCode}" style="color: black;">
-						${n.noticeContent} </a>
-					</td>
-					<td scope="col">${n.createdate}</td>
+					<th scope="col"  width="80px">번호</th>
+					<th scope="col" style="word-break:break-all">제목</th>
+					<th scope="col">내용</th>
+					<th scope="col" width="150px">날짜</th>
 				</tr>
-			</c:forEach>
-		</tbody>
-	</table>
-	<div style=" text-align: center;">
-		<a href="${pageContext.request.contextPath}/NoticeList?currentPage=1" style="color: black;">처음</a>
-		<c:if test="${currentPage > 1}">
-			<a href="${pageContext.request.contextPath}/NoticeList?currentPage=${currentPage-1}&rowPerPage=${rowPerPage}" style="color: black;">이전</a>
-		</c:if>
-		<c:if test="${currentPage < lastPage}">
-			<a href="${pageContext.request.contextPath}/NoticeList?currentPage=${currentPage+1}&rowPerPage=${rowPerPage}" style="color: black;">이후</a>
-		</c:if>
-		<a href="${pageContext.request.contextPath}/NoticeList?currentPage=${lastPage}" style="color: black;">마지막</a>
+			</thead>
+			<tbody style="text-align: center;">
+				<c:forEach var="n" items="${list}">
+					<tr>
+						<td  scope="col" >${n.noticeCode}</td>
+						<td scope="col"><a href="${pageContext.request.contextPath}/NoticeOne?noticeCode=${n.noticeCode}" style="color: black;">
+							${n.noticeTitle} </a></td>
+						<td scope="col">
+							<a href="${pageContext.request.contextPath}/NoticeOne?noticeCode=${n.noticeCode}" style="color: black;">
+							${n.noticeContent} </a>
+						</td>
+						<td scope="col">${n.createdate}</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+		<div style=" text-align: center;">
+			<button type="button" class="btn btn-outline-dark" onclick="location.href='${pageContext.request.contextPath}/NoticeList?currentPage=1'">처음</button>
+			<c:if test="${currentPage > 1}">
+				<button type="button" class="btn btn-outline-dark" onclick="location.href='${pageContext.request.contextPath}/NoticeList?currentPage=${currentPage-1}&rowPerPage=${rowPerPage}'">이전</button>
+			</c:if>
+			<c:if test="${currentPage < lastPage}">
+				<button type="button" class="btn btn-outline-dark" onclick="location.href='${pageContext.request.contextPath}/NoticeList?currentPage=${currentPage+1}&rowPerPage=${rowPerPage}'">다음</button>
+			</c:if>
+			<button type="button" class="btn btn-outline-dark" onclick="location.href='${pageContext.request.contextPath}/NoticeList?currentPage=${lastPage}'">마지막</button>
+			<br>
+			<c:if test="${loginEmp!=null}">
+				<div style="float:left"><button type="button" class="btn btn-outline-dark btn-lg" onclick="location.href='${pageContext.request.contextPath}/AddNotice'">글쓰기</button></div>
+			</c:if>
+		</div>
 	</div>
-	
+	<br><br><br><br><br><br><br><br><br><br><br><br>
 	<!--footer -->
 	<footer class="footer" style="margin-top: 30px;">
 		<img alt="" src="${pageContext.request.contextPath}/image/footeer.png" style="width: 100%; height: auto; ">

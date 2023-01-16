@@ -503,9 +503,7 @@ public class OrderService {
 			conn = db.getConnection();
 			orderdao = new OrderDao();
 			row=orderdao.insertPayment2Order(conn, cart, addressCode);
-			if(row==1) {
-			int	row2=orderdao.updateHitPatment2(conn, gooodsCode);
-			}
+		
 			conn.commit();
 		} catch (Exception e) {
 			try {

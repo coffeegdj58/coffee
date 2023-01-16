@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import service.CustomerService;
+import service.GoodsService;
 import service.OrderService;
 import vo.Address;
 import vo.Cart;
@@ -21,6 +22,7 @@ import vo.Customer;
 public class Payment2Controller extends HttpServlet {
 	private OrderService orderService;
 	private CustomerService customerService;
+	private GoodsService goodsService;
 	//바로구매 폼
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//로그인 한 사람만 접근 가능
@@ -72,9 +74,11 @@ public class Payment2Controller extends HttpServlet {
 		if(request.getParameter("usePoint")!=null && request.getParameter("usePoint").equals("")!=true) {
 			usePoint= Integer.parseInt(request.getParameter("usePoint"));
 		}
+	
 		//총 가격에서 사용한 포인트 뺴기= 결제할 금액
 		int orderPrice= Integer.parseInt(request.getParameter("orderPrice"))-usePoint;
 		//service 불러오기
+		this.goodsService= new GoodsService();
 		this.orderService = new OrderService();
 		this.customerService= new CustomerService();
 		
@@ -98,11 +102,12 @@ public class Payment2Controller extends HttpServlet {
 				loginMember.setPoint(loginMember.getPoint()-usePoint);
 				request.getSession().setAttribute("loginMember", loginMember);
 				//loginMemberupdate
-				ArrayList<Cart> list = new ArrayList<Cart>();
-				list.add(cart);
-				//판매량 증가
-				orderService.updategoodsHit(list);
+				
 			}
+			ArrayList<Cart> list = new ArrayList<Cart>();
+			list.add(cart);
+			//판매량 증가
+			orderService.updategoodsHit(list);
 	
 		}
 		response.sendRedirect(request.getContextPath()+"/CompleteOrder2?result="+result+"&addressCode="+addressCode); //orderState로 보낼거 수정하기

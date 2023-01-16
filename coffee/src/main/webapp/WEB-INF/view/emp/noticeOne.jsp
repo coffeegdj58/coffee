@@ -40,34 +40,36 @@ footer {
 			<jsp:include page="../nav.jsp"></jsp:include> 
 			<!-- include의 주소에는 context를 사용하지 않는다 편한 액션 중하나 -->
 	</div>
-	<div>
-		<h3 style="margin-left: 230px; margin-top: 50px; font-weight: bold;">공지사항</h3>
-	</div> 
-	
-	<div style=" margin-left: 230px; margin-right: 180px; margin-top: 30px; border-style: ridge;"">
-
+	<br><br><br>
+	<div class="container">
+		
+		<br><br>
 		<div>
-			제목: ${n.noticeTitle}
+			<h2>
+				${n.noticeTitle}
+			</h2>
+			<span style="float:right">${n.createdate}</span>
+			
 		</div>
-		<div>
-			내용: <br> ${n.noticeContent}
+		<br>
+		<hr style="height: 3px; background-color:black;">
+		
+			<img src="${pageContext.request.contextPath}/image/bg${n.noticeCode}.png" width="100%">		
+			<h4 style=" text-align: center;">
+				<br> ${n.noticeContent}
+			</h4>
+		
+		<br><br>
+		<!-- 관리자만 수정 삭제가 보이게 할 것 -->
+		<div style="float:right">
+			<c:if test="${loginEmp!=null}">
+				<button type="button" class="btn btn-outline-dark" onclick="location.href='${pageContext.request.contextPath}/ModifyNotice?noticeCode=${n.noticeCode}'">수정</button>
+				<button type="button" class="btn btn-outline-dark" onclick="location.href='${pageContext.request.contextPath}/RemoveNotice?noticeCode=${n.noticeCode}'">삭제</button>
+				
+			</c:if>
 		</div>
-		<div>
-			작성자: ${n.empId}
-		</div>
-		<div>
-			날짜: ${n.createdate}
-		</div>
-	</div>	
-	
-	<!-- 관리자만 수정 삭제가 보이게 할 것 -->
-	<div style="margin-left: 230px; margin-top: 30px;">
-		<c:if test="${loginEmp!=null}">
-			<a href="${pageContext.request.contextPath}/ModifyNotice?noticeCode=${n.noticeCode}" style="color: black;">수정</a> /
-			<a href="${pageContext.request.contextPath}/RemoveNotice?noticeCode=${n.noticeCode}" style="color: black;">삭제</a> 
-		</c:if>
 	</div>
-	
+	<br><br><br><br><br><br><br><br><br><br><br><br>
 	<!--footer -->
 	<footer class="footer">
 		<img alt="" src="${pageContext.request.contextPath}/image/footeer.png" style="width: 100%; height: auto; ">
