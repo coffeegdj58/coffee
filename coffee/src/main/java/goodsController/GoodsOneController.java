@@ -79,7 +79,7 @@ public class GoodsOneController extends HttpServlet {
 		int cartQuantity= Integer.parseInt(request.getParameter("cartQuantity"));
 		
 		if(loginMember ==null) {
-			response.sendRedirect(request.getContextPath()+"/GoodsOne?goodsCode="+goodsCode);
+			response.sendRedirect(request.getContextPath()+"/CustomerLogin");
 			return;
 		}
     	this.orderService = new OrderService();

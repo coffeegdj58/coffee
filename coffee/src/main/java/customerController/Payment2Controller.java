@@ -94,7 +94,8 @@ public class Payment2Controller extends HttpServlet {
 			if(usePoint!=0) {
 				customerService.usePointUpdateCustomer(loginMember, usePoint);
 				customerService.usePointInsertInHistory(loginMember.getCustomerId(), usePoint);
-
+				
+				loginMember.setPoint(loginMember.getPoint()-usePoint);
 				request.getSession().setAttribute("loginMember", loginMember);
 				//loginMemberupdate
 				

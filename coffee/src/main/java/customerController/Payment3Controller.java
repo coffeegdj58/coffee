@@ -25,7 +25,7 @@ public class Payment3Controller extends HttpServlet {
 		HttpSession session = request.getSession();
 		Customer loginMember = (Customer)session.getAttribute("loginMember");
 		if(loginMember==null) {
-			response.sendRedirect(request.getContextPath()+"/GoodsOne?goodsCode="+goodsCode);
+			response.sendRedirect(request.getContextPath()+"/CustomerLogin");
 			return;
 		}
 		this.orderService= new OrderService();

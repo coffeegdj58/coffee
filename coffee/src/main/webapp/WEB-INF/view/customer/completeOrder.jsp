@@ -84,10 +84,12 @@ footer {
 				<td>구매자 이름</td>
 				<td>${loginMember.customerName}</td>
 			</tr>
+			<tr><td colspan="2"><hr></td></tr>
 			<tr>
 				<td>배송지 주소</td>
 				<td>${address.address}</td>
 			</tr>
+			<tr><td colspan="2"><hr></td></tr>
 			<tr>
 				<td>수취인 연락처</td>
 				<td>${loginMember.customerPhone}</td>
