@@ -6,8 +6,46 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import vo.Emp;
+import vo.Order;
 
 public class EmpDao {
+	
+	//관리자가 고객 orderState 수정하기
+	public int modifyOrderState(Connection conn, String orderState, String customerId, int orderCode ) throws Exception{
+		int row=0;
+		String sql="UPDATE orders SET order_state=? WHERE customer_id=? AND order_code=? ;";
+		PreparedStatement stmt=conn.prepareStatement(sql);
+		stmt.setString(1, orderState);
+		stmt.setString(2, customerId);
+		stmt.setInt(3, orderCode);
+		row=stmt.executeUpdate();
+		if(row==1) {
+			System.out.println("수정성공: dao");
+		}
+		stmt.close();
+		return row;
+		
+	}
+	
+	//관리자가 고객 정보 불러오기
+	public ArrayList<Order> selectOrder(Connection conn) throws Exception{
+		ArrayList<Order> list=new ArrayList<Order>();
+		String sql="SELECT order_code, goods_code, customer_id, order_quantity, order_price, order_state, createdate FROM orders ORDER BY order_state ASC;";
+		PreparedStatement stmt=conn.prepareStatement(sql);
+		ResultSet rs=stmt.executeQuery();
+		while(rs.next()) {
+			Order orders=new Order();
+			orders.setOrderCode(rs.getInt("order_code"));
+			orders.setGoodsCode(rs.getInt("goods_code"));
+			orders.setCustomerId(rs.getString("customer_id"));
+			orders.setOrderQuantity(rs.getInt("order_quantity"));
+			orders.setOrderPrice(rs.getInt("order_price"));
+			orders.setOrderState(rs.getString("order_state"));
+			orders.setCreatedate(rs.getString("createdate"));
+			list.add(orders); 
+		}
+		return list;
+	}
 	
 	//최고관리자가 하위 관리자 정보 수정 때 모든 정보 불러오기
 	public Emp selectModifyEmp(Connection conn, int empCode)throws Exception {

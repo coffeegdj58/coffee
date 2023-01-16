@@ -8,9 +8,68 @@ import java.util.HashMap;
 import dao.*;
 import util.*;
 import vo.Emp;
+import vo.Order;
 
 public class EmpService {
 	private EmpDao empDao;
+	
+	//관리자가 고객 orderState 수정하기
+	public int modifyOrderState( String orderState, String customerId, int orderCode  ) {
+		Connection conn=null;
+		Dbutil dbutil=new Dbutil();
+		this.empDao=new EmpDao();
+		int row=0;
+		try {
+			conn=dbutil.getConnection();
+			row=empDao.modifyOrderState(conn, orderState, customerId, orderCode);
+			conn.commit();
+			//System.out.println("커밋 됨");
+		} catch (Exception e) {
+			try {
+				conn.rollback();
+				//System.out.println("롤백 됨");
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		}finally {
+			try {
+				conn.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return row;
+	}
+	
+	//관리자가 고객 정보 불러오기
+	public ArrayList<Order> selectOrder() {
+		ArrayList<Order> list=null;
+		Connection conn=null;
+		Dbutil dbutil=new Dbutil();
+		this.empDao=new EmpDao();
+		try {
+			conn=dbutil.getConnection();
+			list=empDao.selectOrder(conn);
+			conn.commit();
+		} catch (Exception e) {
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		}finally {
+			try {
+				conn.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
+	
+	
 	//최고관리자가 하위 관리자 정보 수정 때 모든 정보 불러오기
 	public Emp selectModifyEmp(int empCode) {
 		Emp emp=null;
