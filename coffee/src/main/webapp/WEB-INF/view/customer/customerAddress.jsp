@@ -97,7 +97,12 @@
 			 	 		<table>
 			 	 			<tr>
 			 	 				<td>주소</td>
-			 	 				<td><input type="text" name="address" id="address"></td>
+			 	 				<td><input type="text" name="address" id="address" readonly="readonly"></td>
+			 	 				
+			 	 			</tr>
+			 	 			<tr>
+			 	 				<td>상세주소</td>
+			 	 				<td><input type="text" name="address2" id="address2"></td>
 			 	 			</tr>
 			 	 			<tr>
 			 	 				<td>기본배송지로 등록</td>
@@ -130,6 +135,12 @@
 							$('#address').focus();
 							return;
 						}
+						
+						if($('#address2').val().length < 5){
+							alert('올바른 주소를 입력해주세요')
+							$('#address2').focus();
+							return;
+						}
 						$('#addressform').submit();
 					})
 				
@@ -144,4 +155,17 @@
 		</c:if>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script> 
 </body>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+window.onload = function(){
+	$('#address').click(function(){
+		new daum.Postcode({	
+			oncomplete: function(data) { 
+				$('#address').val(data.address);
+			}
+		}).open();
+	})
+}
+</script>
+
 </html>

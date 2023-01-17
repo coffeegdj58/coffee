@@ -44,7 +44,7 @@ public class ModifyAddressController extends HttpServlet {
 		HttpSession session = request.getSession();
 		Customer loginMember = (Customer)session.getAttribute("loginMember");
 		request.setCharacterEncoding("utf-8");
-		String address= request.getParameter("address");
+		String address= request.getParameter("address")+" "+request.getParameter("address2");;
 		int addressCode = Integer.parseInt(request.getParameter("addressCode"));
 		int flag = 0;
 		if(request.getParameter("flag")!=null) {

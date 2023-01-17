@@ -47,7 +47,8 @@ public class AddressCustomerController extends HttpServlet {
 		HttpSession session = request.getSession();
 		Customer loginMember = (Customer)session.getAttribute("loginMember");
 		request.setCharacterEncoding("utf-8");
-		String address= request.getParameter("address");
+		String address= request.getParameter("address")+" "+request.getParameter("address2");
+		
 		int flag = 0;
 		if(request.getParameter("flag")!=null) {
 			flag= Integer.parseInt(request.getParameter("flag"));

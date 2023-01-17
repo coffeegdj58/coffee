@@ -50,12 +50,19 @@
 		<h1>주소수정</h1>
 		<hr style="height: 3px; background-color:black;" width="100%">
 		<br>
+		<div>${address.address}</div>
+		<br>
+		<br>
 		<form action="${pageContext.request.contextPath}/ModifyAddress" method="post" id="addressform">
 			<input type="hidden" name="addressCode" value="${address.addressCode}">
 			<table>
 				<tr>
 					<td>주소</td>
-					<td><input type="text" name="address" value="${address.address}" id="address"></td>
+					<td><input type="text" name="address" id="address"></td>
+				</tr>
+				<tr>
+					<td>상세주소</td>
+					<td><input type="text" name="address2" id="address2"></td>
 				</tr>
 				<tr>
 					<td>기본 배송지로 등록</td>
@@ -79,11 +86,29 @@
 						if($('#address').val().length < 5){
 							alert('올바른 주소를 입력해주세요')
 							$('#address').focus();
+							return
+						}else if($('#address2').val().length < 5){
+							alert('올바른 주소를 입력해주세요')
+							$('#address2').focus();
+							return;
 						}
-						$('addressform').submit();
+						
+						$('#addressform').submit();
 					})
 				
 			})
 		</script>
 </body>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+window.onload = function(){
+	$('#address').click(function(){
+		new daum.Postcode({	
+			oncomplete: function(data) { 
+				$('#address').val(data.address);
+			}
+		}).open();
+	})
+}
+</script>
 </html>

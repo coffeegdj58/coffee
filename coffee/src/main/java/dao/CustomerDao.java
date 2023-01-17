@@ -279,7 +279,7 @@ public class CustomerDao {
 	//select address by list 회원 주소를 unique키인 customerid로 select하는 쿼리
 	public ArrayList<Address> addressListById(String customerId,Connection conn) throws Exception{
 		ArrayList<Address> list = new ArrayList<Address>();
-		String sql = "SELECT * FROM customer_address WHERE customer_id= ? ORDER BY flag DESC";
+		String sql = "SELECT * FROM customer_address WHERE customer_id= ? AND vision= 0 ORDER BY flag DESC";
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		stmt.setString(1, customerId);
 		
@@ -370,6 +370,20 @@ public class CustomerDao {
 		stmt.close();
 		rs.close();
 		return address;
+	}
+	//order로 묶힌 address는 살리는 대신 안보이게 처리한다
+	public int updateAddressOne(Connection conn, int addressCode) throws Exception{
+		int result=0;
+		
+		String sql = "UPDATE customer_address SET vision= 1 WHERE address_code= ?";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setInt(1, addressCode);
+		
+		
+		result = stmt.executeUpdate();
+		
+		stmt.close();
+		return result;
 	}
 	
 }

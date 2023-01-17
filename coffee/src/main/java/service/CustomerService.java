@@ -479,10 +479,12 @@ public class CustomerService {
 			
 			result = customerDao.deleteAddress(addressCode, conn);
 			
+			
 			conn.commit(); // DBUtil.class에서 conn.setAutoCommit(false);
 		} catch (Exception e) {
 			try {
 				conn.rollback(); // DBUtil.class에서 conn.setAutoCommit(false);
+				
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
@@ -553,5 +555,36 @@ public class CustomerService {
 			}
 		}
 		return address;
+	}
+	
+	public int updateVisionAddress(int addressCode) {
+		int result =0;
+		Connection conn =null;
+		try {
+			db = new Dbutil();
+			conn =db.getConnection();
+			customerDao =new CustomerDao();
+			
+			result = customerDao.updateAddressOne(conn, addressCode);
+			
+			
+			conn.commit(); // DBUtil.class에서 conn.setAutoCommit(false);
+		} catch (Exception e) {
+			try {
+				conn.rollback(); // DBUtil.class에서 conn.setAutoCommit(false);
+				
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
+		
 	}
 }

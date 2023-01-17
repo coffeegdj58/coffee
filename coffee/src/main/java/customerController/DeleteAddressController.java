@@ -19,7 +19,10 @@ public class DeleteAddressController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int addressCode= Integer.parseInt(request.getParameter("addressCode"));
 		this.customerService = new CustomerService();
-		customerService.deleteAddress(addressCode);
+		int result=customerService.deleteAddress(addressCode);
+		if(result==0) {
+			customerService.updateVisionAddress(addressCode);
+		}
 		
 		response.sendRedirect(request.getContextPath()+"/AddressCustomer");
 		
