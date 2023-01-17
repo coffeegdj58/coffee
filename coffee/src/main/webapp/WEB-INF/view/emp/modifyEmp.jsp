@@ -127,7 +127,7 @@ footer
 	</form>
 </div>
 	<!--footer -->
-	<footer class="footer">
+	<footer class="footer" style="margin-top: 40px;">
 		<img alt="" src="${pageContext.request.contextPath}/image/footeer.png"
 			style="width: 100%; height: auto;">
 	</footer>

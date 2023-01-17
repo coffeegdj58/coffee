@@ -75,7 +75,7 @@ footer {
 								<option value="결제" selected="selected" >결제</option>
 								<option value="취소">취소</option>
 								<option value="배송중">배송중</option>
-								<option value="구매완료">구매완료</option>
+								<option value="배송완료">배송완료</option>
 								<option value="구매확정">구매확정</option>
 							</select>
 						</c:if>
@@ -84,7 +84,7 @@ footer {
 								<option value="결제">결제</option>
 								<option value="취소" selected="selected" >취소</option>
 								<option value="배송중">배송중</option>
-								<option value="구매완료">구매완료</option>
+								<option value="배송완료">배송완료</option>
 								<option value="구매확정">구매확정</option>
 							</select>
 						</c:if>
@@ -93,16 +93,16 @@ footer {
 								<option value="결제">결제</option>
 								<option value="취소">취소</option>
 								<option value="배송중" selected="selected">배송중</option>
-								<option value="구매완료">구매완료</option>
+								<option value="배송완료">배송완료</option>
 								<option value="구매확정">구매확정</option>
 							</select>
 						</c:if>
-						<c:if test="${O.orderState eq '구매완료' }">
+						<c:if test="${O.orderState eq '배송완료' }">
 							<select name="orderState" id="orderState${O.orderCode}">
 								<option value="결제">결제</option>
 								<option value="취소">취소</option>
 								<option value="배송중">배송중</option>
-								<option value="구매완료" selected="selected">구매완료</option>
+								<option value="배송완료" selected="selected">배송완료</option>
 								<option value="구매확정">구매확정</option>
 							</select>
 						</c:if>
@@ -111,7 +111,7 @@ footer {
 								<option value="결제">결제</option>
 								<option value="취소">취소</option>
 								<option value="배송중">배송중</option>
-								<option value="구매완료">구매완료</option>
+								<option value="배송완료">배송완료</option>
 								<option value="구매확정" selected="selected">구매확정</option>
 							</select>
 						</c:if>
@@ -126,10 +126,9 @@ footer {
 	<c:forEach var="O" items="${Olist}">
 	<script>
 		$(document).ready(function(){	
-				$('#orderState${O.orderCode}').change(function(){
-					$('#modifyForm${O.orderCode}').submit();
-					
-				})
+			$('#orderState${O.orderCode}').change(function(){
+				$('#modifyForm${O.orderCode}').submit();
+			})
 		})		
 	</script>
 	</c:forEach>
