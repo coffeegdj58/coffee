@@ -45,7 +45,7 @@ public class LoginEmpController extends HttpServlet {
 		}else if(resultEmp!=null){
 			//System.out.println(resultEmp+"<==resultEmp");
 			session.setAttribute("loginEmp", resultEmp); //세션에 저장
-			response.sendRedirect(request.getContextPath()+"/Home");
+			response.sendRedirect(request.getContextPath()+"/EmpPage");
 		}
 		
 	}
