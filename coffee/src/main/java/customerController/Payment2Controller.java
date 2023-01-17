@@ -79,7 +79,7 @@ public class Payment2Controller extends HttpServlet {
 		if(request.getParameter("usePoint")!=null && request.getParameter("usePoint").equals("")!=true) {
 			usePoint= Integer.parseInt(request.getParameter("usePoint"));
 		}
-	
+		int goodsPrice= Integer.parseInt(request.getParameter("goodsPrice"));
 		//총 가격에서 사용한 포인트 뺴기= 결제할 금액
 		int orderPrice= Integer.parseInt(request.getParameter("orderPrice"))-usePoint;
 		//service 불러오기

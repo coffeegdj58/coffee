@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
      <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
      <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
+     <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -94,7 +95,7 @@
 						<tr><td><h4><a href="${pageContext.request.contextPath}/GoodsOne?goodsCode=${o.goodsCode}">${o.goodsName}</a></h4></td> </tr>
 						<tr><td>${o.orderState}</td></tr>
 						
-						<tr><td> ₩ ${o.orderPrice} &nbsp;&nbsp;&nbsp;${o.orderQuantity}개</td></tr>
+						<tr><td> ₩ <fmt:formatNumber value="${o.orderPrice}" pattern="#,###"/>&nbsp;&nbsp;&nbsp;${o.orderQuantity}개</td></tr>
 					</table>
 				</td>
 				<c:if test="${o.orderState ne '취소'}">
@@ -154,5 +155,10 @@
 	<footer class="footer">
 		<img alt="" src="${pageContext.request.contextPath}/image/footeer.png" style="width: 100%; height: auto; ">
 	</footer>
+	<script type="text/javascript">
+	$(document).ready(function(){
+		$()	
+	})
+	</script>
 </body>
 </html>

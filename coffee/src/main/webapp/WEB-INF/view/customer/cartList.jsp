@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
      <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+     <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -75,7 +76,7 @@ footer {
 			 			<tr>
 			 				<form action="${pageContext.request.contextPath}/UpdateQuantity" method="post" id="updateQunatity${c.goodsCode}">
 			 				<td>
-			 				₩ ${c.cartPrice} &nbsp;&nbsp;&nbsp;
+			 				₩ <fmt:formatNumber value="${c.cartPrice}" pattern="#,###"/>  &nbsp;&nbsp;&nbsp;
 			 				<c:if test="${c.soldout=='N'}">	
 						 	
 						 	
@@ -89,6 +90,11 @@ footer {
 											<option value="3">3</option>
 											<option value="4">4</option>
 											<option value="5">5</option>
+											<option value="6">6</option>
+											<option value="7">7</option>
+											<option value="8">8</option>
+											<option value="9">9</option>
+											<option value="10">10</option>
 										</select>	
 									</c:if>	
 									<c:if test="${c.cartQuantity==2}">
@@ -98,6 +104,11 @@ footer {
 											<option value="3">3</option>
 											<option value="4">4</option>
 											<option value="5">5</option>
+											<option value="6">6</option>
+											<option value="7">7</option>
+											<option value="8">8</option>
+											<option value="9">9</option>
+											<option value="10">10</option>
 										</select>	
 									</c:if>	
 									<c:if test="${c.cartQuantity==3}" >
@@ -105,9 +116,13 @@ footer {
 											<option value="1">1</option>
 											<option value="2">2</option>
 											<option value="3" selected="selected">3</option>
-											<option value="4">4</option>
-											
+											<option value="4">4</option>											
 											<option value="5">5</option>
+											<option value="6">6</option>
+											<option value="7">7</option>
+											<option value="8">8</option>
+											<option value="9">9</option>
+											<option value="10">10</option>
 										</select>	
 									</c:if>	
 									<c:if test="${c.cartQuantity==4}">
@@ -117,6 +132,11 @@ footer {
 											<option value="3">3</option>
 											<option value="4" selected="selected">4</option>
 											<option value="5">5</option>
+											<option value="6">6</option>
+											<option value="7">7</option>
+											<option value="8">8</option>
+											<option value="9">9</option>
+											<option value="10">10</option>
 										</select>	
 									</c:if>	
 									<c:if test="${c.cartQuantity==5}">
@@ -126,8 +146,84 @@ footer {
 											<option value="3">3</option>
 											<option value="4">4</option>
 											<option value="5" selected="selected">5</option>
+											<option value="6">6</option>
+											<option value="7">7</option>
+											<option value="8">8</option>
+											<option value="9">9</option>
+											<option value="10">10</option>
+										</select>	
+									</c:if>
+									<c:if test="${c.cartQuantity==6}">
+								 		<select name="cartQuantity" id="quantity${c.goodsCode}">
+											<option value="1">1</option>
+											<option value="2">2</option>
+											<option value="3">3</option>
+											<option value="4">4</option>
+											<option value="5">5</option>
+											<option value="6" selected="selected" >6</option>
+											<option value="7">7</option>
+											<option value="8">8</option>
+											<option value="9">9</option>
+											<option value="10">10</option>
 										</select>	
 									</c:if>	
+									<c:if test="${c.cartQuantity==7}">
+								 		<select name="cartQuantity" id="quantity${c.goodsCode}">
+											<option value="1">1</option>
+											<option value="2">2</option>
+											<option value="3">3</option>
+											<option value="4">4</option>
+											<option value="5">5</option>
+											<option value="6">6</option>
+											<option value="7" selected="selected">7</option>
+											<option value="8">8</option>
+											<option value="9">9</option>
+											<option value="10">10</option>
+										</select>	
+									</c:if>	
+									<c:if test="${c.cartQuantity==8}" >
+								 		<select name="cartQuantity" id="quantity${c.goodsCode}">
+											<option value="1">1</option>
+											<option value="2">2</option>
+											<option value="3">3</option>
+											<option value="4">4</option>											
+											<option value="5">5</option>
+											<option value="6">6</option>
+											<option value="7">7</option>
+											<option value="8" selected="selected">8</option>
+											<option value="9">9</option>
+											<option value="10">10</option>
+										</select>	
+									</c:if>	
+									<c:if test="${c.cartQuantity==9}">
+								 		<select name="cartQuantity" id="quantity${c.goodsCode}">
+											<option value="1" >1</option>
+											<option value="2">2</option>
+											<option value="3">3</option>
+											<option value="4" >4</option>
+											<option value="5">5</option>
+											<option value="6">6</option>
+											<option value="7">7</option>
+											<option value="8">8</option>
+											<option value="9" selected="selected">9</option>
+											<option value="10">10</option>
+										</select>	
+									</c:if>	
+									<c:if test="${c.cartQuantity==10}">
+								 		<select name="cartQuantity" id="quantity${c.goodsCode}">
+											<option value="1" >1</option>
+											<option value="2">2</option>
+											<option value="3">3</option>
+											<option value="4">4</option>
+											<option value="5" >5</option>
+											<option value="6">6</option>
+											<option value="7">7</option>
+											<option value="8">8</option>
+											<option value="9">9</option>
+											<option value="10"selected="selected">10</option>
+										</select>	
+									</c:if>		
+									
 							 	
 							 	
 							 </c:if>
@@ -155,7 +251,7 @@ footer {
 		<fieldset style="text-align: center;">
 			
 			<h4>
-				총 가격 : ₩ ${sum}
+				총 가격 : ₩ <fmt:formatNumber value="${sum}" pattern="###,###"/> 
 			</h4>
 		</fieldset>
 		
@@ -172,7 +268,7 @@ footer {
 							<td>
 								<div style="text-align: center;"><a href="${pageContext.request.contextPath}/GoodsOne?goodsCode=${g.goodsCode}"><img src="${pageContext.request.contextPath}/image/${g.goodsName}.jpg" width="200" height="200"></a></div>
 								<div style="text-align: center;">${g.goodsName}</div>
-								<div style="text-align: center;">₩ ${g.goodsPrice}</div>
+								<div style="text-align: center;">₩  <fmt:formatNumber value="${g.goodsPrice}" pattern="#,###"/></div>
 							</td>	
 							</c:forEach>
 						</tr>

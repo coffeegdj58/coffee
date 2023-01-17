@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -95,7 +96,7 @@
 					<tr>
 						<td>${c.goodsName}</td>
 						<td><img width='200px' height="200px" src="${pageContext.request.contextPath}/image/${c.goodsName}.jpg"></td>
-						<td>₩ ${c.cartPrice}</td>
+						<td>₩  <fmt:formatNumber value="${c.cartPrice}" pattern="#,###"/></td>
 						<td>${c.cartQuantity}</td>
 					</tr>
 					<tr><td colspan=4><hr></td></tr>
@@ -109,7 +110,7 @@
 					<table width="100%">
 						<tr>
 							<td>총 상품가격</td>
-							<td>₩ ${c.cartPrice}</td>
+							<td>₩  <fmt:formatNumber value="${c.cartPrice}" pattern="#,###"/></td>
 						</tr>
 						<tr><td colspan=2><hr></td></tr>
 						<tr>
@@ -119,7 +120,7 @@
 						<tr><td colspan=2><hr></td></tr>
 						<tr>
 							<td>포인트</td>
-							<td><input type="number" name="usePoint" id="usePoint">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;보유: ${loginMember.point}pt</td>
+							<td><input type="number" name="usePoint" id="usePoint">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;보유: <fmt:formatNumber value="${loginMember.point}" pattern="#,###"/>pt</td>
 						</tr>
 						<tr><td colspan=2><hr></td></tr>
 						<tr>
@@ -130,6 +131,7 @@
 					</table>
 			</fieldset>
 			<input type="hidden" value="${c.goodsCode}" name="goodsCode">
+			<input type="hidden" value="${c.goodsPrice}" name="goodsPrice">
 			<input type="hidden" value="${c.cartQuantity}" name="cartQuantity">
 			<input type="hidden" value="${c.cartPrice}" name="orderPrice">
 			<button type="button" id="btn" class="btn btn-outline-dark btn-lg">결제하기</button>

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%> 
 <!DOCTYPE html>
 <html>
 	<head>
@@ -70,7 +71,8 @@
 					<h5>${g.goodsInfo}</h5>
 					
 					<hr>
-					<h5>₩ ${g.goodsPrice}</h5>
+					
+					<h5>₩ <fmt:formatNumber value="${g.goodsPrice}" pattern="#,###"/> </h5>
 					<br>
 					<c:if test="${g.soldout == 'N'}">
 						<form name="form" method="post">
@@ -81,6 +83,11 @@
 								<option value="3">3</option>
 								<option value="4">4</option>
 								<option value="5">5</option>
+								<option value="6">6</option>
+								<option value="7">7</option>
+								<option value="8">8</option>
+								<option value="9">9</option>
+								<option value="10">10</option>
 							</select>
 							<button class="btn btn-outline-dark" type="submit" onclick="javascript: form.action='${pageContext.request.contextPath}/Payment3'">바로구매</button>
 							<button class="btn btn-outline-dark" type="submit" onclick="javascript: form.action='${pageContext.request.contextPath}/GoodsOne'">장바구니에 담기</button>
@@ -112,7 +119,7 @@
 							<td>
 								<div style="text-align: center;"><a href="${pageContext.request.contextPath}/GoodsOne?goodsCode=${g.goodsCode}"><img src="${pageContext.request.contextPath}/image/${g.goodsName}.jpg" width="200" height="200"></a></div>
 								<div style="text-align: center;">${g.goodsName}</div>
-								<div style="text-align: center;">₩ ${g.goodsPrice}</div>
+								<div style="text-align: center;">₩ <fmt:formatNumber value="${g.goodsPrice}" pattern="#,###"/> </div>
 							</td>	
 							</c:forEach>
 						</tr>

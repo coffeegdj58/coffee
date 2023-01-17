@@ -54,7 +54,7 @@
 				
 				<div>GoodsName : <input type="text" name="goodsName" value='${m.goodsName}' readonly='readonly'></div>
 				<hr>
-				<div>GoodsPrice : <input type="number" name="goodsPrice"></div>
+				<div>GoodsPrice : <input type="number" name="goodsPrice" value="${m.goodsPrice }"></div>
 				<hr>
 				<div>Soldout : Y<input type="radio" name="soldout" value="Y">&nbsp;N<input type="radio" name="soldout" value="N"></div>
 				<hr>
@@ -66,9 +66,9 @@
 				</select>
 				</div>
 				<hr>
-				<div>GoodsContent : <textarea rows="3" cols="50" name= "goodsContent"></textarea></div>
+				<div>GoodsContent : <textarea rows="3" cols="50" name= "goodsContent" >${m.goodsContent }</textarea></div>
 				<hr>
-				<div>GoodsInfo : <input type="text" name="goodsInfo"></div>		
+				<div>GoodsInfo : <input type="text" name="goodsInfo" value="${m.goodsInfo}"></div>		
 				<hr>
 				<div>File : <input type="file" name="filename" accept="image/jpeg, image/png"></div>
 				<hr>
