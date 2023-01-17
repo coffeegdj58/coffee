@@ -9,15 +9,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.websocket.Session;
 
-import service.*;
-import vo.*;
+import service.CounterService;
+import service.EmpService;
+import vo.Emp;
 
 
 @WebServlet("/EmpPage")
 public class EmpPageController extends HttpServlet {
 	private EmpService empService;
+	private CounterService counterService;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//세션에서 관리자만 들어올 수 있겠끔
 		HttpSession session=request.getSession();
@@ -34,6 +35,18 @@ public class EmpPageController extends HttpServlet {
 		
 		//jsp에서 <% %> 안쓰고 가져오게 하려고
 		request.setAttribute("list", list);
+		
+		//접속자 수
+		counterService = new CounterService();
+		int todayCount = counterService.selectTodayCount();
+		//System.out.println("todayCount : "+ todayCount);
+		request.setAttribute("todayCount", todayCount);
+
+		int totalCount = counterService.selectTotalCount();
+		//System.out.println("totalCount : "+ totalCount);
+		request.setAttribute("totalCount", totalCount);
+		
+		
 		
 		request.getRequestDispatcher("/WEB-INF/view/emp/empPage.jsp").forward(request, response);
 	}

@@ -90,6 +90,13 @@ footer {
 		</div>
 	</div>
 	</div>
+	<div class="card border-success mb-3"  style="width: 150px;">
+		<div class="card-text" style="text-align: center;">
+			현재 접속자 : ${currentCount}<br>
+			오늘 접속자 : ${todayCount}<br>
+			누적 접속자 : ${totalCount}<br>
+		</div>
+	</div>
 	<!--footer -->
 	<footer class="footer">
 		<img alt="" src="${pageContext.request.contextPath}/image/footeer.png" style="width: 100%; height: auto; ">
