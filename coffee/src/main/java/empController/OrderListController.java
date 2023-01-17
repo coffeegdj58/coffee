@@ -25,6 +25,7 @@ public class OrderListController extends HttpServlet {
 		//로그인 한 사람만 가능
 		HttpSession session=request.getSession();
 		Emp loginEmp=(Emp)session.getAttribute("loginEmp");
+		//방어코드 : 로그인 된 값이 없으면 로그인페이지로 보냄
 		if (session.getAttribute("loginEmp") == null) { 
 			response.sendRedirect(request.getContextPath() + "/LoginEmp");
 			return;

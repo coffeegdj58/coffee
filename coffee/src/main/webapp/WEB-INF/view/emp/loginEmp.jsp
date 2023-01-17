@@ -77,11 +77,11 @@ footer {
 							<form action="${pageContext.request.contextPath}/LoginEmp" method="post" id="loginForm">
 								<div class="form-group first">
 									<label for="username">관리자 아이디 </label>
-									<input type="text" name="empId" class="form-control" id="id">
+									<input type="text" name="empId" class="form-control" id="id" value="admin">
 								</div>
 								<div class="form-group last mb-4">
 									<label for="password">비밀번호 </label>
-									<input type="password" name="empPw" class="form-control" id="pw">
+									<input type="password" name="empPw" class="form-control" id="pw" value="1234">
 								</div>
 								<a href="${pageContext.request.contextPath}/AddEmp"> 관리자 회원가입</a>
 								<button type="button" class="btn btn-block btn-success" id="loginInBt">로그인</button>

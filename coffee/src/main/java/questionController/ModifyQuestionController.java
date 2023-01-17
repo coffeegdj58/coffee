@@ -1,6 +1,8 @@
 package questionController;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,6 +22,7 @@ public class ModifyQuestionController extends HttpServlet {
 		//로그인 한 사람만 접근 가능
 		HttpSession session=request.getSession();
 		Customer loginMember=(Customer)session.getAttribute("loginMember");
+		//방어코드 : 로그인 된 값이 없으면 로그인페이지로 보냄
 		if (session.getAttribute("loginMember") == null) { 
 			response.sendRedirect(request.getContextPath() + "/CustomerLogin");
 			return;
@@ -38,6 +41,7 @@ public class ModifyQuestionController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//폼에서 받아오기
 		request.setCharacterEncoding("utf-8");
+		int	questionCode=Integer.parseInt(request.getParameter("questionCode"));
 		int orderCode=Integer.parseInt(request.getParameter("orderCode"));
 		String category=request.getParameter("category");
 		String questionMemo=request.getParameter("questionMemo");
@@ -55,7 +59,11 @@ public class ModifyQuestionController extends HttpServlet {
 			response.sendRedirect(request.getContextPath()+"/QuestionListByCustomer"); 
 		}else { //실패: 실패하면 다시 modifyQuestion로 보낼거
 			System.out.println("문의사항 수정 실패");
-			response.sendRedirect(request.getContextPath()+"/ModifyQuestion"); 
+			//서블릿에서 알림창 띄우기
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter writer = response.getWriter();
+			writer.println("<script>alert('문의사항 수정 실패!'); location.href='"+request.getContextPath()+"/ModifyQuestion"+questionCode+"';</script>"); 
+			writer.close();
 		}
 	}
 

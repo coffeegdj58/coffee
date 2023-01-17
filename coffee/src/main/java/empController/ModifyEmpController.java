@@ -76,7 +76,7 @@ public class ModifyEmpController extends HttpServlet {
 			//서블릿에서 알림창 띄우기
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter writer = response.getWriter();
-			writer.println("<script>alert('사원 수정 실패!'); location.href='"+request.getContextPath()+"/ModifyEmp"+"';</script>"); 
+			writer.println("<script>alert('사원 수정 실패!'); location.href='"+request.getContextPath()+"/ModifyEmp"+empCode+"';</script>"); 
 			writer.close();
 		}
 	}

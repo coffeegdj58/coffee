@@ -49,6 +49,7 @@ $('#category').blur(function(){
 		<!-- include의 주소에는 context를 사용하지 않는다 편한 액션 중하나 -->
 	</div>
 	<form action="${pageContext.request.contextPath}/ModifyQuestion" method="post">
+		<input type="hidden" value="${q.questionCode}" name="questionCode">
 		<table>
 			<tr>
 				<td>주문 번호</td>

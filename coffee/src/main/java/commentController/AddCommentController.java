@@ -1,6 +1,7 @@
 package commentController;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -55,7 +56,11 @@ public class AddCommentController extends HttpServlet {
 			response.sendRedirect(request.getContextPath()+"/QuestionListByEmp"); 
 		}else { //답변: 실패하면 다시 addComment로 보낼거
 			System.out.println("답변 추가 실패");
-			response.sendRedirect(request.getContextPath()+"/AddComment"); 
+			//서블릿에서 알림창 띄우기
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter writer = response.getWriter();
+			writer.println("<script>alert('답변 추가 실패!'); location.href='"+request.getContextPath()+"/AddComment"+"';</script>"); 
+			writer.close();
 		}
 	}
 

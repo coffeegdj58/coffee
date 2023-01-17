@@ -63,7 +63,7 @@ public class ModifyNoticeController extends HttpServlet {
 			//서블릿에서 알림창 띄우기
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter writer = response.getWriter();
-			writer.println("<script>alert('공지사항 수정 실패!'); location.href='"+request.getContextPath()+"/ModifyNotice"+"';</script>"); 
+			writer.println("<script>alert('공지사항 수정 실패!'); location.href='"+request.getContextPath()+"/ModifyNotice"+noticeCode+"';</script>"); 
 			writer.close();
 		}
 	}
