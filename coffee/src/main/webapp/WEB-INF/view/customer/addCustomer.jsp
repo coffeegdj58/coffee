@@ -111,8 +111,8 @@ footer {
 									<input type="number" name="customerPhone" class="form-control" id="phone">
 								</div>
 								<div class="form-group last mb-4">
-										<div>여<input type="radio" name="customerGender" id="gender" value="F" class="form-control"></div>
-										<div>남<input type="radio" name="customerGender" id="gender" value="M" class="form-control"></div>
+										<input type="radio" name="customerGender" id="gender" value="F" > 여
+										<input type="radio" name="customerGender" id="gender" value="M" > 남
 								</div>
 								<div class="form-group last mb-4">
 									<label for="password">생일 </label>

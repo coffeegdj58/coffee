@@ -57,7 +57,7 @@
 			<div class="row">
 		
 				<div class="col-5">
-					<img width="450px" height= "450px" src="${pageContext.request.contextPath}/image/${g.goodsName}.jpg"/>
+					<img width="100%" height= "auto" src="${pageContext.request.contextPath}/image/${g.goodsName}.jpg"/>
 				</div>
 				
 				<div class="col-7">

@@ -18,7 +18,7 @@
           <div class="row">
             <div class="col-12">
             <div class="float-right">
-           	 <form action="${pageContext.request.contextPath}/SearchGoods" method="get" id="search">
+           	 <form action="${pageContext.request.contextPath}/SearchGoods" method="get" id="searchform">
 
 					<c:if test="${empty loginMember && empty loginEmp}">
 	                	<a href="${pageContext.request.contextPath}/CustomerLogin" style="color:black">login</a>
@@ -37,8 +37,8 @@
 					</c:if>
 					<span>&nbsp;&nbsp;&nbsp;</span>
 					<span>
-						<input type="text" name="word" placeholder="검색어를 입력해주세요" style="height: 40px; font-size: 15px; border: 0; border-radius: 15px; outline: none; padding-left: 10px; background-color: rgb(233, 233, 233);">
-						<button type="submit" class="btn btn-outline-dark" ><img src="${pageContext.request.contextPath}/image/search.png"></button>
+						<input type="text" name="word" placeholder="검색어를 입력해주세요"id="search" style="height: 40px; font-size: 15px; border: 0; border-radius: 15px; outline: none; padding-left: 10px; background-color: rgb(233, 233, 233);">
+						<button type="button" id="searchbtn" class="btn btn-outline-dark" ><img src="${pageContext.request.contextPath}/image/search.png"></button>
 					</span>
 				</form>
               </div>
@@ -84,6 +84,19 @@
 		
       </header>
       </div>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+      	<script>
+      	$(document).ready(function(){	
+      		$('#searchbtn').click(function(){
+      			 if($('#search').val().length<1){
+      				 alert('검색어를 입력해주세요');
+      				 return;
+      			 }
+      			 $('#searchform').submit();
+      		})	
+      	})
+      	</script>
+      	
         <script src="${pageContext.request.contextPath}/bootstrap/nav/js/jquery-3.3.1.min.js"></script>
     	<script src="${pageContext.request.contextPath}/bootstrap/nav/js/popper.min.js"></script>
   	    <script src="${pageContext.request.contextPath}/bootstrap/nav/js/bootstrap.min.js"></script>

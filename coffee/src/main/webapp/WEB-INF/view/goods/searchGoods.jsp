@@ -47,7 +47,7 @@ footer {
 		<h3>검색결과</h3>
 		<br>
 		<c:if test="${empty list}">
-			<div>검색결과가 없습니다</div>
+			<h2>검색결과가 없습니다</h2>
 		</c:if>
 		<table> 
 			<tr>
@@ -65,11 +65,12 @@ footer {
 			</tr>
 	
 		</table>
-		
+	</div>	
+		<br><br><Br><Br><br><br><Br><Br>
 		<!--footer -->
 		<footer class="footer">
 			<img alt="" src="${pageContext.request.contextPath}/image/footeer.png" style="width: 100%; height: auto; ">
 		</footer>
-	</div>
+	
 </body>
 </html>
