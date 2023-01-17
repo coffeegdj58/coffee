@@ -48,13 +48,13 @@
 	<h1>베이커리</h1>
 	<hr style="height: 3px; background-color:black;" width="100%">
 	<br><br>
-	<h3>카테고리</h3>
+	<h3 style="font-weight: bold;">카테고리</h3>
 	<hr style="height: 3px; background-color:black;" width="100%">
 	<br>
-			<h5>
-			<c:forEach var="c" items="${categoryList}">
-				<c:if test="${c.categoryKind=='bakery'}"><label><span><a style="color:black" href="#${c.categoryName}">${c.categoryName}</a></span> &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></c:if>
-			</c:forEach>
+			<h5 style="font-weight: bold;">
+				<c:forEach var="c" items="${categoryList}">
+					<c:if test="${c.categoryKind=='bakery'}"><label><span><a style="color:black;" href="#${c.categoryName}">${c.categoryName}</a></span> &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></c:if>
+				</c:forEach>
 			</h5>
 			<span id="Bread"></span>
 			<br><br>

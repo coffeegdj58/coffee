@@ -25,7 +25,12 @@ public class AddCustomerController extends HttpServlet {
 		if(loginMember != null) {
 			response.sendRedirect(request.getContextPath()+"/Home");
 			return;
+		}//login 되어있을 시 들어 오지 못한다
+		int msg=0;
+		if(request.getParameter("msg")!=null) {
+			msg=Integer.parseInt(request.getParameter("msg"));
 		}
+		request.setAttribute("msg", msg);		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/view/customer/addCustomer.jsp");
 		rd.forward(request, response);
 	}
@@ -63,7 +68,7 @@ public class AddCustomerController extends HttpServlet {
 			
 			response.sendRedirect(request.getContextPath()+"/CustomerLogin");
 		}else {
-			response.sendRedirect(request.getContextPath()+"/AddCustomer");
+			response.sendRedirect(request.getContextPath()+"/AddCustomer?msg=1");
 		}
 		
 		

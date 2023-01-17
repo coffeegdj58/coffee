@@ -26,6 +26,11 @@ public class CustomerLoginController extends HttpServlet {
 			response.sendRedirect(request.getContextPath()+"/Home");
 			return;
 		}
+		int msg=0;
+		if(request.getParameter("msg")!=null) {
+			msg=Integer.parseInt(request.getParameter("msg"));
+		}
+		request.setAttribute("msg", msg);	
 		
 		request.getRequestDispatcher("/WEB-INF/view/customer/loginCustomer.jsp").forward(request, response);
 	}
@@ -48,7 +53,7 @@ public class CustomerLoginController extends HttpServlet {
 			response.sendRedirect(request.getContextPath()+"/Home");
 		}else {
 						
-			response.sendRedirect(request.getContextPath()+"/CustomerLogin");
+			response.sendRedirect(request.getContextPath()+"/CustomerLogin?msg=1");
 		}
 	}
 

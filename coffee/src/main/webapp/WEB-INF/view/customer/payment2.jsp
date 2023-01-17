@@ -49,7 +49,7 @@
 		<h1>주문결제</h1>
 		<hr style="height: 5px; background-color:black;">
 		<br><br>
-		<form action="${pageContext.request.contextPath}/Payment2" method="post">
+		<form action="${pageContext.request.contextPath}/Payment2" method="post" id="payment">
 			<fieldset>
 				<legend>구매자정보</legend>
 					<hr style="height: 3px; background-color:black;">
@@ -67,7 +67,7 @@
 						<tr>
 						<td>주소</td>
 						<td>
-						<select name="addressCode">
+						<select name="addressCode" id="address">
 							<c:forEach var="a" items='${addressList}'>
 								<option value="${a.addressCode}">
 									${a.address}<c:if test="${a.flag==1 }">(기본배송지)</c:if>
@@ -132,7 +132,7 @@
 			<input type="hidden" value="${c.goodsCode}" name="goodsCode">
 			<input type="hidden" value="${c.cartQuantity}" name="cartQuantity">
 			<input type="hidden" value="${c.cartPrice}" name="orderPrice">
-			<button type="submit" class="btn btn-outline-dark btn-lg">결제하기</button>
+			<button type="button" id="btn" class="btn btn-outline-dark btn-lg">결제하기</button>
 		</form>
 	</div>
 	
@@ -151,6 +151,14 @@
 	 		if($('#usePoint').val()<0){
 	 			$('#usePoint').val(0);
 	 		}
+	 	})
+	 	$('#btn').click(function(){
+	 		if($('#address').val.length<1){
+	 			alert('주소 만들어주세요')
+	 			$('#address').focus();
+	 			return;
+	 		}	
+	 		$('#payment').submit();
 	 	})
 	})
 	</script>

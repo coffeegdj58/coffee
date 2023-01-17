@@ -47,10 +47,10 @@
 	<h1>커피</h1>
 	<hr style="height: 3px; background-color:black;">
 	<br><br>
-	<h3>카테고리</h3>
+	<h3 style="font-weight: bold;">카테고리</h3 >
 	<hr style="height: 3px; background-color:black;" width="100%">
 	<br>
-			<h5>
+			<h5 style="font-weight: bold;">
 			<c:forEach var="c" items="${categoryList}">
 				<c:if test="${c.categoryKind=='coffee'}"><label><span><a style="color:black" href="#${c.categoryName}">${c.categoryName}</a></span> &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></c:if>
 			</c:forEach>

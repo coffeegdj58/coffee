@@ -35,6 +35,8 @@ public class OrderDao {
 				+ "c.goods_code goodsCode, c.cart_quantity cartQuantity, g.soldout soldout,c.selected selected, g.goods_name goodsName, (g.goods_price * c.cart_quantity) cartPrice, g.goods_price goodsPrice, c2.category_kind categoryKind, c2.category_name categoryName "
 				+ "FROM cart c INNER JOIN goods g ON c.goods_code = g.goods_code inner join category c2 ON c2.category_code = g.category_code "
 				+ "WHERE c.customer_id= ?";
+		
+		//cart table과 goods table, category table의 inner join를 위해 cart를 만들고  소비자에게 cart를 보여주고 order로써 넣기위한 colum를 집어넣는 쿼리
 		PreparedStatement stmt= conn.prepareStatement(sql);
 		stmt.setString(1, customerId);
 		
@@ -84,7 +86,7 @@ public class OrderDao {
 		return result;
 	}
 	
-	//결제 후 유저의 카트 데이터를 지우는 쿼리
+	//결제 후 유저의 카트 데이터를 지우는 쿼리 (cart-order로 넘어가는 것이 결제 결제된 카트는 삭제)
 	public int deleteCartById(String customerId, Connection conn) throws Exception {
 		int result =0;
 		
@@ -103,6 +105,7 @@ public class OrderDao {
 		int sum = 0;
 		
 		String sql = "SELECT sum(g.goods_price*c.cart_quantity) sum FROM cart c INNER JOIN goods g ON c.goods_code = g.goods_code WHERE c.customer_id = ? AND c.selected = 1";
+		//goods_price * cart_quantity 가격 * 수량의 총합를 구하는 쿼리
 		PreparedStatement stmt =conn.prepareStatement(sql);
 		stmt.setString(1, customerId);
 		
@@ -131,11 +134,11 @@ public class OrderDao {
 		return result;
 	}
 	
-	//cart - orders에 넘어갈때 hit을 높이는 쿼리
+	//cart - orders에 넘어갈때(구매 시) hit(판매량)을 높이는 쿼리
 	public int updateGoodsHit(ArrayList<Cart> list, Connection conn ) throws Exception {
 		int hit= 0;
 		int result= 0;
-		
+		//
 		for(Cart c : list) {
 			String sql1= "SELECT hit FROM goods WHERE goods_code= ?";
 			PreparedStatement stmt1 = conn.prepareStatement(sql1);
@@ -171,6 +174,8 @@ public class OrderDao {
 		String sql = "SELECT o.createdate createdate, o.order_price, o.order_quantity, c.category_name categoryName, o.goods_code goodsCode, c.category_kind categoryKind, o.order_code orderCode, o.order_state orderState, g.goods_name goodsName, g.goods_price goodsPrice "
 				+ "FROM orders o INNER JOIN goods g ON g.goods_code= o.goods_code INNER JOIN category c ON g.category_code= c.category_code"
 				+ " WHERE o.customer_id = ? AND o.vision = '0' ORDER BY o.createdate DESC";
+		
+		//회원이 볼 수 있는 화면에서의 오더(주문)의 식별을 위한 order, goods, category 세 테이블의 innerjoin를 통한 select
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		stmt.setString(1, customerId);
 		
@@ -262,6 +267,8 @@ public class OrderDao {
 				+ "c.goods_code goodsCode, c.cart_quantity cartQuantity, c.selected selected, g.goods_name goodsName, (g.goods_price * c.cart_quantity) cartPrice, g.goods_price goodsPrice, c2.category_kind categoryKind, c2.category_name categoryName "
 				+ "FROM cart c INNER JOIN goods g ON c.goods_code = g.goods_code inner join category c2 ON c2.category_code = g.category_code "
 				+ "WHERE c.customer_id= ? AND c.selected= 1 AND g.soldout='N'";
+		
+		///실 구매할 cartlist를 구현 selected 1 = level 1 장바구니에 있고 선택 됨 soldout==n 품절되지 않은 상품
 		PreparedStatement stmt= conn.prepareStatement(sql);
 		stmt.setString(1, customerId);
 		
@@ -309,6 +316,9 @@ public class OrderDao {
 		int result= 0;
 		
 		String sql ="UPDATE cart SET selected= ? WHERE customer_id= ? AND goods_code = ?";
+		
+		//장바구니에서의 선택 selected을 update
+		
 		PreparedStatement stmt =conn.prepareStatement(sql);
 		stmt.setInt(1, selected);
 		stmt.setString(2, customerId);
@@ -326,6 +336,7 @@ public class OrderDao {
 		
 		int result = 0;
 		
+		//장바구니에서의 수량 변경 cart에서의 cartquantity update
 		String sql = "UPDATE cart SET cart_quantity = ? WHERE customer_id=? AND goods_code= ? ";
 		PreparedStatement stmt =conn.prepareStatement(sql);
 		
@@ -371,19 +382,6 @@ public class OrderDao {
 		return row;
 	}
 	
-	public int updateHitPatment2(Connection conn, int gooodsCode) throws Exception{
-		int row=0;
-		int hit=0;
-		String sql= "UPDATE goods SET hit=? WHERE goods_code=?";
-		PreparedStatement stmt=conn.prepareStatement(sql);
-		stmt.setInt(1, hit+1);
-		stmt.setInt(2, gooodsCode);
-		row=stmt.executeUpdate();
-		if(row==1) {
-			System.out.println("Hit 증가 : Dao");
-		}
-		return row;		
-	}
 	//하나의 오더를 select by ordercode
 	public Order selectOrderOne(Connection conn, int orderCode) throws Exception{
 		Order o = new Order();
@@ -408,7 +406,7 @@ public class OrderDao {
 		return o;
 	}
 	
-	//하나의 오더를 삭제하는 것처럼보이지만 안보이게함
+	//하나의 오더를 삭제하는 것처럼보이지만 안보이게함(order의 삭제는 없다 다만 고객에게 안 보일뿐) db의보존
 	public int deleteOrderOne(Connection conn, int orderCode) throws Exception{
 		int result= 0;
 		String sql= "UPDATE orders SET vision= 1 WHERE order_code= ?";

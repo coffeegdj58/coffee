@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	   <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -57,15 +58,18 @@ footer {
 	href="${pageContext.request.contextPath}/bootstrap/nav/css/style.css">
 <script>
 	  $(document).ready(function() {
-	  	$('#pw').blur(function){
-	  		if ($('#id').val().length<1||$('#pw').val().length<1){
-	  			$('#msgs').text("올바르게 채워주세요");
+	  	$('#btn').click(function(){
+	  		if ($('#id').val().length < 1 || $('#pw').val().length< 1 || $('#name').val().length< 1 || $('#phone').val().length< 1){
+	  			alert('내용을 채워주세요');
 	  			$('#id').focus();
-	  		}
+	  			return;
+	  			}
+	  		
+	  			$('#addform').submit();
+	  		
 	  		
 	  	})
-	  }
-	  	
+	  })
   </script>
 </head>
 <div>
@@ -84,12 +88,16 @@ footer {
 					<div class="col-md-8">
 						<div class="mb-4">
 							<h3>Sign Up</h3>
-							<form action="${pageContext.request.contextPath}/AddCustomer"
-								method="post">
+							<form action="${pageContext.request.contextPath}/AddCustomer" id="addform" method="post">
 								<div class="form-group first">
-									<label for="username">관리자 아이디 </label>
+									<label for="username">아이디 </label>
 									<input type="text" name="customerId" class="form-control" id="id">
+									<c:if test="${msg eq 1 }">
+										<span style="color:red">다른 아이디를 사용해주세요</span>
+									</c:if>
 								</div>
+								
+								
 								<div class="form-group last mb-4">
 									<label for="password">비밀번호 </label>
 									<input type="password" name="customerPw" class="form-control" id="pw">
@@ -100,18 +108,17 @@ footer {
 								</div>
 								<div class="form-group last mb-4">
 									<label for="password">핸드폰번호 </label>
-									<input type="number" name="customerPhone" class="form-control" id="phon">
+									<input type="number" name="customerPhone" class="form-control" id="phone">
 								</div>
 								<div class="form-group last mb-4">
-									<label for="password">성별 </label>
-									<input type="radio" name="customerGender" id="gender" value="F" class="form-control">여 
-									<input type="radio" name="customerGender" id="gender" value="M" class="form-control">남
+										<div>여<input type="radio" name="customerGender" id="gender" value="F" class="form-control"></div>
+										<div>남<input type="radio" name="customerGender" id="gender" value="M" class="form-control"></div>
 								</div>
 								<div class="form-group last mb-4">
 									<label for="password">생일 </label>
 									<input type="date" name="customerBirth" class="form-control" id="brith">
 								</div>
-								<button type="submit" class="btn btn-block btn-dark">회원가입</button>
+								<button type="button" id="btn" class="btn btn-block btn-dark">회원가입</button>
 							</form>
 						</div>
 					</div>
@@ -123,19 +130,15 @@ footer {
 		</div>
 	</div>
 	</div>
-	<c:if test="${msg==1}">
-		<script>
-  		alert("아이디 비밀번호를 확인해주세요")
-  	</script>
-	</c:if>
+
+
 	
 	<!--footer -->
 	<footer class="footer">
 		<img alt="" src="${pageContext.request.contextPath}/image/footeer.png" style="width: 100%; height: auto; ">
 	</footer>
 
-	<script
-		src="${pageContext.request.contextPath}/bootstrap/loginCss/js/jquery-3.3.1.min.js"></script>
+	
 	<script
 		src="${pageContext.request.contextPath}/bootstrap/loginCss/js/popper.min.js"></script>
 	<script

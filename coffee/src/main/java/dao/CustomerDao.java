@@ -12,11 +12,13 @@ import vo.Point;
 
 public class CustomerDao {
 	
-	//customer insert 쿼리
+	//customer insert 쿼리(회원가입)
 	public int insertCustomer(Customer cust, Connection conn) throws Exception{
 		int result= 0;
 		
 		String sql = "INSERT INTO customer(customer_id, customer_pw, customer_name, customer_phone, customer_gender, customer_birth)VALUES(?,password(?),?,?,?,?)";
+		
+		
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		stmt.setString(1, cust.getCustomerId());
 		stmt.setString(2, cust.getCustomerPw());
@@ -37,7 +39,7 @@ public class CustomerDao {
 	public int checkCustomerId(String customerId, Connection conn) throws Exception{
 		int result= 0;
 
-		//outid 에서찾는쿼리
+		//outid 에서찾는쿼리(customer, emp 모두 가입 시 outId로 똑같은 id가 들어가고 그 아이디는 중복 방지 용으로 select된다 탈퇴이후도 동일)
 		String sql1 = "SELECT id FROM outid WHERE id= ?";
 		PreparedStatement stmt1 = conn.prepareStatement(sql1);
 		stmt1.setString(1, customerId);
@@ -60,6 +62,7 @@ public class CustomerDao {
 	public int updateCustomer(String customerId, String afterPassword, String beforePassword, Connection conn) throws Exception{
 		int result= 0;
 		String sql = "UPDATE customer SET customer_pw = password(?) WHERE customer_id= ? AND customer_pw = password(?) ";
+		//and문으로 비밀번호까지 확인하는 쿼리
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		stmt.setString(1, afterPassword);
 	
@@ -78,6 +81,7 @@ public class CustomerDao {
 		int result = 0;
 		
 		String sql = "INSERT INTO pw_history(customer_id, pw) VALUES (?, password(?))";
+		//동일한 비밀번호로 변경하는 것을 막기위한 table pw history에 insert하는 쿼리
 		PreparedStatement stmt =conn.prepareStatement(sql);
 		stmt.setString(1, customerId);
 		stmt.setString(2, customerPw);
@@ -123,7 +127,7 @@ public class CustomerDao {
 		
 	}
 	
-	//insertoutid timing == insertcustomer
+	//insertoutid timing == insertcustomer 회원가입할때, 아웃아이디에 집어 넣는다
 	public int signUpCustomerByOutid(Connection conn, String customerId) throws Exception{
 	      int row=0;
 	      String sql="INSERT INTO outid(id) VALUES (?);";
@@ -171,13 +175,14 @@ public class CustomerDao {
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		
 		stmt.setInt(1, cust.getPoint()+(int)Math.floor(sum/100*3));
+						//로그인된 회원의 포인트 더하기 구매가격의 3%를 추가
 		stmt.setString(2, cust.getCustomerId());
 		result = stmt.executeUpdate();
 		stmt.close();
 		
 		return result;
 	}
-
+	//point history의 적립으로 insert하는 쿼리
 	public int insertPointInHistory(String customerId, Connection conn, int sum) throws Exception {
 		int result= 0;
 		
@@ -211,6 +216,7 @@ public class CustomerDao {
 		return result;
 	}
 	
+	//point history의 사용으로 insert하는 쿼리
 	public int usePointInsertInHistory(String customerId, Connection conn, int useAmount) throws Exception{
 		int result= 0;
 		
@@ -226,6 +232,8 @@ public class CustomerDao {
 		
 		return result;
 	}
+	
+	
 	//loginaction
 	public Customer loginCustomer(String customerId, Connection conn, String customerPw) throws Exception{
 		Customer c= new Customer();
@@ -252,7 +260,7 @@ public class CustomerDao {
 		return c;
 	}
 	
-	//address add
+	//address add 회원 주소 추가
 	public int addAddress(String customerId, String address, int flag, Connection conn)throws Exception {
 		int result = 0;
 		String sql= "INSERT INTO customer_address (customer_id, address, flag) VALUES (?, ?, ?)";
@@ -268,7 +276,7 @@ public class CustomerDao {
 		return result;
 	}
 	
-	//select address by list
+	//select address by list 회원 주소를 unique키인 customerid로 select하는 쿼리
 	public ArrayList<Address> addressListById(String customerId,Connection conn) throws Exception{
 		ArrayList<Address> list = new ArrayList<Address>();
 		String sql = "SELECT * FROM customer_address WHERE customer_id= ? ORDER BY flag DESC";
@@ -325,7 +333,7 @@ public class CustomerDao {
 		return result;
 	}
 	
-	//reset기본배송지
+	//reset기본배송지 기본배송지로 설정 체크시 실행시켜 초기화하는 쿼리
 	public int resetFlagById(String customerId, Connection conn )throws Exception{
 		int result= 0;
 		

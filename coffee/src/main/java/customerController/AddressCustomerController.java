@@ -30,7 +30,12 @@ public class AddressCustomerController extends HttpServlet {
 		this.customerService= new CustomerService();
 		ArrayList<Address> list= customerService.addressListById(loginMember.getCustomerId());
 		request.setAttribute("list", list);
+		int msg=0;
+		if(request.getParameter("msg")!=null) {
+			msg=Integer.parseInt(request.getParameter("msg"));
+		}
 		
+		request.setAttribute("msg", msg);	
 		request.getRequestDispatcher("/WEB-INF/view/customer/customerAddress.jsp").forward(request, response);
 		
 	}

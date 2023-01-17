@@ -48,6 +48,11 @@ public class Payment2Controller extends HttpServlet {
 		request.setAttribute("c", c);
 		this.customerService = new CustomerService();
 		ArrayList<Address> address = customerService.addressListById(customerId);
+		if(address.isEmpty()) {
+			response.sendRedirect(request.getContextPath()+"/AddressCustomer?msg=1");
+			return;
+		}
+		
 		request.setAttribute("addressList", address);
 		
 		request.getRequestDispatcher("/WEB-INF/view/customer/payment2.jsp").forward(request, response);

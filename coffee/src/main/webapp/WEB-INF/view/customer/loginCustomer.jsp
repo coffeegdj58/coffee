@@ -32,14 +32,14 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/nav/css/style.css">
     <script>
 	  $(document).ready(function() {
-	  	$('#pw').blur(function){
+	  	$('#pw').blur(function(){
 	  		if ($('#id').val().length<1||$('#pw').val().length<1){
 	  			$('#msgs').text("올바르게 채워주세요");
 	  			$('#id').focus();
 	  		}
 	  		
 	  	})
-	  }
+	  })
 	  	
   </script>
   <style type="text/css">
@@ -82,20 +82,21 @@
             <form action="${pageContext.request.contextPath}/CustomerLogin" method="post">
               <div class="form-group first">
                 <label for="username">아이디 </label>
-                <input type="text" class="form-control" id="id" name="customerId">
+                <input type="text" class="form-control" id="id" name="customerId" value="goodee">
               </div>
              
               <div class="form-group last mb-4">
                 <label for="password">비밀번호 </label>
-                <input type="password" class="form-control" id="pw" name="customerPw">
-                
+                <input type="password" class="form-control" id="pw" name="customerPw" value="1234">
+                 <span style="color:red"id = "msgs" class="msgs"></span>
               </div>
                 <a href="${pageContext.request.contextPath}/AddCustomer">회원가입 </a> <span style="float:right"><a href="${pageContext.request.contextPath}/LoginEmp">관리자 로그인 </a></span>
               <input type="submit" value="로그인" class="btn btn-block btn-dark">
             </form>
             </div>
+           
           </div>
-          <span id = "msgs" class="msgs"></span>
+          
           
         </div>
         

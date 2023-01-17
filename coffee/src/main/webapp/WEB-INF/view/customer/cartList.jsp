@@ -164,7 +164,7 @@ footer {
 		</c:if>
 		<br><br><br><br>
 			<div>
-				<h3>BestSeller</h3>
+				<h3 style="font-weight: bold; text-align: center;">BestSeller</h3>
 					<br>
 				<table width="100%">
 						<tr>

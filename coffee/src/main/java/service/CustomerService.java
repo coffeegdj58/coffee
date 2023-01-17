@@ -382,7 +382,7 @@ public class CustomerService {
 	}
 	
 	public ArrayList<Address> addressListById(String customerId){
-		ArrayList<Address> list = new ArrayList<Address>();
+		ArrayList<Address> list = null;
 		Connection conn =null;
 		try {
 			db = new Dbutil();

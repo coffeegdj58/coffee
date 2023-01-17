@@ -104,7 +104,7 @@
 			</div>
 			<br><br><br><br>
 			<div>
-				<h3>BestSeller</h3>
+				<h3 style="font-weight: bold; text-align: center;"  >BestSeller</h3>
 					<br>
 				<table width="100%">
 						<tr>
@@ -122,11 +122,11 @@
 		<!-- 리뷰보이게 -->
 		<div>
 			<div>
-				<h5 style="margin-left: 230px; margin-top: 50px; font-weight: bold;">Review</h5>
+				<h5 style="font-weight: bold; text-align: center;">Review</h5>
 			</div>
 			<br>
 			<table class="table"
-				style="margin-left: auto; margin-right: auto; margin-top: 20px; width: 100%">
+				style="width: 100%">
 				<thead style="text-align: center;">
 					<tr>
 						<td>작성자</td>
