@@ -55,19 +55,6 @@ footer {
 }
 <!--하단 footer 고정-->
 </style>
-<script>
-	  $(document).ready(function() {
-	  	$('#pw').blur(function){
-	  		if ($('#id').val().length<1||$('#pw').val().length<1){
-	  			$('#msgs').text("올바르게 채워주세요");
-	  			$('#id').focus();
-	  		}
-	  		
-	  	})
-	  }
-	  	
-  </script>
-
 </head>
 <body>
 	<div>
@@ -87,7 +74,7 @@ footer {
 							<div class="mb-4">
 								<h3>Manager Sign Up</h3>
 							</div>
-							<form action="${pageContext.request.contextPath}/AddEmp" method="post">
+							<form action="${pageContext.request.contextPath}/AddEmp" method="post" id="signInForm">
 								<div class="form-group first">
 									<label for="username">관리자 아이디 </label> 
 									<input type="text" name="empId" class="form-control" id="id">
@@ -104,22 +91,46 @@ footer {
 									<label for="password">비밀번호 확인</label> 
 									<input type="password" name="empPw" class="form-control" id="pw">
 								</div>
-									<button type="submit" class="btn btn-block btn-success">회원가입</button>
+									<button type="button" class="btn btn-block btn-success" id="signinInBt">회원가입</button>
 							</form>
 						</div>
 					</div>
 					<span id="msgs" class="msgs"></span>
-
 				</div>
-
 			</div>
 		</div>
 	</div>
-	<c:if test="${msg==1}">
-		<script>
-  		alert("아이디 비밀번호를 확인해주세요")
-  	</script>
-	</c:if>
+	<script>
+		let signinInBt=document.querySelector('#signinInBt');
+		signinInBt.addEventListener("click", function(e) {
+			//폼 유효성 검사
+			let id=document.querySelector('#id');
+			if(id.value==''){
+				alert('아이디를 입력하세요');
+				id.focus();
+				return;
+			}
+			let name=document.querySelector('#name');
+			if(name.value==''){
+				alert('이름을 입력하세요');
+				name.focus();
+				return;
+			}
+			let pwCk=document.querySelector('#pwCk');
+			if(pwCk.value==''){
+				alert('비밀번호를 입력하세요!');
+				pwCk.focus();
+				return;
+			}
+			let pw=document.querySelector('#pw');
+			if(pw.value!=pwCk.value){
+				alert('비밀번호를 확인하세요!');
+				return false; //false 적어줘야 비밀번호가 다를 경우 회원가입 액션으로 안넘어감
+			}
+			let signInForm=document.querySelector('#signInForm');
+			signInForm.submit();
+		});
+	</script>
 	<!--footer -->
 	<footer class="footer">
 		<img alt="" src="${pageContext.request.contextPath}/image/footeer.png" style="width: 100%; height: auto; ">

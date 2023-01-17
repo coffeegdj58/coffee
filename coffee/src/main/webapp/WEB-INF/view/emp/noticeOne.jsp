@@ -40,10 +40,7 @@ footer {
 			<jsp:include page="../nav.jsp"></jsp:include> 
 			<!-- include의 주소에는 context를 사용하지 않는다 편한 액션 중하나 -->
 	</div>
-	<br><br><br>
-	<div class="container">
-		
-		<br><br>
+	<div class="container" style="margin-top: 40px;">
 		<div>
 			<h2>
 				${n.noticeTitle}

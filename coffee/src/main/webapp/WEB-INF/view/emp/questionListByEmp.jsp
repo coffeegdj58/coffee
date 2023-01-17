@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>문의 목록</title>
+<title>고객문의목록</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
@@ -40,10 +40,10 @@ footer {
 			<jsp:include page="../nav.jsp"></jsp:include> 
 			<!-- include의 주소에는 context를 사용하지 않는다 편한 액션 중하나 -->
 	</div>
-	<div>
-		<h3 style="margin-left: 230px; margin-top: 50px; font-weight: bold;">문의하기</h3>
-	</div> 
-	<div class="container">
+	<div class="container" style="margin-top: 40px;">
+		<div>
+			<h1>고객문의목록</h1>
+		</div>
 		<!--  검색창 -->
 		<div align="right" >
 			<form action="${pageContext.request.contextPath}/QuestionListByEmp" method="post">
@@ -74,21 +74,27 @@ footer {
 						<td>${q.customerId}</td>
 						<td>${q.orderCode}</td>
 						<!-- 답변 달기 전이면 빨간색으로 글씨 표시.. -->
-						<td>${q.flag}</td>
+						<c:if test="${q.flag eq 'N'}">
+							<td style="color: red;">${q.flag}</td>
+						</c:if>
+						<c:if test="${q.flag eq 'Y'}">
+							<td>${q.flag}</td>
+						</c:if>
+						
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
 	</div>
 	<div style="text-align: center;" >
-		<a href="${pageContext.request.contextPath}/QuestionListByEmp?currentPage=1" style="color: black;">처음</a>
+		<button type="button" class="btn btn-outline-dark" onclick="location.href='${pageContext.request.contextPath}/QuestionListByEmp?currentPage=1'">처음</button>
 		<c:if test="${currentPage > 1}">
-			<a href="${pageContext.request.contextPath}/QuestionListByEmp?currentPage=${currentPage-1}&rowPerPage=${rowPerPage}" style="color: black;">이전</a>
+			<button type="button" class="btn btn-outline-dark" onclick="location.href='${pageContext.request.contextPath}/QuestionListByEmp?currentPage=${currentPage-1}&rowPerPage=${rowPerPage}'">이전</button>
 		</c:if>
 		<c:if test="${currentPage < lastPage}">
-			<a href="${pageContext.request.contextPath}/QuestionListByEmp?currentPage=${currentPage+1}&rowPerPage=${rowPerPage}" style="color: black;">이후</a>
+			<button type="button" class="btn btn-outline-dark" onclick="location.href='${pageContext.request.contextPath}/QuestionListByEmp?currentPage=${currentPage+1}&rowPerPage=${rowPerPage}'">이전</button>
 		</c:if>
-		<a href="${pageContext.request.contextPath}/QuestionListByEmp?currentPage=${lastPage}" style="color: black;">마지막</a>
+		<button type="button" class="btn btn-outline-dark" onclick="location.href='${pageContext.request.contextPath}/QuestionListByEmp?currentPage=${lastPage}'">마지막</button>
 	</div>
 	
 	<!--footer -->	

@@ -41,8 +41,7 @@ footer {
 			<jsp:include page="../nav.jsp"></jsp:include> 
 			<!-- include의 주소에는 context를 사용하지 않는다 편한 액션 중하나 -->
 	</div>
-	<br><br><br><br>
-	<div class="container">
+	<div class="container" style="margin-top: 40px;">
 		<!-- 공지사항은 회원 비회원 모두가 볼 수있게  -->
 		<div>
 			<h1>공지사항</h1>

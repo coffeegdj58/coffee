@@ -41,33 +41,20 @@
 	href="${pageContext.request.contextPath}/bootstrap/nav/css/style.css">
 <style type="text/css">
 html, body {
-    height: 100%
+	height: 100%
 }
 
 #wrap {
-    min-height: 100%;
-    position: relative;
-    padding-bottom: 60px;
+	min-height: 100%;
+	position: relative;
+	padding-bottom: 60px;
 }
 
 footer {
-    bottom: 0;
+	bottom: 0;
 }
 <!--하단 footer 고정-->
 </style>
-<script>
-	  $(document).ready(function() {
-	  	$('#pw').blur(function){
-	  		if ($('#id').val().length<1||$('#pw').val().length<1){
-	  			$('#msgs').text("올바르게 채워주세요");
-	  			$('#id').focus();
-	  		}
-	  		
-	  	})
-	  }
-	  	
-  </script>
-
 </head>
 <body>
 	<div>
@@ -87,41 +74,52 @@ footer {
 							<div class="mb-4">
 								<h3>로그인</h3>
 							</div>
-							<form action="${pageContext.request.contextPath}/LoginEmp"
-								method="post">
+							<form action="${pageContext.request.contextPath}/LoginEmp" method="post" id="loginForm">
 								<div class="form-group first">
-
-									<label for="username">관리자 아이디 </label> 
+									<label for="username">관리자 아이디 </label>
 									<input type="text" name="empId" class="form-control" id="id">
 								</div>
 								<div class="form-group last mb-4">
 									<label for="password">비밀번호 </label>
 									<input type="password" name="empPw" class="form-control" id="pw">
 								</div>
-
-								<a href="${pageContext.request.contextPath}/AddEmp">관리자 회원가입</a>
-								<button type="submit" class="btn btn-block btn-success">로그인</button>
+								<a href="${pageContext.request.contextPath}/AddEmp"> 관리자 회원가입</a>
+								<button type="button" class="btn btn-block btn-success" id="loginInBt">로그인</button>
 							</form>
 						</div>
 					</div>
-					<span id="msgs" class="msgs"></span>
-
 				</div>
-
 			</div>
 		</div>
 	</div>
-	<c:if test="${msg==1}">
-		<script>
-  		alert("아이디 비밀번호를 확인해주세요")
-  	</script>
-	</c:if>
-	
+	<script>
+		let loginInBt = document.querySelector('#loginInBt');
+		loginInBt.addEventListener("click", function(e) {
+			console.log('로그인 버튼 클릭');
+			//폼 유효성 검사
+			let id = document.querySelector('#id');
+			if (id.value == '') {
+				alert('아이디를 입력하세요');
+				id.focus();
+				return;
+			}
+			let pw = document.querySelector('#pw');
+			if (pw.value == '') {
+				alert('비밀번호를 입력하세요!');
+				pw.focus();
+				return;
+			}
+			let loginForm = document.querySelector('#loginForm');
+			loginForm.submit();
+		});
+	</script>
+
 	<!--footer -->
 	<footer class="footer">
-		<img alt="" src="${pageContext.request.contextPath}/image/footeer.png" style="width: 100%; height: auto; ">
+		<img alt="" src="${pageContext.request.contextPath}/image/footeer.png"
+			style="width: 100%; height: auto;">
 	</footer>
-	
+
 	<script
 		src="${pageContext.request.contextPath}/bootstrap/loginCss/js/jquery-3.3.1.min.js"></script>
 	<script

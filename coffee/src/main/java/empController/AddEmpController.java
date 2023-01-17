@@ -23,6 +23,7 @@ public class AddEmpController extends HttpServlet {
 	}
 	//회원가입 액션
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
 		//폼에서 받아오기
 		String empId=request.getParameter("empId");
 		String empPw=request.getParameter("empPw");
