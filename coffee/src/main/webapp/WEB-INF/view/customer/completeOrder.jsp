@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -51,7 +52,7 @@ footer {
 		<h2 style="text-align: center;">주문해주셔서 감사합니다 빠르게 배달해드리겠습니다</h2>
 		<br>	
 
-		<h3 style="text-align: center;">결제 금액 : ${sum}</h3>
+		<h3 style="text-align: center;">결제 금액 : <fmt:formatNumber value="${sum}" pattern="#,###"/></h3>
 		<hr>
 		<br><br>
 		<h4>Order Info</h4>
@@ -69,8 +70,8 @@ footer {
 				<tr>
 					<td><img src="${pageContext.request.contextPath}/image/${c.goodsName}.jpg" width="200px" height="200px"> ${c.goodsName}</td>
 					<td>${c.cartQuantity}</td>
-					<td>${c.goodsPrice}</td>
-					<td>${c.goodsPrice*c.cartQuantity}</td>
+					<td><fmt:formatNumber value="${c.cartPrice/c.cartQuantity}" pattern="#,###"/></td>
+					<td><fmt:formatNumber value="${c.cartPrice}" pattern="#,###"/></td>
 				</tr>
 			</c:forEach>
 		</table>
