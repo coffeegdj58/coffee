@@ -145,8 +145,11 @@
 			  <li class="list-group-item"><a href="${pageContext.request.contextPath}/AddressCustomer">주소관리</a></li>
 			  <li class="list-group-item"><a href="${pageContext.request.contextPath}/QuestionListByCustomer">고객센터</a></li>
 			</ul>
-		
-			
+			<div style="background-color: #cccccc; margin-top: 30px; text-align: center;">
+			현재 접속자 ${currentCount}명<br>
+			오늘 접속자 ${todayCount}명<br>
+			누적 접속자 ${totalCount}명<br>
+			</div>
 		</div>	
 	</div>
 	<br><br><br>

@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>괸리자 페이지</title>
+<title>관리자 페이지</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
@@ -87,18 +87,16 @@ footer {
 				<li class="list-group-item" style="text-align: center;"> <a href="${pageContext.request.contextPath}/OrderList" style="color: black;">고객주문목록</a> </<li>
 				<li class="list-group-item" style="text-align: center;"> <a href="${pageContext.request.contextPath}/QuestionListByEmp" style="color: black;">고객문의사항</a> </li>
 			</ul>
+			<div style="background-color: #cccccc; margin-top: 30px; text-align: center;">
+			현재 접속자 ${currentCount}명<br>
+			오늘 접속자 ${todayCount}명<br>
+			누적 접속자 ${totalCount}명<br>
+			</div>
 		</div>
 	</div>
-	</div>
-	<div class="card border-success mb-3"  style="width: 150px;">
-		<div class="card-text" style="text-align: center;">
-			현재 접속자 : ${currentCount}<br>
-			오늘 접속자 : ${todayCount}<br>
-			누적 접속자 : ${totalCount}<br>
-		</div>
 	</div>
 	<!--footer -->
-	<footer class="footer">
+	<footer class="footer" style="margin-top: 30px">
 		<img alt="" src="${pageContext.request.contextPath}/image/footeer.png" style="width: 100%; height: auto; ">
 	</footer>
 </body>

@@ -19,7 +19,14 @@ public class LoginEmpController extends HttpServlet {
 	private EmpService empService;
 	//관리자 로그임 폼
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		//관리자
+		HttpSession session=request.getSession();
+		Emp loginEmp=(Emp)session.getAttribute("loginEmp"); //현재 로그인 한 사람
+		//방어코드 : 로그인 된 값이 없으면 로그인페이지로 보냄
+		if (session.getAttribute("loginEmp") != null) { 
+			response.sendRedirect(request.getContextPath() + "/EmpPage");
+			return;
+		}
 		request.getRequestDispatcher("/WEB-INF/view/emp/loginEmp.jsp").forward(request, response);
 	}
 	//관리자 로그인 액션

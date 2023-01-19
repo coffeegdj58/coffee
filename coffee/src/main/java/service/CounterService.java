@@ -96,7 +96,7 @@ public class CounterService {
 		int totalCount=0;
 		try {
 			conn=dbutil.getConnection();
-			totalCount=counterDao.selectTodayCount(conn);
+			totalCount=counterDao.selectTotalCount(conn);
 			conn.commit();
 			//System.out.println("커밋 됨");
 		}catch (Exception e) {

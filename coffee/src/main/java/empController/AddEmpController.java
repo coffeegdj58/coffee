@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import service.EmpService;
 import vo.Emp;
@@ -18,7 +19,14 @@ public class AddEmpController extends HttpServlet {
 	private EmpService empService;
 	//회원가입 폼
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		//
+		HttpSession session=request.getSession();
+		Emp loginEmp=(Emp)session.getAttribute("loginEmp"); //현재 로그인 한 사람
+		//방어코드 : 로그인 된 값이 없으면 로그인페이지로 보냄
+		if (session.getAttribute("loginEmp") != null) { 
+			response.sendRedirect(request.getContextPath() + "/EmpPage");
+			return;
+		}
 		request.getRequestDispatcher("/WEB-INF/view/emp/addEmp.jsp").forward(request, response);
 	}
 	//회원가입 액션
