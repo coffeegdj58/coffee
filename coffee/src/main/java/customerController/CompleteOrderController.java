@@ -47,11 +47,18 @@ public class CompleteOrderController extends HttpServlet {
 		ArrayList<Cart> list = orderService.selectCartListlevel1(loginMember.getCustomerId());
 		int sum = orderService.selectSumGoodsPrice(loginMember.getCustomerId());
 		
+		
+		
 		request.setAttribute("sum", sum);
 		
 		request.setAttribute("list", list);
+	
 		
-		orderService.deleteCartById(loginMember.getCustomerId());
+		int row= orderService.deleteCartById(loginMember.getCustomerId());
+		if(row==0) {
+			response.sendRedirect(request.getContextPath()+"/CustomerPage");
+			return;
+		}
 		
 		
 		request.getRequestDispatcher("/WEB-INF/view/customer/completeOrder.jsp").forward(request, response);

@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>Insert title here</title>
+<title>배송지관리</title>
 </head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">

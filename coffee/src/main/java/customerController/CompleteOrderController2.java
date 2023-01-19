@@ -49,6 +49,8 @@ public class CompleteOrderController2 extends HttpServlet {
 		orderService= new OrderService();
 		Cart c = orderService.selectCartlevel2(loginMember.getCustomerId());
 		
+	
+		
 		int sum = c.getCartPrice();
 		
 		request.setAttribute("sum", sum);
@@ -58,7 +60,14 @@ public class CompleteOrderController2 extends HttpServlet {
 		list.add(c);
 		request.setAttribute("list", list);
 		
-		orderService.deletecartlevel2(loginMember.getCustomerId());
+	
+		
+		int row = orderService.deletecartlevel2(loginMember.getCustomerId());
+		
+		if(row==0) {
+			response.sendRedirect(request.getContextPath()+"/CustomerPage");
+			return;
+		}
 		
 		
 		request.getRequestDispatcher("/WEB-INF/view/customer/completeOrder.jsp").forward(request, response);
