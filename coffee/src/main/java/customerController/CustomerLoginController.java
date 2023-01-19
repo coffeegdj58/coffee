@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import service.CustomerService;
+import service.OrderService;
 import vo.Customer;
 
 /**
@@ -18,7 +19,7 @@ import vo.Customer;
 @WebServlet("/CustomerLogin")
 public class CustomerLoginController extends HttpServlet {
 	private CustomerService customerservice;
-	
+	private OrderService orderService;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		Customer loginMember = (Customer)session.getAttribute("loginMember");
@@ -26,6 +27,7 @@ public class CustomerLoginController extends HttpServlet {
 			response.sendRedirect(request.getContextPath()+"/Home");
 			return;
 		}
+		
 		int msg=0;
 		if(request.getParameter("msg")!=null) {
 			msg=Integer.parseInt(request.getParameter("msg"));
@@ -45,8 +47,12 @@ public class CustomerLoginController extends HttpServlet {
 		String customerPw = request.getParameter("customerPw");
 		
 		this.customerservice= new CustomerService();
+		this.orderService = new OrderService();
 		
 		Customer c = customerservice.loginCustomer(customerId, customerPw);
+		int count= orderService.selectCountCart(c.getCustomerId());
+		
+		c.setCustomerCart(count);
 		
 		if(c.getCustomerId() != null) {
 			request.getSession().setAttribute("loginMember", c);

@@ -421,5 +421,22 @@ public class OrderDao {
 		return result;
 		
 	}
+	//장바구니현재갯수
+	public int selectCartCount(Connection conn, String customerId) throws Exception{
+		int count = 0;
+		
+		String sql="SELECT COUNT(*) FROM cart WHERE customer_id= ?";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setString(1, customerId);
+		
+		ResultSet rs = stmt.executeQuery();
+		if(rs.next()) {
+			count = rs.getInt("COUNT(*)");
+		}
+		
+		stmt.close();
+		rs.close();
+		return count;
+	}
 	
 }	

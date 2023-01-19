@@ -12,6 +12,17 @@ public class Customer {
 	private String customerBirth;
 	private String customerAddress;
 	
+	private int customerCart;
+	
+	
+	
+	
+	public int getCustomerCart() {
+		return customerCart;
+	}
+	public void setCustomerCart(int customerCart) {
+		this.customerCart = customerCart;
+	}
 	public int getCustomerCode() {
 		return customerCode;
 	}

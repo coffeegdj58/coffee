@@ -66,12 +66,21 @@
 
                 <ul class="site-menu main-menu js-clone-nav ml-auto d-none d-lg-block">
                   <li><a href="${pageContext.request.contextPath}/Home" class="nav-link">Home</a></li>
+                  <li><a href="${pageContext.request.contextPath}/Story" class="nav-link">Story</a></li>
                   <li><a href="${pageContext.request.contextPath}/CoffeeList" class="nav-link">Coffee</a></li>
                   <li><a href="${pageContext.request.contextPath}/BakeryList" class="nav-link">Bakery</a></li>
                   <li><a href="${pageContext.request.contextPath}/ProductList" class="nav-link">Product</a></li>
                   <li><a href="${pageContext.request.contextPath}/NoticeList">Notice</a></li>
-                  <li><a href="${pageContext.request.contextPath}/QuestionListByCustomer" class="nav-link">Question</a></li>
-                  <li><a href="${pageContext.request.contextPath}/CartList" class="nav-link">Cart</a></li>
+                  <li><a href="${pageContext.request.contextPath}/QuestionListByCustomer" class="nav-link ">Question</a></li>
+                  <li><a href="${pageContext.request.contextPath}/CartList" class="nav-link position-relative">Cart
+                  	<c:if test="${loginMember.customerCart != 0}">
+                  		<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-light">
+						  ${loginMember.customerCart}
+						 </span>
+						 
+					</c:if>	
+						</a> 
+                  	</li>
                 </ul>
               </nav>
 

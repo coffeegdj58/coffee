@@ -166,6 +166,35 @@ public class OrderService {
 	
 	}
 	
+	public int selectCountCart(String customerId) {
+		int result = 0;
+		Connection conn = null;
+
+		try {
+			db= new Dbutil();
+			conn = db.getConnection();
+			orderdao = new OrderDao();
+			
+			result = orderdao.selectCartCount(conn, customerId);
+			
+			conn.commit(); // DBUtil.class에서 conn.setAutoCommit(false);
+		} catch (Exception e) {
+			try {
+				conn.rollback(); // DBUtil.class에서 conn.setAutoCommit(false);
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
+	
 	public int updateOrderState (String orderState, int orderCode) {
 		int result = 0;
 		Connection conn = null;

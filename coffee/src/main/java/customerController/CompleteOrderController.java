@@ -55,6 +55,12 @@ public class CompleteOrderController extends HttpServlet {
 	
 		
 		int row= orderService.deleteCartById(loginMember.getCustomerId());
+		int count = orderService.selectCountCart(loginMember.getCustomerId());
+		
+		loginMember.setCustomerCart(count);
+    	
+    	request.getSession().setAttribute("loginMember", loginMember);
+		
 		if(row==0) {
 			response.sendRedirect(request.getContextPath()+"/CustomerPage");
 			return;

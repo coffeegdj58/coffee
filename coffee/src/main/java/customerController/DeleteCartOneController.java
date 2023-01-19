@@ -25,6 +25,11 @@ public class DeleteCartOneController extends HttpServlet {
 		this.orderService = new OrderService();
 		int result =  orderService.DeleteCartOne(loginMember.getCustomerId(), goodsCode);
 		
+		int count = orderService.selectCountCart(loginMember.getCustomerId());
+		loginMember.setCustomerCart(count);
+    	
+    	request.getSession().setAttribute("loginMember", loginMember);
+		
 		response.sendRedirect(request.getContextPath()+"/CartList?reult="+result);
 	}
 

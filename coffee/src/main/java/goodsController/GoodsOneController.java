@@ -83,12 +83,18 @@ public class GoodsOneController extends HttpServlet {
 			return;
 		}
     	this.orderService = new OrderService();
+
     	Cart c = new Cart();
     	c.setCartQuantity(cartQuantity);
     	c.setCustomerId(loginMember.getCustomerId());
     	c.setGoodsCode(goodsCode);
-    	
     	int result= orderService.insertCart(c);
+    	int count = orderService.selectCountCart(loginMember.getCustomerId());
+    	loginMember.setCustomerCart(count);
+    	
+    	request.getSession().setAttribute("loginMember", loginMember);
+    	
+    	
     	response.sendRedirect(request.getContextPath()+"/GoodsOne?result="+result+"&goodsCode="+goodsCode);
     	
     }
