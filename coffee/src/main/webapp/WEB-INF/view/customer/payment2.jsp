@@ -153,6 +153,9 @@
 	 		if($('#usePoint').val()<0){
 	 			$('#usePoint').val(0);
 	 		}
+	 		if($('#usePoint').val()>${c.cartPrice}){
+	 			$('#usePoint').val(${c.cartPrice});
+	 		}
 	 	})
 	 	$('#btn').click(function(){
 	 		if($('#address').val.length<1){

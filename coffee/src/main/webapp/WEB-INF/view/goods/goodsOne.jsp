@@ -33,6 +33,29 @@
 	
 	footer {
 	    bottom: 0;
+	}* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	}
+	.wrap {
+		position: relative;
+		
+		margin: 0 auto;
+	}
+	
+	.magnifier {
+		width: 350px;
+		height: 250px;
+		position: absolute;
+		
+		box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.85), 0 0 3px 3px rgba(0, 0, 0, 0.25);
+		display: none;
+	}
+	
+	.target {
+		display: block;
+		width: 100%;
 	}
 	
 	<!--하단 footer 고정-->
@@ -58,7 +81,9 @@
 			<div class="row">
 		
 				<div class="col-5">
-					<img width="100%" height= "auto" src="${pageContext.request.contextPath}/image/${g.goodsName}.jpg"/>
+					<div class="wrap">
+					<img width="100%" height= "auto" class="target" data-zoom="3" src="${pageContext.request.contextPath}/image/${g.goodsName}.jpg"/>
+					</div>
 				</div>
 				
 				<div class="col-7">
@@ -179,5 +204,6 @@
 		<footer class="footer">
 			<img alt="" src="${pageContext.request.contextPath}/image/footeer.png" style="width: 100%; height: auto; ">
 		</footer>
+		 <script src="${pageContext.request.contextPath}/bootstrap/main3.js"></script>
 	</body>
 </html>

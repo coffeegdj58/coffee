@@ -150,6 +150,10 @@
 	 		if($('#usePoint').val()<0){
 	 			$('#usePoint').val(0);
 	 		}
+	 		if($('#usePoint').val()>${sum}){
+	 			$('#usePoint').val(${sum});
+	 		}
+	 		
 	 	})
 	 	$('#btn').click(function(){
 	 		if($('#address option:selected').val.length<1){
