@@ -22,7 +22,7 @@ public class AddEmpController extends HttpServlet {
 		//
 		HttpSession session=request.getSession();
 		Emp loginEmp=(Emp)session.getAttribute("loginEmp"); //현재 로그인 한 사람
-		//방어코드 : 로그인 된 값이 없으면 로그인페이지로 보냄
+		//방어코드 : 로그인이 되어 있으면 emp페이지로 보냄
 		if (session.getAttribute("loginEmp") != null) { 
 			response.sendRedirect(request.getContextPath() + "/EmpPage");
 			return;

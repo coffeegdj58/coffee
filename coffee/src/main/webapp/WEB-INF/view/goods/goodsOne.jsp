@@ -19,7 +19,7 @@
     <!-- Style -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/nav/css/style.css">
 
-	<title>GoodsOne</title>
+	<title>상품 상세보기</title>
 	<style type="text/css">
 	html, main {
 	    height: 100%
