@@ -33,6 +33,8 @@ max-width: 100%;
 width: 634px;
 width: :auto !important;
 height: auto !important;
+ overflow: hidden;
+
 }
 
 html, body {
@@ -74,9 +76,9 @@ footer {
 			</div>
 			
 			<div class="c">
-				<a href="${pageContext.request.contextPath}/NoticeOne?noticeCode=2"><img src="${pageContext.request.contextPath}/image/bgSe1.jpg" class="C" ></a>
-				<a href="${pageContext.request.contextPath}/NoticeOne?noticeCode=2"><img src="${pageContext.request.contextPath}/image/bgSe2.jpg" class="C" ></a>
-				<a href="${pageContext.request.contextPath}/NoticeOne?noticeCode=2"><img src="${pageContext.request.contextPath}/image/bgSe3.jpg" class="C"></a>
+				<a href="${pageContext.request.contextPath}/NoticeOne?noticeCode=1"><img src="${pageContext.request.contextPath}/image/bgSe1.jpg" class="C" ></a>
+				<a href="${pageContext.request.contextPath}/NoticeOne?noticeCode=1"><img src="${pageContext.request.contextPath}/image/bgSe2.jpg" class="C" ></a>
+				<a href="${pageContext.request.contextPath}/NoticeOne?noticeCode=1"><img src="${pageContext.request.contextPath}/image/bgSe3.jpg" class="C"></a>
 			</div>
 		</div>
 	<!--footer -->

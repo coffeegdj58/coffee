@@ -82,7 +82,7 @@
 		
 				<div class="col-5">
 					<div class="wrap">
-					<img width="100%" height= "auto" class="target" data-zoom="3" src="${pageContext.request.contextPath}/image/${g.goodsName}.jpg"/>
+						<img width="100%" height= "auto" class="target" data-zoom="3" src="${pageContext.request.contextPath}/image/${g.goodsName}.jpg"/>
 					</div>
 				</div>
 				
