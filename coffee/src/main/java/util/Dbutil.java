@@ -4,7 +4,7 @@ import java.sql.*;
 public class Dbutil {
 	public Connection getConnection() throws Exception{
 		Class.forName("org.mariadb.jdbc.Driver");
-		Connection conn = DriverManager.getConnection("jdbc:mariadb://localhost/shop","root", "java1234");
+		Connection conn = DriverManager.getConnection("jdbc:mariadb://13.124.165.197/shop","root", "java1234");
 		conn.setAutoCommit(false);
 		return conn;
 		}
