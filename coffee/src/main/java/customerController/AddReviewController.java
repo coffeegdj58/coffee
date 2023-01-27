@@ -34,6 +34,7 @@ public class AddReviewController extends HttpServlet {
 		
 		int orderCode=Integer.parseInt(request.getParameter("orderCode"));
 		int goodsCode=Integer.parseInt(request.getParameter("goodsCode"));
+		//System.out.println(goodsCode+"<==받아온 goodsCode");
 		request.setAttribute("orderCode", orderCode);
 		request.setAttribute("goodsCode", goodsCode);
 		
@@ -41,11 +42,22 @@ public class AddReviewController extends HttpServlet {
 		this.reviewService=new ReviewService();
 		ArrayList<Review> Rlist=reviewService.selectReviewById(customerId);
 		request.setAttribute("Rlist", Rlist);
-		//System.out.println(Rlist);
+		//System.out.println("indexOf(goodsGood): "+Rlist.indexOf(goodsCode));
+		Rlist.get(0).getGoodsCode();
+		//System.out.println(Rlist.get(0).getGoodsCode()); list 안에 있는 goodsCode 값 꺼내기
+		int flag=0;
+		for(Review r: Rlist) {
+			if(Rlist.get(0).getGoodsCode() == goodsCode) {//list안에 있는 값과 받아온 goodsCode의 값이 같다
+				flag=1;
+				//System.out.println(flag+"<==flag");
+			}
+			request.setAttribute("flag", flag);
+		}
 		//리뷰 작성할때 상품이름이랑 사진 보여주려고
 		this.goodsService= new GoodsService();
 		Goods goodsOne=goodsService.getGoodsOne(goodsCode);
 		request.setAttribute("goodsOne", goodsOne);
+		
 		//
 		
 		

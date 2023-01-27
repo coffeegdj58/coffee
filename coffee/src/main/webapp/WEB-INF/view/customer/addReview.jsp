@@ -82,7 +82,12 @@ footer {
 					name="customerId" value="${loginMember.customerId}"
 					readonly="readonly" class="form-control" style="width: 100px;">
 				<br>
-				<button type="button" class="btn btn-dark" id="reviewBt">리뷰작성</button>
+				<c:if test="${flag==0 }">
+					<button type="button" class="btn btn-dark" id="reviewBt">리뷰작성</button>
+				</c:if>
+				<c:if test="${flag==1 }">
+					<p>리뷰를 작성하였습니다.</p>
+				</c:if>
 			</form>
 		</div>
 		<script>
@@ -123,6 +128,9 @@ footer {
 				<tbody style="text-align: center;">
 					<tr>
 						<c:forEach var="Rlist" items="${Rlist}">
+						<c:if test="${status.index%5==0}"> <!-- td가 계속 반복해서 떠서 5개의 인덱스가 생기면 줄바꿈 -->
+							</tr><tr>
+						</c:if>
 							<td>${Rlist.goodsName}</td>
 							<td>${Rlist.customerId}</td>
 							<td>${Rlist.rating}
