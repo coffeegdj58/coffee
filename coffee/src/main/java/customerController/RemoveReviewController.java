@@ -29,6 +29,7 @@ public class RemoveReviewController extends HttpServlet {
 	int goodsCode=Integer.parseInt(request.getParameter("goodsCode"));
 	//System.out.println(goodsCode+"<==goodsCode");
 	int orderCode=Integer.parseInt(request.getParameter("orderCode"));
+	System.out.println(orderCode+"<==orderCode");
 	//service에서 불러오기
 	this.reviewService=new ReviewService();
 	int result=reviewService.deleteReview(goodsCode);
@@ -37,7 +38,7 @@ public class RemoveReviewController extends HttpServlet {
 		//서블릿에서 알림창 띄우기
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter writer = response.getWriter();
-		writer.println("<script>alert('리뷰 삭제 성공'); location.href='"+request.getContextPath()+"/CustomerPage"+"';</script>"); 
+		writer.println("<script>alert('리뷰 삭제 성공'); location.href='"+request.getContextPath()+"/AddReview?orderCode="+orderCode+"&goodsCode="+goodsCode+"';</script>"); 
 		writer.close();
 		return;
 	}else {//실패
@@ -45,7 +46,7 @@ public class RemoveReviewController extends HttpServlet {
 		//서블릿에서 알림창 띄우기
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter writer = response.getWriter();
-		writer.println("<script>alert('리뷰 삭제 실패!'); location.href='"+request.getContextPath()+"/AddReview?goodsCode="+goodsCode+"'; return; </script>"); 
+		writer.println("<script>alert('리뷰 삭제 실패!'); location.href='"+request.getContextPath()+"/AddReview?orderCode="+orderCode+"&goodsCode="+goodsCode+"';</script>"); 
 		writer.close();
 	}
 

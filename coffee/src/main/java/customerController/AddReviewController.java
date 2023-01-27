@@ -23,6 +23,7 @@ public class AddReviewController extends HttpServlet {
 	private GoodsService goodsService;
 	//리뷰 추가 폼
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int flag=0;
 		//로그인 한 사람만 접근 가능
 		HttpSession session=request.getSession();
 		Customer loginMember=(Customer)session.getAttribute("loginMember");
@@ -43,16 +44,15 @@ public class AddReviewController extends HttpServlet {
 		ArrayList<Review> Rlist=reviewService.selectReviewById(customerId);
 		request.setAttribute("Rlist", Rlist);
 		//System.out.println("indexOf(goodsGood): "+Rlist.indexOf(goodsCode));
-		Rlist.get(0).getGoodsCode();
+		//Rlist.get(0).getGoodsCode();
 		//System.out.println(Rlist.get(0).getGoodsCode()); list 안에 있는 goodsCode 값 꺼내기
-		int flag=0;
 		for(Review r: Rlist) {
 			if(Rlist.get(0).getGoodsCode() == goodsCode) {//list안에 있는 값과 받아온 goodsCode의 값이 같다
 				flag=1;
 				//System.out.println(flag+"<==flag");
 			}
-			request.setAttribute("flag", flag);
 		}
+		request.setAttribute("flag", flag);
 		//리뷰 작성할때 상품이름이랑 사진 보여주려고
 		this.goodsService= new GoodsService();
 		Goods goodsOne=goodsService.getGoodsOne(goodsCode);
@@ -89,14 +89,14 @@ public class AddReviewController extends HttpServlet {
 			//서블릿에서 알림창 띄우기
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter writer = response.getWriter();
-			writer.println("<script>alert('리뷰 작성 성공'); location.href='"+request.getContextPath()+"/CustomerPage"+"';</script>"); 
+			writer.println("<script>alert('리뷰 작성 성공'); location.href='"+request.getContextPath()+"/AddReview?orderCode="+orderCode+"&goodsCode="+goodsCode+"';</script>"); 
 			writer.close();
 		}else {//실패
 			System.out.println("리뷰 작성 실패");
 			//서블릿에서 알림창 띄우기
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter writer = response.getWriter();
-			writer.println("<script>alert('리뷰 작성 실패!'); location.href='"+request.getContextPath()+"/AddReview"+"';</script>"); 
+			writer.println("<script>alert('리뷰 작성 실패!'); location.href='"+request.getContextPath()+"/AddReview?orderCode="+orderCode+"&goodsCode="+goodsCode+"';</script>"); 
 			writer.close();
 		}
 	}
