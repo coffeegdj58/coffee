@@ -40,7 +40,7 @@ public class ReviewService {
 	}
 	
 	//review delete 쿼리
-	public int deleteReview(int orderCode) {
+	public int deleteReview(int goodsCode) {
 		int result=0;
 		Connection conn=null;
 		Dbutil dbUtil= new Dbutil();
@@ -48,7 +48,8 @@ public class ReviewService {
 		
 		try {
 			conn=dbUtil.getConnection();
-			result=reviewDao.deleteReview(orderCode, conn);
+			result=reviewDao.deleteReview(goodsCode, conn);
+			//System.out.println(goodsCode+"<==goodsCode");
 			conn.commit();
 		}catch(Exception e) {
 			try {

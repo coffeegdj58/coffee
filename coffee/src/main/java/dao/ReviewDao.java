@@ -95,12 +95,12 @@ public class ReviewDao {
 		return result;
 	}
 	//review delete 쿼리
-	public int deleteReview(int orderCode, Connection conn ) throws Exception{
+	public int deleteReview(int goodsCode, Connection conn ) throws Exception{
 		int result= 0;
 		
-		String sql = "DELETE FROM review WHERE order_code= ? ";
+		String sql = "DELETE FROM review WHERE goods_code= ?;";
 		PreparedStatement stmt = conn.prepareStatement(sql);
-		stmt.setInt(1, orderCode);
+		stmt.setInt(1, goodsCode);
 		
 		result= stmt.executeUpdate();
 		

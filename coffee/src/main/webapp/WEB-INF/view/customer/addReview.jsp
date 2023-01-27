@@ -54,7 +54,7 @@ footer {
 		</div>
 		<hr style="height: 50px;">
 		<div style="margin-left: 230px; margin-top: 30px;">
-			<form action="${pageContext.request.contextPath}/AddReview" method="post">
+			<form action="${pageContext.request.contextPath}/AddReview" method="post" id="AddReview">
 				<input type="hidden" name="orderCode" value="${orderCode}" readonly="readonly" class="form-control"
 					style="width: 30px; text-align: center;"> 
 				<img src="${pageContext.request.contextPath}/image/${goodsOne.goodsName}.jpg" width="300px" height="300px">
@@ -75,17 +75,33 @@ footer {
 
 				<div>
 					<label class="form-label">내용</label>
-					<textarea cols="30" rows="10" name="reviewMemo"
+					<textarea cols="30" rows="10" name="reviewMemo" id="reviewMemo" placeholder="5글자 이상 입력해 주세요."
 						class="form-control" style="width: 500px; background-color: #FBF8EF; "></textarea>
 				</div>
 				<label class="form-label">작성자</label> <input type="text"
 					name="customerId" value="${loginMember.customerId}"
 					readonly="readonly" class="form-control" style="width: 100px;">
 				<br>
-				<button type="submit" class="btn btn-dark">리뷰작성</button>
+				<button type="button" class="btn btn-dark" id="reviewBt">리뷰작성</button>
 			</form>
 		</div>
-
+		<script>
+			let reviewBt = document.querySelector('#reviewBt');
+			reviewBt.addEventListener("click", function(e) {
+				console.log('리뷰 버튼 클릭');
+				//폼 유효성 검사
+				let reviewMemo = document.querySelector('#reviewMemo');
+				if (reviewMemo.value == '') {
+					alert('리뷰를 입력하세요');
+					id.focus();
+					return;
+				}
+				
+				let AddReview = document.querySelector('#AddReview');
+				AddReview.submit();
+			});
+		</script>
+		
 		<hr>
 		<!-- 리뷰보이게 -->
 		<div>
@@ -124,7 +140,7 @@ footer {
 							</td>
 							<td>${Rlist.reviewMemo}</td>
 							<td>
-								<a href="${pageContext.request.contextPath}/RemoveReview?orderCode=${Rlist.orderCode}" style="color: black;">삭제</a>
+								<a href="${pageContext.request.contextPath}/RemoveReview?goodsCode=${Rlist.goodsCode}&orderCode=${Rlist.orderCode}" style="color: black;">삭제</a>
 							</td>
 						</c:forEach>
 					</tr>
